@@ -6,11 +6,11 @@ public class Empleado {
   public String apellido;
   public String username;
   private String password;
-  public List<int> horario;
+  public List<Integer> horario;
   //Relacionados
   public Sucursal sucursalDondeTrabaja;
 
-  public Empleado(String nombre, String apellido, String username, String password, List<int> horario)
+  public Empleado(String nombre, String apellido, String username, String password, List<Integer> horario)
   {
     this.nombre = nombre;
     this.apellido = apellido;
