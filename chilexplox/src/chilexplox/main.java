@@ -37,9 +37,21 @@ public class main {
         Camion c1 = new Camion(20, true);
         Camion c2 = new Camion(20, true);
         //-----Cliente
-        
-        
-        
+        Cliente cl = new Cliente("Thomas", "Pryce", "Manquehue Sur 520 Oficina 320");
+            //Usuario entrega rut en sucursal 1 y queda registrado en el sistema
+        cl.rut = "12.345.678-9";
+        cl.sucursalRegistrada = s1;
+        emp.clientes.add(cl);
+        //-----Destinatario
+        Cliente dest = new Cliente("Pepe","El Mago", "Chuchunco 123");
+        dest.sucursalRegistrada = s2;
+        //-----Encomiendas
+        Encomienda enc1 = new Encomienda("En Sucursal de Origen","normal", 2, 1, s2, dest);
+        Encomienda enc2 = new Encomienda("En Sucursal de Origen","normal", 1, 2, s2, dest);
+        //-----Pedido
+        Pedido ped = new Pedido(1);
+        ped.encomiendas.add(enc1);
+        ped.encomiendas.add(enc2);
     }
     
 }

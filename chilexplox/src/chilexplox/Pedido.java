@@ -29,7 +29,7 @@ for(Encomienda e :encomiendas)
     {factor=1;}
       if(e.prioridad=="express")
     {factor=2;}
-    tamano+= (e.tamano*factor);
+    tamano+= (e.tamaño*factor);
     
 }
 int valor= tamano*5;

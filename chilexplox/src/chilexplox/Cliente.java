@@ -11,7 +11,7 @@ public class Cliente {
   public String apellido;
   public String direccion;
   //Relacionados
-  public List<Sucursal> sucursalesRegistradas;
+  public Sucursal sucursalRegistrada;
   public List<Pedido> pedidosRealizados;
 
   public Cliente(String nombre, String apellido, String direccion)

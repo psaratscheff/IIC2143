@@ -4,16 +4,19 @@ package chilexplox;
 public class Encomienda {
   public String estado;
   public String prioridad;
-  public int tamano;
+  public int tamaño;
   public int id;
   public Sucursal destino;
   public Cliente destinatario;
 
-  public Encomienda(String est, String prio)
+  public Encomienda(String estado, String prioridad, int tamaño, int id, Sucursal destino, Cliente destinatario)
   {
-  estado= est;
-  prioridad=prio;
-
+    this.estado = estado;
+    this.prioridad = prioridad;
+    this.tamaño = tamaño;
+    this.id = id;
+    this.destino = destino;
+    this.destinatario = destinatario;
   }
 
 }
