@@ -9,6 +9,8 @@ public class Sucursal {
   public List<Empleado> trabajadores;
   public List<Camion> camionesEstacionados;
   public List<Cliente> clientesRegistrados;
+  //Faltantes en el UML
+  public List<Encomienda> encomiendasAlmacenadas;
 
   public Sucursal(String direccion, int capacidad)
   {
@@ -18,17 +20,21 @@ public class Sucursal {
 
   public int EspacioDisponible()
   {
-    // Falta implementar
-    return 0;
+    int espacio= this.capacidad- this.encomiendasAlmacenadas.size();
+    return espacio;
   }
 
   public void CargarCamion(Camion camion, List<Encomienda> encomiendas)
   {
-    // Falta implementar
+    // Falta validar espacio disponible
+      camion.encomiendas.addAll(encomiendas); //Agrega todas las encomiendas de la lista
   }
 
-  public void RecibirCamion(Camion camion)
+  public List<Encomienda> RecibirCamion(Camion camion)
   {
-    // Falta implementar
+    // Falta validar espacio disponible
+      List<Encomienda> temporal = camion.encomiendas;
+      camion.encomiendas.clear(); //Vacío el camión
+      return temporal;
   }
 }
