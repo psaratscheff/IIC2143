@@ -1,20 +1,22 @@
 
+import java.util.List;
+
 public class Empleado {
-  public string nombre;
-  public string apellido;
-  public string username;
-  private string password;
-  public tuple<int,int> horario;
+  public String nombre;
+  public String apellido;
+  public String username;
+  private String password;
+  public List<int> horario;
   //Relacionados
   public Sucursal sucursalDondeTrabaja;
 
-  public Empleado(string nombre, string apellido, string username, string password, tuple<int,int> horario)
+  public Empleado(String nombre, String apellido, String username, String password, List<int> horario)
   {
-    this.name = name;
+    this.nombre = nombre;
     this.apellido = apellido;
     this.username = username;
     this.password = password;
-    this.horario = horario
+    this.horario = horario;
   }
 
   public void EnviarMensaje(Sucursal sucursal, String mensaje, boolean urgente)

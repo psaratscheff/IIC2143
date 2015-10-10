@@ -1,6 +1,8 @@
 
+import java.util.List;
+
 public class Cliente {
-  public String name;
+  public String nombre;
   public String apellido;
   public String direccion;
   //Relacionados
@@ -9,7 +11,7 @@ public class Cliente {
 
   public Cliente(String nombre, String apellido, String direccion)
   {
-    this.name = name;
+    this.nombre = nombre;
     this.apellido = apellido;
     this.direccion = direccion;
   }

@@ -1,4 +1,6 @@
 
+import java.util.List;
+
 public class Sucursal {
   public String direccion;
   public int capacidad;
@@ -17,6 +19,7 @@ public class Sucursal {
   public int EspacioDisponible()
   {
     // Falta implementar
+    return 0;
   }
 
   public void CargarCamion(Camion camion, List<Encomienda> encomiendas)
