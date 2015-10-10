@@ -1,3 +1,5 @@
+package chilexplox;
+
 
 public class Mensaje {
   public String contenido;
