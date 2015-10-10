@@ -23,4 +23,24 @@ public class Empresa {
         this.camiones = new ArrayList();
         this.clientes = new ArrayList();
     }
+    public Camion EntregarCamion()
+    {
+        for(Camion c: camiones)
+        {
+            if (c.disponibilidad==true)
+            {return c;}
+        }
+        return null;
+    }
+    
+    public Cliente buscarpersona(int rut)
+    {
+    for(Cliente c: clientes)
+    {
+    if (c.rut==rut)
+    {
+    return c;
+    }
+    }
+    }
 }
