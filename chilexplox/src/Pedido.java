@@ -18,10 +18,16 @@ public int Contar()
 public int CalcularValor()
 {
     int tamano=0;
-    
+    int factor=0;
 for(Encomienda e :encomiendas)
 {
-    tamano+= e.tamano;
+    if(e.prioridad=="urgente")
+    {factor=3;}
+     if(e.prioridad=="normal")
+    {factor=1;}
+      if(e.prioridad=="express")
+    {factor=2;}
+    tamano+= (e.tamano*factor);
     
 }
 int valor= tamano*5;
