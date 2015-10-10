@@ -16,12 +16,14 @@ public class Empresa {
     public List<Sucursal> sucursales;
     public List<Camion> camiones;
     public List<Cliente> clientes;
+    public List<Encomienda> encomiendas;
     
     public Empresa()
     {
         this.sucursales = new ArrayList();
         this.camiones = new ArrayList();
         this.clientes = new ArrayList();
+        this.encomiendas = new ArrayList();
     }
     public Camion EntregarCamion()
     {
@@ -44,4 +46,44 @@ public class Empresa {
     }
     return null;
     }
+    
+    public void cambiarestadoencomienda(int id, String estado)
+    {
+        for(Encomienda e: encomiendas)
+        {
+            if(e.id==id)
+            {
+                e.estado=estado;
+            }
+        }
+    }
+    
+    public String verestadoencomienda(int id)
+    {
+        for(Encomienda e: encomiendas)
+        {
+            if(e.id==id)
+            {
+                String estado=e.estado;
+                return estado;
+            }
+        }
+        return null;
+        
+    }
+   /* public int buscarmenoridencomienda()
+    {
+        int largo=encomiendas.size();
+        int menorid=0;
+        boolean esta=true;
+        for(int i=0; i<largo;i++)
+        {
+        for(Encomienda e: encomiendas)
+        {
+           
+        }
+        }
+    }*/
+    
+    
 }
