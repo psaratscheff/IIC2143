@@ -4,6 +4,9 @@ package chilexplox;
 import java.util.List;
 
 public class Cliente {
+  // RUT Opcional, la persona puede no querer quedar registrada en el sistema
+  // Por eso no se agrega al constructor y debe ser modificado posteriormente
+  public String rut;
   public String nombre;
   public String apellido;
   public String direccion;
