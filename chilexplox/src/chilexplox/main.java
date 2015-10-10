@@ -19,8 +19,8 @@ public class main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        //----- CREACIONES-----
+
+        //----- CREACIONES_INICIALES -----
         //-----Empresa
         Empresa emp = new Empresa();
         //-----Sucursales
@@ -36,6 +36,8 @@ public class main {
         //-----Camiones
         Camion c1 = new Camion(20, true);
         Camion c2 = new Camion(20, true);
+
+        //----- LLEGA_CLIENTE y deja dos encomeniendas -----
         //-----Cliente
         Cliente cl = new Cliente("Thomas", "Pryce", "Manquehue Sur 520 Oficina 320");
             //Usuario entrega rut en sucursal 1 y queda registrado en el sistema
@@ -52,6 +54,9 @@ public class main {
         Pedido ped = new Pedido(1);
         ped.encomiendas.add(enc1);
         ped.encomiendas.add(enc2);
+        //-----Almacenamiento encomiendas a sucursal
+        s1.encomiendas.add(enc1);
+        s1.encomiendas.add(enc2);
     }
-    
+
 }
