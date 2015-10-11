@@ -30,7 +30,7 @@ public class main {
         emp.sucursales.add(s2);
         //-----Empleados
         List<Integer> h1 = new ArrayList(); h1.add(8); h1.add(13); h1.add(14); h1.add(17);
-        Empleado e1 = new Empleado("Felix", "Schiegg", "fshiegg", "miclavesecreta", h1);
+        Empleado e1 = new Empleado("Felix", "Schiegg", "fschiegg", "miclavesecreta", h1);
         List<Integer> h2 = new ArrayList(); h2.add(10); h2.add(16);
         Empleado e2 = new Empleado("Pedro", "Saratscheff", "psaratscheff", "mIcl4vESuP3rS3creTa", h2);
         //-----Camiones
@@ -60,6 +60,17 @@ public class main {
 
         //----- Llega camion por las encomiendas -----
         //----- Cargar camion
+        
+        s1.CargarCamion(c2, s1.encomiendasAlmacenadas);
+        for(Encomienda e : s1.encomiendasAlmacenadas)
+        {
+            emp.cambiarestadoencomienda(e.id, "transito");
+        }
+        s1.encomiendasAlmacenadas.clear();
+        s2.RecibirCamion(c2);
+        
+        
+        
         
     }
 

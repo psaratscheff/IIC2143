@@ -37,6 +37,7 @@ public class Sucursal {
   {
     // Falta validar espacio disponible
       camion.encomiendas.addAll(encomiendas); //Agrega todas las encomiendas de la lista
+      camion.disponibilidad=false;  // deja de estar disponible el camion
   }
 
   public List<Encomienda> RecibirCamion(Camion camion)
@@ -44,6 +45,11 @@ public class Sucursal {
     // Falta validar espacio disponible
       List<Encomienda> temporal = camion.encomiendas;
       camion.encomiendas.clear(); //Vacío el camión
+      camion.disponibilidad=true;  //vuelve a estar disponible el camion
+      for(Encomienda e : temporal) // cambia estado de la encomienda
+        {
+            e.estado="destino";
+        }
       return temporal;
   }
 }
