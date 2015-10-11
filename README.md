@@ -1,11 +1,11 @@
 ## Tabla de contenidos
 * [Programa](#programa)
     * [Equipo](#equipo)
-    * [Objetivo del proyecto](#Objetivo del proyecto)
-    * [Detalles del desarrollo](#Detalles del desarrollo)
-    * [Servicio de encomiendas ChilExplox](#Servicio de encomiendas ChilExplox)
-        * [Descripción larga](#Descripción larga)
-    * [Procedimiento de instalación](#Procedimiento de instalación)
+    * [Objetivo del proyecto](#Objetivo-del-proyecto)
+    * [Detalles del desarrollo](#Detalles-del-desarrollo)
+    * [Servicio de encomiendas ChilExplox](#Servicio-de-encomiendas-ChilExplox)
+        * [Descripción larga](#Descripción-larga)
+    * [Procedimiento de instalación](#Procedimiento-de-instalación)
 * [Bibliografía](#bibliografia)
 * [Política de integridad académica](#politica-de-integridad-academica)
 
