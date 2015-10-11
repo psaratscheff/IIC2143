@@ -1,12 +1,12 @@
 ## Tabla de contenidos
 * [Programa](#programa)
     * [Equipo](#equipo)
-    * [Objetivo del proyecto](#Objetivo-del-proyecto)
-    * [Detalles del desarrollo](#Detalles-del-desarrollo)
-    * [Servicio de encomiendas ChilExplox](#Servicio-de-encomiendas-ChilExplox)
-        * [Descripción larga](#Descripción-larga)
-    * [Procedimiento de instalación](#Procedimiento-de-instalación)
-* [Bibliografía](#bibliografia)
+    * [Objetivo del proyecto](#objetivo-del-proyecto)
+    * [Detalles del desarrollo](#detalles-del-desarrollo)
+    * [Servicio de encomiendas ChilExplox](#servicio-de-encomiendas-chilexplox)
+        * [Descripción larga](#descripción-larga)
+    * [Procedimiento de instalación](#procedimiento-de-instalación)
+* [Bibliografia](#bibliografia)
 * [Política de integridad académica](#politica-de-integridad-academica)
 
 # Programa
@@ -48,7 +48,7 @@ recepción. Si todos los datos son correctos, el estado cambia a “Entregado”
 
 ## Bibliografía
 
-## Política de Integridad Académica
+## Politica de Integridad Academica
 
 Los alumnos de la Escuela de Ingeniería de la Pontificia Universidad Católica de Chile deben mantener un comportamiento acorde a la Declaración de Principios de la Universidad. En particular, se espera que mantengan altos estándares de honestidad académica. Cualquier acto deshonesto o fraude académico está prohibido; los alumnos que incurran en este tipo de acciones se exponen a un Procedimiento Sumario. Es responsabilidad de cada alumno conocer y respetar el documento sobre Integridad Académica publicado por la Dirección de Docencia de la Escuela de Ingeniería en el SIDING
 Específicamente, para los cursos del Departamento de Ciencia de la Computación, rige obligatoria- mente la siguiente política de integridad académica. Todo trabajo presentado por un alumno para los efectos de la evaluación de un curso debe ser hecho individualmente por el alumno, sin apoyo en material de terceros. Por “trabajo” se entiende en general las interrogaciones escritas, las tareas de programación u otras, los trabajos de laboratorio, los proyectos, el examen, entre otros. Si un alumno copia un trabajo, obtendrá nota final 1.1 en el curso y se solicitará a la Dirección de Pregrado de la Escuela de Ingeniería que no le permita retirar el curso de la carga académica semestral. Por “copia” se entiende incluir en el trabajo presentado como propio partes hechas por otra persona
