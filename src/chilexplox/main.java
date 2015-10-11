@@ -22,6 +22,8 @@ public class main {
 
         //----- CREACIONES_INICIALES -----
         //-----Empresa
+        int contadorid=0;
+        int contadoridpedidos=0; // para despues cuando automatizemos la creacion de ids para encomiendas y pedidos
         Empresa emp = new Empresa();
         //-----Sucursales
         Sucursal s1 = new Sucursal("Apoquindo 4333", 1000);
@@ -54,20 +56,38 @@ public class main {
         Pedido ped = new Pedido(1);
         ped.encomiendas.add(enc1);
         ped.encomiendas.add(enc2);
-        //-----Almacenamiento encomiendas a sucursal
+        //-----Almacenamiento encomiendas a sucursal despues de verificar que tenga espacio disponible
+        int espacio=s1.EspacioDisponible();
+        if(espacio >=1)
+        {
         s1.encomiendasAlmacenadas.add(enc1);
+        }
+        espacio=s1.EspacioDisponible();
+         if(espacio >=1)
+        {
         s1.encomiendasAlmacenadas.add(enc2);
-
-        //----- Llega camion por las encomiendas -----
-        //----- Cargar camion
+        }
         
-        s1.CargarCamion(c2, s1.encomiendasAlmacenadas);
+         //busca un camion vacio
+
+         Camion camion= emp.EntregarCamion();
+        //----- Llega camion por las encomiendas -----
+        
+        
+        //----- Cargar camion
+         //
+        if(camion!=null)
+        {
+        s1.CargarCamion(camion, s1.encomiendasAlmacenadas);
         for(Encomienda e : s1.encomiendasAlmacenadas)
         {
             emp.cambiarestadoencomienda(e.id, "transito");
         }
         s1.encomiendasAlmacenadas.clear();
-        s2.RecibirCamion(c2);
+        s2.RecibirCamion(camion);
+        }
+        
+        e1.EnviarMensaje(s2, "holi", true);
         
         
         

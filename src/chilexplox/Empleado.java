@@ -23,6 +23,8 @@ public class Empleado {
 
   public void EnviarMensaje(Sucursal sucursal, String mensaje, boolean urgente)
   {
-    // Falta implementar
+      Mensaje mensaje1 = new Mensaje(mensaje, urgente);
+      sucursal.mensajesRecibidos.add(mensaje1);
+      
   }
 }
