@@ -1,6 +1,7 @@
 package chilexplox;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sucursal {
@@ -18,6 +19,12 @@ public class Sucursal {
   {
     this.direccion = direccion;
     this.capacidad = capacidad;
+    //Inicializo los arrays para poder agregar valores
+    this.encomiendasAlmacenadas = new ArrayList();
+    this.mensajesRecibidos = new ArrayList();
+    this.trabajadores = new ArrayList();
+    this.camionesEstacionados = new ArrayList();
+    this.clientesRegistrados = new ArrayList();
   }
 
   public int EspacioDisponible()

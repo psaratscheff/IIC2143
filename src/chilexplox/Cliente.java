@@ -1,6 +1,7 @@
 package chilexplox;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
@@ -19,5 +20,7 @@ public class Cliente {
     this.nombre = nombre;
     this.apellido = apellido;
     this.direccion = direccion;
+    //Inicializo los arrays para poder agregar valores
+    this.pedidosRealizados = new ArrayList();
   }
 }

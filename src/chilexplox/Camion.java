@@ -1,6 +1,7 @@
 package chilexplox;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,7 +13,8 @@ public Camion(int cap, boolean disp)
         {
            capacidad=cap;
            disponibilidad= disp;
-           
+           //Inicializo los arrays para poder agregar valores
+           this.encomiendas = new ArrayList();
         }
 public int EspacioDisponible()
 {

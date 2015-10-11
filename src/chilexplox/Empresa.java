@@ -20,6 +20,7 @@ public class Empresa {
     
     public Empresa()
     {
+        //Inicializo los arrays para poder agregar valores
         this.sucursales = new ArrayList();
         this.camiones = new ArrayList();
         this.clientes = new ArrayList();
