@@ -1,21 +1,13 @@
 ## Tabla de contenidos
 * [Programa](#programa)
     * [Equipo](#equipo)
-    	* [Profesor](#profesor)
-    	* [Ayudantes](#ayudantes)
-    * [Objetivos](#objetivos)
-    * [Contenidos](#contenidos)
-    * [Metodología](#metodologia)
-    * [Evaluación](#evaluacion)
-    * [Bibliografía](#bibliografia)
-    * [Política de integridad académica](#politica-de-integridad-academica)
-* [Proyectos](#proyectos)
-* [Wiki](#wiki)
-    * [Getting Started](#getting-started)
-    * [Gemas](#gemas)
-* [Foro](#foro)
-    * [Etiquetas](#etiquetas)
-    * [Procedimiento](#procedimiento)
+    * [Objetivo del proyecto](#Objetivo del proyecto)
+    * [Detalles del desarrollo](#Detalles del desarrollo)
+    * [Servicio de encomiendas ChilExplox](#Servicio de encomiendas ChilExplox)
+        * [Descripción larga](#Descripción larga)
+    * [Procedimiento de instalación](#Procedimiento de instalación)
+* [Bibliografía](#bibliografia)
+* [Política de integridad académica](#politica-de-integridad-academica)
 
 # Programa
 
@@ -38,7 +30,7 @@ El objetivo del proyecto grupal es que los alumnos logren tener un acercamiento 
 
 ### Descripción larga
 
-El gerente de informática de la reconocida empresa de servicios de encomiendas ChilExplox, ha observado el sorprendente crecimiento que está teniendo la empresa. Preocupado por la estabilidad y buen funcionamiento del negocio, ha decidido mejorar el sistema inform ́atico que controla el servicio de encomiendas. En su intento se vio enfrentado a un sistema legado, mal diseñado, mal documentado y con ausencia total de refactory, ante tal descubrimiento ha decidido desarrollar un nuevo software, dado a que no cuenta con el equipo de trabajo adecuado, ha decidió externalizar, pidiendo la ayuda a los insignes alumnos de la PUC. 
+El gerente de informática de la reconocida empresa de servicios de encomiendas ChilExplox, ha observado el sorprendente crecimiento que está teniendo la empresa. Preocupado por la estabilidad y buen funcionamiento del negocio, ha decidido mejorar el sistema inform ́atico que controla el servicio de encomiendas. En su intento se vio enfrentado a un sistema legado, mal diseñado, mal documentado y con ausencia total de refactory, ante tal descubrimiento ha decidido desarrollar un nuevo software, dado a que no cuenta con el equipo de trabajo adecuado, ha decidió externalizar, pidiendo la ayuda a los insignes alumnos de la PUC.
 
 A continuación se procede a detallar el giro de la empresa y elementos que el gerente considera importantes:
 
@@ -63,4 +55,3 @@ Específicamente, para los cursos del Departamento de Ciencia de la Computación
 Obviamente, está permitido usar material disponible públicamente, por ejemplo, libros o contenidos tomados de Internet, siempre y cuando se incluya la referencia correspondiente. Lo anterior se entiende como complemento al Reglamento del Alumno de la Pontificia Universidad Católica de Chile Por ello, es posible pedir a la Universidad la aplicación de sanciones adicionales especificadas en dicho reglamento.
 
 ## Procedimiento de instalación
-
