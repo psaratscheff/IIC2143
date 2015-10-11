@@ -55,8 +55,12 @@ public class main {
         ped.encomiendas.add(enc1);
         ped.encomiendas.add(enc2);
         //-----Almacenamiento encomiendas a sucursal
-        s1.encomiendas.add(enc1);
-        s1.encomiendas.add(enc2);
+        s1.encomiendasAlmacenadas.add(enc1);
+        s1.encomiendasAlmacenadas.add(enc2);
+
+        //----- Llega camion por las encomiendas -----
+        //----- Cargar camion
+        
     }
 
 }
