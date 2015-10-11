@@ -6,7 +6,7 @@
     * [Servicio de encomiendas ChilExplox](#servicio-de-encomiendas-chilexplox)
         * [Descripción larga](#descripción-larga)
     * [Procedimiento de instalación](#procedimiento-de-instalación)
-* [Bibliografia](#bibliografia)
+* [Bibliografía](#bibliografía)
 * [Política de integridad académica](#politica-de-integridad-academica)
 
 # Programa
