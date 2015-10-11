@@ -36,7 +36,7 @@ public class Empresa {
         return null;
     }
     
-    public Cliente buscarpersona(String rut)
+    public Cliente buscarpersona(int rut)
     {
     for(Cliente c: clientes)
     {
