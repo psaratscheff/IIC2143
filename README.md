@@ -15,7 +15,7 @@
 
 | Nombre                | Github        | Email         |
 |:--------------------- |:--------------|:--------------|
-| Thomas Pryce Jones    | [@thomprycejones](https://github.com/thomprycejones) | ?@uc.cl |
+| Thomas Pryce Jones    | [@thomprycejones](https://github.com/thomprycejones) | trprycejones@uc.cl |
 | Pedro Saratscheff     | [@psaratscheff](https://github.com/psaratscheff) | pasaratscheff@uc.cl |
 | Felix Schiegg         | [@flargofelix](https://github.com/flargofelix) | fschiegg1@uc.cl |
 
