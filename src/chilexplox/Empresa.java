@@ -36,19 +36,19 @@ public class Empresa {
         return null;
     }
     
-    public Cliente buscarpersona(String rut)
+    public Cliente BuscarPersona(String rut)
     {
-    for(Cliente c: clientes)
-    {
-    if (c.rut==rut)
-    {
-    return c;
-    }
-    }
-    return null;
+        for(Cliente c: clientes)
+        {
+        if (c.rut==rut)
+        {
+        return c;
+        }
+        }
+        return null;
     }
     
-    public void cambiarestadoencomienda(int id, String estado)
+    public void CambiarEstadoEncomienda(int id, String estado)
     {
         for(Encomienda e: encomiendas)
         {
@@ -59,7 +59,7 @@ public class Empresa {
         }
     }
     
-    public String verestadoencomienda(int id)
+    public String VerEstadoEncomienda(int id)
     {
         for(Encomienda e: encomiendas)
         {
