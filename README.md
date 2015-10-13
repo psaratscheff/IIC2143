@@ -24,7 +24,16 @@
 El objetivo del proyecto grupal es que los alumnos logren tener un acercamiento real a lo que es el desarrollo de software en la actualidad. Se busca que los alumnos puedan aplicar los conocimientos adquiridos en el curso durante el semestre, de tal forma que una vez finalizado el proyecto tengan una concepción propia de los factores que ayudan a desarrollar un software desde el punto de vista ingenieril (Levantamiento de requisitos, diseño, codificación y testing).
 
 ## Detalles del desarrollo
-* Se desarrolla la aplicación ChilExplox en Java.
+
+### UML
+![Image](Imagenes/UML.png "UML")
+
+
+### Pasos
+* Se crean los requisitos, casos de usos y primeros modelos del problema.
+* Se crean diagramas UML. Se elige el mencionado arriba, debido a que creemos que abarca mejor el sistema requerido por el cliente.
+* Se desarrolla el backend de la aplicación ChilExplox en Java.
+* Se agrega la clase "Empresa", experta en información.
 
 ## Servicio de encomiendas ChilExplox
 
