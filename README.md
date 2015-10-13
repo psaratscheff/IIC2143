@@ -31,7 +31,7 @@ El objetivo del proyecto grupal es que los alumnos logren tener un acercamiento 
 
 ### Pasos
 * Se crean los requisitos, casos de usos y primeros modelos del problema.
-* Se crean diagramas UML. Se elige el mencionado arriba, debido a que creemos que abarca mejor el sistema requerido por el cliente.
+* Se crean diagramas UML. Se elige el mencionado arriba, debido a que creemos que abarca mejor el sistema requerido por el cliente. Se enfoca más en realizar las funcionalidades requeridas.
 * Se desarrolla el backend de la aplicación ChilExplox en Java.
 * Se agrega la clase "Empresa", experta en información.
 
