@@ -5,6 +5,7 @@
  */
 package chilexplox;
 import chilexplox.classes.*;
+import java.io.IOException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +21,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.cell.ComboBoxListCell;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -78,6 +85,15 @@ public class FXMLSucursalController implements Initializable {
              "Jesus está vivo, crean en el y y..."
         );
         ListMessagesPreview.setItems(messages);
+    }
+    
+    @FXML
+    private void IngresarPedidoAction(MouseEvent event) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedido.fxml"));
+        Parent root2 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root2));  
+        stage.show();
     }
     
 }
