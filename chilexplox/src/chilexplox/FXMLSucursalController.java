@@ -7,7 +7,11 @@ package chilexplox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -15,6 +19,28 @@ import javafx.fxml.Initializable;
  * @author Thomas Pryce Jones
  */
 public class FXMLSucursalController implements Initializable {
+    @FXML
+    private Label LabelNombreTrabajador;
+    @FXML
+    private ChoiceBox<?> Sucursales;
+    @FXML
+    private Button IngresarPedido;
+    @FXML
+    private Button Mensajes;
+    @FXML
+    private Button ModificarPedido;
+    @FXML
+    private Button NotificarErrorPedido;
+    @FXML
+    private Label LabelCamionesDisponibles;
+    @FXML
+    private Button CargarCamion;
+    @FXML
+    private Button DescargarPedido;
+    @FXML
+    private ChoiceBox<?> Camiones;
+    @FXML
+    private Button EnviarCamion;
 
     /**
      * Initializes the controller class.
