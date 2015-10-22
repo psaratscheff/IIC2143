@@ -14,7 +14,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import chilexplox.Empresa;
+import chilexplox.classes.Empresa;
+import chilexplox.classes.Empleado;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -42,23 +49,23 @@ public class FXMLLoginController implements Initializable {
     }    
 
     @FXML
-    private void btnLoginAction(MouseEvent event) 
+    private void btnLoginAction(MouseEvent event) throws IOException 
     {
         String pass = password.getText();
         String user = username.getText();
         for (Empleado e: emp.empleados) 
         {
-            if (pass.equals("test") & user.equals("test")) 
+            if (pass.equals(e.password) & user.equals(e.username)) 
             {
-                ErrorLabel.setText("OK!");
-            }
-            else
-            {
-                ErrorLabel.setText("Invalid username or password!");
-            }          
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLSucursal.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root1));  
+                stage.show();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+            } 
         }
-        
-        
+        ErrorLabel.setText("Invalid user or password");
     }
     
 }

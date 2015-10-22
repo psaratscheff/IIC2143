@@ -7,7 +7,7 @@ public class Empleado {
   public String nombre;
   public String apellido;
   public String username;
-  private String password;
+  public String password;
   public List<Integer> horario;
   //Relacionados
   public Sucursal sucursalDondeTrabaja;

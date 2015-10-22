@@ -5,6 +5,8 @@
  */
 package chilexplox;
 
+import chilexplox.classes.Camion;
+import chilexplox.classes.Sucursal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
