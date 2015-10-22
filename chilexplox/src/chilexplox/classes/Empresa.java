@@ -40,6 +40,10 @@ public class Empresa {
         this.encomiendas = new ArrayList();
         this.empleados = new ArrayList();
     }
+    public void AddEmpleado(Empleado e)
+    {
+        this.empleados.add(e);
+    }
     public Camion EntregarCamion()
     {
         for(Camion c: camiones)

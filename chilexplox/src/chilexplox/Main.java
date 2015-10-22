@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import chilexplox.classes.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,8 +21,10 @@ import chilexplox.classes.*;
  */
 public class Main extends Application {
     
+    
     @Override
     public void start(Stage stage) throws Exception {
+        //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -32,6 +36,15 @@ public class Main extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        
+        //Creacion de empresa inicial
+        Empresa E = new Empresa();
+        List<Integer> h = new ArrayList(); h.add(8); h.add(13); h.add(14); h.add(17);
+        Sucursal s = new Sucursal("Apoquindo 4333", 1000);
+        Empleado e = new Empleado("Minombre", "Miapellido", "1", "1", h, s);
+        E.AddEmpleado(e);
+        //List<Empleado> emplds = E.empleados;
+        // Empresa.getInstance().empleados.add(e); //*/
     }
     
 }
