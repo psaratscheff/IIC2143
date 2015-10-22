@@ -13,6 +13,13 @@ import java.util.List;
  * @author peter
  */
 public class Empresa {
+    
+    //SINGLETON!! Clase maestra
+    private final static Empresa instance = new Empresa();
+    public static Empresa getInstance() {
+        return instance;
+    }
+    
     public List<Sucursal> sucursales;
     public List<Camion> camiones;
     public List<Cliente> clientes;
@@ -87,6 +94,5 @@ public class Empresa {
         }
         }
     }*/
-    
-    
+
 }
