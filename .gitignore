@@ -4,4 +4,4 @@
 # But not these files...
 !README.md
 !OLD_Respaldo.zip
-!chilexplox/src/**
+!chilexplox/src/*
