@@ -90,9 +90,18 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private void IngresarPedidoAction(MouseEvent event) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedido.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
+        Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(root2));  
+        stage.setScene(new Scene(root));  
+        stage.show();
+    }
+    
+    @FXML
+    private void MensajesAction(MouseEvent event) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLMensajesRecibidos.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));  
         stage.show();
     }
     
