@@ -1,4 +1,4 @@
-package chilexplox;
+package chilexplox.classes;
 
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package chilexplox;
+package chilexplox.classes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ public class Empresa {
     public List<Camion> camiones;
     public List<Cliente> clientes;
     public List<Encomienda> encomiendas;
+    public List<Empleado> empleados;
     
     public Empresa()
     {
@@ -25,6 +26,7 @@ public class Empresa {
         this.camiones = new ArrayList();
         this.clientes = new ArrayList();
         this.encomiendas = new ArrayList();
+        this.empleados = new ArrayList();
     }
     public Camion EntregarCamion()
     {

@@ -1,4 +1,4 @@
-package chilexplox;
+package chilexplox.classes;
 
 
 public class Encomienda {
