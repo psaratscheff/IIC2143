@@ -16,6 +16,11 @@ public class Empresa {
     
     //SINGLETON!! Clase maestra
     private final static Empresa instance = new Empresa();
+
+    /**
+     * Retorna la única instancia (singleton) de Empresa
+     * @return
+     */
     public static Empresa getInstance() {
         return instance;
     }
