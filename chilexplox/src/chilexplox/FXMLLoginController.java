@@ -16,7 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Empleado;
+import chilexplox.classes.Sucursal;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -30,7 +33,7 @@ import javafx.stage.Stage;
  */
 public class FXMLLoginController implements Initializable {
     
-    Empresa emp = new Empresa();
+    Empresa emp = Empresa.getInstance();
     @FXML
     private Button login;
     @FXML
@@ -46,6 +49,11 @@ public class FXMLLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //Creacion de empresa inicial
+        List<Integer> h = new ArrayList(); h.add(8); h.add(13); h.add(14); h.add(17);
+        Sucursal s = new Sucursal("Apoquindo 4333", 1000);
+        Empleado e = new Empleado("Minombre", "Miapellido", "1", "1", h, s);
+        emp.AddEmpleado(e);
     }    
 
     @FXML
