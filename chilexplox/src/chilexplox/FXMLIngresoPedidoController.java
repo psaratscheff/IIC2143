@@ -6,6 +6,7 @@
 package chilexplox;
 
 import chilexplox.classes.Empresa;
+import chilexplox.classes.Encomienda;
 import chilexplox.classes.Sucursal;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -49,6 +51,8 @@ public class FXMLIngresoPedidoController implements Initializable {
     private TextField EOrigen;
     @FXML
     private Label TotalPedido;
+    @FXML
+    private ListView<Encomienda> ListEncomiendas;
 
     Empresa emp;
     /**
@@ -56,7 +60,7 @@ public class FXMLIngresoPedidoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        emp = Empresa.getInstance();
         EPrioridad.getItems().add("Normal");
         EPrioridad.getItems().add("Alta");
         for (Sucursal s: emp.sucursales) 
@@ -78,6 +82,9 @@ public class FXMLIngresoPedidoController implements Initializable {
         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
         String prioridad = EPrioridad.getValue();
         Sucursal destino = EDestino.getValue();
+        Encomienda enco = new Encomienda("Ingresado", prioridad, tamaño, 0, destino, destino);
+        emp.encomiendas.add(enco);
+        ListEncomiendas.getItems().add(enco);
     }
     
 }

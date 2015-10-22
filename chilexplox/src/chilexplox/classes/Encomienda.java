@@ -10,7 +10,7 @@ public class Encomienda {
   public Sucursal origen;
   public Cliente destinatario;
 
-  public Encomienda(String estado, String prioridad, int tamaño, int id, Sucursal destino, Sucursal origen, Cliente destinatario)
+  public Encomienda(String estado, String prioridad, int tamaño, int id, Sucursal destino, Sucursal origen)
   {
     this.estado = estado;
     this.prioridad = prioridad;
@@ -18,7 +18,10 @@ public class Encomienda {
     this.id = id;
     this.destino = destino;
     this.origen = origen;
-    this.destinatario = destinatario;
   }
+
+    public Encomienda() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
