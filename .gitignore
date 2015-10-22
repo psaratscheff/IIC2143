@@ -1,7 +1,8 @@
 # Ignore everything
-# *
+*
 
 # But not these files...
-# !README.md
-# !OLD_Respaldo.zip
-# !src/**
+!README.md
+!OLD_Respaldo.zip
+!src/*
+!src/chilexplox/*
