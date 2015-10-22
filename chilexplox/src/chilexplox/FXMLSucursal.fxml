@@ -8,8 +8,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLSucursalController">
    <children>
-      <ListView layoutX="542.0" layoutY="84.0" prefHeight="145.0" prefWidth="220.0" />
-      <Label fx:id="LabelNombreTrabajador" layoutX="14.0" layoutY="14.0" text="Hola, Nombre Trabajador">
+      <ListView id="ListMessagesPreview" fx:id="ListMessagesPreview" layoutX="542.0" layoutY="84.0" prefHeight="145.0" prefWidth="220.0" />
+      <Label fx:id="LabelNombreTrabajador" layoutX="14.0" layoutY="14.0" text="Hola, #NombreTrabajador">
          <font>
             <Font size="16.0" />
          </font>
@@ -44,7 +44,6 @@
       </ScrollPane>
       <Button fx:id="ModificarPedido" layoutX="673.0" layoutY="277.0" mnemonicParsing="false" text="Modificar pedido" />
       <Button fx:id="NotificarErrorPedido" layoutX="673.0" layoutY="450.0" mnemonicParsing="false" text="Notificar error" />
-      <Label layoutX="548.0" layoutY="89.0" text="IMPORTANTE: La última encomienda..." textFill="#ff0f0f" />
       <Label layoutX="48.0" layoutY="281.0" text="Camiones">
          <font>
             <Font name="System Bold" size="32.0" />
@@ -57,10 +56,6 @@
       <Label layoutX="63.0" layoutY="356.0" text="Seleccionar camión:" />
       <Label layoutX="41.0" layoutY="413.0" text="Capacidad:" />
       <Button fx:id="EnviarCamion" layoutX="70.0" layoutY="472.0" mnemonicParsing="false" text="Enviar camión" />
-      <ProgressBar layoutX="40.0" layoutY="434.0" prefHeight="18.0" prefWidth="150.0" progress="0.67" />
-      <Label layoutX="548.0" layoutY="109.0" text="Recuerda hacer lo que tienes pendi..." />
-      <Label layoutX="548.0" layoutY="129.0" text="IMPORTANTE: Cliente molesto con..." textFill="#ff0f0f" />
-      <Label layoutX="547.0" layoutY="148.0" text="Recuerda hacer lo que tienes pendi..." />
-      <Label layoutX="547.0" layoutY="170.0" text="Recuerda hacer lo que tienes pendi..." />
+      <ProgressBar id="ProgressBarCapacity" fx:id="ProgressBarCapacity" layoutX="40.0" layoutY="434.0" prefHeight="18.0" prefWidth="150.0" progress="0.67" />
    </children>
 </AnchorPane>

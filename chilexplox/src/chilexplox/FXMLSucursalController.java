@@ -4,16 +4,22 @@
  * and open the template in the editor.
  */
 package chilexplox;
+import chilexplox.classes.*;
 
-import chilexplox.classes.Camion;
-import chilexplox.classes.Sucursal;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.cell.ComboBoxListCell;
+
+import javafx.event.ActionEvent;
 
 /**
  * FXML Controller class
@@ -43,13 +49,35 @@ public class FXMLSucursalController implements Initializable {
     private ChoiceBox<Camion> Camiones;
     @FXML
     private Button EnviarCamion;
+    @FXML
+    private ListView ListMessagesPreview;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        /*EnviarCamion.setOnAction(new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent e) {
+            populateMessages();
+            }
+        });*/
+    }  
+   
+    /**
+     * prueba 1 rellenar listview con preview de mensajes
+     */
+    @FXML
+    public void populateMessages(){
+        ObservableList<String> messages = FXCollections.observableArrayList(
+             "IMPORTANTE: Tienes que hacer que...",
+             "El paquete de la semana pasada n...",
+             "Cuando creen que vaya a llegar e...",
+             "IMPORTANTE: EL TIPO DE AYER ERA ...",
+             "Jesus está vivo, crean en el y y..."
+        );
+        ListMessagesPreview.setItems(messages);
+    }
     
 }
