@@ -3,4 +3,5 @@
 
 # But not these files...
 !README.md
-!OLD_Respaldo/*
+!OLD_Respaldo.zip
+!src/**
