@@ -26,7 +26,7 @@ El objetivo del proyecto grupal es que los alumnos logren tener un acercamiento 
 ## Detalles del desarrollo
 
 ### UML
-![Image](Imagenes/UML.png "UML")
+![Image](imgs/UML.png "UML")
 
 
 ### Pasos
