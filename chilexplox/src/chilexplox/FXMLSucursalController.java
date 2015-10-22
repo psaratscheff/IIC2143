@@ -22,7 +22,7 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private Label LabelNombreTrabajador;
     @FXML
-    private ChoiceBox<?> Sucursales;
+    private ChoiceBox<Sucursal> Sucursales;
     @FXML
     private Button IngresarPedido;
     @FXML
@@ -38,7 +38,7 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private Button DescargarPedido;
     @FXML
-    private ChoiceBox<?> Camiones;
+    private ChoiceBox<Camion> Camiones;
     @FXML
     private Button EnviarCamion;
 

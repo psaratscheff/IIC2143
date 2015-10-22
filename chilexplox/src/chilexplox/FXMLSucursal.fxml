@@ -18,7 +18,7 @@
          </font>
       </Label>
       <ChoiceBox fx:id="Sucursales" layoutX="359.0" layoutY="14.0" prefWidth="150.0" />
-      <Button fx:id="IngresarPedido" layoutX="29.0" layoutY="111.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="224.0" text="Ingresar Pedido">
+      <Button fx:id="IngresarPedido" layoutX="29.0" layoutY="111.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="268.0" text="Ingresar Pedido">
          <font>
             <Font size="26.0" />
          </font>
