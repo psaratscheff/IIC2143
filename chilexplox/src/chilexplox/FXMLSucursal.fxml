@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLSucursalController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Hola, Nombre Trabajador">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="291.0" layoutY="14.0" text="Sucursal">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="359.0" layoutY="14.0" prefWidth="150.0" />
+      <Button layoutX="29.0" layoutY="111.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="224.0" text="Ingresar Pedido">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <Button layoutX="360.0" layoutY="117.0" mnemonicParsing="false" text="Mensajes">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <Label layoutX="29.0" layoutY="224.0" text="Pedidos en cola" />
+      <Label layoutX="29.0" layoutY="397.0" text="Pedidos recibidos" />
+      <ScrollPane layoutX="29.0" layoutY="248.0" prefHeight="126.0" prefWidth="408.0">
+         <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="126.0" prefWidth="394.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="29.0" layoutY="421.0" prefHeight="126.0" prefWidth="408.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="156.0" prefWidth="394.0" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="443.0" layoutY="248.0" mnemonicParsing="false" text="Modificar pedido" />
+      <Button layoutX="443.0" layoutY="421.0" mnemonicParsing="false" text="Notificar error" />
+      <Label layoutX="401.0" layoutY="178.0" text="IMPORTANTE" textFill="#ff0f0f" />
+      <Label layoutX="649.0" layoutY="247.0" text="Camiones">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="649.0" layoutY="303.0" text="Disponibles: " />
+      <Button layoutX="443.0" layoutY="288.0" mnemonicParsing="false" text="Cargar a camión" />
+      <Button layoutX="443.0" layoutY="459.0" mnemonicParsing="false" text="Descargar" />
+      <ChoiceBox layoutX="636.0" layoutY="372.0" prefWidth="150.0" />
+      <Label layoutX="659.0" layoutY="355.0" text="Seleccionar camión:" />
+      <Label layoutX="649.0" layoutY="425.0" text="Disponibles: " />
+      <Button layoutX="666.0" layoutY="484.0" mnemonicParsing="false" text="Enviar camión" />
+   </children>
+</AnchorPane>
