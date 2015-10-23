@@ -7,6 +7,7 @@ package chilexplox;
 import chilexplox.classes.Camion;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
+import chilexplox.classes.Mensaje;
 import chilexplox.classes.Sucursal;
 import java.io.IOException;
 
@@ -71,7 +72,7 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private Button CargarSucursal;
     @FXML
-    private ListView<String> ListMessagesPreview;
+    private ListView ListMessagesPreview; //TIENE CELL-FACTORY!! No convertir a ListView<String>!!
     @FXML
     private ListView<String> EncomiendasEnSucursal;
     @FXML
@@ -94,6 +95,7 @@ public class FXMLSucursalController implements Initializable {
         {
             ChoiceBoxSucursales.getItems().add(s.direccion);
         }
+        // SUCURSAL CHOICEBOX LISTENER (En caso de no usar el boton cargar)
         /*ChoiceBoxSucursales.getSelectionModel().selectedIndexProperty().addListener(new
             ChangeListener<Number>() {
                 public void changed(ObservableValue ov,
@@ -121,6 +123,32 @@ public class FXMLSucursalController implements Initializable {
         {
             EncomiendasEnSucursal.getItems().add("["+en.prioridad+"] // "+"ID: "+en.id+" Destino: " + en.destino);
         }
+        // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
+        ListMessagesPreview.getItems().clear();
+        for(Mensaje m: emp.sucursalActual.mensajesRecibidos)
+        {
+            if (m.urgente == true) 
+            {
+                String mensajePreview ="URGENTE " + m.contenido;
+                String[] mpArray = mensajePreview.split("\\r?\\n");
+                if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
+            }
+            else
+            {
+                String mensajePreview = m.contenido;
+                String[] mpArray = mensajePreview.split("\\r?\\n");
+                if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
+            }
+        }
+        ListMessagesPreview.setCellFactory(new Callback<ListView<String>, EllipsisListCell>() {
+            @Override
+            public EllipsisListCell call(ListView<String> p) {
+                EllipsisListCell cell = new EllipsisListCell();
+                return cell;
+            }
+        });
     }
     
     @FXML

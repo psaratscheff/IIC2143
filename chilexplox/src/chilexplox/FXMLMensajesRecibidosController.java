@@ -55,11 +55,11 @@ public class FXMLMensajesRecibidosController implements Initializable {
         {
             if (m.urgente == true) 
             {
-                Recibidos.getItems().add("URGENTE " + m.contenido);
+                Recibidos.getItems().add(0, "URGENTE " + m.contenido); // Invierto el orden, se agregan al principio
             }
             else
             {
-                Recibidos.getItems().add(m.contenido);
+                Recibidos.getItems().add(0, m.contenido); // Invierto el orden, se agregan al principio
             }
             
         }

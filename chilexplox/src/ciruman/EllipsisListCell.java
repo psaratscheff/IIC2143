@@ -17,6 +17,7 @@
  */
 package ciruman;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.StackPane;
@@ -37,6 +38,7 @@ public class EllipsisListCell extends ListCell<String> {
         pane.setMinWidth(0);
         pane.setPrefWidth(1);
         pane.getChildren().add(label);
+        pane.setAlignment(Pos.TOP_LEFT);
     }
 
     @Override
