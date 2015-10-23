@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package chilexplox;
-import chilexplox.classes.*;
+import chilexplox.classes.Camion;
+import chilexplox.classes.Empresa;
+import chilexplox.classes.Sucursal;
 import java.io.IOException;
 
 import java.net.URL;
@@ -28,6 +30,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import ciruman.EllipsisListCell;
+import java.util.Iterator;
 import javafx.util.Callback;
 
 /**
@@ -61,11 +64,19 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private ListView ListMessagesPreview;
 
+    Empresa emp;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        emp = Empresa.getInstance();
+        emp.sucursales.add(new Sucursal("kaka1",50));
+        emp.sucursales.add(new Sucursal("kaka2",150));
+        emp.sucursales.add(new Sucursal("kaka3",250));
+        for(int index = 0; index < emp.sucursales.toArray().length; index++) {
+            System.out.println(emp.sucursales.toArray()[index].toString());
+        }
     }  
     
     @FXML
