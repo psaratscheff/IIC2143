@@ -32,6 +32,8 @@ public class Empresa {
     public List<Empleado> empleados;
     public Empleado empleadoActual;
     public Sucursal sucursalActual;
+    public int IDEncomienda = 0;
+    public int IDPedido = 0;
     
     public Empresa()
     {
@@ -89,8 +91,21 @@ public class Empresa {
                 return estado;
             }
         }
-        return null;
-        
+        return null;   
+    }
+    
+    public int AsignarIDEnco()
+    {
+        int temp = IDEncomienda;
+        IDEncomienda += 1;
+        return temp;
+    }
+    
+    public int AsignarIDPedido()
+    {
+        int temp = IDPedido;
+        IDPedido += 1;
+        return temp;
     }
    /* public int buscarmenoridencomienda()
     {

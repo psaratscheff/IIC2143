@@ -7,6 +7,7 @@ package chilexplox;
 
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
+import chilexplox.classes.Pedido;
 import chilexplox.classes.Sucursal;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,15 +53,18 @@ public class FXMLIngresoPedidoController implements Initializable {
     @FXML
     private Label TotalPedido;
     @FXML
-    private ListView<Encomienda> ListEncomiendas;
+    private ListView<String> ListEncomiendas;
 
     Empresa emp;
+    
+    Pedido pedido;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         emp = Empresa.getInstance();
+        pedido = new Pedido(emp.AsignarIDPedido());
         EPrioridad.getItems().add("Normal");
         EPrioridad.getItems().add("Alta");
         for (Sucursal s: emp.sucursales) 
@@ -83,6 +87,16 @@ public class FXMLIngresoPedidoController implements Initializable {
         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
         String prioridad = EPrioridad.getValue();
         String destino = EDestino.getValue();
+        for(Sucursal s: emp.sucursales)
+            {
+                if (s.direccion == destino) 
+                {
+                    Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.sucursalActual);
+                    pedido.encomiendas.add(en);
+                    ListEncomiendas.getItems().add("ID: "+en.id+" Destino: "+en.destino.direccion);
+                }
+            }
+        
     }
     
 }

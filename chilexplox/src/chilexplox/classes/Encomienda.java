@@ -20,8 +20,6 @@ public class Encomienda {
     this.origen = origen;
   }
 
-    public Encomienda() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }
