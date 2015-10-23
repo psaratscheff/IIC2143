@@ -51,8 +51,12 @@ public class FXMLLoginController implements Initializable {
         // TODO
         //Creacion de empresa inicial
         List<Integer> h = new ArrayList(); h.add(8); h.add(13); h.add(14); h.add(17);
-        Sucursal s = new Sucursal("Apoquindo 4333", 1000);
-        Empleado e = new Empleado("Minombre", "Miapellido", "1", "1", h, s);
+        Sucursal s = new Sucursal("Valdivia", 1000);
+        emp.sucursales.add(s);
+        emp.sucursales.add(new Sucursal("La Serena",50));
+        emp.sucursales.add(new Sucursal("Santiago",150));
+        emp.sucursales.add(new Sucursal("Arica",250));
+        Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s);
         emp.AddEmpleado(e);
     }    
 

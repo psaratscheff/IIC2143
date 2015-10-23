@@ -57,5 +57,6 @@
       <Label layoutX="41.0" layoutY="413.0" text="Capacidad:" />
       <Button fx:id="EnviarCamion" layoutX="70.0" layoutY="472.0" mnemonicParsing="false" text="Enviar camión" />
       <ProgressBar id="ProgressBarCapacity" fx:id="ProgressBarCapacity" layoutX="40.0" layoutY="434.0" prefHeight="18.0" prefWidth="150.0" progress="0.67" />
+      <Button fx:id="CargarSucursal" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnCargarSucursal" text="Cargar Sucursal" />
    </children>
 </AnchorPane>

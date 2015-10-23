@@ -46,9 +46,9 @@ public class FXMLIngresoPedidoController implements Initializable {
     @FXML
     private TextField ELargo;
     @FXML
-    private ChoiceBox<Sucursal> EDestino;
+    private ChoiceBox<String> EDestino;
     @FXML
-    private TextField EOrigen;
+    private Label EOrigen;
     @FXML
     private Label TotalPedido;
     @FXML
@@ -65,8 +65,9 @@ public class FXMLIngresoPedidoController implements Initializable {
         EPrioridad.getItems().add("Alta");
         for (Sucursal s: emp.sucursales) 
         {
-            EDestino.getItems().add(s);
+            EDestino.getItems().add(s.direccion);
         }
+        EOrigen.setText(emp.sucursalActual.direccion);
         
     }    
 
@@ -81,10 +82,7 @@ public class FXMLIngresoPedidoController implements Initializable {
     {
         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
         String prioridad = EPrioridad.getValue();
-        Sucursal destino = EDestino.getValue();
-        Encomienda enco = new Encomienda("Ingresado", prioridad, tamaño, 0, destino, destino);
-        emp.encomiendas.add(enco);
-        ListEncomiendas.getItems().add(enco);
+        String destino = EDestino.getValue();
     }
     
 }

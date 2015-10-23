@@ -42,7 +42,7 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private Label LabelNombreTrabajador;
     @FXML
-    private ChoiceBox<Sucursal> Sucursales;
+    private ChoiceBox<String> Sucursales;
     @FXML
     private Button IngresarPedido;
     @FXML
@@ -62,6 +62,8 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private Button EnviarCamion;
     @FXML
+    private Button CargarSucursal;
+    @FXML
     private ListView ListMessagesPreview;
 
     Empresa emp;
@@ -71,19 +73,17 @@ public class FXMLSucursalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         emp = Empresa.getInstance();
-        emp.sucursales.add(new Sucursal("kaka1",50));
-        emp.sucursales.add(new Sucursal("kaka2",150));
-        emp.sucursales.add(new Sucursal("kaka3",250));
-        for(int index = 0; index < emp.sucursales.toArray().length; index++) {
-            System.out.println(emp.sucursales.toArray()[index].toString());
+        String bienvenida = "Hola, " + emp.empleadoActual.nombre;
+        LabelNombreTrabajador.setText(bienvenida);
+        for (Sucursal s: emp.sucursales) 
+        {
+            Sucursales.getItems().add(s.direccion);
         }
     }  
     
     @FXML
     public void NameAction(){
-        Empresa emp = new Empresa();
-        String bienvenida = "Hola, ";
-        LabelNombreTrabajador.setText(bienvenida);
+        
         ObservableList<String> messages = FXCollections.observableArrayList(
              "IMPORTANTE: Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
              "Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
@@ -135,4 +135,16 @@ public class FXMLSucursalController implements Initializable {
         stage.show();
     }
     
+    @FXML
+    private void btnCargarSucursal(MouseEvent event) throws IOException{
+        String direccion = Sucursales.getValue();
+        for(Sucursal s: emp.sucursales)
+        {
+            if (s.direccion == direccion)
+            {
+                emp.sucursalActual = s;
+                break;
+            }
+        }
+    }
 }

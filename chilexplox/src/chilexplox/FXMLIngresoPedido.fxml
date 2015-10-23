@@ -38,7 +38,6 @@
       <Label layoutX="35.0" layoutY="279.0" text="Destino:" />
       <ChoiceBox fx:id="EDestino" layoutX="102.0" layoutY="275.0" prefHeight="25.0" prefWidth="192.0" />
       <Label layoutX="35.0" layoutY="112.0" text="Origen:" />
-      <TextField fx:id="EOrigen" layoutX="101.0" layoutY="108.0" prefHeight="25.0" prefWidth="192.0" />
       <ListView fx:id="ListEncomiendas" layoutX="362.0" layoutY="105.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="366.0" layoutY="67.0" text="Pedido">
          <font>
@@ -61,5 +60,6 @@
          </font>
       </Label>
       <ChoiceBox fx:id="EPrioridad" layoutX="102.0" layoutY="239.0" prefHeight="25.0" prefWidth="192.0" />
+      <Label fx:id="EOrigen" layoutX="102.0" layoutY="112.0" />
    </children>
 </AnchorPane>
