@@ -7,5 +7,7 @@
 !chilexplox/
 chilexplox/*
 !chilexplox/src/
+!chilexplox/src/ciruman/
+!chilexplox/src/ciruman/*
 !imgs/
 !imgs/*
