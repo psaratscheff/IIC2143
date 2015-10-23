@@ -45,6 +45,15 @@ public class Empresa {
         this.encomiendas = new ArrayList();
         this.empleados = new ArrayList();
     }
+    public List<String> getDireccionSucursales()
+    {
+        List<String> array = new ArrayList();
+        for (Sucursal s: sucursales) 
+        {
+            array.add(s.direccion);
+        }
+        return array;
+    }
     public void AddEmpleado(Empleado e)
     {
         this.empleados.add(e);

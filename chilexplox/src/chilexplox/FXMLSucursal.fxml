@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"  prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLSucursalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLSucursalController">
    <children>
       <ListView id="ListMessagesPreview" fx:id="ListMessagesPreview" layoutX="542.0" layoutY="84.0" prefHeight="145.0" prefWidth="220.0" />
       <Label fx:id="LabelNombreTrabajador" layoutX="14.0" layoutY="14.0" text="Hola, #NombreTrabajador">
@@ -14,12 +14,12 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="291.0" layoutY="14.0" text="Sucursal">
+      <Label layoutX="440.0" layoutY="15.0" text="Sucursal">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="Sucursales" layoutX="359.0" layoutY="14.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="ChoiceBoxSucursales" layoutX="508.0" layoutY="15.0" prefWidth="150.0" />
       <Button fx:id="IngresarPedido" layoutX="47.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#IngresarPedidoAction" prefHeight="67.0" prefWidth="268.0" text="Ingresar Pedido">
          <font>
             <Font size="26.0" />
@@ -47,8 +47,13 @@
       <Label layoutX="41.0" layoutY="413.0" text="Capacidad:" />
       <Button fx:id="EnviarCamion" layoutX="70.0" layoutY="472.0" mnemonicParsing="false" text="Enviar camión" />
       <ProgressBar id="ProgressBarCapacity" fx:id="ProgressBarCapacity" layoutX="40.0" layoutY="434.0" prefHeight="18.0" prefWidth="150.0" progress="0.67" />
-      <Button fx:id="CargarSucursal" layoutX="533.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#btnCargarSucursal" text="Cargar Sucursal" />
+      <Button fx:id="CargarSucursal" layoutX="682.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#btnCargarSucursal" text="Cargar Sucursal" />
       <ListView fx:id="EncomiendasEnSucursal" layoutX="250.0" layoutY="267.0" prefHeight="132.0" prefWidth="408.0" />
       <ListView fx:id="EncomiendasRecibidas" layoutX="250.0" layoutY="447.0" prefHeight="132.0" prefWidth="408.0" />
+      <Label fx:id="ErrorLabelSucursal" layoutX="498.0" layoutY="47.0" textFill="RED" />
+      <Label fx:id="LabelSucursal" layoutX="247.0" layoutY="3.0" textAlignment="CENTER">
+         <font>
+            <Font size="32.0" />
+         </font></Label>
    </children>
 </AnchorPane>
