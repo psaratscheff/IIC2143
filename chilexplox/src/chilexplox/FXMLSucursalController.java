@@ -94,7 +94,7 @@ public class FXMLSucursalController implements Initializable {
         {
             ChoiceBoxSucursales.getItems().add(s.direccion);
         }
-        ChoiceBoxSucursales.getSelectionModel().selectedIndexProperty().addListener(new
+        /*ChoiceBoxSucursales.getSelectionModel().selectedIndexProperty().addListener(new
             ChangeListener<Number>() {
                 public void changed(ObservableValue ov,
                     Number value, Number new_value) {
@@ -112,7 +112,7 @@ public class FXMLSucursalController implements Initializable {
                        ErrorLabelSucursal.setText("");
                        LabelSucursal.setText(sucursalesArray[new_value.intValue()]);
                    }
-            });
+            });*/
     }  
     
     public void UpdateConSucursal()
@@ -121,10 +121,22 @@ public class FXMLSucursalController implements Initializable {
         {
             EncomiendasEnSucursal.getItems().add("["+en.prioridad+"] // "+"ID: "+en.id+" Destino: " + en.destino);
         }
-        
     }
     
-    
+    @FXML
+    private void btnCargarSucursal(MouseEvent event) throws IOException{
+        String direccion = ChoiceBoxSucursales.getValue();
+        for(Sucursal s: emp.sucursales)
+        {
+            if (s.direccion == direccion)
+            {
+                emp.sucursalActual = s;
+            }
+        }
+        UpdateConSucursal();
+        ErrorLabelSucursal.setText("");
+        LabelSucursal.setText(emp.sucursalActual.direccion);
+    }
     
     @FXML
     private void IngresarPedidoAction(MouseEvent event) throws IOException{
@@ -150,19 +162,5 @@ public class FXMLSucursalController implements Initializable {
         } catch (Exception e){
             ErrorLabelSucursal.setText("¡Debes seleccionar una sucursal!");
         }
-    }
-    
-    @FXML
-    private void btnCargarSucursal(MouseEvent event) throws IOException{
-        String direccion = ChoiceBoxSucursales.getValue();
-        for(Sucursal s: emp.sucursales)
-        {
-            if (s.direccion == direccion)
-            {
-                emp.sucursalActual = s;
-            }
-        }
-        UpdateConSucursal();
-        ErrorLabelSucursal.setText("");
     }
 }
