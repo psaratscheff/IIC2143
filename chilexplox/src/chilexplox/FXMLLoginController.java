@@ -65,15 +65,16 @@ public class FXMLLoginController implements Initializable {
         {
             if (pass.equals(e.password) & user.equals(e.username)) 
             {
+                emp.empleadoActual = e; //Seteo el usuario que se logró loguear
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLSucursal.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
+                Parent root = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(root1));  
+                stage.setScene(new Scene(root));  
                 stage.show();
                 ((Node)(event.getSource())).getScene().getWindow().hide();
             } 
         }
-        ErrorLabel.setText("Invalid user or password");
+        ErrorLabel.setText("Usuario o contraseña incorrectos");
     }
     
 }

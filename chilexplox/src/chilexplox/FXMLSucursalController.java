@@ -27,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.ciruman.javafx.component.listview.EllipsisListCell;
 
 /**
  * FXML Controller class
@@ -64,13 +65,33 @@ public class FXMLSucursalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*EnviarCamion.setOnAction(new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent e) {
-            populateMessages();
-            }
-        });*/
+        
     }  
+    
+    @FXML
+    public void NameAction(){
+        Empresa emp = new Empresa();
+        String bienvenida = "Hola, ";
+        LabelNombreTrabajador.setText(bienvenida);
+        ObservableList<String> messages = FXCollections.observableArrayList(
+             "IMPORTANTE: Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
+             "Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
+             "Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
+             "Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
+             "IMPORTANTE: Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
+             "Lorem ipsum dolor sit amet, at eum libris aliquip laoreet."
+        );
+        ListMessagesPreview.setItems(messages);
+
+        /*ListView<String> root = new ListView<>();
+
+        root.setCellFactory((ListView<String> param) -> new EllipsisListCell());
+
+        Scene scene = new Scene(root, 300, 250);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();*/
+    }
    
     /**
      * prueba 1 rellenar listview con preview de mensajes

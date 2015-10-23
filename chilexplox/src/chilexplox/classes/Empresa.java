@@ -30,6 +30,7 @@ public class Empresa {
     public List<Cliente> clientes;
     public List<Encomienda> encomiendas;
     public List<Empleado> empleados;
+    public Empleado empleadoActual;
     
     public Empresa()
     {
