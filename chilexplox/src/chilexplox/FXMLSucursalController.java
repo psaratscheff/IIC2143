@@ -6,6 +6,7 @@
 package chilexplox;
 import chilexplox.classes.Camion;
 import chilexplox.classes.Empresa;
+import chilexplox.classes.Encomienda;
 import chilexplox.classes.Sucursal;
 import java.io.IOException;
 
@@ -64,7 +65,11 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private Button CargarSucursal;
     @FXML
-    private ListView ListMessagesPreview;
+    private ListView<String> ListMessagesPreview;
+    @FXML
+    private ListView<String> EncomiendasEnSucursal;
+    @FXML
+    private ListView<String> EncomiendasRecibidas;
 
     Empresa emp;
     /**
@@ -81,41 +86,17 @@ public class FXMLSucursalController implements Initializable {
         }
     }  
     
-    @FXML
-    public void NameAction(){
+    public void UpdateConSucursal()
+    {
+        for(Encomienda en: emp.sucursalActual.encomiendasAlmacenadas)
+        {
+            System.out.print("asd");
+            EncomiendasEnSucursal.getItems().add("["+en.prioridad+"] // "+"ID: "+en.id+" Destino: " + en.destino);
+        }
         
-        ObservableList<String> messages = FXCollections.observableArrayList(
-             "IMPORTANTE: Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
-             "Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
-             "Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
-             "Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
-             "IMPORTANTE: Lorem ipsum dolor sit amet, at eum libris aliquip laoreet.",
-             "Lorem ipsum dolor sit amet, at eum libris aliquip laoreet."
-        );
-        ListMessagesPreview.setItems(messages);
-        ListMessagesPreview.setCellFactory(new Callback<ListView<String>, EllipsisListCell>() {
-            @Override
-            public EllipsisListCell call(ListView<String> p) {
-                EllipsisListCell cell = new EllipsisListCell();
-                return cell;
-            }
-        });
     }
     
-    /**
-     * prueba 1 rellenar listview con preview de mensajes
-     */
-    @FXML
-    public void populateMessages(){
-        ObservableList<String> messages = FXCollections.observableArrayList(
-             "IMPORTANTE: Tienes que hacer que...",
-             "El paquete de la semana pasada n...",
-             "Cuando creen que vaya a llegar e...",
-             "IMPORTANTE: EL TIPO DE AYER ERA ...",
-             "Jesus está vivo, crean en el y y..."
-        );
-        ListMessagesPreview.setItems(messages);
-    }
+    
     
     @FXML
     private void IngresarPedidoAction(MouseEvent event) throws IOException{
@@ -143,8 +124,8 @@ public class FXMLSucursalController implements Initializable {
             if (s.direccion == direccion)
             {
                 emp.sucursalActual = s;
-                break;
             }
         }
+        UpdateConSucursal();
     }
 }
