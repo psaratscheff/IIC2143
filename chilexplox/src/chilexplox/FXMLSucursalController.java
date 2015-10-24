@@ -55,6 +55,8 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private ChoiceBox<String> ChoiceBoxSucursales;
     @FXML
+    private ChoiceBox<String> ChoiceBoxDestinoCamiones;
+    @FXML
     private Button IngresarPedido;
     @FXML
     private Button Mensajes;
@@ -99,6 +101,7 @@ public class FXMLSucursalController implements Initializable {
         for (Sucursal s: emp.sucursales) 
         {
             ChoiceBoxSucursales.getItems().add(s.direccion);
+            ChoiceBoxDestinoCamiones.getItems().add(s.direccion);
         }
         // SUCURSAL CHOICEBOX LISTENER (En caso de no usar el boton cargar)
         /*ChoiceBoxSucursales.getSelectionModel().selectedIndexProperty().addListener(new
@@ -119,7 +122,7 @@ public class FXMLSucursalController implements Initializable {
                        ErrorLabelSucursal.setText("");
                        LabelSucursal.setText(sucursalesArray[new_value.intValue()]);
                    }
-            });*/
+            });/**/
         // CAMIONES CHOICEBOX LISTENER
         ChoiceBoxCamiones.getSelectionModel().selectedIndexProperty().addListener(new
             ChangeListener<Number>() {
@@ -142,6 +145,8 @@ public class FXMLSucursalController implements Initializable {
     
     public void UpdateConSucursal()
     {
+        // CARGAR ENCOMIENDAS
+        EncomiendasEnSucursal.getItems().clear();
         for(Encomienda en: emp.sucursalActual.encomiendasAlmacenadas)
         {
             EncomiendasEnSucursal.getItems().add("["+en.prioridad+"] // "+"ID: "+en.id+" Destino: " + en.destino);
@@ -173,6 +178,7 @@ public class FXMLSucursalController implements Initializable {
             }
         });
         // CARGAR CAMIONES DISPONIBLES
+        ChoiceBoxCamiones.getItems().clear();
         for (Camion c: emp.sucursalActual.camionesEstacionados) 
         {
             ChoiceBoxCamiones.getItems().add(c.getNombre());
@@ -180,7 +186,7 @@ public class FXMLSucursalController implements Initializable {
     }
     
     @FXML
-    private void btnCargarSucursal(MouseEvent event) throws IOException{
+    private void btnCargarSucursal() throws IOException{
         String direccion = ChoiceBoxSucursales.getValue();
         for(Sucursal s: emp.sucursales)
         {
@@ -195,7 +201,44 @@ public class FXMLSucursalController implements Initializable {
     }
     
     @FXML
-    private void IngresarPedidoAction(MouseEvent event) throws IOException{
+    private void EnviarCamionAction() throws IOException{
+        // Obtener Camion a Enviar
+        String nombreCamion = ChoiceBoxCamiones.getValue();
+        Camion camion = null;
+        for(Camion c: emp.sucursalActual.camionesEstacionados)
+        {
+            if (c.getNombre().equals(nombreCamion))
+            {
+                camion = c;
+            }
+        }
+        if (camion != null)
+        {
+            // Obtener Sucursal destino
+            String destino = ChoiceBoxDestinoCamiones.getValue();
+            Sucursal destinoSucursal;
+            for(Sucursal s: emp.sucursales)
+            {
+                if (s.direccion.equals(destino))
+                {
+                    // Enviar Camion
+                    destinoSucursal = s;
+                    destinoSucursal.camionesEstacionados.add(camion);
+                    emp.sucursalActual.camionesEstacionados.remove(camion);
+                }
+            }
+            ChoiceBoxDestinoCamiones.getSelectionModel().clearSelection();
+            // CARGAR CAMIONES DISPONIBLES
+            ChoiceBoxCamiones.getItems().clear();
+            for (Camion c: emp.sucursalActual.camionesEstacionados) 
+            {
+                ChoiceBoxCamiones.getItems().add(c.getNombre());
+            }/**/
+        }
+    }
+    
+    @FXML
+    private void IngresarPedidoAction() throws IOException{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedido.fxml"));
             Parent root = (Parent) fxmlLoader.load();
@@ -208,7 +251,7 @@ public class FXMLSucursalController implements Initializable {
     }
     
     @FXML
-    private void MensajesAction(MouseEvent event) throws IOException{
+    private void MensajesAction() throws IOException{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLMensajesRecibidos.fxml"));
             Parent root = (Parent) fxmlLoader.load();
