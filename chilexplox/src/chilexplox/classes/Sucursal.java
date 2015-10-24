@@ -14,6 +14,7 @@ public class Sucursal {
   public List<Cliente> clientesRegistrados;
   //Faltantes en el UML
   public List<Encomienda> encomiendasAlmacenadas;
+  public List<Encomienda> encomiendasRecibidas;
 
   public Sucursal(String direccion, int capacidad)
   {
@@ -25,6 +26,7 @@ public class Sucursal {
     this.trabajadores = new ArrayList();
     this.camionesEstacionados = new ArrayList();
     this.clientesRegistrados = new ArrayList();
+    this.encomiendasRecibidas = new ArrayList();
   }
 
   public int EspacioDisponible()

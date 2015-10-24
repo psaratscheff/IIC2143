@@ -164,6 +164,12 @@ public class FXMLSucursalController implements Initializable {
         {
             EncomiendasEnSucursal.getItems().add("["+en.prioridad+"] // "+"ID: #"+en.id+"# Destino: " + en.destino.direccion);
         }
+        // CARGAR ENCOMIENDAS RECIBIDAS
+        EncomiendasRecibidas.getItems().clear();
+        for(Encomienda en: emp.sucursalActual.encomiendasRecibidas)
+        {
+            EncomiendasRecibidas.getItems().add("["+en.prioridad+"] // "+"ID: #"+en.id+"# Destino: " + en.destino.direccion);
+        }
         // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
         ListMessagesPreview.getItems().clear();
         for(Mensaje m: emp.sucursalActual.mensajesRecibidos)
@@ -324,6 +330,12 @@ public class FXMLSucursalController implements Initializable {
                     destinoSucursal = s;
                     destinoSucursal.camionesEstacionados.add(camion);
                     emp.sucursalActual.camionesEstacionados.remove(camion);
+                    // Descargar encomiendas en destino (Inmediato por ahora)
+                    for (Encomienda e: camion.encomiendas)
+                    {
+                        destinoSucursal.encomiendasRecibidas.add(e);
+                    }
+                    camion.encomiendas.clear();/**/
                 }
             }
             // NO SE SI PONER ESTO DENTRO DEL FOR DE AQUI ARRIBA ^
