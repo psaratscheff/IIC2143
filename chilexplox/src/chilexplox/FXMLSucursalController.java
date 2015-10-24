@@ -100,10 +100,6 @@ public class FXMLSucursalController implements Initializable {
         {
             ChoiceBoxSucursales.getItems().add(s.direccion);
         }
-        for (Camion c: emp.camiones) 
-        {
-            ChoiceBoxCamiones.getItems().add(c.getNombre());
-        }/**/
         // SUCURSAL CHOICEBOX LISTENER (En caso de no usar el boton cargar)
         /*ChoiceBoxSucursales.getSelectionModel().selectedIndexProperty().addListener(new
             ChangeListener<Number>() {
@@ -130,7 +126,7 @@ public class FXMLSucursalController implements Initializable {
                 public void changed(ObservableValue ov,
                     Number value, Number new_value) {
                        String name = ChoiceBoxCamiones.getValue();
-                       for(Camion c: emp.camiones)
+                       for(Camion c: emp.sucursalActual.camionesEstacionados)
                        {
                            if (c.getNombre() == name)
                            {
@@ -141,7 +137,7 @@ public class FXMLSucursalController implements Initializable {
                        //Stufffff to do al seleccionar camion
                        ProgressBarCapacity.setProgress(espacioCamion);
                    }
-            });
+            });/**/
     }  
     
     public void UpdateConSucursal()
@@ -176,6 +172,11 @@ public class FXMLSucursalController implements Initializable {
                 return cell;
             }
         });
+        // CARGAR CAMIONES DISPONIBLES
+        for (Camion c: emp.sucursalActual.camionesEstacionados) 
+        {
+            ChoiceBoxCamiones.getItems().add(c.getNombre());
+        }/**/
     }
     
     @FXML
