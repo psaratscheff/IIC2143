@@ -206,6 +206,13 @@ public class FXMLSucursalController implements Initializable {
     }
     
     @FXML
+    private void EntregarEncomiendaAction()
+    {
+        String encomienda = EncomiendasRecibidas.getSelectionModel().getSelectedItem();
+        EncomiendasRecibidas.getItems().remove(encomienda);
+    }
+    
+    @FXML
     private void RefreshProgressBarAction() // SE EJECUTA TODO EL RATO!!
     {
         String name = ChoiceBoxCamiones.getValue();

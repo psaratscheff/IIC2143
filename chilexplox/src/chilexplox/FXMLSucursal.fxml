@@ -41,7 +41,7 @@
       </Label>
       <Label fx:id="LabelCamionesDisponibles" layoutX="53.0" layoutY="336.0" text="Disponibles: " />
       <Button fx:id="CargarCamion" layoutX="673.0" layoutY="317.0" mnemonicParsing="false" onAction="#CargarCamionAction" text="Cargar a camión" />
-      <Button fx:id="DescargarPedido" layoutX="673.0" layoutY="488.0" mnemonicParsing="false" text="Entregar Pedido" />
+      <Button fx:id="EntregarEncomienda" layoutX="673.0" layoutY="488.0" mnemonicParsing="false" onAction="#EntregarEncomiendaAction" text="Entregar Pedido" />
       <ChoiceBox fx:id="ChoiceBoxCamiones" layoutX="40.0" layoutY="373.0" prefWidth="150.0" />
       <Label layoutX="63.0" layoutY="356.0" text="Seleccionar camión:" />
       <Label layoutX="41.0" layoutY="403.0" text="Espacio libre:" />
