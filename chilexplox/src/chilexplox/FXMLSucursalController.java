@@ -90,7 +90,7 @@ public class FXMLSucursalController implements Initializable {
 
     Empresa emp;
     Camion camionActual;
-    double espacioCamion;
+    double espacioCamion = -1;
     /**
      * Initializes the controller class.
      */
@@ -125,14 +125,14 @@ public class FXMLSucursalController implements Initializable {
                    }
             });/**/
         // CAMIONES CHOICEBOX LISTENER
-        ChoiceBoxCamiones.getSelectionModel().selectedIndexProperty().addListener(new
+        /*ChoiceBoxCamiones.getSelectionModel().selectedIndexProperty().addListener(new
             ChangeListener<Number>() {
                 public void changed(ObservableValue ov,
                     Number value, Number new_value) {
                        String name = ChoiceBoxCamiones.getValue();
                        for(Camion c: emp.sucursalActual.camionesEstacionados)
                        {
-                           if (c.getNombre() == name)
+                           if (c.getNombre().equals(name))
                            {
                                camionActual = c;
                                espacioCamion = c.PorcentajeDisponible();
@@ -191,6 +191,7 @@ public class FXMLSucursalController implements Initializable {
             }
         });
         // CARGAR CAMIONES DISPONIBLES
+        espacioCamion = -1;
         ChoiceBoxCamiones.getItems().clear();
         for (Camion c: emp.sucursalActual.camionesEstacionados) 
         {
@@ -333,6 +334,7 @@ public class FXMLSucursalController implements Initializable {
             {
                 ChoiceBoxCamiones.getItems().add(c.getNombre());
             }/**/
+            espacioCamion = -1;
             ProgressBarCapacity.setProgress(-1); // -1 para indeterminado
         }
     }
