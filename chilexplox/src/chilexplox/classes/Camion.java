@@ -37,7 +37,9 @@ public class Camion {
      */
     public double PorcentajeDisponible()
     {
-        double porcentaje = this.encomiendas.size() / this.capacidad;
+        double size = this.encomiendas.size();
+        double cap = this.capacidad;
+        double porcentaje = size / cap;
         return porcentaje;
     }
 }

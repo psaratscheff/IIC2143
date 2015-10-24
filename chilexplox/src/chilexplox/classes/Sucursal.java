@@ -39,7 +39,17 @@ public class Sucursal {
       camion.encomiendas.addAll(encomiendas); //Agrega todas las encomiendas de la lista
       camion.disponibilidad=false;  // deja de estar disponible el camion
   }
-
+  public Encomienda getEncomienda(int id)
+  {
+      for (Encomienda e: encomiendasAlmacenadas)
+      {
+          if (e.id == id)
+          {
+              return e;
+          }
+      }
+      return null;
+  }
   public List<Encomienda> RecibirCamion(Camion camion)
   {
     // Falta validar espacio disponible

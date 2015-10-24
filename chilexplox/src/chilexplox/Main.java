@@ -33,9 +33,9 @@ public class Main extends Application {
         emp.sucursales.add(new Sucursal("Arica",250));
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s);
         emp.AddEmpleado(e);
-        Camion c1 = new Camion("Charlie", 1000, true);
-        Camion c2 = new Camion("CharlieII", 2000, true);
-        Camion c3 = new Camion("Arnold", 500, true);
+        Camion c1 = new Camion("Charlie", 10, true);
+        Camion c2 = new Camion("CharlieII", 20, true);
+        Camion c3 = new Camion("Arnold", 5, true);
         emp.camiones.add(c1);
         emp.camiones.add(c2);
         emp.camiones.add(c3);
