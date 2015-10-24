@@ -41,19 +41,21 @@
       </Label>
       <Label fx:id="LabelCamionesDisponibles" layoutX="53.0" layoutY="336.0" text="Disponibles: " />
       <Button fx:id="CargarCamion" layoutX="673.0" layoutY="317.0" mnemonicParsing="false" text="Cargar a camión" />
-      <Button fx:id="DescargarPedido" layoutX="673.0" layoutY="488.0" mnemonicParsing="false" text="Descargar" />
-      <ChoiceBox fx:id="Camiones" layoutX="40.0" layoutY="373.0" prefWidth="150.0" />
+      <Button fx:id="DescargarPedido" layoutX="673.0" layoutY="488.0" mnemonicParsing="false" text="Entregar Pedido" />
+      <ChoiceBox fx:id="ChoiceBoxCamiones" layoutX="40.0" layoutY="373.0" prefWidth="150.0" />
       <Label layoutX="63.0" layoutY="356.0" text="Seleccionar camión:" />
-      <Label layoutX="41.0" layoutY="413.0" text="Capacidad:" />
-      <Button fx:id="EnviarCamion" layoutX="70.0" layoutY="472.0" mnemonicParsing="false" text="Enviar camión" />
-      <ProgressBar id="ProgressBarCapacity" fx:id="ProgressBarCapacity" layoutX="40.0" layoutY="434.0" prefHeight="18.0" prefWidth="150.0" progress="0.67" />
+      <Label layoutX="41.0" layoutY="403.0" text="Espacio libre:" />
+      <Button fx:id="EnviarCamion" layoutX="70.0" layoutY="501.0" mnemonicParsing="false" text="Enviar camión" />
+      <ProgressBar id="ProgressBarCapacity" fx:id="ProgressBarCapacity" layoutX="40.0" layoutY="420.0" prefHeight="18.0" prefWidth="150.0" />
       <Button fx:id="CargarSucursal" layoutX="682.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#btnCargarSucursal" text="Cargar Sucursal" />
       <ListView fx:id="EncomiendasEnSucursal" layoutX="250.0" layoutY="267.0" prefHeight="132.0" prefWidth="408.0" />
       <ListView fx:id="EncomiendasRecibidas" layoutX="250.0" layoutY="447.0" prefHeight="132.0" prefWidth="408.0" />
       <Label fx:id="ErrorLabelSucursal" layoutX="498.0" layoutY="47.0" textFill="RED" />
-      <Label fx:id="LabelSucursal" layoutX="247.0" layoutY="3.0" textAlignment="CENTER">
+      <Label fx:id="LabelSucursal" layoutX="247.0" layoutY="3.0" textAlignment="CENTER" underline="true">
          <font>
             <Font size="32.0" />
          </font></Label>
+      <Label layoutX="63.0" layoutY="454.0" text="Seleccionar destino:" />
+      <ChoiceBox fx:id="Camiones1" layoutX="40.0" layoutY="471.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

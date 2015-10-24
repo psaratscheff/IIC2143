@@ -39,6 +39,7 @@ import javafx.util.Callback;
 //Listener
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tooltip;
 
 /**
@@ -49,6 +50,8 @@ import javafx.scene.control.Tooltip;
 public class FXMLSucursalController implements Initializable {
     @FXML
     private Label LabelNombreTrabajador;
+    @FXML
+    private ChoiceBox<String> ChoiceBoxCamiones;
     @FXML
     private ChoiceBox<String> ChoiceBoxSucursales;
     @FXML
@@ -66,8 +69,6 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private Button DescargarPedido;
     @FXML
-    private ChoiceBox<Camion> Camiones;
-    @FXML
     private Button EnviarCamion;
     @FXML
     private Button CargarSucursal;
@@ -81,8 +82,12 @@ public class FXMLSucursalController implements Initializable {
     private Label ErrorLabelSucursal;
     @FXML
     private Label LabelSucursal;
+    @FXML
+    private ProgressBar ProgressBarCapacity;
 
     Empresa emp;
+    Camion camionActual;
+    double espacioCamion;
     /**
      * Initializes the controller class.
      */
@@ -95,6 +100,10 @@ public class FXMLSucursalController implements Initializable {
         {
             ChoiceBoxSucursales.getItems().add(s.direccion);
         }
+        for (Camion c: emp.camiones) 
+        {
+            ChoiceBoxCamiones.getItems().add(c.getNombre());
+        }/**/
         // SUCURSAL CHOICEBOX LISTENER (En caso de no usar el boton cargar)
         /*ChoiceBoxSucursales.getSelectionModel().selectedIndexProperty().addListener(new
             ChangeListener<Number>() {
@@ -115,6 +124,24 @@ public class FXMLSucursalController implements Initializable {
                        LabelSucursal.setText(sucursalesArray[new_value.intValue()]);
                    }
             });*/
+        // CAMIONES CHOICEBOX LISTENER
+        ChoiceBoxCamiones.getSelectionModel().selectedIndexProperty().addListener(new
+            ChangeListener<Number>() {
+                public void changed(ObservableValue ov,
+                    Number value, Number new_value) {
+                       String name = ChoiceBoxCamiones.getValue();
+                       for(Camion c: emp.camiones)
+                       {
+                           if (c.getNombre() == name)
+                           {
+                               camionActual = c;
+                               espacioCamion = c.PorcentajeDisponible();
+                           }
+                       }
+                       //Stufffff to do al seleccionar camion
+                       ProgressBarCapacity.setProgress(espacioCamion);
+                   }
+            });
     }  
     
     public void UpdateConSucursal()

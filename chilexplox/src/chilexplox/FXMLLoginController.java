@@ -5,6 +5,7 @@
  */
 package chilexplox;
 
+import chilexplox.classes.Camion;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -58,6 +59,12 @@ public class FXMLLoginController implements Initializable {
         emp.sucursales.add(new Sucursal("Arica",250));
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s);
         emp.AddEmpleado(e);
+        Camion c1 = new Camion("Charlie", 1000, true);
+        Camion c2 = new Camion("CharlieII", 2000, true);
+        Camion c3 = new Camion("Arnold", 500, true);
+        emp.camiones.add(c1);
+        emp.camiones.add(c2);
+        emp.camiones.add(c3);
     }    
 
     @FXML
@@ -75,7 +82,7 @@ public class FXMLLoginController implements Initializable {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));  
                 stage.show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
+                ((Node)(event.getSource())).getScene().getWindow().hide(); // hide es IDENTICO a close()
             } 
         }
         ErrorLabel.setText("Usuario o contraseña incorrectos");
