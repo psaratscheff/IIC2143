@@ -62,6 +62,7 @@ public class FXMLVentanaPagoController implements Initializable {
         for(Encomienda en: pedido.encomiendas)
         {
             emp.sucursalActual.encomiendasAlmacenadas.add(en);
+            emp.encomiendas.add(en);
         }
         
         Stage stage = (Stage) okButton.getScene().getWindow();

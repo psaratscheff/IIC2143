@@ -22,7 +22,7 @@
       <TextField fx:id="CApellido" layoutX="100.0" layoutY="461.0" prefHeight="25.0" prefWidth="192.0" />
       <TextField fx:id="CDireccion" layoutX="100.0" layoutY="493.0" prefHeight="25.0" prefWidth="192.0" />
       <TextField fx:id="CRut" layoutX="100.0" layoutY="527.0" prefHeight="25.0" prefWidth="192.0" />
-      <Button fx:id="Pagar" layoutX="399.0" layoutY="452.0" mnemonicParsing="false" onMouseClicked="#btnPagar" text="Pagar">
+      <Button fx:id="Pagar" layoutX="400.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#btnPagar" text="Pagar">
          <font>
             <Font size="32.0" />
          </font>
@@ -61,5 +61,11 @@
       </Label>
       <ChoiceBox fx:id="EPrioridad" layoutX="102.0" layoutY="239.0" prefHeight="25.0" prefWidth="192.0" />
       <Label fx:id="EOrigen" layoutX="102.0" layoutY="112.0" />
+      <Button fx:id="EditarEncomienda" layoutX="400.0" layoutY="394.0" mnemonicParsing="false" onMouseClicked="#btnEditar" text="Editar">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="EditarID" layoutX="497.0" layoutY="405.0" textFill="RED" />
    </children>
 </AnchorPane>

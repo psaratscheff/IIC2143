@@ -9,6 +9,7 @@ import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Pedido;
 import chilexplox.classes.Sucursal;
+import java.awt.Desktop.Action;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +25,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import se.mbaeumer.fxmessagebox.MessageBox;
+import se.mbaeumer.fxmessagebox.MessageBoxResult;
+import se.mbaeumer.fxmessagebox.MessageBoxType;
 
 /**
  * FXML Controller class
@@ -44,6 +48,8 @@ public class FXMLIngresoPedidoController implements Initializable {
     @FXML
     private Button AgregarEncomienda;
     @FXML
+    private Button EditarEncomienda;
+    @FXML
     private TextField EAncho;
     @FXML
     private ChoiceBox<String> EPrioridad;
@@ -58,11 +64,13 @@ public class FXMLIngresoPedidoController implements Initializable {
     @FXML
     private Label TotalPedido;
     @FXML
+    private Label EditarID;
+    @FXML
     private ListView<String> ListEncomiendas;
 
     Empresa emp;
-    
     Pedido pedido;
+    Boolean editando;
     /**
      * Initializes the controller class.
      */
@@ -78,6 +86,7 @@ public class FXMLIngresoPedidoController implements Initializable {
             EDestino.getItems().add(s.direccion);
         }
         EOrigen.setText(emp.sucursalActual.direccion);
+        editando=false;
         
     }    
 
@@ -103,27 +112,86 @@ public class FXMLIngresoPedidoController implements Initializable {
     {
         try
         {    
-            int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
-            String prioridad = EPrioridad.getValue();
-            String destino = EDestino.getValue();
-            for(Sucursal s: emp.sucursales)
-                {
-                    if (s.direccion == destino) 
+            if(editando == false)
+            {
+                int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
+                String prioridad = EPrioridad.getValue();
+                String destino = EDestino.getValue();
+                for(Sucursal s: emp.sucursales)
                     {
-                        Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.sucursalActual);
-                        pedido.encomiendas.add(en);
-                        ListEncomiendas.getItems().add("ID: "+en.id+" Destino: "+en.destino.direccion);
-                        int asd = pedido.CalcularValor();
-                        String precio= Integer.toString(asd);
-                        TotalPedido.setText("Total: $"+precio);
+                        if (s.direccion == destino) 
+                        {
+                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.sucursalActual);
+                            pedido.encomiendas.add(en);
+                            ListEncomiendas.getItems().add("ID: "+"#"+en.id+"#"+" Destino: "+en.destino.direccion);
+                            int asd = pedido.CalcularValor();
+                            String precio= Integer.toString(asd);
+                            TotalPedido.setText("Total: $"+precio);
+                        }
+                    }
+            }
+            
+            if (editando == true) 
+            {
+                int id = Integer.parseInt(EditarID.getText().split("#")[1]);
+                for (Encomienda en: pedido.encomiendas) 
+                {
+                    if (en.id == id) 
+                    {
+                        pedido.encomiendas.remove(en);
+                        int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
+                        String prioridad = EPrioridad.getValue();
+                        String destino = EDestino.getValue();
+                        for(Sucursal s: emp.sucursales)
+                            {
+                                if (s.direccion == destino) 
+                                {
+                                    Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, s, emp.sucursalActual);
+                                    pedido.encomiendas.add(wn);
+                                    ListEncomiendas.getItems().add("ID: "+"#"+wn.id+"#"+" Destino: "+wn.destino.direccion);
+                                    int asd = pedido.CalcularValor();
+                                    String precio= Integer.toString(asd);
+                                    TotalPedido.setText("Total: $"+precio);
+                                }
+                            }
                     }
                 }
+                EditarID.setText(null);
+                editando = false;
+            }
+            
         }
         catch(Exception e)
         {
             System.out.print("Error en el sistema");
         }     
         
+    }
+
+    
+    @FXML
+    private void btnEditar(MouseEvent event) 
+    {
+        MessageBox mb = new MessageBox("OK or cancel?", MessageBoxType.OK_CANCEL);
+        mb.showAndWait();
+        if (mb.getMessageBoxResult() == MessageBoxResult.OK){
+                System.out.println("OK");
+        }else{
+                System.out.println("Cancel");
+        }
+        try
+        {    
+            editando = true;
+            String encomiendaID = ListEncomiendas.getSelectionModel().getSelectedItem().split("#")[1]; //
+            EditarID.setText("ID: "+"#"+encomiendaID+"#");
+            int selectedIdx = ListEncomiendas.getSelectionModel().getSelectedIndex();
+            ListEncomiendas.getItems().remove(selectedIdx);
+            
+        }
+        catch(Exception e)
+        {
+            System.out.print("Error en el sistema");
+        }     
         
     }
     
