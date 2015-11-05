@@ -61,5 +61,6 @@
       <Button fx:id="QuitarEncomiendaCamion" layoutX="673.0" layoutY="489.0" mnemonicParsing="false" onAction="#QuitarEncomiendaCamionAction" text="Quitar Encomienda" />
       <Button fx:id="VerPedidosRecibidos" layoutX="674.0" layoutY="450.0" mnemonicParsing="false" onAction="#VerPedidosRecibidosAction" text="Ver Recibidos" />
       <Button fx:id="PasarACola" layoutX="674.0" layoutY="526.0" mnemonicParsing="false" onAction="#PasarAColaAction" text="Pasar a Cola" />
+      <Label fx:id="Urgencia" layoutX="394.0" layoutY="245.0" textFill="RED" />
    </children>
 </AnchorPane>

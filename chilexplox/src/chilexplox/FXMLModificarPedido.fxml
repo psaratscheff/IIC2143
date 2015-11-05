@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="chilexplox.FXMLModificarPedidoController">
+   <children>
+      <Label fx:id="EditarID" layoutX="507.0" layoutY="403.0" textFill="RED" />
+      <Label fx:id="EOrigen" layoutX="112.0" layoutY="110.0" />
+      <ChoiceBox fx:id="EPrioridad" layoutX="112.0" layoutY="237.0" />
+      <Label layoutX="40.0" layoutY="12.0" text="ChilExplox">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="65.0" text="Agregar Encomienda">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="45.0" layoutY="110.0" text="Origen:" />
+      <ChoiceBox fx:id="EDestino" layoutX="112.0" layoutY="273.0" />
+      <Label layoutX="45.0" layoutY="277.0" text="Destino:" />
+      <Label layoutX="46.0" layoutY="241.0" text="Prioridad:" />
+      <Label layoutX="46.0" layoutY="175.0" text="Ancho" />
+      <Label layoutX="46.0" layoutY="144.0" text="Largo:" />
+      <TextField fx:id="ELargo" layoutX="112.0" layoutY="140.0" />
+      <TextField fx:id="EPeso" layoutX="112.0" layoutY="203.0" />
+      <TextField fx:id="EAncho" layoutX="112.0" layoutY="171.0" />
+      <Label layoutX="46.0" layoutY="207.0" text="Peso:" />
+      <Button fx:id="Editar" layoutX="381.0" layoutY="228.0" mnemonicParsing="false" onAction="#EditarAction" text="Editar">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Button>
+      <TextField fx:id="CRut" layoutX="113.0" layoutY="459.0" />
+      <TextField fx:id="CDireccion" layoutX="113.0" layoutY="425.0" />
+      <TextField fx:id="CApellido" layoutX="113.0" layoutY="393.0" />
+      <TextField fx:id="CNombre" layoutX="113.0" layoutY="362.0" />
+      <Label layoutX="47.0" layoutY="463.0" text="Rut:" />
+      <Label layoutX="47.0" layoutY="429.0" text="Dirección:" />
+      <Label layoutX="47.0" layoutY="397.0" text="Apellido:" />
+      <Label layoutX="47.0" layoutY="366.0" text="Nombre:" />
+      <Label layoutX="47.0" layoutY="311.0" text="Cliente">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
