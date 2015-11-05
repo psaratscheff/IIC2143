@@ -50,6 +50,13 @@ public class Sucursal {
               return e;
           }
       }
+      for (Encomienda e: encomiendasRecibidas)
+      {
+          if (e.id == id)
+          {
+              return e;
+          }
+      }
       return null;
   }
   public List<Encomienda> RecibirCamion(Camion camion)

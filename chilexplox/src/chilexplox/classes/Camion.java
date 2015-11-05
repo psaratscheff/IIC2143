@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Camion {
     private int capacidad;
-    private String name;
+    public String name;
     public List<Encomienda> encomiendas;
     public boolean disponibilidad;
     

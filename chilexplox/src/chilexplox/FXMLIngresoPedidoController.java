@@ -174,25 +174,27 @@ public class FXMLIngresoPedidoController implements Initializable {
     {
         MessageBox mb = new MessageBox("OK or cancel?", MessageBoxType.OK_CANCEL);
         mb.showAndWait();
-        if (mb.getMessageBoxResult() == MessageBoxResult.OK){
+        if (mb.getMessageBoxResult() == MessageBoxResult.OK)
+        {
                 System.out.println("OK");
-        }else{
+                try
+                {    
+                    editando = true;
+                    String encomiendaID = ListEncomiendas.getSelectionModel().getSelectedItem().split("#")[1]; //
+                    EditarID.setText("ID: "+"#"+encomiendaID+"#");
+                    int selectedIdx = ListEncomiendas.getSelectionModel().getSelectedIndex();
+                    ListEncomiendas.getItems().remove(selectedIdx);
+
+                }
+                catch(Exception e)
+                {
+                    System.out.print("Error en el sistema");
+                }
+        }
+        else
+        {
                 System.out.println("Cancel");
         }
-        try
-        {    
-            editando = true;
-            String encomiendaID = ListEncomiendas.getSelectionModel().getSelectedItem().split("#")[1]; //
-            EditarID.setText("ID: "+"#"+encomiendaID+"#");
-            int selectedIdx = ListEncomiendas.getSelectionModel().getSelectedIndex();
-            ListEncomiendas.getItems().remove(selectedIdx);
-            
-        }
-        catch(Exception e)
-        {
-            System.out.print("Error en el sistema");
-        }     
-        
     }
     
 }
