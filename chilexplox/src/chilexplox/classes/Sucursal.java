@@ -59,7 +59,7 @@ public class Sucursal {
     // Falta validar espacio disponible
       List<Encomienda> temporal = camion.getlistencomiendas();
       camion.borrarencomiendas(); //Vacío el camión
-      camion.disponibilidad=true;  //vuelve a estar disponible el camion
+      camion.setdisponibilidad(true);  //vuelve a estar disponible el camion
       for(Encomienda e : temporal) // cambia estado de la encomienda
         {
             e.estado="destino";

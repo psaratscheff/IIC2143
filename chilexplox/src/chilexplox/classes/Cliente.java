@@ -7,7 +7,7 @@ import java.util.List;
 public class Cliente {
   // RUT Opcional, la persona puede no querer quedar registrada en el sistema
   // Por eso no se agrega al constructor y debe ser modificado posteriormente
-  public String rut;
+  private String rut;
   public String nombre;
   public String apellido;
   public String direccion;
@@ -23,4 +23,9 @@ public class Cliente {
     //Inicializo los arrays para poder agregar valores
     this.pedidosRealizados = new ArrayList();
   }
+ 
+  public String getrut()
+  {return rut;}
+  public void setrut(String Rut)
+  {rut=Rut;}
 }

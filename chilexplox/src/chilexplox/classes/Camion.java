@@ -10,7 +10,7 @@ public class Camion {
     private String name;
     private String tipo;
     private List<Encomienda> encomiendas;
-    public boolean disponibilidad;
+    private boolean disponibilidad;
     
     public Camion(String n, int cap, boolean disp,String tip)
             {
@@ -21,22 +21,45 @@ public class Camion {
                //Inicializo los arrays para poder agregar valores
                this.encomiendas = new ArrayList();
             }
+    
+    /**
+     * claramente retorna la disponibilidad del camion(si esta ocupado o no)
+     * @return 
+     */
+    public boolean getdisponibilidad()
+    {return disponibilidad;}
+    /**
+     * cambia el estado de disponibilidad del camion al booleano "disp"
+     * @param disp 
+     */
+    public void setdisponibilidad(boolean disp)
+    {disponibilidad=disp;}
     /**
      * retorna el nombre del camion
      * @return 
      */
     public String Nombre()
     {return name;}
+    /**
+     * borra una encomienda "encomienda" de la lista de encomiendas del camion
+     * @param encomienda 
+     */
     public void borrarencomienda(Encomienda encomienda)
     {encomiendas.remove(encomienda);}
     public void borrarencomiendas()
     {encomiendas.clear();}
+    
+    /**
+     * carga una encomienda en el camion
+     * @param encomienda 
+     */
+    public void addencomienda(Encomienda encomienda)
+    {encomiendas.add(encomienda);}
+    
     /**
      * carga el camion con la lista de encomiendas
      * @param encomiendas 
      */
-    public void addencomienda(Encomienda encomienda)
-    {encomiendas.add(encomienda);}
     public void CargarCamion( List<Encomienda> encomiendas)
   {
     // Falta validar espacio disponible

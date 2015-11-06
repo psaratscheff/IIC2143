@@ -63,7 +63,7 @@ public class Empresa {
     {
         for(Camion c: camiones)
         {
-            if (c.disponibilidad==true)
+            if (c.getdisponibilidad()==true)
             {return c;}
         }
         return null;
@@ -73,7 +73,7 @@ public class Empresa {
     {
         for(Cliente c: clientes)
         {
-        if (c.rut==rut)
+        if (c.getrut()==rut)
         {
         return c;
         }
