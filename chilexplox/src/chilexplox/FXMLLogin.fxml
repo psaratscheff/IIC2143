@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLLoginController">
    <children>
-      <Button id="button1" fx:id="login" defaultButton="true" layoutX="100.0" layoutY="302.0" onMouseClicked="#btnLoginAction" prefHeight="70.0" prefWidth="400.0" text="Login" />
+      <TextField id="textField1" fx:id="username" layoutX="93.0" layoutY="127.0" prefWidth="415.0" promptText="Username" />
       <Label layoutX="175.0" layoutY="28.0" text="Welcome to ChilExplox ">
          <font>
             <Font size="24.0" />
@@ -17,8 +17,9 @@
       </Label>
       <PasswordField id="passwordField1" fx:id="password" layoutX="93.0" layoutY="218.0" prefWidth="415.0" promptText="Password" />
       <Label id="label1" layoutX="100.0" layoutY="200.0" text="Password" />
-      <TextField id="textField1" fx:id="username" layoutX="93.0" layoutY="127.0" prefWidth="415.0" promptText="Username" />
+      
       <Label id="label1" layoutX="98.0" layoutY="110.0" text="Username" />
       <Label fx:id="ErrorLabel" layoutX="262.0" layoutY="278.0" textFill="RED" />
+      <Button id="button1" fx:id="login" defaultButton="true" layoutX="100.0" layoutY="302.0" onMouseClicked="#btnLoginAction" prefHeight="70.0" prefWidth="400.0" text="Login" />
    </children>
 </AnchorPane>

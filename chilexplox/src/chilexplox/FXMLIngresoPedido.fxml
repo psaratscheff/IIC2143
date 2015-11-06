@@ -25,12 +25,7 @@
       </items>
       </ChoiceBox>
       <Label layoutX="41.0" layoutY="323.0" text="Tipo:" />
-      <Label fx:id="EditarID" layoutX="507.0" layoutY="415.0" textFill="RED" />
-      <Button fx:id="EditarEncomienda" layoutX="410.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#btnEditar" text="Editar">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
+      
       <Label fx:id="EOrigen" layoutX="112.0" layoutY="122.0" />
        <Button fx:id="AgregarEncomienda" layoutX="33.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#btnAgregarEncomienda" text="Agregar Encomienda" />
     
@@ -48,6 +43,13 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
+      <ListView fx:id="ListEncomiendas" layoutX="372.0" layoutY="115.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label fx:id="EditarID" layoutX="507.0" layoutY="415.0" textFill="RED" />
+      <Button fx:id="EditarEncomienda" layoutX="410.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#btnEditar" text="Editar">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
       <Label fx:id="TotalPedido" layoutX="376.0" layoutY="343.0" text="Total:">
          <font>
             <Font size="17.0" />
@@ -68,7 +70,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <ListView fx:id="ListEncomiendas" layoutX="372.0" layoutY="115.0" prefHeight="200.0" prefWidth="200.0" />
+      
       <Label layoutX="45.0" layoutY="122.0" text="Origen:" />
       
       <Label layoutX="45.0" layoutY="289.0" text="Destino:" />
