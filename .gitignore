@@ -11,3 +11,5 @@ chilexplox/*
 !chilexplox/src/ciruman/*
 !imgs/
 !imgs/*
+!librerias/
+!librerias/FXMessageBox.jar
