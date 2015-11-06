@@ -206,13 +206,17 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasRecibidas.getItems().remove(enco);
     }
     
-    @FXML // SE EJECUTA TODO EL RATO!!
+    @FXML
     private void RefreshProgressBarAction(){
        
         Camion camionSeleccionado = ChoiceBoxCamiones.getValue();
+        
+        // Reviso que haya seleccion al momento de llamar al metodo
+        if (camionSeleccionado == null) { return; }
+        
         camionActual = camionSeleccionado;
         espacioCamion = camionSeleccionado.PorcentajeDisponible();
-        
+
         //Stufffff to do
         ProgressBarCapacity.setProgress(espacioCamion);
          if (espacioCamion<0.7)
