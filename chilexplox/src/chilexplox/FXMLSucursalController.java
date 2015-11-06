@@ -328,12 +328,11 @@ public class FXMLSucursalController implements Initializable {
             if (espacioCamion>=1.0){ return; }
             
             //CARGAR CAMION!!
-            if(camion.tipo==encomienda.tipo)
-            {
+            
             encomienda.estado = "En Camión";
             camion.encomiendas.add(encomienda);
             emp.sucursalActual.encomiendasAlmacenadas.remove(encomienda);
-            }
+            
             //Recargar Encomiendas
             EncomiendasEnSucursal.getItems().clear();
             Boolean boolurgencia = false;

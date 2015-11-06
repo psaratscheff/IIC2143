@@ -21,7 +21,10 @@ public class Camion {
                //Inicializo los arrays para poder agregar valores
                this.encomiendas = new ArrayList();
             }
-    
+    /**
+     * 
+     * @return 
+     */
     public String getNombre()
     {
         return name + '-' + capacidad;
