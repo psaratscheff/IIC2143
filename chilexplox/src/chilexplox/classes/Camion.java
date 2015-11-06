@@ -8,14 +8,16 @@ import java.util.List;
 public class Camion {
     private int capacidad;
     public String name;
+    public String tipo;
     public List<Encomienda> encomiendas;
     public boolean disponibilidad;
     
-    public Camion(String n, int cap, boolean disp)
+    public Camion(String n, int cap, boolean disp,String tip)
             {
                capacidad = cap;
                disponibilidad = disp;
                name = n;
+               tipo=tip;
                //Inicializo los arrays para poder agregar valores
                this.encomiendas = new ArrayList();
             }

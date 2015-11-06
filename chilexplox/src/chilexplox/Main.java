@@ -5,13 +5,16 @@
  */
 package chilexplox;
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import chilexplox.classes.*;
+import chilexplox.classes.Empleado;
+import chilexplox.classes.Empresa;
+import chilexplox.classes.Sucursal;
+import chilexplox.classes.Camion;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,15 +36,18 @@ public class Main extends Application {
         emp.sucursales.add(new Sucursal("Arica",250));
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s);
         emp.AddEmpleado(e);
-        Camion c1 = new Camion("Charlie", 10, true);
-        Camion c2 = new Camion("CharlieII", 20, true);
-        Camion c3 = new Camion("Arnold", 5, true);
+        Camion c1 = new Camion("Charlie", 10, true,"Normal");
+        Camion c2 = new Camion("CharlieII", 20, true,"Normal");
+        Camion c3 = new Camion("Arnold", 5, true,"Refrigerado");
+        Camion c4 = new Camion("Aleph", 5, true,"Radioactivo");
         emp.camiones.add(c1);
         emp.camiones.add(c2);
         emp.camiones.add(c3);
+        emp.camiones.add(c4);
         s.camionesEstacionados.add(c1);
         s.camionesEstacionados.add(c2);
         s.camionesEstacionados.add(c3);
+        s.camionesEstacionados.add(c4);
         
         //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));

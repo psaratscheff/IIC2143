@@ -9,8 +9,9 @@ public class Encomienda {
   public Sucursal destino;
   public Sucursal origen;
   public Cliente destinatario;
+  public String tipo;
 
-  public Encomienda(String estado, String prioridad, int tamaño, int id, Sucursal destino, Sucursal origen)
+  public Encomienda(String estado, String prioridad, int tamaño, int id, Sucursal destino, Sucursal origen,String tipo)
   {
     this.estado = estado;
     this.prioridad = prioridad;
@@ -18,6 +19,7 @@ public class Encomienda {
     this.id = id;
     this.destino = destino;
     this.origen = origen;
+    this.tipo=tipo;
   }
 
     

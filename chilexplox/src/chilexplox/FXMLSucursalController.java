@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package chilexplox;
+
 import chilexplox.classes.Camion;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;

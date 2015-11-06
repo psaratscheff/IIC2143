@@ -54,6 +54,8 @@ public class FXMLIngresoPedidoController implements Initializable {
     @FXML
     private ChoiceBox<String> EPrioridad;
     @FXML
+    private ChoiceBox<String> ETipo;
+    @FXML
     private TextField EPeso;
     @FXML
     private TextField ELargo;
@@ -121,7 +123,7 @@ public class FXMLIngresoPedidoController implements Initializable {
                     {
                         if (s.direccion == destino) 
                         {
-                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.sucursalActual);
+                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.sucursalActual,"Normal");
                             pedido.encomiendas.add(en);
                             ListEncomiendas.getItems().add("ID: "+"#"+en.id+"#"+" Destino: "+en.destino.direccion);
                             int asd = pedido.CalcularValor();
@@ -142,11 +144,12 @@ public class FXMLIngresoPedidoController implements Initializable {
                         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
                         String prioridad = EPrioridad.getValue();
                         String destino = EDestino.getValue();
+                        String tipo= ETipo.getValue();
                         for(Sucursal s: emp.sucursales)
                             {
                                 if (s.direccion == destino) 
                                 {
-                                    Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, s, emp.sucursalActual);
+                                    Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, s, emp.sucursalActual,tipo);
                                     pedido.encomiendas.add(wn);
                                     ListEncomiendas.getItems().add("ID: "+"#"+wn.id+"#"+" Destino: "+wn.destino.direccion);
                                     int asd = pedido.CalcularValor();
