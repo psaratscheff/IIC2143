@@ -10,6 +10,21 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLIngresoPedidoController">
    <children>
+       <TextField fx:id="ELargo" layoutX="112.0" layoutY="152.0" prefHeight="25.0" prefWidth="192.0" />
+       <TextField fx:id="EAncho" layoutX="112.0" layoutY="183.0" prefHeight="25.0" prefWidth="192.0" />
+       <TextField fx:id="EPeso" layoutX="112.0" layoutY="215.0" prefHeight="25.0" prefWidth="192.0" />
+        <ChoiceBox fx:id="EPrioridad" layoutX="112.0" layoutY="249.0" prefHeight="25.0" prefWidth="192.0" />
+        <ChoiceBox fx:id="EDestino" layoutX="112.0" layoutY="285.0" prefHeight="25.0" prefWidth="192.0" />
+        <ChoiceBox fx:id="ETipo" layoutX="112.0" layoutY="323.0" prefHeight="25.0" prefWidth="192.0" >
+          <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Normal" />
+          <String fx:value="Refrigerado" />
+          <String fx:value="Radioactivo" />
+        </FXCollections>
+      </items>
+      </ChoiceBox>
+      <Label layoutX="41.0" layoutY="323.0" text="Tipo:" />
       <Label fx:id="EditarID" layoutX="507.0" layoutY="415.0" textFill="RED" />
       <Button fx:id="EditarEncomienda" layoutX="410.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#btnEditar" text="Editar">
          <font>
@@ -17,7 +32,22 @@
          </font>
       </Button>
       <Label fx:id="EOrigen" layoutX="112.0" layoutY="122.0" />
-      <ChoiceBox fx:id="EPrioridad" layoutX="112.0" layoutY="249.0" prefHeight="25.0" prefWidth="192.0" />
+       <Button fx:id="AgregarEncomienda" layoutX="33.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#btnAgregarEncomienda" text="Agregar Encomienda" />
+    
+       <TextField fx:id="CNombre" layoutX="110.0" layoutY="440.0" prefHeight="25.0" prefWidth="192.0" />
+      
+      <TextField fx:id="CApellido" layoutX="110.0" layoutY="471.0" prefHeight="25.0" prefWidth="192.0" />
+      <TextField fx:id="CDireccion" layoutX="110.0" layoutY="503.0" prefHeight="25.0" prefWidth="192.0" />
+       <TextField fx:id="CRut" layoutX="110.0" layoutY="537.0" prefHeight="25.0" prefWidth="192.0" />
+      <Label layoutX="44.0" layoutY="541.0" text="Rut:" />
+      <Label layoutX="44.0" layoutY="507.0" text="Dirección:" />
+      <Label layoutX="44.0" layoutY="475.0" text="Apellido:" />
+      <Label layoutX="44.0" layoutY="444.0" text="Nombre:" />
+      <Label layoutX="44.0" layoutY="400.0" text="Cliente">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
       <Label fx:id="TotalPedido" layoutX="376.0" layoutY="343.0" text="Total:">
          <font>
             <Font size="17.0" />
@@ -40,43 +70,22 @@
       </Label>
       <ListView fx:id="ListEncomiendas" layoutX="372.0" layoutY="115.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="45.0" layoutY="122.0" text="Origen:" />
-      <ChoiceBox fx:id="EDestino" layoutX="112.0" layoutY="285.0" prefHeight="25.0" prefWidth="192.0" />
+      
       <Label layoutX="45.0" layoutY="289.0" text="Destino:" />
       <Label layoutX="46.0" layoutY="253.0" text="Prioridad:" />
       <Label layoutX="46.0" layoutY="187.0" text="Ancho" />
       <Label layoutX="46.0" layoutY="156.0" text="Largo:" />
-      <TextField fx:id="ELargo" layoutX="112.0" layoutY="152.0" prefHeight="25.0" prefWidth="192.0" />
-      <TextField fx:id="EPeso" layoutX="112.0" layoutY="215.0" prefHeight="25.0" prefWidth="192.0" />
-      <TextField fx:id="EAncho" layoutX="112.0" layoutY="183.0" prefHeight="25.0" prefWidth="192.0" />
+      
+      
+      
       <Label layoutX="46.0" layoutY="219.0" text="Peso:" />
-      <Button fx:id="AgregarEncomienda" layoutX="33.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#btnAgregarEncomienda" text="Agregar Encomienda" />
+     
       <Button fx:id="Pagar" layoutX="410.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#btnPagar" text="Pagar">
          <font>
             <Font size="32.0" />
          </font>
       </Button>
-      <TextField fx:id="CRut" layoutX="110.0" layoutY="537.0" prefHeight="25.0" prefWidth="192.0" />
-      <TextField fx:id="CDireccion" layoutX="110.0" layoutY="503.0" prefHeight="25.0" prefWidth="192.0" />
-      <TextField fx:id="CApellido" layoutX="110.0" layoutY="471.0" prefHeight="25.0" prefWidth="192.0" />
-      <TextField fx:id="CNombre" layoutX="110.0" layoutY="440.0" prefHeight="25.0" prefWidth="192.0" />
-      <Label layoutX="44.0" layoutY="541.0" text="Rut:" />
-      <Label layoutX="44.0" layoutY="507.0" text="Dirección:" />
-      <Label layoutX="44.0" layoutY="475.0" text="Apellido:" />
-      <Label layoutX="44.0" layoutY="444.0" text="Nombre:" />
-      <Label layoutX="44.0" layoutY="400.0" text="Cliente">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <ChoiceBox fx:id="ETipo" layoutX="112.0" layoutY="323.0" prefHeight="25.0" prefWidth="192.0" >
-          <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Normal" />
-          <String fx:value="Refrigerado" />
-          <String fx:value="Radioactivo" />
-        </FXCollections>
-      </items>
-      </ChoiceBox>
-      <Label layoutX="41.0" layoutY="323.0" text="Tipo:" />
+      
+      
    </children>
 </AnchorPane>
