@@ -66,4 +66,13 @@ public class Sucursal {
         }
       return temporal;
   }
+  
+  /**
+   * Retorna el nombre de la sucursal (Su direccion)
+   * @return String
+   */
+  @Override
+    public String toString() {
+        return this.direccion;
+    }
 }
