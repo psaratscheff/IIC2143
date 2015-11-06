@@ -73,7 +73,7 @@ public class Camion {
     
     /**
      * Retornar porcentaje de la capacidad disponible en un double 0.0 - 1.0 para la progressBar
-     * @return
+     * @return double
      */
     public double PorcentajeDisponible()
     {
@@ -81,5 +81,14 @@ public class Camion {
         double cap = this.capacidad;
         double porcentaje = size / cap;
         return porcentaje;
+    }
+    
+    /**
+     * Retornar nombre del camion con su tamaño
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return this.name+"-"+this.capacidad;
     }
 }

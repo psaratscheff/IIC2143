@@ -8,8 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#RefreshProgressBarAction" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLSucursalController">
    <children>
-       <ChoiceBox fx:id="ChoiceBoxSucursales" layoutX="508.0" layoutY="15.0" prefWidth="150.0" />
-       <Button fx:id="CargarSucursal" layoutX="682.0" layoutY="15.0" mnemonicParsing="false" onAction="#btnCargarSucursal" text="Cargar Sucursal" />
+       <ComboBox fx:id="ChoiceBoxSucursales" layoutX="721.0" layoutY="14.0" onAction="#btnCargarSucursal" prefWidth="150.0" />
        <Button fx:id="IngresarPedido" layoutX="47.0" layoutY="112.0" mnemonicParsing="false" onAction="#IngresarPedidoAction" prefHeight="67.0" prefWidth="268.0" text="Ingresar Pedido">
          <font>
             <Font size="26.0" />
@@ -27,13 +26,13 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="440.0" layoutY="15.0" text="Sucursal">
+      <Label layoutX="653.0" layoutY="14.0" text="Sucursal">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-    
-      <ChoiceBox fx:id="ChoiceBoxCamiones" layoutX="40.0" layoutY="373.0" prefWidth="150.0" />
+
+      <ComboBox fx:id="ChoiceBoxCamiones" layoutX="40.0" layoutY="373.0" prefWidth="150.0" />
       <ProgressBar id="ProgressBarCapacity" fx:id="ProgressBarCapacity" layoutX="40.0" layoutY="420.0" prefHeight="18.0" prefWidth="150.0" />
       <Label layoutX="63.0" layoutY="454.0" text="Seleccionar destino:" />
       <ChoiceBox fx:id="ChoiceBoxDestinoCamiones" layoutX="40.0" layoutY="471.0" prefWidth="150.0" />

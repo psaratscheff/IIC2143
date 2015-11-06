@@ -40,6 +40,7 @@ import javafx.util.Callback;
 //Listener
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tooltip;
@@ -60,11 +61,11 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private Label LabelRecibidosCamiones;
     @FXML
-    private ChoiceBox<String> ChoiceBoxCamiones;
+    private ComboBox<Camion> ChoiceBoxCamiones;
     @FXML
-    private ChoiceBox<String> ChoiceBoxSucursales;
+    private ComboBox<Sucursal> ChoiceBoxSucursales;
     @FXML
-    private ChoiceBox<String> ChoiceBoxDestinoCamiones;
+    private ChoiceBox<Sucursal> ChoiceBoxDestinoCamiones;
     @FXML
     private Button IngresarPedido;
     @FXML
@@ -118,61 +119,11 @@ public class FXMLSucursalController implements Initializable {
         LabelNombreTrabajador.setText(bienvenida);
         for (Sucursal s: emp.sucursales) 
         {
-            ChoiceBoxSucursales.getItems().add(s.direccion);
-            ChoiceBoxDestinoCamiones.getItems().add(s.direccion);
+            ChoiceBoxSucursales.getItems().add(s);
+            ChoiceBoxDestinoCamiones.getItems().add(s);
         }
         QuitarEncomiendaCamion.setVisible(false);
         VerPedidosRecibidos.setVisible(false);
-        // SUCURSAL CHOICEBOX LISTENER (En caso de no usar el boton cargar)
-        /*ChoiceBoxSucursales.getSelectionModel().selectedIndexProperty().addListener(new
-            ChangeListener<Number>() {
-                public void changed(ObservableValue ov,
-                    Number value, Number new_value) {
-                       String direccion = ChoiceBoxSucursales.getValue();
-                       for(Sucursal s: emp.sucursales)
-                       {
-                           if (s.direccion == direccion)
-                           {
-                               emp.sucursalActual = s;
-                           }
-                       }
-                       List<String> list = emp.getDireccionSucursales();
-                       String[] sucursalesArray = list.toArray(new String[list.size()]);
-                       UpdateConSucursal();
-                       ErrorLabelSucursal.setText("");
-                       LabelSucursal.setText(sucursalesArray[new_value.intValue()]);
-                   }
-            });/**/
-        // CAMIONES CHOICEBOX LISTENER
-        /*ChoiceBoxCamiones.getSelectionModel().selectedIndexProperty().addListener(new
-            ChangeListener<Number>() {
-                public void changed(ObservableValue ov,
-                    Number value, Number new_value) {
-                       String name = ChoiceBoxCamiones.getValue();
-                       for(Camion c: emp.sucursalActual.camionesEstacionados)
-                       {
-                           if (c.getNombre().equals(name))
-                           {
-                               camionActual = c;
-                               espacioCamion = c.PorcentajeDisponible();
-                           }
-                       }
-                       //Stufffff to do al seleccionar camion
-                       ProgressBarCapacity.setProgress(espacioCamion);
-                        if (espacioCamion<0.7)
-                        {
-                             ProgressBarCapacity.setStyle("-fx-accent: green;");
-                        }
-                        else if (espacioCamion<0.85)
-                        {
-                             ProgressBarCapacity.setStyle("-fx-accent: yellow;");
-                        }
-                        else
-                        {
-                             ProgressBarCapacity.setStyle("-fx-accent: red;");
-                        }
-                   }
-            });/**/
     }  
     
     public void UpdateConSucursal(){
@@ -234,7 +185,7 @@ public class FXMLSucursalController implements Initializable {
         ChoiceBoxCamiones.getItems().clear();
         for (Camion c: emp.sucursalActual.camionesEstacionados) 
         {
-            ChoiceBoxCamiones.getItems().add(c.getNombre());
+            ChoiceBoxCamiones.getItems().add(c);
         }/**/
     }
     
@@ -258,15 +209,10 @@ public class FXMLSucursalController implements Initializable {
     @FXML // SE EJECUTA TODO EL RATO!!
     private void RefreshProgressBarAction(){
        
-        String name = ChoiceBoxCamiones.getValue();
-        for(Camion c: emp.sucursalActual.camionesEstacionados)
-        {
-            if (c.getNombre().equals(name))
-            {
-                camionActual = c;
-                espacioCamion = c.PorcentajeDisponible();
-            }
-        }
+        Camion camionSeleccionado = ChoiceBoxCamiones.getValue();
+        camionActual = camionSeleccionado;
+        espacioCamion = camionSeleccionado.PorcentajeDisponible();
+        
         //Stufffff to do
         ProgressBarCapacity.setProgress(espacioCamion);
          if (espacioCamion<0.7)
@@ -285,14 +231,9 @@ public class FXMLSucursalController implements Initializable {
     
     @FXML
     private void btnCargarSucursal() throws IOException{
-        String direccion = ChoiceBoxSucursales.getValue();
-        for(Sucursal s: emp.sucursales)
-        {
-            if (s.direccion == direccion)
-            {
-                emp.sucursalActual = s;
-            }
-        }
+        Sucursal s = ChoiceBoxSucursales.getValue();
+        emp.sucursalActual = s;
+        
         UpdateConSucursal();
         ErrorLabelSucursal.setText("");
         LabelSucursal.setText(emp.sucursalActual.direccion);
@@ -311,124 +252,100 @@ public class FXMLSucursalController implements Initializable {
             return; //Nada
         }
         
-        //OJO con la importancia de que el id sea un numero valido
-        // Obtener Camion a Enviar
-        String nombreCamion = ChoiceBoxCamiones.getValue();
-        Camion camion = null;
-        for(Camion c: emp.sucursalActual.camionesEstacionados)
+        try
         {
-            if (c.getNombre().equals(nombreCamion))
+            //OJO con la importancia de que el id sea un numero valido
+            // Obtener Camion a Enviar
+            Camion camion = ChoiceBoxCamiones.getValue();
+            if (camion != null && encomienda != null)
             {
-                camion = c;
+                espacioCamion = camion.PorcentajeDisponible();
+                if (espacioCamion>=1.0){ return; }
+
+                //CARGAR CAMION!!
+
+                encomienda.estado = "En Camión";
+
+                camion.addencomienda(encomienda);
+                emp.sucursalActual.encomiendasAlmacenadas.remove(encomienda);
+
+                //Recargar Encomiendas
+                EncomiendasEnSucursal.getItems().clear();
+                Boolean boolurgencia = false;
+
+                for(Encomienda en: emp.sucursalActual.encomiendasAlmacenadas)
+                {
+                    if (en.prioridad == "Urgente") 
+                    {
+                        boolurgencia = true;
+                    }
+                    EncomiendasEnSucursal.getItems().add("["+en.prioridad+"]" + "(" + en.estado +")" + "// " + "ID: #" + en.id + "# Destino: " + en.destino.direccion);
+                }
+                if (boolurgencia == false) 
+                {
+                    Urgencia.setText(null);
+                }
+                if (boolurgencia) 
+                {
+                    Urgencia.setText("Hay una encomienda urgente!");
+                    boolurgencia = false;
+                }
+
+                //Actualizar capacidad
+                espacioCamion = camion.PorcentajeDisponible();
+                // RECICLAR ESTE CODIGO DESPUES!!! ¡¡¡¡DRY!!!!
+                ProgressBarCapacity.setProgress(espacioCamion);
+                if (espacioCamion<0.7)
+                {
+                     ProgressBarCapacity.setStyle("-fx-accent: green;");
+                }
+                else if (espacioCamion<0.85)
+                {
+                     ProgressBarCapacity.setStyle("-fx-accent: yellow;");
+                }
+                else
+                {
+                     ProgressBarCapacity.setStyle("-fx-accent: red;");
+                }
             }
         }
-        if (camion != null && encomienda != null)
+        catch (Exception e)
         {
-            espacioCamion = camion.PorcentajeDisponible();
-            if (espacioCamion>=1.0){ return; }
-            
-            //CARGAR CAMION!!
-            
-            encomienda.estado = "En Camión";
-            
-            camion.addencomienda(encomienda);
-            emp.sucursalActual.encomiendasAlmacenadas.remove(encomienda);
-            
-            //Recargar Encomiendas
-            EncomiendasEnSucursal.getItems().clear();
-            Boolean boolurgencia = false;
-            
-            
-            
-            
-            //ME FALTA CERRAR EL PARENTESIS DEL IF!!!
-            
-            
-            
-            
-            for(Encomienda en: emp.sucursalActual.encomiendasAlmacenadas)
-            {
-                if (en.prioridad == "Urgente") 
-                {
-                    boolurgencia = true;
-                }
-                EncomiendasEnSucursal.getItems().add("["+en.prioridad+"]" + "(" + en.estado +")" + "// " + "ID: #" + en.id + "# Destino: " + en.destino.direccion);
-            }
-            if (boolurgencia == false) 
-            {
-                Urgencia.setText(null);
-            }
-            if (boolurgencia) 
-            {
-                Urgencia.setText("Hay una encomienda urgente!");
-                boolurgencia = false;
-            }
-            
-            //Actualizar capacidad
-            espacioCamion = camion.PorcentajeDisponible();
-            // RECICLAR ESTE CODIGO DESPUES!!! ¡¡¡¡DRY!!!!
-            ProgressBarCapacity.setProgress(espacioCamion);
-            if (espacioCamion<0.7)
-            {
-                 ProgressBarCapacity.setStyle("-fx-accent: green;");
-            }
-            else if (espacioCamion<0.85)
-            {
-                 ProgressBarCapacity.setStyle("-fx-accent: yellow;");
-            }
-            else
-            {
-                 ProgressBarCapacity.setStyle("-fx-accent: red;");
-            }
+            System.out.println("ERROOR: " + e.toString());
         }
     }
     
     @FXML
     private void EnviarCamionAction() throws IOException{
         // Obtener Camion a Enviar
-        String nombreCamion = ChoiceBoxCamiones.getValue();
-        Camion camion = null;
-        for(Camion c: emp.sucursalActual.camionesEstacionados)
-        {
-            if (c.getNombre().equals(nombreCamion))
-            {
-                camion = c;
-            }
-        }
+        Camion camion = ChoiceBoxCamiones.getValue();
         if (camion != null)
         {
             // Obtener Sucursal destino
-            String destino = ChoiceBoxDestinoCamiones.getValue();
-            Sucursal destinoSucursal;
-            for(Sucursal s: emp.sucursales)
+            Sucursal destinoSucursal = ChoiceBoxDestinoCamiones.getValue();
+            // Enviar Camion
+            destinoSucursal.camionesEstacionados.add(camion);
+            emp.sucursalActual.camionesEstacionados.remove(camion);
+            // Descargar encomiendas en destino (Inmediato por ahora)
+            for (Encomienda e: camion.getlistencomiendas())
             {
-                if (s.direccion.equals(destino))
-                {
-                    // Enviar Camion
-                    destinoSucursal = s;
-                    destinoSucursal.camionesEstacionados.add(camion);
-                    emp.sucursalActual.camionesEstacionados.remove(camion);
-                    // Descargar encomiendas en destino (Inmediato por ahora)
-                    for (Encomienda e: camion.getlistencomiendas())
-                    {
-                        e.estado = "En Destino";
-                        destinoSucursal.encomiendasRecibidas.add(e);
-                    }
-                    camion.borrarencomiendas();/**/
-                }
+                e.estado = "En Destino";
+                destinoSucursal.encomiendasRecibidas.add(e);
             }
-            // NO SE SI PONER ESTO DENTRO DEL FOR DE AQUI ARRIBA ^
-            ChoiceBoxDestinoCamiones.getSelectionModel().clearSelection();
-            // CARGAR CAMIONES DISPONIBLES
-            ChoiceBoxCamiones.getItems().clear();
-            for (Camion c: emp.sucursalActual.camionesEstacionados) 
-            {
-                ChoiceBoxCamiones.getItems().add(c.getNombre());
-            }/**/
-            espacioCamion = -1;
-            ProgressBarCapacity.setProgress(-1); // -1 para indeterminado
-        }
+            camion.borrarencomiendas();/**/
+            }
+        
+        ChoiceBoxDestinoCamiones.getSelectionModel().clearSelection();
+        // CARGAR CAMIONES DISPONIBLES
+        ChoiceBoxCamiones.getItems().clear();
+        for (Camion c: emp.sucursalActual.camionesEstacionados) 
+        {
+            ChoiceBoxCamiones.getItems().add(c);
+        }/**/
+        espacioCamion = -1;
+        ProgressBarCapacity.setProgress(-1); // -1 para indeterminado
     }
+    
     
     @FXML
     private void IngresarPedidoAction() throws IOException{
@@ -459,27 +376,18 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private void VerCamionAction() throws IOException{
         // Obtener Camion a Revisar
-        String nombreCamion = ChoiceBoxCamiones.getValue();
-        Camion camion = null;
-        for(Camion c: emp.sucursalActual.camionesEstacionados)
+        Camion camion = ChoiceBoxCamiones.getValue();
+        LabelRecibidosCamiones.setText("Camion: "+camion.Nombre());
+        NotificarErrorPedido.setVisible(false);
+        EntregarEncomienda.setVisible(false);
+        PasarACola.setVisible(false);
+        QuitarEncomiendaCamion.setVisible(true);
+        VerPedidosRecibidos.setVisible(true);
+        EncomiendasRecibidas.getItems().clear();
+        for(Encomienda en: camion.getlistencomiendas())
         {
-            if (c.getNombre().equals(nombreCamion))
-            {
-                camion = c;
-                LabelRecibidosCamiones.setText("Camion: "+camion.Nombre());
-                NotificarErrorPedido.setVisible(false);
-                EntregarEncomienda.setVisible(false);
-                PasarACola.setVisible(false);
-                QuitarEncomiendaCamion.setVisible(true);
-                VerPedidosRecibidos.setVisible(true);
-                EncomiendasRecibidas.getItems().clear();
-                for(Encomienda en: camion.getlistencomiendas())
-                {
-                    EncomiendasRecibidas.getItems().add("["+en.prioridad+"]" + "(" + en.estado +")" + "// " + "ID: #" + en.id + "# Destino: " + en.destino.direccion);
-                }
-            }
+            EncomiendasRecibidas.getItems().add("["+en.prioridad+"]" + "(" + en.estado +")" + "// " + "ID: #" + en.id + "# Destino: " + en.destino.direccion);
         }
-        
     }
     
     @FXML
@@ -517,15 +425,7 @@ public class FXMLSucursalController implements Initializable {
     private void QuitarEncomiendaCamionAction() throws IOException{
         String encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
         Encomienda encomienda = null;
-        String nombreCamion = ChoiceBoxCamiones.getValue();
-        Camion camion = null;
-        for(Camion c: emp.sucursalActual.camionesEstacionados)
-        {
-            if (c.getNombre().equals(nombreCamion))
-            {
-                camion = c;
-            }
-        }
+        Camion camion = ChoiceBoxCamiones.getValue();
         for(Encomienda en: camion.getlistencomiendas())
         {
             if (en.id == Integer.parseInt(encomiendaID)) 
@@ -547,7 +447,7 @@ public class FXMLSucursalController implements Initializable {
             Boolean boolurgencia = false;
             for(Encomienda en: emp.sucursalActual.encomiendasAlmacenadas)
             {
-                if (en.prioridad == "Urgente") 
+                if ("Urgente".equals(en.prioridad)) 
                 {
                     boolurgencia = true;
                 }
@@ -665,7 +565,7 @@ public class FXMLSucursalController implements Initializable {
         } 
         catch (Exception e)
         {
-            return; //Nada
+            //Nada
         }
     }
 }
