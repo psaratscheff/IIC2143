@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Camion {
     private int capacidad;
-    public String name;
-    public String tipo;
-    public List<Encomienda> encomiendas;
+    private String name;
+    private String tipo;
+    private List<Encomienda> encomiendas;
     public boolean disponibilidad;
     
     public Camion(String n, int cap, boolean disp,String tip)
@@ -22,14 +22,49 @@ public class Camion {
                this.encomiendas = new ArrayList();
             }
     /**
-     * 
+     * retorna el nombre del camion
+     * @return 
+     */
+    public String Nombre()
+    {return name;}
+    public void borrarencomienda(Encomienda encomienda)
+    {encomiendas.remove(encomienda);}
+    public void borrarencomiendas()
+    {encomiendas.clear();}
+    /**
+     * carga el camion con la lista de encomiendas
+     * @param encomiendas 
+     */
+    public void addencomienda(Encomienda encomienda)
+    {encomiendas.add(encomienda);}
+    public void CargarCamion( List<Encomienda> encomiendas)
+  {
+    // Falta validar espacio disponible
+      encomiendas.addAll(encomiendas); //Agrega todas las encomiendas de la lista
+      disponibilidad=false;  // deja de estar disponible el camion
+  }
+    /**
+     * retorna nombre-capacidad-tipo del camion en un solo string
      * @return 
      */
     public String getNombre()
     {
         return name + '-' + capacidad;
     }
-    
+    /**
+     * retorna la lista de encomiendas dentro del camion
+     * @return 
+     */
+    public List<Encomienda> getlistencomiendas()
+    {
+        return encomiendas;
+    }
+    /**
+     * retorna el tipo del camion(normal,radioactivo,refrigerado)
+     * @return 
+     */
+    public String Tipo()
+    {return tipo;}
     public int EspacioDisponible()
     {
         int espacio= this.capacidad- this.encomiendas.size();

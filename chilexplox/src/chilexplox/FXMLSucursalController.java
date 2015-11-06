@@ -330,7 +330,8 @@ public class FXMLSucursalController implements Initializable {
             //CARGAR CAMION!!
             
             encomienda.estado = "En Camión";
-            camion.encomiendas.add(encomienda);
+            
+            camion.addencomienda(encomienda);
             emp.sucursalActual.encomiendasAlmacenadas.remove(encomienda);
             
             //Recargar Encomiendas
@@ -408,12 +409,12 @@ public class FXMLSucursalController implements Initializable {
                     destinoSucursal.camionesEstacionados.add(camion);
                     emp.sucursalActual.camionesEstacionados.remove(camion);
                     // Descargar encomiendas en destino (Inmediato por ahora)
-                    for (Encomienda e: camion.encomiendas)
+                    for (Encomienda e: camion.getlistencomiendas())
                     {
                         e.estado = "En Destino";
                         destinoSucursal.encomiendasRecibidas.add(e);
                     }
-                    camion.encomiendas.clear();/**/
+                    camion.borrarencomiendas();/**/
                 }
             }
             // NO SE SI PONER ESTO DENTRO DEL FOR DE AQUI ARRIBA ^
@@ -465,14 +466,14 @@ public class FXMLSucursalController implements Initializable {
             if (c.getNombre().equals(nombreCamion))
             {
                 camion = c;
-                LabelRecibidosCamiones.setText("Camion: "+camion.name);
+                LabelRecibidosCamiones.setText("Camion: "+camion.Nombre());
                 NotificarErrorPedido.setVisible(false);
                 EntregarEncomienda.setVisible(false);
                 PasarACola.setVisible(false);
                 QuitarEncomiendaCamion.setVisible(true);
                 VerPedidosRecibidos.setVisible(true);
                 EncomiendasRecibidas.getItems().clear();
-                for(Encomienda en: camion.encomiendas)
+                for(Encomienda en: camion.getlistencomiendas())
                 {
                     EncomiendasRecibidas.getItems().add("["+en.prioridad+"]" + "(" + en.estado +")" + "// " + "ID: #" + en.id + "# Destino: " + en.destino.direccion);
                 }
@@ -525,7 +526,7 @@ public class FXMLSucursalController implements Initializable {
                 camion = c;
             }
         }
-        for(Encomienda en: camion.encomiendas)
+        for(Encomienda en: camion.getlistencomiendas())
         {
             if (en.id == Integer.parseInt(encomiendaID)) 
             {
@@ -539,7 +540,7 @@ public class FXMLSucursalController implements Initializable {
             
             //CARGAR CAMION!!
             encomienda.estado = "En cola";
-            camion.encomiendas.remove(encomienda);
+            camion.borrarencomienda(encomienda);
             emp.sucursalActual.encomiendasAlmacenadas.add(encomienda);
             //Recargar Encomiendas
             EncomiendasEnSucursal.getItems().clear();
@@ -563,7 +564,7 @@ public class FXMLSucursalController implements Initializable {
             }
             
             EncomiendasRecibidas.getItems().clear();
-            for(Encomienda en: camion.encomiendas)
+            for(Encomienda en: camion.getlistencomiendas())
             {
                 EncomiendasRecibidas.getItems().add("["+en.prioridad+"]" + "(" + en.estado +")" + "// " + "ID: #" + en.id + "# Destino: " + en.destino.direccion);
             }

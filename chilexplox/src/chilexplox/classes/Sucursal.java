@@ -35,12 +35,7 @@ public class Sucursal {
     return espacio;
   }
 
-  public void CargarCamion(Camion camion, List<Encomienda> encomiendas)
-  {
-    // Falta validar espacio disponible
-      camion.encomiendas.addAll(encomiendas); //Agrega todas las encomiendas de la lista
-      camion.disponibilidad=false;  // deja de estar disponible el camion
-  }
+  
   public Encomienda getEncomienda(int id)
   {
       for (Encomienda e: encomiendasAlmacenadas)
@@ -62,8 +57,8 @@ public class Sucursal {
   public List<Encomienda> RecibirCamion(Camion camion)
   {
     // Falta validar espacio disponible
-      List<Encomienda> temporal = camion.encomiendas;
-      camion.encomiendas.clear(); //Vacío el camión
+      List<Encomienda> temporal = camion.getlistencomiendas();
+      camion.borrarencomiendas(); //Vacío el camión
       camion.disponibilidad=true;  //vuelve a estar disponible el camion
       for(Encomienda e : temporal) // cambia estado de la encomienda
         {
