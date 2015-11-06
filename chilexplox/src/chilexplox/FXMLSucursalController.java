@@ -328,12 +328,24 @@ public class FXMLSucursalController implements Initializable {
             if (espacioCamion>=1.0){ return; }
             
             //CARGAR CAMION!!
+            if(camion.tipo==encomienda.tipo)
+            {
             encomienda.estado = "En Camión";
             camion.encomiendas.add(encomienda);
             emp.sucursalActual.encomiendasAlmacenadas.remove(encomienda);
+            }
             //Recargar Encomiendas
             EncomiendasEnSucursal.getItems().clear();
             Boolean boolurgencia = false;
+            
+            
+            
+            
+            //ME FALTA CERRAR EL PARENTESIS DEL IF!!!
+            
+            
+            
+            
             for(Encomienda en: emp.sucursalActual.encomiendasAlmacenadas)
             {
                 if (en.prioridad == "Urgente") 
