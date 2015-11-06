@@ -6,8 +6,21 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#RefreshProgressBarAction" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLSucursalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseMoved="#RefreshProgressBarAction" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLSucursalController">
    <children>
+       <ChoiceBox fx:id="ChoiceBoxSucursales" layoutX="508.0" layoutY="15.0" prefWidth="150.0" />
+       <Button fx:id="CargarSucursal" layoutX="682.0" layoutY="15.0" mnemonicParsing="false" onAction="#btnCargarSucursal" text="Cargar Sucursal" />
+       <Button fx:id="IngresarPedido" layoutX="47.0" layoutY="112.0" mnemonicParsing="false" onAction="#IngresarPedidoAction" prefHeight="67.0" prefWidth="268.0" text="Ingresar Pedido">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      <Button fx:id="Mensajes" layoutX="382.0" layoutY="117.0" mnemonicParsing="false" onAction="#MensajesAction" text="Mensajes">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Button>
+      
       <ListView id="ListMessagesPreview" fx:id="ListMessagesPreview" layoutX="542.0" layoutY="84.0" prefHeight="145.0" prefWidth="220.0" />
       <Label fx:id="LabelNombreTrabajador" layoutX="14.0" layoutY="14.0" text="Hola, #NombreTrabajador">
          <font>
@@ -19,48 +32,56 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="ChoiceBoxSucursales" layoutX="508.0" layoutY="15.0" prefWidth="150.0" />
-      <Button fx:id="IngresarPedido" layoutX="47.0" layoutY="112.0" mnemonicParsing="false" onAction="#IngresarPedidoAction" prefHeight="67.0" prefWidth="268.0" text="Ingresar Pedido">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Button>
-      <Button fx:id="Mensajes" layoutX="382.0" layoutY="117.0" mnemonicParsing="false" onAction="#MensajesAction" text="Mensajes">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Button>
+    
+      <ChoiceBox fx:id="ChoiceBoxCamiones" layoutX="40.0" layoutY="373.0" prefWidth="150.0" />
+      <ProgressBar id="ProgressBarCapacity" fx:id="ProgressBarCapacity" layoutX="40.0" layoutY="420.0" prefHeight="18.0" prefWidth="150.0" />
+      <Label layoutX="63.0" layoutY="454.0" text="Seleccionar destino:" />
+      <ChoiceBox fx:id="ChoiceBoxDestinoCamiones" layoutX="40.0" layoutY="471.0" prefWidth="150.0" />
+       <Button fx:id="EnviarCamion" layoutX="70.0" layoutY="501.0" mnemonicParsing="false" onAction="#EnviarCamionAction" text="Enviar camión" />
+       <Button fx:id="VerCamion" layoutX="78.0" layoutY="538.0" mnemonicParsing="false" onAction="#VerCamionAction" text="Ver camión" />
+       
+       
+       <ListView fx:id="EncomiendasEnSucursal" layoutX="250.0" layoutY="267.0" prefHeight="132.0" prefWidth="408.0" />
+       
       <Label layoutX="249.0" layoutY="245.0" text="Pedidos en cola" />
       <Label fx:id="LabelRecibidosCamiones" layoutX="249.0" layoutY="418.0" text="Pedidos recibidos" />
       <Button fx:id="ModificarPedido" layoutX="673.0" layoutY="277.0" mnemonicParsing="false" onAction="#ModificarPedidoAction" text="Modificar pedido" />
+       <Button fx:id="CargarCamion" layoutX="673.0" layoutY="317.0" mnemonicParsing="false" onAction="#CargarCamionAction" text="Cargar a camión" />
+       
+       
+       <ListView fx:id="EncomiendasRecibidas" layoutX="250.0" layoutY="447.0" prefHeight="132.0" prefWidth="408.0" />
+       
       <Button fx:id="NotificarErrorPedido" layoutX="673.0" layoutY="450.0" mnemonicParsing="false" onAction="#NotificarErrorAction" text="Notificar error" />
+      <Button fx:id="EntregarEncomienda" layoutX="673.0" layoutY="488.0" mnemonicParsing="false" onAction="#EntregarEncomiendaAction" text="Entregar Pedido" />
+      <Button fx:id="PasarACola" layoutX="674.0" layoutY="526.0" mnemonicParsing="false" onAction="#PasarAColaAction" text="Pasar a Cola" />
+      <Button fx:id="VerPedidosRecibidos" layoutX="674.0" layoutY="450.0" mnemonicParsing="false" onAction="#VerPedidosRecibidosAction" text="Ver Recibidos" />
+       <Button fx:id="QuitarEncomiendaCamion" layoutX="673.0" layoutY="489.0" mnemonicParsing="false" onAction="#QuitarEncomiendaCamionAction" text="Quitar Encomienda" />
+      
+      
+      
       <Label layoutX="48.0" layoutY="281.0" text="Camiones">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
       <Label fx:id="LabelCamionesDisponibles" layoutX="53.0" layoutY="336.0" text="Disponibles: " />
-      <Button fx:id="CargarCamion" layoutX="673.0" layoutY="317.0" mnemonicParsing="false" onAction="#CargarCamionAction" text="Cargar a camión" />
-      <Button fx:id="EntregarEncomienda" layoutX="673.0" layoutY="488.0" mnemonicParsing="false" onAction="#EntregarEncomiendaAction" text="Entregar Pedido" />
-      <ChoiceBox fx:id="ChoiceBoxCamiones" layoutX="40.0" layoutY="373.0" prefWidth="150.0" />
+     
+      
+      
       <Label layoutX="63.0" layoutY="356.0" text="Seleccionar camión:" />
       <Label layoutX="41.0" layoutY="403.0" text="Espacio libre:" />
-      <Button fx:id="EnviarCamion" layoutX="70.0" layoutY="501.0" mnemonicParsing="false" onAction="#EnviarCamionAction" text="Enviar camión" />
-      <ProgressBar id="ProgressBarCapacity" fx:id="ProgressBarCapacity" layoutX="40.0" layoutY="420.0" prefHeight="18.0" prefWidth="150.0" />
-      <Button fx:id="CargarSucursal" layoutX="682.0" layoutY="15.0" mnemonicParsing="false" onAction="#btnCargarSucursal" text="Cargar Sucursal" />
-      <ListView fx:id="EncomiendasEnSucursal" layoutX="250.0" layoutY="267.0" prefHeight="132.0" prefWidth="408.0" />
-      <ListView fx:id="EncomiendasRecibidas" layoutX="250.0" layoutY="447.0" prefHeight="132.0" prefWidth="408.0" />
+     
+      
+      
+      
       <Label fx:id="ErrorLabelSucursal" layoutX="498.0" layoutY="47.0" textFill="RED" />
       <Label fx:id="LabelSucursal" layoutX="247.0" layoutY="3.0" textAlignment="CENTER" underline="true">
          <font>
             <Font size="32.0" />
          </font></Label>
-      <Label layoutX="63.0" layoutY="454.0" text="Seleccionar destino:" />
-      <ChoiceBox fx:id="ChoiceBoxDestinoCamiones" layoutX="40.0" layoutY="471.0" prefWidth="150.0" />
-      <Button fx:id="VerCamion" layoutX="78.0" layoutY="538.0" mnemonicParsing="false" onAction="#VerCamionAction" text="Ver camión" />
-      <Button fx:id="QuitarEncomiendaCamion" layoutX="673.0" layoutY="489.0" mnemonicParsing="false" onAction="#QuitarEncomiendaCamionAction" text="Quitar Encomienda" />
-      <Button fx:id="VerPedidosRecibidos" layoutX="674.0" layoutY="450.0" mnemonicParsing="false" onAction="#VerPedidosRecibidosAction" text="Ver Recibidos" />
-      <Button fx:id="PasarACola" layoutX="674.0" layoutY="526.0" mnemonicParsing="false" onAction="#PasarAColaAction" text="Pasar a Cola" />
+      
+      
+      
       <Label fx:id="Urgencia" layoutX="394.0" layoutY="245.0" textFill="RED" />
    </children>
 </AnchorPane>
