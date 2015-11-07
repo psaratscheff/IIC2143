@@ -35,7 +35,6 @@ public class Empresa {
     public int IDEncomienda = 0;
     public int IDPedido = 0;
     public Pedido pedidotemp;
-    public Encomienda EncomiendaTemporal;
     
     public Empresa()
     {

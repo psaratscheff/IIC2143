@@ -544,7 +544,6 @@ public class FXMLSucursalController implements Initializable {
             encomienda = emp.sucursalActual.getEncomienda(Integer.parseInt(encomiendaID));
             if (emp.sucursalActual == encomienda.origen) 
             {
-                emp.EncomiendaTemporal = encomienda;
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLModificarPedido.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();

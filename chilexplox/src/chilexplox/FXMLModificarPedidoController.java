@@ -71,7 +71,7 @@ public class FXMLModificarPedidoController implements Initializable {
         EOrigen.setText(emp.sucursalActual.direccion);
     } 
     
-    @FXML
+    /*@FXML
     private void EditarAction() throws IOException{
         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
         String prioridad = EPrioridad.getValue();
@@ -87,6 +87,6 @@ public class FXMLModificarPedidoController implements Initializable {
             }
         Stage stage = (Stage) Editar.getScene().getWindow();
         stage.close();
-    }
+    }*/
     
 }
