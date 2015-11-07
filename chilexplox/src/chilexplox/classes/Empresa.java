@@ -48,6 +48,7 @@ public class Empresa {
         this.encomiendas = new ArrayList();
         this.empleados = new ArrayList();
         this.dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        this.ingresos = new ArrayList();
     }
     
     /**
@@ -57,6 +58,10 @@ public class Empresa {
      * Entrega un string con la fecha en formato "yyyy/MM/dd HH:mm:ss"
      * @return DateFormat
      */
+    public List<Ingreso> ingresos()
+    {
+        return this.ingresos;
+    }
     public DateFormat dateFormat()
     {return this.dateFormat;}
     public List<Sucursal> getsucursales()
