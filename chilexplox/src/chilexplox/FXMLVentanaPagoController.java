@@ -59,9 +59,9 @@ public class FXMLVentanaPagoController implements Initializable {
     @FXML
     private void btnPagar(MouseEvent event) throws IOException 
     {
-        for(Encomienda en: pedido.encomiendas)
+        for(Encomienda en: pedido.getencomiendas())
         {
-            emp.getsucursalactual().encomiendasAlmacenadas.add(en);
+            emp.getsucursalactual().getencomiendasalmacenadas().add(en);
             emp.getencomiendas().add(en);
         }
         

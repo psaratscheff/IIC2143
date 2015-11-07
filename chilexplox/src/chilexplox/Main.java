@@ -44,10 +44,10 @@ public class Main extends Application {
         emp.getcamiones().add(c2);
         emp.getcamiones().add(c3);
         emp.getcamiones().add(c4);
-        s.camionesEstacionados.add(c1);
-        s.camionesEstacionados.add(c2);
-        s.camionesEstacionados.add(c3);
-        s.camionesEstacionados.add(c4);
+        s.getcamionesestacionados().add(c1);
+        s.getcamionesestacionados().add(c2);
+        s.getcamionesestacionados().add(c3);
+        s.getcamionesestacionados().add(c4);
         
         //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));

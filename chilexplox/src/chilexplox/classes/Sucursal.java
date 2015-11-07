@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sucursal {
-  public String direccion;
-  public int capacidad;
+  private String direccion;
+  private int capacidad;
   //Relacionados
-  public List<Mensaje> mensajesRecibidos;
-  public List<Empleado> trabajadores;
-  public List<Camion> camionesEstacionados;
-  public List<Cliente> clientesRegistrados;
+  private List<Mensaje> mensajesRecibidos;
+  private List<Empleado> trabajadores;
+  private List<Camion> camionesEstacionados;
+  private List<Cliente> clientesRegistrados;
   //Faltantes en el UML
-  public List<Encomienda> encomiendasAlmacenadas;
-  public List<Encomienda> encomiendasRecibidas;
+  private List<Encomienda> encomiendasAlmacenadas;
+  private List<Encomienda> encomiendasRecibidas;
 
   public Sucursal(String direccion, int capacidad)
   {
@@ -28,6 +28,19 @@ public class Sucursal {
     this.clientesRegistrados = new ArrayList();
     this.encomiendasRecibidas = new ArrayList();
   }
+  
+  public List<Camion> getcamionesestacionados()
+  {return camionesEstacionados;}
+  
+   public List<Encomienda> getencomiendasrecibidas()
+  {return encomiendasRecibidas;}
+  public List<Encomienda> getencomiendasalmacenadas()
+  {return encomiendasAlmacenadas;}
+  public String getdireccion()
+  {return direccion;}
+  
+  public List<Mensaje> getmensajesrecibidos()
+  {return mensajesRecibidos;}
 
   public int EspacioDisponible()
   {

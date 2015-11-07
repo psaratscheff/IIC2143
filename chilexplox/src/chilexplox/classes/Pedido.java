@@ -6,14 +6,21 @@ import java.util.List;
 
 
 public class Pedido {
-    public List<Encomienda> encomiendas;
-    public int id;
+    private List<Encomienda> encomiendas;
+    private int id;
+    
     public Pedido(int identificador)
     {
         id=identificador;
         //Inicializo los arrays para poder agregar valores
         encomiendas= new ArrayList<Encomienda>() {};
     }
+    public List<Encomienda> getencomiendas()
+    {return encomiendas;}
+    public void addencomienda(Encomienda encomienda)
+    { encomiendas.add(encomienda);}
+    public void removeencomienda(Encomienda encomienda)
+    { encomiendas.remove(encomienda);}
     public int Contar()
     {
         return encomiendas.size();

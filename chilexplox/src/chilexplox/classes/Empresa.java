@@ -76,7 +76,7 @@ public class Empresa {
         List<String> array = new ArrayList();
         for (Sucursal s: sucursales) 
         {
-            array.add(s.direccion);
+            array.add(s.getdireccion());
         }
         return array;
     }
