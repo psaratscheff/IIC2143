@@ -89,8 +89,7 @@ public class FXMLIngresoPedidoController implements Initializable {
         }
         EOrigen.setText(emp.getsucursalactual().getdireccion());
         editando=false;
-        
-    }    
+    }
 
     @FXML
     private void btnPagar(MouseEvent event) throws IOException 

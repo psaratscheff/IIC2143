@@ -45,6 +45,8 @@ public class FXMLVentanaPagoController implements Initializable {
     private Button okButton;
     @FXML
     private Stage parentStage;
+    
+    private int valor;
 
     /**
      * Initializes the controller class.
@@ -77,7 +79,7 @@ public class FXMLVentanaPagoController implements Initializable {
 
     void setPedido(Pedido pedido) {
         this.pedido = pedido;
-        int valor = pedido.CalcularValor();
+        valor = pedido.CalcularValor();
         String precio= Integer.toString(valor);
         MontoTotal.setText("$"+precio);
     }
