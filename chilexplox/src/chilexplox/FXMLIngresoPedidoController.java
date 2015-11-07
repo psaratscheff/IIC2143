@@ -70,9 +70,10 @@ public class FXMLIngresoPedidoController implements Initializable {
     @FXML
     private ListView<String> ListEncomiendas;
 
-    Empresa emp;
-    Pedido pedido;
-    Boolean editando;
+    private Empresa emp;
+    private Pedido pedido;
+    private Boolean editando;
+    private FXMLSucursalController sucursalController;
     /**
      * Initializes the controller class.
      */
@@ -105,6 +106,7 @@ public class FXMLIngresoPedidoController implements Initializable {
             controller.setPedido(pedido);
             controller.setEmpresa(emp);
             controller.setParentWindow((Stage)Pagar.getScene().getWindow());
+            controller.setSucursalController(this.sucursalController);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();
@@ -201,6 +203,10 @@ public class FXMLIngresoPedidoController implements Initializable {
         {
                 System.out.println("Cancel");
         }
+    }
+
+    void setSucursalController(FXMLSucursalController aThis) {
+        this.sucursalController = aThis;
     }
     
 }

@@ -200,7 +200,8 @@ public class FXMLSucursalController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();
-        } catch (Exception e){
+        }
+        catch (Exception e){
             System.out.println("ERROR 101: " + e.toString());
         }
     }
@@ -385,6 +386,8 @@ public class FXMLSucursalController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedido.fxml"));
             Parent root = (Parent) fxmlLoader.load();
+            FXMLIngresoPedidoController controller = fxmlLoader.<FXMLIngresoPedidoController>getController();
+            controller.setSucursalController(this);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();

@@ -50,6 +50,7 @@ public class FXMLVentanaPagoController implements Initializable {
     private Stage parentStage;
     
     private int valor;
+    private FXMLSucursalController sucursalController;
 
     /**
      * Initializes the controller class.
@@ -72,6 +73,7 @@ public class FXMLVentanaPagoController implements Initializable {
         emp.addIngreso(new Ingreso(this.valor, cal.getTime()));
         
         Stage stage = (Stage) okButton.getScene().getWindow();
+        this.sucursalController.UpdateConSucursal();
         this.parentStage.close();
         stage.close();
     }
@@ -96,6 +98,10 @@ public class FXMLVentanaPagoController implements Initializable {
 
     void setEmpresa(Empresa emp) {
         this.emp = emp;
+    }
+
+    void setSucursalController(FXMLSucursalController aThis) {
+        this.sucursalController = aThis;
     }
     
 }
