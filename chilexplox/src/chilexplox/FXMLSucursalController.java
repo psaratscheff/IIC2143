@@ -300,7 +300,7 @@ public class FXMLSucursalController implements Initializable {
                     {
                         boolurgencia = true;
                     }
-                    EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion());
+                    EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion()+" Tipo: "+en.gettipo());
                 }
                 if (boolurgencia == false) 
                 {
@@ -487,7 +487,7 @@ public class FXMLSucursalController implements Initializable {
                 {
                     boolurgencia = true;
                 }
-                EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion()+"Tipo: "+en.gettipo());
+                EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion()+" Tipo: "+en.gettipo());
             }
             if (boolurgencia == false) 
             {
