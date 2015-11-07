@@ -49,8 +49,8 @@ public class FXMLVentanaPagoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         emp = Empresa.getInstance();
-        pedido = emp.pedidotemp;
-        emp.pedidotemp = null;
+        pedido = emp.getpedidotemp();
+        emp.setpedidotemp(null);
         int asd = pedido.CalcularValor();
         String precio= Integer.toString(asd);
         MontoTotal.setText("$"+precio);
@@ -61,8 +61,8 @@ public class FXMLVentanaPagoController implements Initializable {
     {
         for(Encomienda en: pedido.encomiendas)
         {
-            emp.sucursalActual.encomiendasAlmacenadas.add(en);
-            emp.encomiendas.add(en);
+            emp.getsucursalactual().encomiendasAlmacenadas.add(en);
+            emp.getencomiendas().add(en);
         }
         
         Stage stage = (Stage) okButton.getScene().getWindow();

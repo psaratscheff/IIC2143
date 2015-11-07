@@ -25,17 +25,17 @@ public class Empresa {
         return instance;
     }
     
-    public List<Sucursal> sucursales;
-    public List<Camion> camiones;
-    public List<Cliente> clientes;
-    public List<Encomienda> encomiendas;
-    public List<Empleado> empleados;
-    public Empleado empleadoActual;
-    public Sucursal sucursalActual;
-    public int IDEncomienda = 0;
-    public int IDPedido = 0;
-    public Pedido pedidotemp;
-    public Encomienda EncomiendaTemporal;
+    private List<Sucursal> sucursales;
+    private List<Camion> camiones;
+    private List<Cliente> clientes;
+    private List<Encomienda> encomiendas;
+    private List<Empleado> empleados;
+    private Empleado empleadoActual;
+    private Sucursal sucursalActual;
+    private int IDEncomienda = 0;
+    private int IDPedido = 0;
+    private Pedido pedidotemp;
+    private Encomienda EncomiendaTemporal;
     
     public Empresa()
     {
@@ -46,6 +46,31 @@ public class Empresa {
         this.encomiendas = new ArrayList();
         this.empleados = new ArrayList();
     }
+    public List<Sucursal> getsucursales()
+    {return sucursales;}
+    public Sucursal getsucursalactual()
+    {return sucursalActual;}
+    public void setsucursalactual(Sucursal sucursal)
+    {sucursalActual=sucursal;}
+    public Pedido getpedidotemp()
+    {return pedidotemp;}
+    public void setpedidotemp(Pedido pedido)
+    {pedidotemp=pedido;}
+    public List<Empleado> getempleados()
+    {return empleados;}
+    public Empleado getempleadoactual()
+    {return empleadoActual;}
+    public void setempleadoactual(Empleado empleado)
+    {empleadoActual=empleado;}
+    public Encomienda getencomiendatemporal()
+    {return EncomiendaTemporal;}
+    public void setencomiendatemporal(Encomienda encomiendatemp)
+    {EncomiendaTemporal=encomiendatemp;}
+    public List<Encomienda> getencomiendas()
+    {return encomiendas;}
+    public List<Camion> getcamiones()
+    {return camiones;}
+    
     public List<String> getDireccionSucursales()
     {
         List<String> array = new ArrayList();
@@ -85,9 +110,9 @@ public class Empresa {
     {
         for(Encomienda e: encomiendas)
         {
-            if(e.id==id)
+            if(e.getid()==id)
             {
-                e.estado=estado;
+                e.setestado(estado);
             }
         }
     }
@@ -96,9 +121,9 @@ public class Empresa {
     {
         for(Encomienda e: encomiendas)
         {
-            if(e.id==id)
+            if(e.getid()==id)
             {
-                String estado=e.estado;
+                String estado=e.getestado();
                 return estado;
             }
         }

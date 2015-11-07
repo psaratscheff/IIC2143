@@ -57,11 +57,11 @@ public class FXMLLoginController implements Initializable {
     {
         String pass = password.getText();
         String user = username.getText();
-        for (Empleado e: emp.empleados) 
+        for (Empleado e: emp.getempleados()) 
         {
-            if (pass.equals(e.password) & user.equals(e.username)) 
+            if (pass.equals(e.getpassword()) & user.equals(e.getusername())) 
             {
-                emp.empleadoActual = e; //Seteo el usuario que se logró loguear
+                emp.setempleadoactual(e) ; //Seteo el usuario que se logró loguear
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLSucursal.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();

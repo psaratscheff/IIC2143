@@ -30,20 +30,20 @@ public class Main extends Application {
         //Creacion de empresa inicial
         List<Integer> h = new ArrayList(); h.add(8); h.add(13); h.add(14); h.add(17);
         Sucursal s = new Sucursal("Valdivia", 1000);
-        emp.sucursales.add(s);
-        emp.sucursales.add(new Sucursal("La Serena",50));
-        emp.sucursales.add(new Sucursal("Santiago",150));
-        emp.sucursales.add(new Sucursal("Arica",250));
+        emp.getsucursales().add(s);
+        emp.getsucursales().add(new Sucursal("La Serena",50));
+        emp.getsucursales().add(new Sucursal("Santiago",150));
+        emp.getsucursales().add(new Sucursal("Arica",250));
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s);
         emp.AddEmpleado(e);
         Camion c1 = new Camion("Charlie", 10, true,"Normal");
         Camion c2 = new Camion("CharlieII", 20, true,"Normal");
         Camion c3 = new Camion("Arnold", 5, true,"Refrigerado");
         Camion c4 = new Camion("Aleph", 5, true,"Radioactivo");
-        emp.camiones.add(c1);
-        emp.camiones.add(c2);
-        emp.camiones.add(c3);
-        emp.camiones.add(c4);
+        emp.getcamiones().add(c1);
+        emp.getcamiones().add(c2);
+        emp.getcamiones().add(c3);
+        emp.getcamiones().add(c4);
         s.camionesEstacionados.add(c1);
         s.camionesEstacionados.add(c2);
         s.camionesEstacionados.add(c3);

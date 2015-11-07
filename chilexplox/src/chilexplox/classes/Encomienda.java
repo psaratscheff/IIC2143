@@ -2,14 +2,14 @@ package chilexplox.classes;
 
 
 public class Encomienda {
-  public String estado;
-  public String prioridad;
-  public int tamaño;
-  public int id;
-  public Sucursal destino;
-  public Sucursal origen;
-  public Cliente destinatario;
-  public String tipo;
+  private String estado;
+  private String prioridad;
+  private int tamaño;
+  private int id;
+  private Sucursal destino;
+  private Sucursal origen;
+  private Cliente destinatario;
+  private String tipo;
 
   public Encomienda(String estado, String prioridad, int tamaño, int id, Sucursal destino, Sucursal origen,String tipo)
   {
@@ -21,7 +21,26 @@ public class Encomienda {
     this.origen = origen;
     this.tipo=tipo;
   }
+  public Integer getid()
+  {return id;}
+  public Sucursal getdestino()
+  {return destino;}
+  public void setdestino(Sucursal sucursal)
+  {destino=sucursal;}
+   public void settamaño(Integer tam)
+  {tamaño=tam;}
+public void setprioridad(String prior)
+  {prioridad=prior;}
+public String getprioridad()
+{return prioridad;}
+public String getestado()
+{return estado;}
+public Sucursal getorigen()
+{return origen;}
+public int gettamaño()
+{return tamaño;}
 
-    
+    public void setestado(String est)
+  {estado=est;}
 
 }

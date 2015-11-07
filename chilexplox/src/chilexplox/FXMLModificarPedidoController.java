@@ -64,11 +64,11 @@ public class FXMLModificarPedidoController implements Initializable {
         EPrioridad.getItems().add("Urgente");
         EPrioridad.getItems().add("Normal");
         EPrioridad.getItems().add("Express");
-        for (Sucursal s: emp.sucursales) 
+        for (Sucursal s: emp.getsucursales()) 
         {
             EDestino.getItems().add(s.direccion);
         }
-        EOrigen.setText(emp.sucursalActual.direccion);
+        EOrigen.setText(emp.getsucursalactual().direccion);
     } 
     
     @FXML
@@ -76,13 +76,13 @@ public class FXMLModificarPedidoController implements Initializable {
         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
         String prioridad = EPrioridad.getValue();
         String destino = EDestino.getValue();
-        for(Sucursal s: emp.sucursales)
+        for(Sucursal s: emp.getsucursales())
             {
             if (s.direccion == destino) 
                 {
-                    emp.EncomiendaTemporal.destino = s;
-                    emp.EncomiendaTemporal.prioridad = prioridad;
-                    emp.EncomiendaTemporal.tamaño = tamaño;
+                    emp.getencomiendatemporal().setdestino(s);
+                    emp.getencomiendatemporal().setprioridad(prioridad);
+                    emp.getencomiendatemporal().settamaño(tamaño);
                 }
             }
         Stage stage = (Stage) Editar.getScene().getWindow();

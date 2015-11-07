@@ -40,14 +40,14 @@ public class Sucursal {
   {
       for (Encomienda e: encomiendasAlmacenadas)
       {
-          if (e.id == id)
+          if (e.getid() == id)
           {
               return e;
           }
       }
       for (Encomienda e: encomiendasRecibidas)
       {
-          if (e.id == id)
+          if (e.getid() == id)
           {
               return e;
           }
@@ -62,7 +62,7 @@ public class Sucursal {
       camion.setdisponibilidad(true);  //vuelve a estar disponible el camion
       for(Encomienda e : temporal) // cambia estado de la encomienda
         {
-            e.estado="destino";
+            e.setestado("destino");
         }
       return temporal;
   }

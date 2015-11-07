@@ -47,11 +47,11 @@ public class FXMLMensajesRecibidosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) 
     {
         emp = Empresa.getInstance();
-        for(Sucursal s: emp.sucursales)
+        for(Sucursal s: emp.getsucursales())
         {
             EnviarDestino.getItems().add(s.direccion);
         }
-        for(Mensaje m: emp.sucursalActual.mensajesRecibidos)
+        for(Mensaje m: emp.getsucursalactual().mensajesRecibidos)
         {
             if (m.urgente == true) 
             {
@@ -69,15 +69,15 @@ public class FXMLMensajesRecibidosController implements Initializable {
     private void btnEnviarMensaje(MouseEvent event) throws IOException
     {
         Boolean urgencia = EnviarUrgente.isSelected();
-        String contenido = "[" + emp.sucursalActual.direccion + "] --- " + EnviarContenido.getText();
+        String contenido = "[" + emp.getsucursalactual().direccion + "] --- " + EnviarContenido.getText();
         String direccionDestino = EnviarDestino.getValue();
         if (direccionDestino != null & EnviarContenido.getText() != "") 
         {
-            for(Sucursal s: emp.sucursales)
+            for(Sucursal s: emp.getsucursales())
             {
                 if (s.direccion == direccionDestino) 
                 {
-                    emp.empleadoActual.EnviarMensaje(s, contenido, urgencia);
+                    emp.getempleadoactual().EnviarMensaje(s, contenido, urgencia);
                     EnviarContenido.setText("");
                 }
             }

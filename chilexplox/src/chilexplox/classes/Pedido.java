@@ -24,13 +24,13 @@ public class Pedido {
         int factor=0;
         for(Encomienda e :encomiendas)
         {
-            if(e.prioridad=="Urgente")
+            if(e.getprioridad()=="Urgente")
             {factor=3;}
-             if(e.prioridad=="Normal")
+             if(e.getprioridad()=="Normal")
             {factor=1;}
-              if(e.prioridad=="Express")
+              if(e.getprioridad()=="Express")
             {factor=2;}
-            tamano+= (e.tamaño*factor);
+            tamano+= (e.gettamaño()*factor);
 
         }
         int valor= tamano*5;

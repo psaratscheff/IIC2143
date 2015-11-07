@@ -83,11 +83,11 @@ public class FXMLIngresoPedidoController implements Initializable {
         EPrioridad.getItems().add("Urgente");
         EPrioridad.getItems().add("Normal");
         EPrioridad.getItems().add("Express");
-        for (Sucursal s: emp.sucursales) 
+        for (Sucursal s: emp.getsucursales()) 
         {
             EDestino.getItems().add(s.direccion);
         }
-        EOrigen.setText(emp.sucursalActual.direccion);
+        EOrigen.setText(emp.getsucursalactual().direccion);
         editando=false;
         
     }    
@@ -97,7 +97,7 @@ public class FXMLIngresoPedidoController implements Initializable {
     {
         if (CNombre.getText() != null & CApellido.getText() != null & CDireccion.getText()!= null) 
         {
-            emp.pedidotemp = pedido;
+            emp.setpedidotemp(pedido) ;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLVentanaPago.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
@@ -119,13 +119,13 @@ public class FXMLIngresoPedidoController implements Initializable {
                 int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
                 String prioridad = EPrioridad.getValue();
                 String destino = EDestino.getValue();
-                for(Sucursal s: emp.sucursales)
+                for(Sucursal s: emp.getsucursales())
                     {
                         if (s.direccion == destino) 
                         {
-                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.sucursalActual,"Normal");
+                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.getsucursalactual(),"Normal");
                             pedido.encomiendas.add(en);
-                            ListEncomiendas.getItems().add("ID: "+"#"+en.id+"#"+" Destino: "+en.destino.direccion);
+                            ListEncomiendas.getItems().add("ID: "+"#"+en.getid()+"#"+" Destino: "+en.getdestino().direccion);
                             int asd = pedido.CalcularValor();
                             String precio= Integer.toString(asd);
                             TotalPedido.setText("Total: $"+precio);
@@ -138,20 +138,20 @@ public class FXMLIngresoPedidoController implements Initializable {
                 int id = Integer.parseInt(EditarID.getText().split("#")[1]);
                 for (Encomienda en: pedido.encomiendas) 
                 {
-                    if (en.id == id) 
+                    if (en.getid() == id) 
                     {
                         pedido.encomiendas.remove(en);
                         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
                         String prioridad = EPrioridad.getValue();
                         String destino = EDestino.getValue();
                         String tipo= ETipo.getValue();
-                        for(Sucursal s: emp.sucursales)
+                        for(Sucursal s: emp.getsucursales())
                             {
                                 if (s.direccion == destino) 
                                 {
-                                    Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, s, emp.sucursalActual,tipo);
+                                    Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, s, emp.getsucursalactual(),tipo);
                                     pedido.encomiendas.add(wn);
-                                    ListEncomiendas.getItems().add("ID: "+"#"+wn.id+"#"+" Destino: "+wn.destino.direccion);
+                                    ListEncomiendas.getItems().add("ID: "+"#"+wn.getid()+"#"+" Destino: "+wn.getdestino().direccion);
                                     int asd = pedido.CalcularValor();
                                     String precio= Integer.toString(asd);
                                     TotalPedido.setText("Total: $"+precio);
