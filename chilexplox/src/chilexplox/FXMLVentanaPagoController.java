@@ -7,9 +7,12 @@ package chilexplox;
 
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
+import chilexplox.classes.Ingreso;
 import chilexplox.classes.Pedido;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,6 +67,9 @@ public class FXMLVentanaPagoController implements Initializable {
             emp.getsucursalactual().getencomiendasalmacenadas().add(en);
             emp.getencomiendas().add(en);
         }
+        
+        Calendar cal = Calendar.getInstance();
+        emp.addIngreso(new Ingreso(this.valor, cal.getTime()));
         
         Stage stage = (Stage) okButton.getScene().getWindow();
         this.parentStage.close();

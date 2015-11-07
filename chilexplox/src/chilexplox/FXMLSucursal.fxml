@@ -82,5 +82,6 @@
       
       
       <Label fx:id="Urgencia" layoutX="394.0" layoutY="245.0" textFill="RED" />
+      <Button layoutX="807.0" layoutY="554.0" mnemonicParsing="false" text="Ver Informe" />
    </children>
 </AnchorPane>
