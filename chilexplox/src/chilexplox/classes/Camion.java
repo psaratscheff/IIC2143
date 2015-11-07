@@ -114,6 +114,13 @@ public class Camion {
      */
     @Override
     public String toString() {
+        if(this.tipo=="Normal")
+        {
         return this.name+"-"+this.capacidad;
+        }
+        else
+        {
+        return this.name+"-"+this.capacidad+"-"+this.tipo ;
+        }
     }
 }

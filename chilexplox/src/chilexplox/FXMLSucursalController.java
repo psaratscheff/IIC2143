@@ -136,7 +136,7 @@ public class FXMLSucursalController implements Initializable {
             {
                 boolurgencia = true;
             }
-            EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion());
+            EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion()+" Tipo: "+en.gettipo());
         }
         if (boolurgencia == false) 
         {
@@ -469,7 +469,7 @@ public class FXMLSucursalController implements Initializable {
                 {
                     boolurgencia = true;
                 }
-                EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion());
+                EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion()+"Tipo: "+en.gettipo());
             }
             if (boolurgencia == false) 
             {
@@ -518,7 +518,7 @@ public class FXMLSucursalController implements Initializable {
         {
             return; //Nada
         }
-        EncomiendasEnSucursal.getItems().add("["+encomienda.getprioridad()+"]" + "(" + encomienda.getestado() +")" + "// " + "ID: #" + encomienda.getid() + "# Destino: " + encomienda.getdestino().getdireccion());
+        EncomiendasEnSucursal.getItems().add("["+encomienda.getprioridad()+"]" + "(" + encomienda.getestado() +")" + "// " + "ID: #" + encomienda.getid() + "# Destino: " + encomienda.getdestino().getdireccion()+" Tipo: "+encomienda.gettipo());
         emp.getsucursalactual().getencomiendasalmacenadas().add(encomienda);
         emp.getsucursalactual().getencomiendasrecibidas().remove(encomienda);
         //Recargar Encomiendas
@@ -530,7 +530,7 @@ public class FXMLSucursalController implements Initializable {
             {
                 boolurgencia = true;
             }
-            EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion());
+            EncomiendasEnSucursal.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion()+" Tipo: "+encomienda.gettipo());
         }
         if (boolurgencia == false) 
         {
