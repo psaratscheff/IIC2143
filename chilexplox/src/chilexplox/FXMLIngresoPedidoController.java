@@ -101,6 +101,8 @@ public class FXMLIngresoPedidoController implements Initializable {
             Parent root = (Parent) fxmlLoader.load();        
             FXMLVentanaPagoController controller = fxmlLoader.<FXMLVentanaPagoController>getController();
             controller.setPedido(pedido);
+            controller.setEmpresa(emp);
+            controller.setParentWindow((Stage)Pagar.getScene().getWindow());
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();

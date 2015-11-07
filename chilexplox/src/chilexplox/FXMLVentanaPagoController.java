@@ -43,6 +43,8 @@ public class FXMLVentanaPagoController implements Initializable {
     private HBox okParent;
     @FXML
     private Button okButton;
+    @FXML
+    private Stage parentStage;
 
     /**
      * Initializes the controller class.
@@ -62,6 +64,7 @@ public class FXMLVentanaPagoController implements Initializable {
         }
         
         Stage stage = (Stage) okButton.getScene().getWindow();
+        this.parentStage.close();
         stage.close();
     }
     
@@ -77,6 +80,14 @@ public class FXMLVentanaPagoController implements Initializable {
         int asd = pedido.CalcularValor();
         String precio= Integer.toString(asd);
         MontoTotal.setText("$"+precio);
+    }
+
+    void setParentWindow(Stage stage) {
+        this.parentStage = stage;
+    }
+
+    void setEmpresa(Empresa emp) {
+        this.emp = emp;
     }
     
 }
