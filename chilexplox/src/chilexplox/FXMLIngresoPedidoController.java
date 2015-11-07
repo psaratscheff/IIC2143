@@ -97,23 +97,23 @@ public class FXMLIngresoPedidoController implements Initializable {
     {
         if (CNombre.getText() != null & CApellido.getText() != null & CDireccion.getText()!= null) 
         {
-            emp.setpedidotemp(pedido) ;
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLVentanaPago.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
+            Parent root = (Parent) fxmlLoader.load();        
+            FXMLVentanaPagoController controller = fxmlLoader.<FXMLVentanaPagoController>getController();
+            controller.setPedido(pedido);
+            controller.setEmpresa(emp);
+            controller.setParentWindow((Stage)Pagar.getScene().getWindow());
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();
         }
-        else{}
-        
-        
     }
 
     @FXML
     private void btnAgregarEncomienda(MouseEvent event) 
     {
         try
-        {    
+        {
             if(editando == false)
             {
                 int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());

@@ -35,7 +35,6 @@ public class Empresa {
     private int IDEncomienda = 0;
     private int IDPedido = 0;
     private Pedido pedidotemp;
-    private Encomienda EncomiendaTemporal;
     
     public Empresa()
     {
@@ -62,10 +61,6 @@ public class Empresa {
     {return empleadoActual;}
     public void setempleadoactual(Empleado empleado)
     {empleadoActual=empleado;}
-    public Encomienda getencomiendatemporal()
-    {return EncomiendaTemporal;}
-    public void setencomiendatemporal(Encomienda encomiendatemp)
-    {EncomiendaTemporal=encomiendatemp;}
     public List<Encomienda> getencomiendas()
     {return encomiendas;}
     public List<Camion> getcamiones()

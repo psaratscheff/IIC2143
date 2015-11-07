@@ -60,7 +60,7 @@ public class FXMLModificarPedidoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        emp = Empresa.getInstance();
+        /*emp = Empresa.getInstance();
         EPrioridad.getItems().add("Urgente");
         EPrioridad.getItems().add("Normal");
         EPrioridad.getItems().add("Express");
@@ -68,10 +68,10 @@ public class FXMLModificarPedidoController implements Initializable {
         {
             EDestino.getItems().add(s.direccion);
         }
-        EOrigen.setText(emp.getsucursalactual().direccion);
+        EOrigen.setText(emp.getsucursalactual().direccion);*/
     } 
     
-    @FXML
+    /*@FXML
     private void EditarAction() throws IOException{
         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
         String prioridad = EPrioridad.getValue();
@@ -87,6 +87,6 @@ public class FXMLModificarPedidoController implements Initializable {
             }
         Stage stage = (Stage) Editar.getScene().getWindow();
         stage.close();
-    }
+    }*/
     
 }

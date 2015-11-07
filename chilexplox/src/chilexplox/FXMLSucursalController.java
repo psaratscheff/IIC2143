@@ -351,14 +351,20 @@ public class FXMLSucursalController implements Initializable {
     
     @FXML
     private void IngresarPedidoAction() throws IOException{
+        if (ChoiceBoxSucursales.getValue() == null)
+        {
+            ErrorLabelSucursal.setText("¡Debes seleccionar una sucursal!");
+            return;
+        }
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedido.fxml"));
             Parent root = (Parent) fxmlLoader.load();
+            FXMLIngresoPedidoController controller = fxmlLoader.<FXMLIngresoPedidoController>getController();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();
         } catch (Exception e){
-            ErrorLabelSucursal.setText("¡Debes seleccionar una sucursal!");
+            System.out.println("ERROR: " + e.toString());
         }
     }
     
@@ -542,7 +548,6 @@ public class FXMLSucursalController implements Initializable {
             encomienda = emp.getsucursalactual().getEncomienda(Integer.parseInt(encomiendaID));
             if (emp.getsucursalactual() == encomienda.getorigen()) 
             {
-                emp.setencomiendatemporal(encomienda) ;
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLModificarPedido.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();

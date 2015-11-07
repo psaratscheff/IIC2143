@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 public class FXMLVentanaPagoController implements Initializable {
     Empresa emp;
     Pedido pedido;
+    Stage AgregarEncomiendaWindow;
     @FXML
     private Label messageLabel;
     @FXML
@@ -42,18 +43,15 @@ public class FXMLVentanaPagoController implements Initializable {
     private HBox okParent;
     @FXML
     private Button okButton;
+    @FXML
+    private Stage parentStage;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        emp = Empresa.getInstance();
-        pedido = emp.getpedidotemp();
-        emp.setpedidotemp(null);
-        int asd = pedido.CalcularValor();
-        String precio= Integer.toString(asd);
-        MontoTotal.setText("$"+precio);
+        // Nada :)
     }    
     
     @FXML
@@ -66,6 +64,7 @@ public class FXMLVentanaPagoController implements Initializable {
         }
         
         Stage stage = (Stage) okButton.getScene().getWindow();
+        this.parentStage.close();
         stage.close();
     }
     
@@ -74,6 +73,21 @@ public class FXMLVentanaPagoController implements Initializable {
     {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+        int valor = pedido.CalcularValor();
+        String precio= Integer.toString(valor);
+        MontoTotal.setText("$"+precio);
+    }
+
+    void setParentWindow(Stage stage) {
+        this.parentStage = stage;
+    }
+
+    void setEmpresa(Empresa emp) {
+        this.emp = emp;
     }
     
 }
