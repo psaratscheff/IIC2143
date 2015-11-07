@@ -9,6 +9,10 @@ chilexplox/*
 !chilexplox/src/
 !chilexplox/src/ciruman/
 !chilexplox/src/ciruman/*
+!chilexplox/src/chilexplox/
+!chilexplox/src/chilexplox/*
+!chilexplox/src/chilexplox/classes/
+!chilexplox/src/chilexplox/classes/*
 !imgs/
 !imgs/*
 !librerias/
