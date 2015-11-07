@@ -22,6 +22,7 @@ public class Camion {
                this.encomiendas = new ArrayList();
             }
     
+    
     /**
      * claramente retorna la disponibilidad del camion(si esta ocupado o no)
      * @return 
@@ -86,8 +87,9 @@ public class Camion {
      * retorna el tipo del camion(normal,radioactivo,refrigerado)
      * @return 
      */
-    public String Tipo()
+    public String gettipo()
     {return tipo;}
+    
     public int EspacioDisponible()
     {
         int espacio= this.capacidad- this.encomiendas.size();

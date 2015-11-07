@@ -15,15 +15,9 @@
        <TextField fx:id="EPeso" layoutX="112.0" layoutY="215.0" prefHeight="25.0" prefWidth="192.0" />
         <ChoiceBox fx:id="EPrioridad" layoutX="112.0" layoutY="249.0" prefHeight="25.0" prefWidth="192.0" />
         <ChoiceBox fx:id="EDestino" layoutX="112.0" layoutY="285.0" prefHeight="25.0" prefWidth="192.0" />
-        <ChoiceBox fx:id="ETipo" layoutX="112.0" layoutY="323.0" prefHeight="25.0" prefWidth="192.0" >
-          <items>
-        <FXCollections fx:factory="observableArrayList">
-          <String fx:value="Normal" />
-          <String fx:value="Refrigerado" />
-          <String fx:value="Radioactivo" />
-        </FXCollections>
-      </items>
-      </ChoiceBox>
+        <ChoiceBox fx:id="ETipo" layoutX="112.0" layoutY="323.0" prefHeight="25.0" prefWidth="192.0" />
+         
+    
       <Label layoutX="41.0" layoutY="323.0" text="Tipo:" />
       
       <Label fx:id="EOrigen" layoutX="112.0" layoutY="122.0" />

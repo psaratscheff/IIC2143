@@ -21,6 +21,8 @@ public class Encomienda {
     this.origen = origen;
     this.tipo=tipo;
   }
+  public String gettipo()
+  {return tipo;}
   public Integer getid()
   {return id;}
   public Sucursal getdestino()

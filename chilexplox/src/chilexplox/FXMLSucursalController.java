@@ -260,8 +260,10 @@ public class FXMLSucursalController implements Initializable {
             //OJO con la importancia de que el id sea un numero valido
             // Obtener Camion a Enviar
             Camion camion = ChoiceBoxCamiones.getValue();
-            if (camion != null && encomienda != null)
+            if (camion != null && encomienda != null)// aca
             {
+                if(camion.gettipo()==encomienda.gettipo())
+                {
                 espacioCamion = camion.PorcentajeDisponible();
                 if (espacioCamion>=1.0){ return; }
 
@@ -310,10 +312,18 @@ public class FXMLSucursalController implements Initializable {
                      ProgressBarCapacity.setStyle("-fx-accent: red;");
                 }
             }
+            else
+            {
+                MessageBox mb = new MessageBox("Solo se puede cargar una encomienda \n tipo "+ encomienda.gettipo()+
+                        " en un camion "+encomienda.gettipo()+"!", MessageBoxType.OK_ONLY);
+                mb.showAndWait();
+                
+                return;}//podria hacer un messagebox que no coincide tipo
+            }
         }
         catch (Exception e)
         {
-            System.out.println("ERROOR: " + e.toString());
+            System.out.println("ERROR: " + e.toString());
         }
     }
     

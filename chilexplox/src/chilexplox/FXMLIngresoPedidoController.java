@@ -83,6 +83,9 @@ public class FXMLIngresoPedidoController implements Initializable {
         EPrioridad.getItems().add("Urgente");
         EPrioridad.getItems().add("Normal");
         EPrioridad.getItems().add("Express");
+        ETipo.getItems().add("Normal");
+        ETipo.getItems().add("Refrigerado");
+        ETipo.getItems().add("Radioactivo");
         for (Sucursal s: emp.getsucursales()) 
         {
             EDestino.getItems().add(s.getdireccion());
@@ -119,11 +122,12 @@ public class FXMLIngresoPedidoController implements Initializable {
                 int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
                 String prioridad = EPrioridad.getValue();
                 String destino = EDestino.getValue();
+                String tipo= ETipo.getValue();
                 for(Sucursal s: emp.getsucursales())
                     {
                         if (s.getdireccion() == destino) 
                         {
-                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.getsucursalactual(),"Normal");
+                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.getsucursalactual(),tipo);
                             pedido.addencomienda(en);
                             ListEncomiendas.getItems().add("ID: "+"#"+en.getid()+"#"+" Destino: "+en.getdestino().getdireccion());
                             int asd = pedido.CalcularValor();
