@@ -190,6 +190,22 @@ public class FXMLSucursalController implements Initializable {
     }
     
     @FXML
+    private void CargarVentanaInformes()
+    {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLVerInforme.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            FXMLVerInformeController controller = fxmlLoader.<FXMLVerInformeController>getController();
+            controller.setEmpresa(emp);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+        } catch (Exception e){
+            System.out.println("ERROR 101: " + e.toString());
+        }
+    }
+    
+    @FXML
     private void EntregarEncomiendaAction(){
         String enco = EncomiendasRecibidas.getSelectionModel().getSelectedItem();
         String encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
@@ -369,12 +385,11 @@ public class FXMLSucursalController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedido.fxml"));
             Parent root = (Parent) fxmlLoader.load();
-            FXMLIngresoPedidoController controller = fxmlLoader.<FXMLIngresoPedidoController>getController();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();
         } catch (Exception e){
-            System.out.println("ERROR: " + e.toString());
+            System.out.println("ERROR 102: " + e.toString());
         }
     }
     

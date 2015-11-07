@@ -5,6 +5,8 @@
  */
 package chilexplox.classes;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class Empresa {
     public static Empresa getInstance() {
         return instance;
     }
-    
+    private DateFormat dateFormat;
     private List<Sucursal> sucursales;
     private List<Camion> camiones;
     private List<Cliente> clientes;
@@ -35,6 +37,7 @@ public class Empresa {
     private int IDEncomienda = 0;
     private int IDPedido = 0;
     private Pedido pedidotemp;
+    private List<Ingreso> ingresos;
     
     public Empresa()
     {
@@ -44,7 +47,23 @@ public class Empresa {
         this.clientes = new ArrayList();
         this.encomiendas = new ArrayList();
         this.empleados = new ArrayList();
+        this.dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        this.ingresos = new ArrayList();
     }
+    
+    /**
+     * Para obtener el formato de fecha.
+     * Uso:
+     * dateFormat.format(date) 
+     * Entrega un string con la fecha en formato "yyyy/MM/dd HH:mm:ss"
+     * @return DateFormat
+     */
+    public List<Ingreso> ingresos()
+    {
+        return this.ingresos;
+    }
+    public DateFormat dateFormat()
+    {return this.dateFormat;}
     public List<Sucursal> getsucursales()
     {return sucursales;}
     public Sucursal getsucursalactual()
@@ -78,6 +97,10 @@ public class Empresa {
     public void AddEmpleado(Empleado e)
     {
         this.empleados.add(e);
+    }
+    public void addIngreso(Ingreso i)
+    {
+        this.ingresos.add(i);
     }
     public Camion EntregarCamion()
     {

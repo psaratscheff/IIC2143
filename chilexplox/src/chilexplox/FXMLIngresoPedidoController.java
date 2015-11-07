@@ -92,8 +92,7 @@ public class FXMLIngresoPedidoController implements Initializable {
         }
         EOrigen.setText(emp.getsucursalactual().getdireccion());
         editando=false;
-        
-    }    
+    }
 
     @FXML
     private void btnPagar(MouseEvent event) throws IOException 
@@ -150,17 +149,17 @@ public class FXMLIngresoPedidoController implements Initializable {
                         String destino = EDestino.getValue();
                         String tipo= ETipo.getValue();
                         for(Sucursal s: emp.getsucursales())
+                        {
+                            if (s.getdireccion() == destino) 
                             {
-                                if (s.getdireccion() == destino) 
-                                {
-                                    Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, s, emp.getsucursalactual(),tipo);
-                                    pedido.addencomienda(wn);
-                                    ListEncomiendas.getItems().add("ID: "+"#"+wn.getid()+"#"+" Destino: "+wn.getdestino().getdireccion());
-                                    int asd = pedido.CalcularValor();
-                                    String precio= Integer.toString(asd);
-                                    TotalPedido.setText("Total: $"+precio);
-                                }
+                                Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, s, emp.getsucursalactual(),tipo);
+                                pedido.addencomienda(wn);
+                                ListEncomiendas.getItems().add("ID: "+"#"+wn.getid()+"#"+" Destino: "+wn.getdestino().getdireccion());
+                                int asd = pedido.CalcularValor();
+                                String precio= Integer.toString(asd);
+                                TotalPedido.setText("Total: $"+precio);
                             }
+                        }
                     }
                 }
                 EditarID.setText(null);
