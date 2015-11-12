@@ -11,7 +11,7 @@
 
 # Programa
 
-## Equipo
+## Equipo - Grupo 13
 
 | Nombre                | Github        | Email         |
 |:--------------------- |:--------------|:--------------|
