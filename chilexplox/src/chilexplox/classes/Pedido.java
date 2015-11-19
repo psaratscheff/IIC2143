@@ -25,6 +25,18 @@ public class Pedido {
     {
         return encomiendas.size();
     }
+    public Encomienda getencomiendabyid(int id)
+    {
+        Encomienda temp = null;
+        for(Encomienda en: encomiendas)
+        {
+            if (en.getid() == id) 
+            {
+                temp =en;
+            }
+        } 
+        return temp;
+    }
     public int CalcularValor()
     {
         int tamano=0;

@@ -62,6 +62,8 @@ public class FXMLIngresoPedidoController implements Initializable {
     @FXML
     private ChoiceBox<String> EDestino;
     @FXML
+    private TextField EDireccion;
+    @FXML
     private Label EOrigen;
     @FXML
     private Label TotalPedido;
@@ -129,6 +131,10 @@ public class FXMLIngresoPedidoController implements Initializable {
                         if (s.getdireccion() == destino) 
                         {
                             Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.getsucursalactual(),tipo);
+                            en.setancho(Integer.parseInt(EAncho.getText()));
+                            en.setlargo(Integer.parseInt(ELargo.getText()));
+                            en.setpeso(Integer.parseInt(EPeso.getText()));
+                            en.setdirecciondestino(EDireccion.getText());
                             pedido.addencomienda(en);
                             ListEncomiendas.getItems().add("ID: "+"#"+en.getid()+"#"+" Destino: "+en.getdestino().getdireccion());
                             int asd = pedido.CalcularValor();
@@ -155,17 +161,22 @@ public class FXMLIngresoPedidoController implements Initializable {
                             if (s.getdireccion() == destino) 
                             {
                                 Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, s, emp.getsucursalactual(),tipo);
+                                wn.setancho(Integer.parseInt(EAncho.getText()));
+                                wn.setlargo(Integer.parseInt(ELargo.getText()));
+                                wn.setpeso(Integer.parseInt(EPeso.getText()));
+                                wn.setdirecciondestino(EDireccion.getText());
                                 pedido.addencomienda(wn);
                                 ListEncomiendas.getItems().add("ID: "+"#"+wn.getid()+"#"+" Destino: "+wn.getdestino().getdireccion());
                                 int asd = pedido.CalcularValor();
                                 String precio= Integer.toString(asd);
                                 TotalPedido.setText("Total: $"+precio);
+                                EditarID.setText(null);
+                                editando = false;
                             }
                         }
                     }
                 }
-                EditarID.setText(null);
-                editando = false;
+                
             }
             
         }
@@ -184,6 +195,7 @@ public class FXMLIngresoPedidoController implements Initializable {
         mb.showAndWait();
         if (mb.getMessageBoxResult() == MessageBoxResult.OK)
         {
+            
                 System.out.println("OK");
                 try
                 {    
@@ -192,7 +204,11 @@ public class FXMLIngresoPedidoController implements Initializable {
                     EditarID.setText("ID: "+"#"+encomiendaID+"#");
                     int selectedIdx = ListEncomiendas.getSelectionModel().getSelectedIndex();
                     ListEncomiendas.getItems().remove(selectedIdx);
-
+                    Encomienda temp = pedido.getencomiendabyid(Integer.parseInt(encomiendaID));
+                    EPeso.setText(Integer.toString(temp.getpeso()));
+                    EAncho.setText(Integer.toString(temp.getancho()));
+                    ELargo.setText(Integer.toString(temp.getlargo()));
+                    EDireccion.setText(temp.getdirecciondestino());
                 }
                 catch(Exception e)
                 {

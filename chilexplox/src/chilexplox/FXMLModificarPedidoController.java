@@ -50,9 +50,13 @@ public class FXMLModificarPedidoController implements Initializable {
     @FXML
     private TextField ELargo;
     @FXML
+    private TextField EDireccion;
+    @FXML
     private ChoiceBox<String> EDestino;
     @FXML
     private Label EOrigen;
+    
+    private FXMLSucursalController sucursalController;
 
     Empresa emp;
     /**
@@ -60,33 +64,46 @@ public class FXMLModificarPedidoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*emp = Empresa.getInstance();
+        emp = Empresa.getInstance();
         EPrioridad.getItems().add("Urgente");
         EPrioridad.getItems().add("Normal");
         EPrioridad.getItems().add("Express");
         for (Sucursal s: emp.getsucursales()) 
         {
-            EDestino.getItems().add(s.direccion);
+            EDestino.getItems().add(s.getdireccion());
         }
-        EOrigen.setText(emp.getsucursalactual().direccion);*/
+        EOrigen.setText(emp.getsucursalactual().getdireccion());
+        EAncho.setText(Integer.toString(emp.getencomiendatemporal().getancho()));
+        ELargo.setText(Integer.toString(emp.getencomiendatemporal().getlargo()));
+        EPeso.setText(Integer.toString(emp.getencomiendatemporal().getpeso()));
+        EDireccion.setText(emp.getencomiendatemporal().getdirecciondestino());
     } 
     
-    /*@FXML
+    @FXML
     private void EditarAction() throws IOException{
         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
         String prioridad = EPrioridad.getValue();
         String destino = EDestino.getValue();
         for(Sucursal s: emp.getsucursales())
             {
-            if (s.direccion == destino) 
+                if (s.getdireccion() == destino) 
                 {
                     emp.getencomiendatemporal().setdestino(s);
                     emp.getencomiendatemporal().setprioridad(prioridad);
                     emp.getencomiendatemporal().settamaño(tamaño);
+                    emp.getencomiendatemporal().setancho(Integer.parseInt(EAncho.getText()));
+                    emp.getencomiendatemporal().setlargo(Integer.parseInt(ELargo.getText()));
+                    emp.getencomiendatemporal().setpeso(Integer.parseInt(EPeso.getText()));
+                    emp.getencomiendatemporal().setdirecciondestino(EDireccion.getText());
                 }
             }
+        this.sucursalController.UpdateConSucursal();
         Stage stage = (Stage) Editar.getScene().getWindow();
         stage.close();
-    }*/
+    }
+    
+    void setSucursalController(FXMLSucursalController aThis) {
+        this.sucursalController = aThis;
+    }
     
 }

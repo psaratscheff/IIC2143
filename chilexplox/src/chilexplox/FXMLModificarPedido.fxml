@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="chilexplox.FXMLModificarPedidoController">
+<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLModificarPedidoController">
    <children>
       <Label fx:id="EditarID" layoutX="507.0" layoutY="403.0" textFill="RED" />
       <Label fx:id="EOrigen" layoutX="112.0" layoutY="110.0" />
@@ -38,18 +37,20 @@
             <Font size="32.0" />
          </font>
       </Button>
-      <TextField fx:id="CRut" layoutX="113.0" layoutY="459.0" />
-      <TextField fx:id="CDireccion" layoutX="113.0" layoutY="425.0" />
-      <TextField fx:id="CApellido" layoutX="113.0" layoutY="393.0" />
-      <TextField fx:id="CNombre" layoutX="113.0" layoutY="362.0" />
-      <Label layoutX="47.0" layoutY="463.0" text="Rut:" />
-      <Label layoutX="47.0" layoutY="429.0" text="Dirección:" />
-      <Label layoutX="47.0" layoutY="397.0" text="Apellido:" />
-      <Label layoutX="47.0" layoutY="366.0" text="Nombre:" />
-      <Label layoutX="47.0" layoutY="311.0" text="Cliente">
+      <TextField fx:id="CRut" layoutX="113.0" layoutY="489.0" />
+      <TextField fx:id="CDireccion" layoutX="113.0" layoutY="455.0" />
+      <TextField fx:id="CApellido" layoutX="113.0" layoutY="423.0" />
+      <TextField fx:id="CNombre" layoutX="113.0" layoutY="392.0" />
+      <Label layoutX="47.0" layoutY="493.0" text="Rut:" />
+      <Label layoutX="47.0" layoutY="459.0" text="Dirección:" />
+      <Label layoutX="47.0" layoutY="427.0" text="Apellido:" />
+      <Label layoutX="47.0" layoutY="396.0" text="Nombre:" />
+      <Label layoutX="47.0" layoutY="341.0" text="Cliente">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
+      <Label layoutX="47.0" layoutY="312.0" text="Dirección:" />
+      <TextField fx:id="EDireccion" layoutX="113.0" layoutY="308.0" />
    </children>
 </AnchorPane>

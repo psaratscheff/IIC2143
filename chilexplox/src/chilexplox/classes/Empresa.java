@@ -34,6 +34,7 @@ public class Empresa {
     private List<Empleado> empleados;
     private Empleado empleadoActual;
     private Sucursal sucursalActual;
+    private Encomienda encomiendaTemporal;
     private int IDEncomienda = 0;
     private int IDPedido = 0;
     private Pedido pedidotemp;
@@ -84,6 +85,22 @@ public class Empresa {
     {return encomiendas;}
     public List<Camion> getcamiones()
     {return camiones;}
+    public Encomienda getencomiendatemporal()
+    {return encomiendaTemporal;}
+    public void setencomiendatemporal(Encomienda encotempo)
+    {encomiendaTemporal=encotempo;}
+    public Encomienda getencomiendabyid(int id)
+    {
+        Encomienda temp = null;
+        for(Encomienda en: encomiendas)
+        {
+            if (en.getid() == id) 
+            {
+                temp =en;
+            }
+        } 
+        return temp;
+    }
     
     public List<String> getDireccionSucursales()
     {

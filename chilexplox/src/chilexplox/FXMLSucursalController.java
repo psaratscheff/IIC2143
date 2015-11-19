@@ -576,15 +576,18 @@ public class FXMLSucursalController implements Initializable {
             encomienda = emp.getsucursalactual().getEncomienda(Integer.parseInt(encomiendaID));
             if (emp.getsucursalactual() == encomienda.getorigen()) 
             {
+                emp.setencomiendatemporal(encomienda);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLModificarPedido.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
+                FXMLModificarPedidoController controller = fxmlLoader.<FXMLModificarPedidoController>getController();
+                controller.setSucursalController(this);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));  
                 stage.show();
             }
             if(emp.getsucursalactual() != encomienda.getorigen())
             {
-                MessageBox mb = new MessageBox("Solo se puede editar desde la encomienda de origen!", MessageBoxType.OK_CANCEL);
+                MessageBox mb = new MessageBox("Solo se puede editar desde la sucursal de origen!", MessageBoxType.OK_CANCEL);
                 mb.showAndWait();
                 if (mb.getMessageBoxResult() == MessageBoxResult.OK)
                 {
