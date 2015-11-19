@@ -8,6 +8,8 @@ public class Cliente {
   // RUT Opcional, la persona puede no querer quedar registrada en el sistema
   // Por eso no se agrega al constructor y debe ser modificado posteriormente
   private String rut;
+  private String usuario;
+  private String password;
   private String nombre;
   private String apellido;
   private String direccion;
@@ -15,15 +17,20 @@ public class Cliente {
   private Sucursal sucursalRegistrada;
   private List<Pedido> pedidosRealizados;
 
-  public Cliente(String nombre, String apellido, String direccion)
+  public Cliente(String nombre, String apellido, String direccion, String user, String pass)
   {
     this.nombre = nombre;
+    this.usuario=user;
+    this.password=pass;
     this.apellido = apellido;
     this.direccion = direccion;
     //Inicializo los arrays para poder agregar valores
     this.pedidosRealizados = new ArrayList();
   }
- 
+ public String getpasswordcliente()
+ {return password;}
+ public String getusercliente()
+ {return usuario;}
   public String getrut()
   {return rut;}
   public void setrut(String Rut)

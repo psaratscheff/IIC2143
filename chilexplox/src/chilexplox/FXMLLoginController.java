@@ -6,6 +6,7 @@
 package chilexplox;
 
 import chilexplox.classes.Camion;
+import chilexplox.classes.Cliente;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -61,8 +62,24 @@ public class FXMLLoginController implements Initializable {
         {
             if (pass.equals(e.getpassword()) & user.equals(e.getusername())) 
             {
+                
                 emp.setempleadoactual(e) ; //Seteo el usuario que se logró loguear
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLSucursal.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));  
+                stage.show();
+                ((Node)(event.getSource())).getScene().getWindow().hide(); // hide es IDENTICO a close()
+            } 
+            
+        }
+        for (Cliente c: emp.getclientes())
+        {
+         if (pass.equals(c.getpasswordcliente()) & user.equals(c.getusercliente())) 
+            {
+                
+                emp.setclienteactual(c) ; //Seteo el usuario que se logró loguear
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLCliente.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));  

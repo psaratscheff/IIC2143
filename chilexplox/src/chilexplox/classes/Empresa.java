@@ -33,6 +33,7 @@ public class Empresa {
     private List<Encomienda> encomiendas;
     private List<Empleado> empleados;
     private Empleado empleadoActual;
+    private Cliente clienteActual;
     private Sucursal sucursalActual;
     private Encomienda encomiendaTemporal;
     private int IDEncomienda = 0;
@@ -77,10 +78,14 @@ public class Empresa {
     {pedidotemp=pedido;}
     public List<Empleado> getempleados()
     {return empleados;}
+    public List<Cliente> getclientes()
+    {return clientes;}
     public Empleado getempleadoactual()
     {return empleadoActual;}
     public void setempleadoactual(Empleado empleado)
     {empleadoActual=empleado;}
+    public void setclienteactual(Cliente cliente)
+    {clienteActual=cliente;}
     public List<Encomienda> getencomiendas()
     {return encomiendas;}
     public List<Camion> getcamiones()
@@ -114,6 +119,10 @@ public class Empresa {
     public void AddEmpleado(Empleado e)
     {
         this.empleados.add(e);
+    }
+     public void AddCliente(Cliente c)
+    {
+        this.clientes.add(c);
     }
     public void addIngreso(Ingreso i)
     {

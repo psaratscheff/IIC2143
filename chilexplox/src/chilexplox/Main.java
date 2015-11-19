@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import chilexplox.classes.Empleado;
+import chilexplox.classes.Cliente;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Sucursal;
 import chilexplox.classes.Camion;
@@ -35,7 +36,9 @@ public class Main extends Application {
         emp.getsucursales().add(new Sucursal("Santiago",150));
         emp.getsucursales().add(new Sucursal("Arica",250));
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s);
+        Cliente c = new Cliente("Pedro","S","Lejos","2","2");
         emp.AddEmpleado(e);
+        emp.AddCliente(c);
         Camion c1 = new Camion("Charlie", 10, true,"Normal");
         Camion c2 = new Camion("CharlieII", 20, true,"Normal");
         Camion c3 = new Camion("Arnold", 5, true,"Refrigerado");
