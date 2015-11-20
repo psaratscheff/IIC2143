@@ -7,22 +7,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLClienteController">
-   
+<AnchorPane id="AnchorPane" prefHeight="310.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLClienteController">
+    
    <children>
-      <TextField id="textField1" fx:id="username" layoutX="93.0" layoutY="127.0" prefWidth="415.0" promptText="Username" />
-      <Label layoutX="175.0" layoutY="28.0" text="Welcome to ChilExplox ">
+       <Label fx:id="LabelNombreTrabajador" layoutX="165.0" layoutY="65.0" prefHeight="35.0" prefWidth="195.0" text="aögoqawedadsfasfasfasf" />
+      <Label layoutX="205.0" layoutY="30.0" text="ChilExplox ">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <PasswordField id="passwordField1" fx:id="password" layoutX="93.0" layoutY="218.0" prefWidth="415.0" promptText="Password" />
-      <Label id="label1" layoutX="100.0" layoutY="200.0" text="Password" />
-      
-      <Label id="label1" layoutX="98.0" layoutY="110.0" text="Username" />
+      <Label id="label1" layoutX="324.0" layoutY="140.0" prefHeight="21.0" prefWidth="227.0" text="Numero de encomienda a revisar" />
       <Label fx:id="ErrorLabel" layoutX="262.0" layoutY="278.0" textFill="RED" />
+      <Button fx:id="BotonVerEstadoEncomienda" layoutX="328.0" layoutY="231.0" prefHeight="31.0" prefWidth="189.0" text="Ver estado encomienda" />
+      <TextField fx:id="TextFieldNrEncomienda" layoutX="328.0" layoutY="183.0" prefHeight="31.0" prefWidth="218.0" promptText="Numero encomienda" />
+      <Button fx:id="BottonAgregarEncomienda" layoutX="57.0" layoutY="140.0" mnemonicParsing="false" onMouseClicked='#EventoAgregarEncomiendaCliente' prefHeight="31.0" prefWidth="180.0" text="Agregar encomienda" />
    </children>
 
 </AnchorPane>

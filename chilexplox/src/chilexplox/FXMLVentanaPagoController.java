@@ -51,6 +51,8 @@ public class FXMLVentanaPagoController implements Initializable {
     
     private int valor;
     private FXMLSucursalController sucursalController;
+    private FXMLClienteController clienteController;
+
 
     /**
      * Initializes the controller class.
@@ -103,5 +105,7 @@ public class FXMLVentanaPagoController implements Initializable {
     void setSucursalController(FXMLSucursalController aThis) {
         this.sucursalController = aThis;
     }
-    
+    void setClienteController(FXMLClienteController aThis) {
+        this.clienteController = aThis;
+    }
 }

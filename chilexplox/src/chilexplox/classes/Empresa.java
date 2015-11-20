@@ -82,6 +82,8 @@ public class Empresa {
     {return clientes;}
     public Empleado getempleadoactual()
     {return empleadoActual;}
+    public Cliente getclienteactual()
+    {return clienteActual;}
     public void setempleadoactual(Empleado empleado)
     {empleadoActual=empleado;}
     public void setclienteactual(Cliente cliente)
