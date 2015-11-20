@@ -20,7 +20,7 @@
       <Label fx:id="ErrorLabel" layoutX="262.0" layoutY="278.0" textFill="RED" />
       <Button fx:id="BotonVerEstadoEncomienda" layoutX="328.0" layoutY="231.0" prefHeight="31.0" prefWidth="189.0" text="Ver estado encomienda" />
       <TextField fx:id="TextFieldNrEncomienda" layoutX="328.0" layoutY="183.0" prefHeight="31.0" prefWidth="218.0" promptText="Numero encomienda" />
-      <Button fx:id="BottonAgregarEncomienda" layoutX="57.0" layoutY="140.0" mnemonicParsing="false" onMouseClicked='#EventoAgregarEncomiendaCliente' prefHeight="31.0" prefWidth="180.0" text="Agregar encomienda" />
+      <Button fx:id="BottonAgregarEncomienda" layoutX="57.0" layoutY="140.0" mnemonicParsing="false" onAction="#EventoAgregarEncomiendaCliente"  prefHeight="31.0" prefWidth="180.0" text="Agregar encomienda" />
    </children>
 
 </AnchorPane>

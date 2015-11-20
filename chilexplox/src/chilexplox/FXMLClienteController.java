@@ -76,6 +76,16 @@ public class FXMLClienteController implements Initializable {
         LabelNombreTrabajador.setText(bienvenida);
     }
     
+   /* @FXML
+    private void EventoAgregarEncomiendaCliente(javafx.event.ActionEvent event) {
+        try {
+          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedidoCliente.fxml"));
+          
+        } catch (Exception e){
+            System.out.println("ERROR 102: " + e.toString());
+        }
+    }*/
+    
     @FXML
     private void EventoAgregarEncomiendaCliente(javafx.event.ActionEvent event) {
         try {
@@ -90,6 +100,7 @@ public class FXMLClienteController implements Initializable {
             System.out.println("ERROR 102: " + e.toString());
         }
     }
+    
     
     
 }

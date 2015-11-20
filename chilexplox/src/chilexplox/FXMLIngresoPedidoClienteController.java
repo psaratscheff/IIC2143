@@ -116,7 +116,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
        
         editando=false;
     } 
-     /**private void btnPagar(MouseEvent event) throws IOException 
+     private void btnPagar(MouseEvent event) throws IOException 
     {
         
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLVentanaPago.fxml"));
@@ -236,7 +236,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                 System.out.println("Cancel");
         }
     }
-**/
+
     void setClienteController(FXMLClienteController aThis) {
         this.clienteController = aThis;
     }
