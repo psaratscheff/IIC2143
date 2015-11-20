@@ -5,6 +5,7 @@
  */
 package chilexplox.classes;
 
+import com.firebase.client.Firebase;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -198,6 +199,11 @@ public class Empresa {
         IDPedido += 1;
         return temp;
     }
+    public Firebase fbRef()
+    {
+        Firebase myFirebaseRef = new Firebase("https://chilexplox.firebaseio.com/");
+        return myFirebaseRef;
+    }
    /* public int buscarmenoridencomienda()
     {
         int largo=encomiendas.size();
@@ -211,5 +217,6 @@ public class Empresa {
         }
         }
     }*/
+    
 
 }

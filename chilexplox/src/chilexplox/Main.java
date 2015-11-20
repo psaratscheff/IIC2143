@@ -16,8 +16,12 @@ import chilexplox.classes.Cliente;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Sucursal;
 import chilexplox.classes.Camion;
+import com.firebase.client.Firebase;
+import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -51,6 +55,25 @@ public class Main extends Application {
         s.getcamionesestacionados().add(c2);
         s.getcamionesestacionados().add(c3);
         s.getcamionesestacionados().add(c4);
+        
+        //Cargar data a FireBase
+        /*Firebase sucursalesRef = emp.fbRef().child("sucursales");
+        Firebase sPushRef = sucursalesRef.push();
+        Map<String, String> post1 = new HashMap<String, String>();
+        post1.put("name", "Arica");
+        post1.put("direccion", "direccion ariqueña");
+        post1.put("capacidad", "250");
+        sPushRef.setValue(post1);/**/
+        /*String postId = sPushRef.getKey();
+        Firebase camionesRef = emp.fbRef().child("camiones");
+        Firebase pushRef= camionesRef.push();
+        Map<String, String> post2 = new HashMap<String, String>();
+        post2.put("name", "Aleph");
+        post2.put("tipo", "Radioactivo");
+        post2.put("capacidad", "5");
+        post2.put("disponible", "true");
+        post2.put("poscicion", postId);
+        pushRef.setValue(post2);/**/
         
         //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
