@@ -20,7 +20,7 @@
       <Label layoutX="46.0" layoutY="361.0" text="Tipo:" />
       
      
-       <Button fx:id="AgregarEncomienda" layoutX="35.0" layoutY="392.0" mnemonicParsing="false"  text="Agregar Encomienda" />
+       <Button fx:id="AgregarEncomienda" layoutX="35.0" layoutY="392.0" mnemonicParsing="false" onMouseClicked="#btnAgregarEncomienda" text="Agregar Encomienda" />
       <Label layoutX="45.0" layoutY="479.0" />
       <Label layoutX="45.0" layoutY="435.0">
          <font>
@@ -29,7 +29,7 @@
       </Label>
       <ListView fx:id="ListEncomiendas" layoutX="372.0" layoutY="115.0" prefHeight="200.0" prefWidth="200.0" />
       <Label fx:id="EditarID" layoutX="507.0" layoutY="415.0" textFill="RED" />
-      <Button fx:id="EditarEncomienda" layoutX="410.0" layoutY="404.0" mnemonicParsing="false"  text="Editar">
+      <Button fx:id="EditarEncomienda" layoutX="410.0" layoutY="404.0" mnemonicParsing="false" onMouseClicked="#btnEditar" text="Editar">
          <font>
             <Font size="18.0" />
          </font>
@@ -66,7 +66,7 @@
       
       <Label layoutX="46.0" layoutY="219.0" text="Peso:" />
      
-      <Button fx:id="Pagar" layoutX="263.0" layoutY="431.0" mnemonicParsing="false"  text="Pagar">
+      <Button fx:id="Pagar" layoutX="263.0" layoutY="431.0" mnemonicParsing="false" onMouseClicked="#btnPagar" text="Pagar">
          <font>
             <Font size="32.0" />
          </font>

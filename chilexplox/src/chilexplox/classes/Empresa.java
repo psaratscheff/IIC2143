@@ -108,6 +108,15 @@ public class Empresa {
         } 
         return temp;
     }
+    public Sucursal getsucursalcondir(String direccion)
+    {
+        for (Sucursal s: sucursales) 
+        {
+            if(s.getdireccion()==direccion)
+            {return s;}
+        }
+        return sucursales.get(0);
+    }
     
     public List<String> getDireccionSucursales()
     {

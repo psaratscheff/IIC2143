@@ -141,12 +141,14 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                 int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
                 String prioridad = EPrioridad.getValue();
                 String destino = EDestino.getValue();
+                String  origen = EOrigen.getValue();
                 String tipo= ETipo.getValue();
+                Sucursal sucursalorigen= emp.getsucursalcondir(origen);
                 for(Sucursal s: emp.getsucursales())
                     {
                         if (s.getdireccion() == destino) 
                         {
-                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, emp.getsucursalactual(),tipo);
+                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, sucursalorigen ,tipo);
                             en.setancho(Integer.parseInt(EAncho.getText()));
                             en.setlargo(Integer.parseInt(ELargo.getText()));
                             en.setpeso(Integer.parseInt(EPeso.getText()));
