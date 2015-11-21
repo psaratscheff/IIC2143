@@ -31,9 +31,10 @@ public class Sucursal {
       this.encomiendasRecibidas = new ArrayList();
     }
     
+    // No modificar nombres, necesarios para FireBase!!!
     public String getDireccion()
     { return this.direccion; }
-    public long getCapacidad()
+    public int getCapacidad()
     { return this.capacidad; }
     public List<Mensaje> getMensajesRecibidos()
     { return this.mensajesRecibidos; }
@@ -47,7 +48,9 @@ public class Sucursal {
     { return this.encomiendasAlmacenadas; }
     public List<Encomienda> getEncomiendasRecibidas()
     { return this.encomiendasRecibidas; }
-
+    
+    // Otro métodos en adelante:
+    
     public int EspacioDisponible()
     {
       int espacio= this.capacidad- this.encomiendasAlmacenadas.size();
@@ -59,14 +62,14 @@ public class Sucursal {
     {
         for (Encomienda e: encomiendasAlmacenadas)
         {
-            if (e.getid() == id)
+            if (e.getId() == id)
             {
                 return e;
             }
         }
         for (Encomienda e: encomiendasRecibidas)
         {
-            if (e.getid() == id)
+            if (e.getId() == id)
             {
                 return e;
             }

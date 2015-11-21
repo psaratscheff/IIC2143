@@ -73,10 +73,10 @@ public class FXMLModificarPedidoController implements Initializable {
             EDestino.getItems().add(s.getDireccion());
         }
         EOrigen.setText(emp.getsucursalactual().getDireccion());
-        EAncho.setText(Integer.toString(emp.getencomiendatemporal().getancho()));
-        ELargo.setText(Integer.toString(emp.getencomiendatemporal().getlargo()));
-        EPeso.setText(Integer.toString(emp.getencomiendatemporal().getpeso()));
-        EDireccion.setText(emp.getencomiendatemporal().getdirecciondestino());
+        EAncho.setText(Integer.toString(emp.getencomiendatemporal().getAncho()));
+        ELargo.setText(Integer.toString(emp.getencomiendatemporal().getLargo()));
+        EPeso.setText(Integer.toString(emp.getencomiendatemporal().getPeso()));
+        EDireccion.setText(emp.getencomiendatemporal().getDireccionDestino());
     } 
     
     @FXML
@@ -88,7 +88,7 @@ public class FXMLModificarPedidoController implements Initializable {
             {
                 if (s.getDireccion() == destino) 
                 {
-                    emp.getencomiendatemporal().setdestino(s);
+                    emp.getencomiendatemporal().setdestino(s.getDireccion());
                     emp.getencomiendatemporal().setprioridad(prioridad);
                     emp.getencomiendatemporal().settamaño(tamaño);
                     emp.getencomiendatemporal().setancho(Integer.parseInt(EAncho.getText()));

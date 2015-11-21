@@ -47,12 +47,18 @@ public class Main extends Application {
         emp.getsucursales().add(s2);
         emp.getsucursales().add(s3);
         emp.getsucursales().add(s4);
+        
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s1);
-        Cliente c = new Cliente("Pedro","S","Lejos","2","2");
-        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"1",s1,s2,"Normal"));
-        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"2",s1,s2,"Normal"));
         emp.AddEmpleado(e);
+        
+        Cliente c = new Cliente("Pedro","S","Lejos","2","2");
         emp.AddCliente(c);
+        
+        Encomienda enc1 = new Encomienda("Normal","Urgente",1,"1",s1.getDireccion(),s2.getDireccion(),"Normal");
+        Encomienda enc2 = new Encomienda("Normal","Urgente",1,"2",s1.getDireccion(),s2.getDireccion(),"Normal");
+        s1.getEncomiendasAlmacenadas().add(enc1);
+        s1.getEncomiendasAlmacenadas().add(enc2);
+        
         Camion c1 = new Camion("Charlie", 10, true,"Normal");
         Camion c2 = new Camion("CharlieII", 20, true,"Normal");
         Camion c3 = new Camion("Arnold", 5, true,"Refrigerado");

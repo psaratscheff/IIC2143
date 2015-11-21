@@ -30,7 +30,7 @@ public class Pedido {
         Encomienda temp = null;
         for(Encomienda en: encomiendas)
         {
-            if (en.getid() == id) 
+            if (en.getId() == id) 
             {
                 temp =en;
             }
@@ -43,13 +43,13 @@ public class Pedido {
         int factor=0;
         for(Encomienda e :encomiendas)
         {
-            if(e.getprioridad()=="Urgente")
+            if(e.getPrioridad()=="Urgente")
             {factor=3;}
-             if(e.getprioridad()=="Normal")
+             if(e.getPrioridad()=="Normal")
             {factor=1;}
-              if(e.getprioridad()=="Express")
+              if(e.getPrioridad()=="Express")
             {factor=2;}
-            tamano+= (e.gettamaño()*factor);
+            tamano+= (e.getTamaño()*factor);
 
         }
         int valor= tamano*5;

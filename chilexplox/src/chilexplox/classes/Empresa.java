@@ -102,7 +102,7 @@ public class Empresa {
         Encomienda temp = null;
         for(Encomienda en: encomiendas)
         {
-            if (en.getid() == id) 
+            if (en.getId() == id) 
             {
                 temp =en;
             }
@@ -166,7 +166,7 @@ public class Empresa {
     {
         for(Encomienda e: encomiendas)
         {
-            if(e.getid()==id)
+            if(e.getId()==id)
             {
                 e.setestado(estado);
             }
@@ -177,9 +177,9 @@ public class Empresa {
     {
         for(Encomienda e: encomiendas)
         {
-            if(e.getid()==id)
+            if(e.getId()==id)
             {
-                String estado=e.getestado();
+                String estado=e.getEstado();
                 return estado;
             }
         }

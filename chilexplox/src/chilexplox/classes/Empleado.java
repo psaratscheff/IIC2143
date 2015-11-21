@@ -43,10 +43,10 @@ public Sucursal getsucursaldondetrabaja()
   
   public void ModificarDireccionEncomienda(Encomienda e, Sucursal destino) //Busco la encomienda o el id de la encomienda? - Thom
   {
-      if (e.getorigen() == this.sucursalDondeTrabaja) 
+      if (e.getOrigen() == this.sucursalDondeTrabaja.getDireccion()) 
       {
-          e.setdestino(destino);
-          EnviarMensaje(destino, "Destino encomienda "+ e.getid() + " actualizado", true);
+          e.setdestino(destino.getDireccion());
+          EnviarMensaje(destino, "Destino encomienda "+ e.getId() + " actualizado", true);
       }
   }
 }

@@ -2,63 +2,68 @@ package chilexplox.classes;
 
 
 public class Encomienda {
-  private String estado;
-  private String prioridad;
-  private String direccionDestino;
-  private int tamaño;
-  private String id;
-  private int largo;
-  private int ancho;
-  private int peso;
-  private Sucursal destino;
-  private Sucursal origen;
-  private Cliente destinatario;
-  private String tipo;
+    private String estado;
+    private String prioridad;
+    private String direccionDestino;
+    private int tamaño;
+    private String id;
+    private int largo;
+    private int ancho;
+    private int peso;
+    private String sucursalDestino; //id - firebase
+    private String sucursalOrigen; //id - firebase
+    private String destinatario; //id - firebase
+    private String tipo;
 
-  public Encomienda(String estado, String prioridad, int tamaño, String id, Sucursal destino, Sucursal origen,String tipo)
-  {
-    this.estado = estado;
-    this.prioridad = prioridad;
-    this.tamaño = tamaño;
-    this.id = id;
-    this.destino = destino;
-    this.origen = origen;
-    this.tipo=tipo;
-  }
-  public String getdirorigen()
-  {return origen.getDireccion();}
-    public String gettipo()
-    {return tipo;}
-    public String getid()
+    public Encomienda() {} // Constructor vacío para Firebase
+    
+    public Encomienda(String estado, String prioridad, int tamaño, String id, String sucursalOrigen, String sucursalDestino, String tipo)
+    {
+        this.estado = estado;
+        this.prioridad = prioridad;
+        this.tamaño = tamaño;
+        this.id = id;
+        this.sucursalDestino = sucursalDestino;
+        this.sucursalOrigen = sucursalOrigen;
+        this.tipo=tipo;
+    }
+    
+    // No modificar nombres, necesarios para FireBase!!!
+    public String getEstado()
+    {return estado;}
+    public String getPrioridad()
+    {return prioridad;}
+    public String getDireccionDestino()
+    {return direccionDestino;}
+    public int getTamaño()
+    {return tamaño;}
+    public String getId()
     {return id;}
-    public Sucursal getdestino()
-    {return destino;}
-    public void setdestino(Sucursal sucursal)
-    {destino=sucursal;}
+    public int getLargo()
+    {return largo;}
+    public int getAncho()
+    {return ancho;}
+    public int getPeso()
+    {return peso;}
+    public String getDestino()
+    {return sucursalDestino;}
+    public String getOrigen()
+    {return sucursalOrigen;}
+    public String getDestinatario()
+    {return destinatario;}
+    public String getTipo()
+    {return tipo;}
+    
+    public void setdestino(String sucursal)
+    {sucursalDestino=sucursal;}
     public void settamaño(Integer tam)
     {tamaño=tam;}
     public void setprioridad(String prior)
     {prioridad=prior;}
-    public String getprioridad()
-    {return prioridad;}
-    public String getestado()
-    {return estado;}
-    public Sucursal getorigen()
-    {return origen;}
-    public int gettamaño()
-    {return tamaño;}
-    public String getdirecciondestino()
-    {return direccionDestino;}
     public String setdirecciondestino(String direcciondest)
     {return direccionDestino = direcciondest;}
     public void setestado(String est)
     {estado=est;}
-    public int getlargo()
-    {return largo;}
-    public int getancho()
-    {return ancho;}
-    public int getpeso()
-    {return peso;}
     public int setlargo(int lar)
     {return largo = lar;}
     public int setancho(int an)

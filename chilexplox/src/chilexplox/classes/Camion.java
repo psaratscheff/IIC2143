@@ -24,7 +24,8 @@ public class Camion {
         this.encomiendas = new ArrayList();
     }
     
-    public long getCapacidad()
+    // No modificar nombres, necesarios para FireBase!!!
+    public int getCapacidad()
     {return this.capacidad;}
     public String getNombre()
     {return this.nombre;}
@@ -35,6 +36,7 @@ public class Camion {
     public Boolean getDisponibilidad()
     {return this.disponibilidad;}
     
+    // Otro métodos en adelante:
     
     /**
      * cambia el estado de getDisponibilidad del camion al booleano "disp"
