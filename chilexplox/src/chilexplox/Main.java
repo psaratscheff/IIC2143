@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import chilexplox.classes.Empleado;
 import chilexplox.classes.Cliente;
+import chilexplox.classes.Boss;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Sucursal;
 import chilexplox.classes.Camion;
@@ -50,11 +51,18 @@ public class Main extends Application {
         emp.getsucursales().add(s3);
         emp.getsucursales().add(s4);
         
+        /* Para que existe esa lista?!
+        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"1",s,s,"Normal")); 
+        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"2",s,s,"Normal"));*/ 
+        
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s1);
         emp.AddEmpleado(e);
         
         Cliente c = new Cliente("Pedro","S","Lejos","2","2");
         emp.AddCliente(c);
+        
+        Boss b= new Boss("Berni","Ljubetic","3","3");
+        emp.getjefes().add(b);
         
         Encomienda enc1 = new Encomienda("Normal","Urgente",1,"1",s1.getDireccion(),s2.getDireccion(),"Normal");
         Encomienda enc2 = new Encomienda("Normal","Urgente",1,"2",s1.getDireccion(),s2.getDireccion(),"Normal");

@@ -146,7 +146,7 @@ public class FXMLSucursalController implements Initializable {
             {
                 boolurgencia = true;
             }
-            EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getDestino()).getDireccion()+" Tipo: "+en.getTipo());
+            EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
         }
         if (boolurgencia == false) 
         {
@@ -162,7 +162,7 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasRecibidas.getItems().clear();
         for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
         {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getDestino()).getDireccion());
+            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
         }
         // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
         ListMessagesPreview.getItems().clear();
@@ -312,7 +312,7 @@ public class FXMLSucursalController implements Initializable {
                     {
                         boolurgencia = true;
                     }
-                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getDestino()).getDireccion()+" Tipo: "+en.getTipo());
+                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
                 }
                 if (boolurgencia == false) 
                 {
@@ -434,7 +434,7 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasRecibidas.getItems().clear();
         for(Encomienda en: camion.getEncomiendas())
         {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getDestino()).getDireccion());
+            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
         }
     }
     
@@ -449,7 +449,7 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasRecibidas.getItems().clear();
         for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
         {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getDestino()).getDireccion());
+            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
         }
     }
     
@@ -466,7 +466,7 @@ public class FXMLSucursalController implements Initializable {
             return; //Nada
         }
         String mensaje = "Se ha detectado error en la encomienda ID #"+encomienda.getId()+"#";
-        emp.getempleadoactual().EnviarMensaje(emp.getsucursalcondir(encomienda.getOrigen()), mensaje, true);
+        emp.getempleadoactual().EnviarMensaje(emp.getsucursalcondir(encomienda.getSucursalOrigen()), mensaje, true);
     }
     
     @FXML
@@ -499,7 +499,7 @@ public class FXMLSucursalController implements Initializable {
                 {
                     boolurgencia = true;
                 }
-                EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getDestino()).getDireccion()+" Tipo: "+en.getTipo());
+                EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
             }
             if (boolurgencia == false) 
             {
@@ -514,7 +514,7 @@ public class FXMLSucursalController implements Initializable {
             EncomiendasRecibidas.getItems().clear();
             for(Encomienda en: camion.getEncomiendas())
             {
-                EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getDestino()).getDireccion());
+                EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
             }
             //Actualizar capacidad
             espacioCamion = camion.PorcentajeDisponible();
@@ -548,7 +548,7 @@ public class FXMLSucursalController implements Initializable {
         {
             return; //Nada
         }
-        EncomiendasEnSucursal.getItems().add("["+encomienda.getPrioridad()+"]" + "(" + encomienda.getEstado() +")" + "// " + "ID: #" + encomienda.getId() + "# Destino: " + emp.getsucursalcondir(encomienda.getDestino()).getDireccion()+" Tipo: "+encomienda.getTipo());
+        EncomiendasEnSucursal.getItems().add("["+encomienda.getPrioridad()+"]" + "(" + encomienda.getEstado() +")" + "// " + "ID: #" + encomienda.getId() + "# Destino: " + emp.getsucursalcondir(encomienda.getSucursalDestino()).getDireccion()+" Tipo: "+encomienda.getTipo());
         emp.getsucursalactual().getEncomiendasAlmacenadas().add(encomienda);
         emp.getsucursalactual().getEncomiendasRecibidas().remove(encomienda);
         //Recargar Encomiendas
@@ -560,7 +560,7 @@ public class FXMLSucursalController implements Initializable {
             {
                 boolurgencia = true;
             }
-            EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getDestino()).getDireccion()+" Tipo: "+encomienda.getTipo());
+            EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion()+" Tipo: "+encomienda.getTipo());
         }
         if (boolurgencia == false) 
         {
@@ -575,7 +575,7 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasRecibidas.getItems().clear();
         for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
         {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getDestino()).getDireccion());
+            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
         }   
     }
     
@@ -586,7 +586,7 @@ public class FXMLSucursalController implements Initializable {
             String encomiendaID = EncomiendasEnSucursal.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
             Encomienda encomienda = null;
             encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
-            if (emp.getsucursalactual() == emp.getsucursalcondir(encomienda.getOrigen())) 
+            if (emp.getsucursalactual() == emp.getsucursalcondir(encomienda.getSucursalOrigen())) 
             {
                 emp.setencomiendatemporal(encomienda);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLModificarPedido.fxml"));
@@ -597,7 +597,7 @@ public class FXMLSucursalController implements Initializable {
                 stage.setScene(new Scene(root));  
                 stage.show();
             }
-            if(emp.getsucursalactual() != emp.getsucursalcondir(encomienda.getOrigen()))
+            if(emp.getsucursalactual() != emp.getsucursalcondir(encomienda.getSucursalOrigen()))
             {
                 MessageBox mb = new MessageBox("Solo se puede editar desde la sucursal de origen!", MessageBoxType.OK_CANCEL);
                 mb.showAndWait();

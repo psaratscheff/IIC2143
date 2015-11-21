@@ -53,7 +53,7 @@ public class Encomienda {
     {return destinatario;}
     public String getTipo()
     {return tipo;}
-    /*
+    
     public void setdestino(String sucursal)
     {sucursalDestino=sucursal;}
     public void settamaño(Integer tam)
@@ -69,6 +69,6 @@ public class Encomienda {
     public int setancho(int an)
     {return ancho = an;}
     public int setpeso(int pes)
-    {return peso = pes;}*/
+    {return peso = pes;}
 
 }

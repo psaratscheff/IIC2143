@@ -67,7 +67,7 @@ public class FXMLVentanaPagoController implements Initializable {
     {
         for(Encomienda en: pedido.getencomiendas())
         {
-            emp.getsucursalcondir(en.getOrigen()).getEncomiendasAlmacenadas().add(en);
+            emp.getsucursalcondir(en.getSucursalOrigen()).getEncomiendasAlmacenadas().add(en);
             emp.getencomiendas().add(en);
         }
         

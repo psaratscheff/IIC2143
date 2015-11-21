@@ -102,7 +102,7 @@ public class FXMLClienteController implements Initializable {
            {
                ListViewEncomiendasCliente.visibleProperty().setValue(true);
                existe=true;
-               ListViewEncomiendasCliente.getItems().add("ID: "+"#"+en.getId()+"#"+" Destino: "+emp.getsucursalcondir(en.getDestino()).getDireccion());
+               ListViewEncomiendasCliente.getItems().add("ID: "+"#"+en.getId()+"#"+" Destino: "+emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
                ListViewEncomiendasCliente.getItems().add("Hola");
                
            }
