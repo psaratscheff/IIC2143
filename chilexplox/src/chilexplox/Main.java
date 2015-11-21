@@ -16,6 +16,7 @@ import chilexplox.classes.Cliente;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Sucursal;
 import chilexplox.classes.Camion;
+import chilexplox.classes.Encomienda;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class Main extends Application {
         emp.getsucursales().add(new Sucursal("Arica",250));
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s);
         Cliente c = new Cliente("Pedro","S","Lejos","2","2");
+        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"1",s,s,"Normal"));
+        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"2",s,s,"Normal"));
         emp.AddEmpleado(e);
         emp.AddCliente(c);
         Camion c1 = new Camion("Charlie", 10, true,"Normal");

@@ -6,7 +6,7 @@ public class Encomienda {
   private String prioridad;
   private String direccionDestino;
   private int tamaño;
-  private int id;
+  private String id;
   private int largo;
   private int ancho;
   private int peso;
@@ -15,7 +15,7 @@ public class Encomienda {
   private Cliente destinatario;
   private String tipo;
 
-  public Encomienda(String estado, String prioridad, int tamaño, int id, Sucursal destino, Sucursal origen,String tipo)
+  public Encomienda(String estado, String prioridad, int tamaño, String id, Sucursal destino, Sucursal origen,String tipo)
   {
     this.estado = estado;
     this.prioridad = prioridad;
@@ -25,9 +25,11 @@ public class Encomienda {
     this.origen = origen;
     this.tipo=tipo;
   }
+  public String getdirorigen()
+  {return origen.getdireccion();}
     public String gettipo()
     {return tipo;}
-    public Integer getid()
+    public String getid()
     {return id;}
     public Sucursal getdestino()
     {return destino;}

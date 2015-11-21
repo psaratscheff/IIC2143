@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Pedido {
     private List<Encomienda> encomiendas;
-    private int id;
+    private String id;
     
-    public Pedido(int identificador)
+    public Pedido(String identificador)
     {
         id=identificador;
         //Inicializo los arrays para poder agregar valores
@@ -25,7 +25,7 @@ public class Pedido {
     {
         return encomiendas.size();
     }
-    public Encomienda getencomiendabyid(int id)
+    public Encomienda getencomiendabyid(String id)
     {
         Encomienda temp = null;
         for(Encomienda en: encomiendas)

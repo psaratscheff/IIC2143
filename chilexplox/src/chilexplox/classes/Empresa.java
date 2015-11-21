@@ -96,7 +96,7 @@ public class Empresa {
     {return encomiendaTemporal;}
     public void setencomiendatemporal(Encomienda encotempo)
     {encomiendaTemporal=encotempo;}
-    public Encomienda getencomiendabyid(int id)
+    public Encomienda getencomiendabyid(String id)
     {
         Encomienda temp = null;
         for(Encomienda en: encomiendas)
@@ -161,7 +161,7 @@ public class Empresa {
         return null;
     }
     
-    public void CambiarEstadoEncomienda(int id, String estado)
+    public void CambiarEstadoEncomienda(String id, String estado)
     {
         for(Encomienda e: encomiendas)
         {
@@ -172,7 +172,7 @@ public class Empresa {
         }
     }
     
-    public String VerEstadoEncomienda(int id)
+    public String VerEstadoEncomienda(String id)
     {
         for(Encomienda e: encomiendas)
         {
@@ -185,18 +185,18 @@ public class Empresa {
         return null;   
     }
     
-    public int AsignarIDEnco()
+    public String AsignarIDEnco()
     {
         int temp = IDEncomienda;
         IDEncomienda += 1;
-        return temp;
+        return Integer.toString(temp);
     }
     
-    public int AsignarIDPedido()
+    public String AsignarIDPedido()
     {
         int temp = IDPedido;
         IDPedido += 1;
-        return temp;
+        return Integer.toString(temp);
     }
    /* public int buscarmenoridencomienda()
     {

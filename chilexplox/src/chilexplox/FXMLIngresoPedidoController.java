@@ -146,7 +146,7 @@ public class FXMLIngresoPedidoController implements Initializable {
             
             if (editando == true) 
             {
-                int id = Integer.parseInt(EditarID.getText().split("#")[1]);
+                String id = EditarID.getText().split("#")[1];
                 for (Encomienda en: pedido.getencomiendas()) 
                 {
                     if (en.getid() == id) 
@@ -204,7 +204,7 @@ public class FXMLIngresoPedidoController implements Initializable {
                     EditarID.setText("ID: "+"#"+encomiendaID+"#");
                     int selectedIdx = ListEncomiendas.getSelectionModel().getSelectedIndex();
                     ListEncomiendas.getItems().remove(selectedIdx);
-                    Encomienda temp = pedido.getencomiendabyid(Integer.parseInt(encomiendaID));
+                    Encomienda temp = pedido.getencomiendabyid(encomiendaID);
                     EPeso.setText(Integer.toString(temp.getpeso()));
                     EAncho.setText(Integer.toString(temp.getancho()));
                     ELargo.setText(Integer.toString(temp.getlargo()));
