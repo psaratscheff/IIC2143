@@ -64,11 +64,11 @@ public class FXMLVerInformeController implements Initializable {
             Calendar cal = Calendar.getInstance();
             for (Ingreso i: emp.ingresos())
             {
-                cal.setTime(i.Fecha());
+                cal.setTime(i.getFecha());
                 int month = cal.get(Calendar.MONTH);
                 if (month == m)
                 {
-                    neto += i.Valor();
+                    neto += i.getValor();
                 }
             }
             NetValue.setText("$"+neto);

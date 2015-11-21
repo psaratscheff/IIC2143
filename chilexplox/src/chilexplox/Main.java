@@ -19,11 +19,13 @@ import chilexplox.classes.Camion;
 import com.firebase.client.Firebase;
 import com.firebase.client.ValueEventListener;
 import chilexplox.classes.Encomienda;
+import chilexplox.classes.Ingreso;
 import chilexplox.classes.Mensaje;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,14 +90,18 @@ public class Main extends Application {
         newPostRef = postRef.child(s3.getDireccion()); newPostRef.setValue(s3);
         newPostRef = postRef.child(s4.getDireccion()); newPostRef.setValue(s4);
         
+        Ingreso i1 = new Ingreso(100, new Date(1448078729000L)); // Timestamp universal en milisegundos, L al final para definir que es un long
+        postRef = emp.fbRef().child("ingresos");
+        newPostRef = postRef.push(); newPostRef.setValue(i1);
+        
         // Para verificar escrituras válidas (Leíbles por código)
-        postRef = emp.fbRef().child("camiones");
+        postRef = emp.fbRef().child("ingresos");
         postRef.addChildEventListener(new ChildEventListener() {
             // Retrieve new posts as they are added to the database
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
                   System.out.println(snapshot);
-                  Camion post = snapshot.getValue(Camion.class);
+                  Ingreso post = snapshot.getValue(Ingreso.class);
                   System.out.println("Mensaje:" + post.toString());
             }
             @Override

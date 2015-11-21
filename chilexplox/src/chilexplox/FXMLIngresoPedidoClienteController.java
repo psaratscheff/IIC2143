@@ -148,13 +148,13 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                     {
                         if (s.getDireccion()== destino) 
                         {
-                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), s, sucursalorigen ,tipo);
+                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), sucursalorigen.getDireccion(), s.getDireccion(), tipo);
                             en.setancho(Integer.parseInt(EAncho.getText()));
                             en.setlargo(Integer.parseInt(ELargo.getText()));
                             en.setpeso(Integer.parseInt(EPeso.getText()));
                             en.setdirecciondestino(EDireccion.getText());
                             pedido.addencomienda(en);
-                            ListEncomiendas.getItems().add("ID: "+"#"+en.getId()+"#"+" Destino: "+en.getDestino().getDireccion());
+                            ListEncomiendas.getItems().add("ID: "+"#"+en.getId()+"#"+" Destino: "+emp.getsucursalcondir(en.getDestino()).getDireccion());
                             int asd = pedido.CalcularValor();
                             String precio= Integer.toString(asd);
                             TotalPedido.setText("Total: $"+precio);
@@ -178,13 +178,13 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                         {
                             if (s.getDireccion() == destino) 
                             {
-                                Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, s, emp.getsucursalactual(),tipo);
+                                Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo);
                                 wn.setancho(Integer.parseInt(EAncho.getText()));
                                 wn.setlargo(Integer.parseInt(ELargo.getText()));
                                 wn.setpeso(Integer.parseInt(EPeso.getText()));
                                 wn.setdirecciondestino(EDireccion.getText());
                                 pedido.addencomienda(wn);
-                                ListEncomiendas.getItems().add("ID: "+"#"+wn.getId()+"#"+" Destino: "+wn.getDestino().getDireccion());
+                                ListEncomiendas.getItems().add("ID: "+"#"+wn.getId()+"#"+" Destino: "+emp.getsucursalcondir(wn.getDestino()).getDireccion());
                                 int asd = pedido.CalcularValor();
                                 String precio= Integer.toString(asd);
                                 TotalPedido.setText("Total: $"+precio);
