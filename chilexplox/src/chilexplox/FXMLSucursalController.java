@@ -10,6 +10,7 @@ import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Mensaje;
 import chilexplox.classes.Sucursal;
+import chilexplox.classes.fbSucursal;
 import java.io.IOException;
 
 import java.net.URL;
@@ -33,6 +34,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import ciruman.EllipsisListCell;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import java.util.Iterator;
 import java.util.List;
 import javafx.util.Callback;
@@ -114,17 +119,21 @@ public class FXMLSucursalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Get singleton empresa
         emp = Empresa.getInstance();
+        // Set welcome message
         String bienvenida = "Hola, " + emp.getempleadoactual().getnombre();
         LabelNombreTrabajador.setText(bienvenida);
+        // Update sucursales
         for (Sucursal s: emp.getsucursales()) 
         {
             ChoiceBoxSucursales.getItems().add(s);
             ChoiceBoxDestinoCamiones.getItems().add(s);
         }
+        // Ocultar botones deshabilitados
         QuitarEncomiendaCamion.setVisible(false);
         VerPedidosRecibidos.setVisible(false);
-    }  
+    }
     
     public void UpdateConSucursal(){
         // CARGAR ENCOMIENDAS
