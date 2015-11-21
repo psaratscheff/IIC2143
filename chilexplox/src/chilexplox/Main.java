@@ -47,10 +47,10 @@ public class Main extends Application {
         Sucursal s2 = new Sucursal("La Serena",50);
         Sucursal s3 = new Sucursal("Santiago",150);
         Sucursal s4 = new Sucursal("Arica",250);
-        emp.getsucursales().add(s1);
+        /*emp.getsucursales().add(s1);
         emp.getsucursales().add(s2);
         emp.getsucursales().add(s3);
-        emp.getsucursales().add(s4);
+        emp.getsucursales().add(s4);*/
         
         /* Para que existe esa lista?!
         emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"1",s,s,"Normal")); 

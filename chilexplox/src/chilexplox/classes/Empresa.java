@@ -183,7 +183,8 @@ public class Empresa {
             if(s.getDireccion()==direccion)
             {return s;}
         }
-        return sucursales.get(0);
+        System.out.println("La dirección "+direccion+" no fue encontrada!");
+        return null;
     }
     
     public List<String> getDireccionSucursales()
@@ -214,6 +215,7 @@ public class Empresa {
             if (c.getDisponibilidad()==true)
             {return c;}
         }
+        System.out.println("No hay camiones disponibles!");
         return null;
     }
     
@@ -221,11 +223,12 @@ public class Empresa {
     {
         for(Cliente c: clientes)
         {
-        if (c.getRut()==rut)
-        {
-        return c;
+            if (c.getRut()==rut)
+            {
+                return c;
+            }
         }
-        }
+        System.out.println("No existe el cliente con rut: "+rut);
         return null;
     }
     
@@ -250,6 +253,7 @@ public class Empresa {
                 return estado;
             }
         }
+        System.out.println("La encomienda "+id+" no fue encontrada!");
         return null;   
     }
     
