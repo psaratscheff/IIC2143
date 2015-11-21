@@ -334,8 +334,10 @@ public class FXMLSucursalController implements Initializable {
         String cs = ChoiceBoxCamiones.getValue();
         for (Camion c: emp.getsucursalactual().getCamionesEstacionados())
         {
+            System.out.println(c.NombreCompleto()+" != "+cs);
             if (c.NombreCompleto().equals(cs))
             {
+            System.out.println(c.NombreCompleto()+" == "+cs);
                 camionSeleccionado = c;
             }
         }
