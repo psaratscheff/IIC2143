@@ -1,9 +1,5 @@
 package chilexplox.classes;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class fbSucursal {
     private String direccion;
     private String capacidad;

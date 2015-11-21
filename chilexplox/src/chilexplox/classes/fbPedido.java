@@ -1,10 +1,5 @@
 package chilexplox.classes;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class fbPedido {
     private String id;
     
