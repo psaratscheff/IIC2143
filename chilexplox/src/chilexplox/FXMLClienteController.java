@@ -97,8 +97,8 @@ public class FXMLClienteController implements Initializable {
        {   
            
            
-           String aux=en.getId();
-           if(aux==nrencomienda)
+           
+           if(nrencomienda.equals(en.getId()))
            {
                ListViewEncomiendasCliente.visibleProperty().setValue(true);
                existe=true;

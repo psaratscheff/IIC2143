@@ -136,7 +136,7 @@ public class FXMLBossController implements Initializable {
     @FXML
     private void MensajesAction() throws IOException{
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLMensajesRecibidos.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLMensajesGerente.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
