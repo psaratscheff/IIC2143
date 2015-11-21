@@ -82,6 +82,8 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private Button Mensajes;
     @FXML
+    private Button Salir;
+    @FXML
     private Button ModificarPedido;
     @FXML
     private Button NotificarErrorPedido;
@@ -767,6 +769,24 @@ public class FXMLSucursalController implements Initializable {
                 }
             }
             
+        } 
+        catch (Exception e)
+        {
+            //Nada
+        }
+    }
+    
+    @FXML
+    private void SalirAction() throws IOException{
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLLogin.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+            Stage cerrar = (Stage)Salir.getScene().getWindow();
+            cerrar.close();
         } 
         catch (Exception e)
         {

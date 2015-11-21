@@ -60,10 +60,10 @@ public class FXMLBossController implements Initializable {
     private Label LabelNombreJefe;
     @FXML
     private ComboBox<Sucursal> ChoiceBoxSucursales;
-    
+    @FXML
+    private Button Salir;
     @FXML
     private Button Mensajes;
-    
     @FXML
     private Button CargarSucursal;
     
@@ -160,6 +160,24 @@ public class FXMLBossController implements Initializable {
         catch (Exception e){
             System.out.println("ERROR 101: " + e.toString());
         }*/
+    }
+    
+    @FXML
+    private void SalirAction() throws IOException{
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLLogin.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+            Stage cerrar = (Stage)Salir.getScene().getWindow();
+            cerrar.close();
+        } 
+        catch (Exception e)
+        {
+            //Nada
+        }
     }
     
 }
