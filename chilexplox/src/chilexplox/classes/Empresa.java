@@ -50,69 +50,13 @@ public class Empresa {
     public Empresa()
     {
         this.dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        
-        //---------- SUCURSALES -----------
         this.sucursales = new ArrayList();
-        /*Firebase sucursalesRef = fbRef().child("sucursales");
-        sucursalesRef.addChildEventListener(new ChildEventListener() {
-            // Retrieve new posts as they are added to the database
-            @Override
-            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
-                  Sucursal post = ds.getValue(Sucursal.class);
-                  System.out.println("Sucursal:" + post.toString());
-                  
-                  sucursales.add(post);
-            }
-            @Override
-            public void onChildChanged(DataSnapshot ds, String string) {
-                // Elimino la versión antigua
-                //sucursales.remove(getSucursalConDireccion(string));
-                // Agrego la versión nueva
-                Sucursal post = ds.getValue(Sucursal.class);
-                //sucursales.add(post);
-                  System.out.println("BBSucursal:" + post.toString());
-            }
-            @Override
-            public void onChildRemoved(DataSnapshot ds) {
-                Sucursal post = ds.getValue(Sucursal.class);
-                System.out.println("Sucursal REMOVIDA:" + post.toString());
-                  
-                //sucursales.remove(post);
-            }
-            @Override
-            public void onChildMoved(DataSnapshot ds, String string) {
-                // Who cares... (No se requiere hacer nada)
-            }
-            @Override
-            public void onCancelled(FirebaseError fe) {
-                System.out.println("ERROR FB-101:" + fe.getMessage());
-            }
-        });/**/
-        
-        //---------- CAMIONES -----------
         this.camiones = new ArrayList();
-        
-        
-        //---------- EMPLEADOS -----------
         this.empleados = new ArrayList();
-        
-        
-        //---------- CLIENTES -----------
         this.clientes = new ArrayList();
-        
-        
-        //---------- JEFES -----------
         this.jefes = new ArrayList();
-        
-        
-        //---------- ENCOMIENDAS -----------
         this.encomiendas = new ArrayList();
-        
-        
-        //---------- INGRESOS -----------
         this.ingresos = new ArrayList();
-        
-        
     }
     
     /**
@@ -158,7 +102,7 @@ public class Empresa {
     {clienteActual=cliente;}
     public List<Encomienda> getencomiendas()
     {return encomiendas;}
-    public List<Camion> getcamiones()
+    public List<Camion> getCamiones()
     {return camiones;}
     public Encomienda getencomiendatemporal()
     {return encomiendaTemporal;}
@@ -180,10 +124,20 @@ public class Empresa {
     {
         for (Sucursal s: sucursales) 
         {
-            if(s.getDireccion()==direccion)
+            if(s.getDireccion().equals(direccion))
             {return s;}
         }
         System.out.println("La dirección "+direccion+" no fue encontrada!");
+        return null;
+    }
+    public Camion getCamionConNombre(String nombre)
+    {
+        for (Camion c: camiones) 
+        {
+            if(c.getNombre().equals(nombre))
+            {return c;}
+        }
+        System.out.println("El camión con nombre "+nombre+" no fue encontrado!");
         return null;
     }
     

@@ -47,10 +47,6 @@ public class Main extends Application {
         Sucursal s2 = new Sucursal("La Serena",50);
         Sucursal s3 = new Sucursal("Santiago",150);
         Sucursal s4 = new Sucursal("Arica",250);
-        /*emp.getsucursales().add(s1);
-        emp.getsucursales().add(s2);
-        emp.getsucursales().add(s3);
-        emp.getsucursales().add(s4);*/
         
         /* Para que existe esa lista?!
         emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"1",s,s,"Normal")); 
@@ -65,12 +61,12 @@ public class Main extends Application {
         Boss b= new Boss("Berni","Ljubetic","3","3");
         emp.getjefes().add(b);
         
-        Encomienda enc1 = new Encomienda("Normal","Urgente",1,"none",s1.getDireccion(),s2.getDireccion(),"Normal");
-        Encomienda enc2 = new Encomienda("Normal","Urgente",1,"none",s1.getDireccion(),s2.getDireccion(),"Normal");
+        Encomienda enc1 = new Encomienda("Normal","Urgente",1,s1.getDireccion(),s2.getDireccion(),"Normal");
+        Encomienda enc2 = new Encomienda("Normal","Urgente",1,s1.getDireccion(),s2.getDireccion(),"Normal");
         s1.getEncomiendasAlmacenadas().add(enc1);
         s1.getEncomiendasAlmacenadas().add(enc2);
         
-        Pedido p1 = new Pedido("none");
+        Pedido p1 = new Pedido(null);
         p1.getEncomiendas().add(enc1);
         p1.getEncomiendas().add(enc2);
         
@@ -78,10 +74,10 @@ public class Main extends Application {
         Camion c2 = new Camion("CharlieII", 20, true,"Normal");
         Camion c3 = new Camion("Arnold", 5, true,"Refrigerado");
         Camion c4 = new Camion("Aleph", 5, true,"Radioactivo");
-        emp.getcamiones().add(c1);
+        /*emp.getcamiones().add(c1);
         emp.getcamiones().add(c2);
         emp.getcamiones().add(c3);
-        emp.getcamiones().add(c4);
+        emp.getcamiones().add(c4);*/
         s1.getCamionesEstacionados().add(c1);
         s1.getCamionesEstacionados().add(c2);
         s1.getCamionesEstacionados().add(c3);
@@ -96,8 +92,8 @@ public class Main extends Application {
         
        
         postRef = emp.fbRef().child("encomiendas");
-        newPostRef = postRef.push(); enc1.setId(newPostRef.getKey()); newPostRef.setValue(enc1);
-        newPostRef = postRef.push(); enc2.setId(newPostRef.getKey()); newPostRef.setValue(enc2);
+        newPostRef = postRef.push(); String id1 = newPostRef.getKey(); enc1.setId(id1); newPostRef.setValue(enc1);
+        newPostRef = postRef.push(); String id2 = newPostRef.getKey(); enc2.setId(id2); newPostRef.setValue(enc2);
         
         postRef = emp.fbRef().child("camiones");
         newPostRef = postRef.child(c1.getNombre()); newPostRef.setValue(c1);

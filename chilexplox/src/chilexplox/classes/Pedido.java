@@ -28,7 +28,7 @@ public class Pedido {
     {return this.id;}
     public void setId(String sId)
     {
-        if (this.id == "none")
+        if (this.id == null)
         {
             this.id = sId;
         }

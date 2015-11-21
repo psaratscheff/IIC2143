@@ -17,6 +17,16 @@ public class Encomienda {
 
     public Encomienda() {} // Constructor vacío para Firebase
     
+    public Encomienda(String estado, String prioridad, int tamaño, String sucursalOrigen, String sucursalDestino, String tipo)
+    {
+        this.estado = estado;
+        this.prioridad = prioridad;
+        this.tamaño = tamaño;
+        this.id = null;
+        this.sucursalDestino = sucursalDestino;
+        this.sucursalOrigen = sucursalOrigen;
+        this.tipo=tipo;
+    }
     public Encomienda(String estado, String prioridad, int tamaño, String id, String sucursalOrigen, String sucursalDestino, String tipo)
     {
         this.estado = estado;
@@ -41,7 +51,7 @@ public class Encomienda {
     {return id;}
     public void setId(String sId)
     {
-        if (this.id == "none")
+        if (this.id == null)
         {
             this.id = sId;
         }
