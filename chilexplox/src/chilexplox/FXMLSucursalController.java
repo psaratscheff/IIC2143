@@ -135,6 +135,8 @@ public class FXMLSucursalController implements Initializable {
         VerPedidosRecibidos.setVisible(false);
     }
     
+    
+    
     public void UpdateConSucursal(){
         // CARGAR ENCOMIENDAS
         EncomiendasEnSucursal.getItems().clear();
@@ -222,7 +224,7 @@ public class FXMLSucursalController implements Initializable {
         Encomienda encomienda = null;
         try
         {
-            encomienda = emp.getsucursalactual().getEncomienda(Integer.parseInt(encomiendaID));
+            encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
         } 
         catch (Exception e)
         {
@@ -274,7 +276,7 @@ public class FXMLSucursalController implements Initializable {
         Encomienda encomienda = null;
         try
         {
-            encomienda = emp.getsucursalactual().getEncomienda(Integer.parseInt(encomiendaID));
+            encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
         } 
         catch (Exception e)
         {
@@ -456,7 +458,7 @@ public class FXMLSucursalController implements Initializable {
         Encomienda encomienda = null;
         try
         {
-            encomienda = emp.getsucursalactual().getEncomienda(Integer.parseInt(encomiendaID));
+            encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
         } 
         catch (Exception e)
         {
@@ -473,7 +475,7 @@ public class FXMLSucursalController implements Initializable {
         Camion camion = ChoiceBoxCamiones.getValue();
         for(Encomienda en: camion.getlistencomiendas())
         {
-            if (en.getid() == Integer.parseInt(encomiendaID)) 
+            if (en.getid() == encomiendaID) 
             {
                 encomienda = en;
             }
@@ -538,7 +540,7 @@ public class FXMLSucursalController implements Initializable {
         Encomienda encomienda = null;
         try
         {
-            encomienda = emp.getsucursalactual().getEncomienda(Integer.parseInt(encomiendaID));
+            encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
             
         } 
         catch (Exception e)
@@ -582,7 +584,7 @@ public class FXMLSucursalController implements Initializable {
         {
             String encomiendaID = EncomiendasEnSucursal.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
             Encomienda encomienda = null;
-            encomienda = emp.getsucursalactual().getEncomienda(Integer.parseInt(encomiendaID));
+            encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
             if (emp.getsucursalactual() == encomienda.getorigen()) 
             {
                 emp.setencomiendatemporal(encomienda);

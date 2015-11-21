@@ -214,7 +214,7 @@ public class FXMLfbSucursalController implements Initializable {
             System.out.println("ERROR 101: " + e.toString());
         }
     }
-    
+    /*
     @FXML
     private void EntregarEncomiendaAction(){
         String enco = EncomiendasRecibidas.getSelectionModel().getSelectedItem();
@@ -231,7 +231,7 @@ public class FXMLfbSucursalController implements Initializable {
         emp.getsucursalactual().getencomiendasrecibidas().remove(encomienda);
         EncomiendasRecibidas.getItems().remove(enco);
     }
-    
+    */
     @FXML
     private void RefreshProgressBarAction(){
        
@@ -267,7 +267,7 @@ public class FXMLfbSucursalController implements Initializable {
         ErrorLabelSucursal.setText("");
         LabelSucursal.setText(emp.getsucursalactual().getdireccion());
     }
-    
+    /*
     @FXML
     private void CargarCamionAction() throws IOException{
         String encomiendaID = EncomiendasEnSucursal.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
@@ -352,7 +352,7 @@ public class FXMLfbSucursalController implements Initializable {
             System.out.println("ERROR: " + e.toString());
         }
     }
-    
+    */
     @FXML
     private void EnviarCamionAction() throws IOException{
         // Obtener Camion a Enviar
@@ -449,7 +449,7 @@ public class FXMLfbSucursalController implements Initializable {
             EncomiendasRecibidas.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion());
         }
     }
-    
+    /*
     @FXML
     private void NotificarErrorAction() throws IOException{
         String encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
@@ -465,7 +465,7 @@ public class FXMLfbSucursalController implements Initializable {
         String mensaje = "Se ha detectado error en la encomienda ID #"+encomienda.getid()+"#";
         emp.getempleadoactual().EnviarMensaje(encomienda.getorigen(), mensaje, true);
     }
-    
+    *//*
     @FXML
     private void QuitarEncomiendaCamionAction() throws IOException{
         String encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
@@ -531,7 +531,7 @@ public class FXMLfbSucursalController implements Initializable {
             }
         }
     }
-    
+    *//*
     @FXML
     private void PasarAColaAction() throws IOException{
         String encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
@@ -575,7 +575,7 @@ public class FXMLfbSucursalController implements Initializable {
             EncomiendasRecibidas.getItems().add("["+en.getprioridad()+"]" + "(" + en.getestado() +")" + "// " + "ID: #" + en.getid() + "# Destino: " + en.getdestino().getdireccion());
         }   
     }
-    /*
+    *//*
     @FXML
     private void ModificarPedidoAction() throws IOException{
         try

@@ -49,7 +49,7 @@ public class Sucursal {
     }
 
   
-    public Encomienda getEncomienda(int id)
+    public Encomienda getEncomienda(String id)
     {
         for (Encomienda e: encomiendasAlmacenadas)
         {
