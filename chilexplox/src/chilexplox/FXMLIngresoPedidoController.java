@@ -147,7 +147,7 @@ public class FXMLIngresoPedidoController implements Initializable {
             if (editando == true) 
             {
                 String id = EditarID.getText().split("#")[1];
-                for (Encomienda en: pedido.getencomiendas()) 
+                for (Encomienda en: pedido.getEncomiendas()) 
                 {
                     if (en.getId() == id) 
                     {

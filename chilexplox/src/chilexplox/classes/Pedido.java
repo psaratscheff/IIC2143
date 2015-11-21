@@ -9,14 +9,31 @@ public class Pedido {
     private List<Encomienda> encomiendas;
     private String id;
     
+    public Pedido() // Constructor vacío para Firebase
+    {
+        //Inicializo los arrays para poder agregar valores
+        encomiendas= new ArrayList<Encomienda>() {};
+    }
+    
     public Pedido(String identificador)
     {
         id=identificador;
         //Inicializo los arrays para poder agregar valores
         encomiendas= new ArrayList<Encomienda>() {};
     }
-    public List<Encomienda> getencomiendas()
+    
+    public List<Encomienda> getEncomiendas()
     {return encomiendas;}
+    public String getId()
+    {return this.id;}
+    public void setId(String sId)
+    {
+        if (this.id == "none")
+        {
+            this.id = sId;
+        }
+    }
+    
     public void addencomienda(Encomienda encomienda)
     { encomiendas.add(encomienda);}
     public void removeencomienda(Encomienda encomienda)

@@ -37,8 +37,15 @@ public class Encomienda {
     {return direccionDestino;}
     public int getTamaño()
     {return tamaño;}
-    public String getId() // mmmmmmmmm
+    public String getId()
     {return id;}
+    public void setId(String sId)
+    {
+        if (this.id == "none")
+        {
+            this.id = sId;
+        }
+    }
     public int getLargo()
     {return largo;}
     public int getAncho()

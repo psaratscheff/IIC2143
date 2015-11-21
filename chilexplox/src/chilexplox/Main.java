@@ -22,6 +22,7 @@ import com.firebase.client.ValueEventListener;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Ingreso;
 import chilexplox.classes.Mensaje;
+import chilexplox.classes.Pedido;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
@@ -64,10 +65,14 @@ public class Main extends Application {
         Boss b= new Boss("Berni","Ljubetic","3","3");
         emp.getjefes().add(b);
         
-        Encomienda enc1 = new Encomienda("Normal","Urgente",1,"1",s1.getDireccion(),s2.getDireccion(),"Normal");
-        Encomienda enc2 = new Encomienda("Normal","Urgente",1,"2",s1.getDireccion(),s2.getDireccion(),"Normal");
+        Encomienda enc1 = new Encomienda("Normal","Urgente",1,"none",s1.getDireccion(),s2.getDireccion(),"Normal");
+        Encomienda enc2 = new Encomienda("Normal","Urgente",1,"none",s1.getDireccion(),s2.getDireccion(),"Normal");
         s1.getEncomiendasAlmacenadas().add(enc1);
         s1.getEncomiendasAlmacenadas().add(enc2);
+        
+        Pedido p1 = new Pedido("none");
+        p1.getEncomiendas().add(enc1);
+        p1.getEncomiendas().add(enc2);
         
         Camion c1 = new Camion("Charlie", 10, true,"Normal");
         Camion c2 = new Camion("CharlieII", 20, true,"Normal");
@@ -88,6 +93,11 @@ public class Main extends Application {
         // Cargar información a la base de datos
         Firebase postRef;
         Firebase newPostRef;
+        
+       
+        postRef = emp.fbRef().child("encomiendas");
+        newPostRef = postRef.push(); enc1.setId(newPostRef.getKey()); newPostRef.setValue(enc1);
+        newPostRef = postRef.push(); enc2.setId(newPostRef.getKey()); newPostRef.setValue(enc2);
         
         postRef = emp.fbRef().child("camiones");
         newPostRef = postRef.child(c1.getNombre()); newPostRef.setValue(c1);
@@ -113,6 +123,9 @@ public class Main extends Application {
         
         postRef = emp.fbRef().child("empleados");
         newPostRef = postRef.child(e.getUsername()); newPostRef.setValue(e);
+        
+        postRef = emp.fbRef().child("pedidos");
+        newPostRef = postRef.push(); p1.setId(newPostRef.getKey()); newPostRef.setValue(p1);
         
         // Para verificar escrituras válidas (Leíbles por código)
         postRef = emp.fbRef().child("empleados");
