@@ -50,13 +50,13 @@ public class Main extends Application {
         
         
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s1.getDireccion());
-        emp.AddEmpleado(e);
+        //emp.AddEmpleado(e);
         
         Cliente c = new Cliente("Pedro","S","Lejos","2","2");
-        emp.AddCliente(c);
+        //emp.AddCliente(c);
         
         Boss b= new Boss("Berni","Ljubetic","3","3");
-        emp.getjefes().add(b);
+        //emp.getjefes().add(b);
         
         Encomienda enc1 = new Encomienda("Normal","Urgente",1,s2.getDireccion(),s3.getDireccion(),"Normal");
         Encomienda enc2 = new Encomienda("Normal","Urgente",1,s2.getDireccion(),s4.getDireccion(),"Normal");

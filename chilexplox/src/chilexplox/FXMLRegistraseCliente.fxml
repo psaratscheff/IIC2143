@@ -25,10 +25,10 @@
          </Label>
       <Label layoutX="55.0" layoutY="245.0" text="Username:" />
       <Label layoutX="54.0" layoutY="290.0" text="Clave:" />
-      <TextField fx:id="TextFieldUsername" layoutX="179.0" layoutY="240.0" prefHeight="31.0" prefWidth="192.0" />
-      <TextField fx:id="TextFieldClave" layoutX="179.0" layoutY="285.0" prefHeight="31.0" prefWidth="192.0" />
-      <TextField fx:id="TextFieldClave2" layoutX="179.0" layoutY="326.0" prefHeight="31.0" prefWidth="192.0" />
+      <TextField fx:id="CUsername" layoutX="179.0" layoutY="240.0" prefHeight="31.0" prefWidth="192.0" />
+      <PasswordField fx:id="CClave" layoutX="179.0" layoutY="285.0" prefHeight="31.0" prefWidth="192.0" />
+      <PasswordField fx:id="CClave2" layoutX="179.0" layoutY="326.0" prefHeight="31.0" prefWidth="192.0" />
       <Label layoutX="55.0" layoutY="331.0" text="Repita su clave:" />
-      <Button fx:id="ButtonRegistrarme"  layoutX="161.0" layoutY="373.0" mnemonicParsing="false" text="Registrarme" />
+      <Button fx:id="ButtonRegistrarme"  layoutX="161.0" layoutY="373.0" mnemonicParsing="false" text="Registrarme" onMouseClicked="#btnRegistrarmeAction" />
    </children>
 </AnchorPane>

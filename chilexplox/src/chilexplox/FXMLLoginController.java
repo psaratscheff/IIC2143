@@ -20,6 +20,10 @@ import javafx.scene.input.MouseEvent;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Empleado;
 import chilexplox.classes.Sucursal;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,20 +50,84 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private Label ErrorLabel;
 
+    List<Empleado> empleados= new ArrayList();
+    List<Cliente> clientes= new ArrayList();
+    List<Boss> jefes= new ArrayList();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        Firebase postRef;
+        Firebase newPostRef;
+        postRef = emp.fbRef().child("empleados");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+                  //System.out.println(snapshot);
+                  Empleado post = snapshot.getValue(Empleado.class);
+                  //System.out.println("Mensaje:" + post.toString());
+                  empleados.add(post);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
+        });
+        postRef = emp.fbRef().child("jefes");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+                  //System.out.println(snapshot);
+                  Boss post = snapshot.getValue(Boss.class);
+                  //System.out.println("Mensaje:" + post.toString());
+                  jefes.add(post);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
+        });
+        
+        postRef = emp.fbRef().child("clientes");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+                  //System.out.println(snapshot);
+                  Cliente post = snapshot.getValue(Cliente.class);
+                  //System.out.println("Mensaje:" + post.toString());
+                  clientes.add(post);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
+        });
     }    
-
+//tengo que hacer array de usuario en el initialice desde sucursla controler 
     @FXML
     private void btnLoginAction(MouseEvent event) throws IOException 
     {
         String pass = password.getText();
         String user = username.getText();
-        for (Empleado e: emp.getempleados()) 
+        for (Empleado e: empleados) 
         {
             if (pass.equals(e.getPassword()) & user.equals(e.getUsername())) 
             {
@@ -74,7 +142,7 @@ public class FXMLLoginController implements Initializable {
             } 
             
         }
-        for (Cliente c: emp.getclientes())
+        for (Cliente c: clientes)
         {
          if (pass.equals(c.getPassword()) & user.equals(c.getUsuario())) 
             {
@@ -89,8 +157,9 @@ public class FXMLLoginController implements Initializable {
             } 
         }
         
-        for (Boss b: emp.getjefes())
+        for (Boss b: jefes)
         {
+            
          if (pass.equals(b.getPassword()) & user.equals(b.getUsername())) 
             {
                 
@@ -104,6 +173,16 @@ public class FXMLLoginController implements Initializable {
             } 
         }
         ErrorLabel.setText("Usuario o contraseña incorrectos");
+    }
+    @FXML
+    private void btnRegistrarseAction(MouseEvent event) throws IOException 
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLRegistraseCliente.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));  
+                stage.show();
+       
     }
     
 }

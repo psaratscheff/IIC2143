@@ -21,7 +21,7 @@
       <Label id="label1" layoutX="98.0" layoutY="110.0" text="Username" />
       <Label fx:id="ErrorLabel" layoutX="262.0" layoutY="278.0" textFill="RED" />
       <Button id="button1" fx:id="login" defaultButton="true" layoutX="101.0" layoutY="289.0" onMouseClicked="#btnLoginAction" prefHeight="70.0" prefWidth="400.0" text="Login" />
-      <Button fx:id="Bottonregistrarse" layoutX="262.0" layoutY="378.0" mnemonicParsing="false" text="aqui!" />
+      <Button fx:id="Bottonregistrarse" layoutX="262.0" layoutY="378.0" mnemonicParsing="false" text="aqui!" onMouseClicked="#btnRegistrarseAction" />
       <Label layoutX="187.0" layoutY="383.0" prefHeight="21.0" prefWidth="102.0" text="Registrarse" />
    </children>
 </AnchorPane>
