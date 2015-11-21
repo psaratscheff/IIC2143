@@ -64,7 +64,7 @@ public class FXMLLoginController implements Initializable {
             {
                 
                 emp.setempleadoactual(e) ; //Seteo el usuario que se logró loguear
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLSucursal.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLfbSucursal.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));  
