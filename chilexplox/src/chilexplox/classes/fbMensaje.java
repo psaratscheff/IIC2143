@@ -15,7 +15,7 @@ public class fbMensaje {
     { return contenido; }
     
     /**
-     * Retorna String pedido junto al id del pedido
+     * Retorna el mensaje con [URGENTE] al inicio en caso de ser urgente
      * @return String
      */
     @Override
