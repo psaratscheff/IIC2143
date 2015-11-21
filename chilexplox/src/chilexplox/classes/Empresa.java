@@ -163,7 +163,7 @@ public class Empresa {
     {
         for(Cliente c: clientes)
         {
-        if (c.getrut()==rut)
+        if (c.getRut()==rut)
         {
         return c;
         }

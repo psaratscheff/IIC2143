@@ -55,7 +55,7 @@ public class Main extends Application {
         emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"1",s,s,"Normal")); 
         emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"2",s,s,"Normal"));*/ 
         
-        Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s1);
+        Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s1.getDireccion());
         emp.AddEmpleado(e);
         
         Cliente c = new Cliente("Pedro","S","Lejos","2","2");
@@ -105,16 +105,23 @@ public class Main extends Application {
         postRef = emp.fbRef().child("ingresos");
         newPostRef = postRef.push(); newPostRef.setValue(i1);
         
+        postRef = emp.fbRef().child("clientes");
+        newPostRef = postRef.child(c.getUsuario()); newPostRef.setValue(c);
         
+        postRef = emp.fbRef().child("jefes");
+        newPostRef = postRef.child(b.getUsername()); newPostRef.setValue(b);
+        
+        postRef = emp.fbRef().child("empleados");
+        newPostRef = postRef.child(e.getUsername()); newPostRef.setValue(e);
         
         // Para verificar escrituras válidas (Leíbles por código)
-        postRef = emp.fbRef().child("sucursales");
+        postRef = emp.fbRef().child("empleados");
         postRef.addChildEventListener(new ChildEventListener() {
             // Retrieve new posts as they are added to the database
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
                   System.out.println(snapshot);
-                  Sucursal post = snapshot.getValue(Sucursal.class);
+                  Empleado post = snapshot.getValue(Empleado.class);
                   System.out.println("Mensaje:" + post.toString());
             }
             @Override

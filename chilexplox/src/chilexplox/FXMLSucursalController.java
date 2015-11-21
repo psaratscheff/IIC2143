@@ -121,7 +121,7 @@ public class FXMLSucursalController implements Initializable {
         // Get singleton empresa
         emp = Empresa.getInstance();
         // Set welcome message
-        String bienvenida = "Hola, " + emp.getempleadoactual().getnombre();
+        String bienvenida = "Hola, " + emp.getempleadoactual().getNombre();
         LabelNombreTrabajador.setText(bienvenida);
         // Update sucursales
         for (Sucursal s: emp.getsucursales()) 

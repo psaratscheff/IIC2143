@@ -61,7 +61,7 @@ public class FXMLLoginController implements Initializable {
         String user = username.getText();
         for (Empleado e: emp.getempleados()) 
         {
-            if (pass.equals(e.getpassword()) & user.equals(e.getusername())) 
+            if (pass.equals(e.getPassword()) & user.equals(e.getUsername())) 
             {
                 
                 emp.setempleadoactual(e) ; //Seteo el usuario que se logró loguear
@@ -76,7 +76,7 @@ public class FXMLLoginController implements Initializable {
         }
         for (Cliente c: emp.getclientes())
         {
-         if (pass.equals(c.getpasswordcliente()) & user.equals(c.getusercliente())) 
+         if (pass.equals(c.getPassword()) & user.equals(c.getUsuario())) 
             {
                 
                 emp.setclienteactual(c) ; //Seteo el usuario que se logró loguear
@@ -91,7 +91,7 @@ public class FXMLLoginController implements Initializable {
         
         for (Boss b: emp.getjefes())
         {
-         if (pass.equals(b.getpassword()) & user.equals(b.getusername())) 
+         if (pass.equals(b.getPassword()) & user.equals(b.getUsername())) 
             {
                 
                 emp.setjefeactual(b) ; //Seteo el usuario que se logró loguear

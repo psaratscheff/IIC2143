@@ -82,7 +82,7 @@ public class FXMLBossController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         emp = Empresa.getInstance();
-        String bienvenida = "Hola, estimad@  " + emp.getjefeactual().getnombre();
+        String bienvenida = "Hola, estimad@  " + emp.getjefeactual().getNombre();
         LabelNombreJefe.setText(bienvenida);
         for (Sucursal s: emp.getsucursales()) 
         {

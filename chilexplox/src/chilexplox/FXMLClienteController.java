@@ -74,7 +74,7 @@ public class FXMLClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         emp = Empresa.getInstance();
-        String bienvenida = "Hola, " + emp.getclienteactual().getnombre();
+        String bienvenida = "Hola, " + emp.getclienteactual().getNombre();
         LabelNombreTrabajador.setText(bienvenida);
     }
     
