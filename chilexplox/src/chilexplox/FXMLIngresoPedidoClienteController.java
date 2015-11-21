@@ -143,7 +143,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                 String destino = EDestino.getValue();
                 String  origen = EOrigen.getValue();
                 String tipo= ETipo.getValue();
-                Sucursal sucursalorigen= emp.getsucursalcondir(origen);
+                Sucursal sucursalorigen= emp.getSucursalConDireccion(origen);
                 for(Sucursal s: emp.getsucursales())
                     {
                         if (s.getDireccion()== destino) 
@@ -154,7 +154,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                             en.setpeso(Integer.parseInt(EPeso.getText()));
                             en.setdirecciondestino(EDireccion.getText());
                             pedido.addencomienda(en);
-                            ListEncomiendas.getItems().add("ID: "+"#"+en.getId()+"#"+" Destino: "+emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
+                            ListEncomiendas.getItems().add("ID: "+"#"+en.getId()+"#"+" Destino: "+emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
                             int asd = pedido.CalcularValor();
                             String precio= Integer.toString(asd);
                             TotalPedido.setText("Total: $"+precio);
@@ -184,7 +184,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                                 wn.setpeso(Integer.parseInt(EPeso.getText()));
                                 wn.setdirecciondestino(EDireccion.getText());
                                 pedido.addencomienda(wn);
-                                ListEncomiendas.getItems().add("ID: "+"#"+wn.getId()+"#"+" Destino: "+emp.getsucursalcondir(wn.getSucursalDestino()).getDireccion());
+                                ListEncomiendas.getItems().add("ID: "+"#"+wn.getId()+"#"+" Destino: "+emp.getSucursalConDireccion(wn.getSucursalDestino()).getDireccion());
                                 int asd = pedido.CalcularValor();
                                 String precio= Integer.toString(asd);
                                 TotalPedido.setText("Total: $"+precio);

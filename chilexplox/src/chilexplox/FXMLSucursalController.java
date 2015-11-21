@@ -33,6 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import ciruman.EllipsisListCell;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -124,16 +125,56 @@ public class FXMLSucursalController implements Initializable {
         String bienvenida = "Hola, " + emp.getempleadoactual().getNombre();
         LabelNombreTrabajador.setText(bienvenida);
         // Update sucursales
-        for (Sucursal s: emp.getsucursales()) 
+        /*for (Sucursal s: emp.getsucursales()) 
         {
             ChoiceBoxSucursales.getItems().add(s);
             ChoiceBoxDestinoCamiones.getItems().add(s);
-        }
+        }/**/
+        LoadSucursales();
         // Ocultar botones deshabilitados
         QuitarEncomiendaCamion.setVisible(false);
         VerPedidosRecibidos.setVisible(false);
     }
     
+    // Métodos privados para cargar información
+   private void LoadSucursales()
+   {Firebase sucursalesRef = emp.fbRef().child("sucursales");
+        sucursalesRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
+                    Sucursal post = ds.getValue(Sucursal.class);
+                    System.out.println("Sucursal:" + post.toString());
+                  
+                    ChoiceBoxSucursales.getItems().add(post);
+                    ChoiceBoxDestinoCamiones.getItems().add(post);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {
+                // Elimino la versión antigua
+                //sucursales.remove(getSucursalConDireccion(string));
+                // Agrego la versión nueva
+                Sucursal post = ds.getValue(Sucursal.class);
+                //sucursales.add(post);
+                  System.out.println("BBSucursal:" + post.toString());
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {
+                Sucursal post = ds.getValue(Sucursal.class);
+                System.out.println("Sucursal REMOVIDA:" + post.toString());
+                  
+                //sucursales.remove(post);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {
+                // Who cares... (No se requiere hacer nada)
+            }
+            @Override
+            public void onCancelled(FirebaseError fe) {
+                System.out.println("ERROR FB-101:" + fe.getMessage());
+            }
+        });/**/
+   }
     
     
     public void UpdateConSucursal(){
@@ -146,7 +187,7 @@ public class FXMLSucursalController implements Initializable {
             {
                 boolurgencia = true;
             }
-            EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
+            EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
         }
         if (boolurgencia == false) 
         {
@@ -162,7 +203,7 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasRecibidas.getItems().clear();
         for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
         {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
+            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
         }
         // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
         ListMessagesPreview.getItems().clear();
@@ -312,7 +353,7 @@ public class FXMLSucursalController implements Initializable {
                     {
                         boolurgencia = true;
                     }
-                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
+                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
                 }
                 if (boolurgencia == false) 
                 {
@@ -434,7 +475,7 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasRecibidas.getItems().clear();
         for(Encomienda en: camion.getEncomiendas())
         {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
+            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
         }
     }
     
@@ -449,7 +490,7 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasRecibidas.getItems().clear();
         for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
         {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
+            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
         }
     }
     
@@ -466,7 +507,7 @@ public class FXMLSucursalController implements Initializable {
             return; //Nada
         }
         String mensaje = "Se ha detectado error en la encomienda ID #"+encomienda.getId()+"#";
-        emp.getempleadoactual().EnviarMensaje(emp.getsucursalcondir(encomienda.getSucursalOrigen()), mensaje, true);
+        emp.getempleadoactual().EnviarMensaje(emp.getSucursalConDireccion(encomienda.getSucursalOrigen()), mensaje, true);
     }
     
     @FXML
@@ -499,7 +540,7 @@ public class FXMLSucursalController implements Initializable {
                 {
                     boolurgencia = true;
                 }
-                EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
+                EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
             }
             if (boolurgencia == false) 
             {
@@ -514,7 +555,7 @@ public class FXMLSucursalController implements Initializable {
             EncomiendasRecibidas.getItems().clear();
             for(Encomienda en: camion.getEncomiendas())
             {
-                EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
+                EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
             }
             //Actualizar capacidad
             espacioCamion = camion.PorcentajeDisponible();
@@ -548,7 +589,7 @@ public class FXMLSucursalController implements Initializable {
         {
             return; //Nada
         }
-        EncomiendasEnSucursal.getItems().add("["+encomienda.getPrioridad()+"]" + "(" + encomienda.getEstado() +")" + "// " + "ID: #" + encomienda.getId() + "# Destino: " + emp.getsucursalcondir(encomienda.getSucursalDestino()).getDireccion()+" Tipo: "+encomienda.getTipo());
+        EncomiendasEnSucursal.getItems().add("["+encomienda.getPrioridad()+"]" + "(" + encomienda.getEstado() +")" + "// " + "ID: #" + encomienda.getId() + "# Destino: " + emp.getSucursalConDireccion(encomienda.getSucursalDestino()).getDireccion()+" Tipo: "+encomienda.getTipo());
         emp.getsucursalactual().getEncomiendasAlmacenadas().add(encomienda);
         emp.getsucursalactual().getEncomiendasRecibidas().remove(encomienda);
         //Recargar Encomiendas
@@ -560,7 +601,7 @@ public class FXMLSucursalController implements Initializable {
             {
                 boolurgencia = true;
             }
-            EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion()+" Tipo: "+encomienda.getTipo());
+            EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+encomienda.getTipo());
         }
         if (boolurgencia == false) 
         {
@@ -575,7 +616,7 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasRecibidas.getItems().clear();
         for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
         {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getsucursalcondir(en.getSucursalDestino()).getDireccion());
+            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
         }   
     }
     
@@ -586,7 +627,7 @@ public class FXMLSucursalController implements Initializable {
             String encomiendaID = EncomiendasEnSucursal.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
             Encomienda encomienda = null;
             encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
-            if (emp.getsucursalactual() == emp.getsucursalcondir(encomienda.getSucursalOrigen())) 
+            if (emp.getsucursalactual() == emp.getSucursalConDireccion(encomienda.getSucursalOrigen())) 
             {
                 emp.setencomiendatemporal(encomienda);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLModificarPedido.fxml"));
@@ -597,7 +638,7 @@ public class FXMLSucursalController implements Initializable {
                 stage.setScene(new Scene(root));  
                 stage.show();
             }
-            if(emp.getsucursalactual() != emp.getsucursalcondir(encomienda.getSucursalOrigen()))
+            if(emp.getsucursalactual() != emp.getSucursalConDireccion(encomienda.getSucursalOrigen()))
             {
                 MessageBox mb = new MessageBox("Solo se puede editar desde la sucursal de origen!", MessageBoxType.OK_CANCEL);
                 mb.showAndWait();

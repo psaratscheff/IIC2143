@@ -15,17 +15,21 @@ public class Cliente {
     private String sucursalRegistrada;
     private List<Pedido> pedidosRealizados;
 
-    public Cliente() {} // Constructor vacío para Firebase
+    public Cliente() // Constructor vacío para Firebase
+    {
+        //Inicializo los arrays para poder agregar valores
+        this.pedidosRealizados = new ArrayList();
+    }
 
     public Cliente(String nombre, String apellido, String direccion, String user, String pass)
     {
-      this.nombre = nombre;
-      this.usuario=user;
-      this.password=pass;
-      this.apellido = apellido;
-      this.direccion = direccion;
-      //Inicializo los arrays para poder agregar valores
-      this.pedidosRealizados = new ArrayList();
+        this.nombre = nombre;
+        this.usuario=user;
+        this.password=pass;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        //Inicializo los arrays para poder agregar valores
+        this.pedidosRealizados = new ArrayList();
     }
     public String getRut()
     {return rut;}

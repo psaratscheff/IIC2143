@@ -12,7 +12,11 @@ public class Camion {
     private List<Encomienda> encomiendas;
     private boolean disponibilidad;
 
-    public Camion() {} // Constructor vacío para Firebase
+    public Camion() // Constructor vacío para Firebase
+    {
+        //Inicializo los arrays para poder agregar valores
+        this.encomiendas = new ArrayList();
+    }
 
     public Camion(String n, int cap, boolean disp,String tip)
     {

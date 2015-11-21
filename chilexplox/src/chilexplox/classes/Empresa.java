@@ -5,7 +5,10 @@
  */
 package chilexplox.classes;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,15 +49,70 @@ public class Empresa {
     
     public Empresa()
     {
-        //Inicializo los arrays para poder agregar valores
-        this.sucursales = new ArrayList();
-        this.camiones = new ArrayList();
-        this.clientes = new ArrayList();
-        this.encomiendas = new ArrayList();
-        this.empleados = new ArrayList();
         this.dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        this.ingresos = new ArrayList();
+        
+        //---------- SUCURSALES -----------
+        this.sucursales = new ArrayList();
+        /*Firebase sucursalesRef = fbRef().child("sucursales");
+        sucursalesRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
+                  Sucursal post = ds.getValue(Sucursal.class);
+                  System.out.println("Sucursal:" + post.toString());
+                  
+                  sucursales.add(post);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {
+                // Elimino la versión antigua
+                //sucursales.remove(getSucursalConDireccion(string));
+                // Agrego la versión nueva
+                Sucursal post = ds.getValue(Sucursal.class);
+                //sucursales.add(post);
+                  System.out.println("BBSucursal:" + post.toString());
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {
+                Sucursal post = ds.getValue(Sucursal.class);
+                System.out.println("Sucursal REMOVIDA:" + post.toString());
+                  
+                //sucursales.remove(post);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {
+                // Who cares... (No se requiere hacer nada)
+            }
+            @Override
+            public void onCancelled(FirebaseError fe) {
+                System.out.println("ERROR FB-101:" + fe.getMessage());
+            }
+        });/**/
+        
+        //---------- CAMIONES -----------
+        this.camiones = new ArrayList();
+        
+        
+        //---------- EMPLEADOS -----------
+        this.empleados = new ArrayList();
+        
+        
+        //---------- CLIENTES -----------
+        this.clientes = new ArrayList();
+        
+        
+        //---------- JEFES -----------
         this.jefes = new ArrayList();
+        
+        
+        //---------- ENCOMIENDAS -----------
+        this.encomiendas = new ArrayList();
+        
+        
+        //---------- INGRESOS -----------
+        this.ingresos = new ArrayList();
+        
+        
     }
     
     /**
@@ -118,7 +176,7 @@ public class Empresa {
         } 
         return temp;
     }
-    public Sucursal getsucursalcondir(String direccion)
+    public Sucursal getSucursalConDireccion(String direccion)
     {
         for (Sucursal s: sucursales) 
         {

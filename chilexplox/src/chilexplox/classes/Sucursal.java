@@ -16,7 +16,16 @@ public class Sucursal {
     private List<Encomienda> encomiendasAlmacenadas;
     private List<Encomienda> encomiendasRecibidas;
     
-    public Sucursal() {} // Constructor vacío para FireBase
+    public Sucursal() // Constructor vacío para FireBase
+    {
+      //Inicializo los arrays para poder agregar valores
+      this.encomiendasAlmacenadas = new ArrayList();
+      this.mensajesRecibidos = new ArrayList();
+      this.trabajadores = new ArrayList();
+      this.camionesEstacionados = new ArrayList();
+      this.clientesRegistrados = new ArrayList();
+      this.encomiendasRecibidas = new ArrayList();
+    }
 
     public Sucursal(String direccion, int capacidad)
     {
