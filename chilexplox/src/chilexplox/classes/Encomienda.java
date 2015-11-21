@@ -37,7 +37,7 @@ public class Encomienda {
     {return direccionDestino;}
     public int getTamaño()
     {return tamaño;}
-    public String getId()
+    public String getId() // mmmmmmmmm
     {return id;}
     public int getLargo()
     {return largo;}
@@ -45,15 +45,15 @@ public class Encomienda {
     {return ancho;}
     public int getPeso()
     {return peso;}
-    public String getDestino()
+    public String getSucursalDestino()
     {return sucursalDestino;}
-    public String getOrigen()
+    public String getSucursalOrigen()
     {return sucursalOrigen;}
     public String getDestinatario()
     {return destinatario;}
     public String getTipo()
     {return tipo;}
-    
+    /*
     public void setdestino(String sucursal)
     {sucursalDestino=sucursal;}
     public void settamaño(Integer tam)
@@ -69,6 +69,6 @@ public class Encomienda {
     public int setancho(int an)
     {return ancho = an;}
     public int setpeso(int pes)
-    {return peso = pes;}
+    {return peso = pes;}*/
 
 }
