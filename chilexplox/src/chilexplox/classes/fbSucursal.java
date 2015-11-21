@@ -14,9 +14,9 @@ public class fbSucursal {
     }
     
     public String getDireccion()
-    {return direccion;}
+    { return direccion; }
     public String getCapacidad()
-    {return capacidad;}
+    { return capacidad; }
     
     /**
      * Retorna el nombre de la sucursal (Su direccion)
