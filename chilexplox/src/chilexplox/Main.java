@@ -89,10 +89,10 @@ public class Main extends Application {
         newPostRef = postRef.push(); String id2 = newPostRef.getKey(); enc2.setId(id2); newPostRef.setValue(enc2);
         
         postRef = emp.fbRef().child("camiones");
-        newPostRef = postRef.child(c1.getNombre()); newPostRef.setValue(c1);
-        newPostRef = postRef.child(c2.getNombre()); newPostRef.setValue(c2);
-        newPostRef = postRef.child(c3.getNombre()); newPostRef.setValue(c3);
-        newPostRef = postRef.child(c4.getNombre()); newPostRef.setValue(c4);
+        newPostRef = postRef.child(c1.NombreCompleto()); newPostRef.setValue(c1);
+        newPostRef = postRef.child(c2.NombreCompleto()); newPostRef.setValue(c2);
+        newPostRef = postRef.child(c3.NombreCompleto()); newPostRef.setValue(c3);
+        newPostRef = postRef.child(c4.NombreCompleto()); newPostRef.setValue(c4);
         
         postRef = emp.fbRef().child("sucursales");
         newPostRef = postRef.child(s1.getDireccion()); newPostRef.setValue(s1);
