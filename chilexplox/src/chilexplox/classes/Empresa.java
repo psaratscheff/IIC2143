@@ -32,7 +32,9 @@ public class Empresa {
     private List<Cliente> clientes;
     private List<Encomienda> encomiendas;
     private List<Empleado> empleados;
+    private List<Boss> jefes;
     private Empleado empleadoActual;
+    private Boss jefeActual;
     private Cliente clienteActual;
     private Sucursal sucursalActual;
     private Encomienda encomiendaTemporal;
@@ -51,6 +53,7 @@ public class Empresa {
         this.empleados = new ArrayList();
         this.dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         this.ingresos = new ArrayList();
+        this.jefes = new ArrayList();
     }
     
     /**
@@ -68,6 +71,8 @@ public class Empresa {
     {return this.dateFormat;}
     public List<Sucursal> getsucursales()
     {return sucursales;}
+    public List<Boss> getjefes()
+    {return jefes;}
     public Sucursal getsucursalactual()
     {return sucursalActual;}
     public void setsucursalactual(Sucursal sucursal)
@@ -82,10 +87,14 @@ public class Empresa {
     {return clientes;}
     public Empleado getempleadoactual()
     {return empleadoActual;}
+    public Boss getjefeactual()
+    {return jefeActual;}
     public Cliente getclienteactual()
     {return clienteActual;}
     public void setempleadoactual(Empleado empleado)
     {empleadoActual=empleado;}
+    public void setjefeactual(Boss jefe)
+    {jefeActual=jefe;}
     public void setclienteactual(Cliente cliente)
     {clienteActual=cliente;}
     public List<Encomienda> getencomiendas()
