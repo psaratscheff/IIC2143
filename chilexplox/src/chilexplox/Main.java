@@ -58,8 +58,8 @@ public class Main extends Application {
         
         Encomienda enc1 = new Encomienda("Normal","Urgente",1,"1",s1.getDireccion(),s2.getDireccion(),"Normal");
         Encomienda enc2 = new Encomienda("Normal","Urgente",1,"2",s1.getDireccion(),s2.getDireccion(),"Normal");
-        s1.getEncomiendasAlmacenadas().add(enc1);
-        s1.getEncomiendasAlmacenadas().add(enc2);
+        //s1.getEncomiendasAlmacenadas().add(enc1);
+        //s1.getEncomiendasAlmacenadas().add(enc2);
         
         Camion c1 = new Camion("Charlie", 10, true,"Normal");
         Camion c2 = new Camion("CharlieII", 20, true,"Normal");
@@ -73,6 +73,9 @@ public class Main extends Application {
         s1.getCamionesEstacionados().add(c2);
         s1.getCamionesEstacionados().add(c3);
         s1.getCamionesEstacionados().add(c4);
+        
+        Mensaje m1 = new Mensaje("AAAAAA", true);
+        s1.getMensajesRecibidos().add(m1);
         
         // Cargar información a la base de datos
         Firebase postRef;
@@ -94,14 +97,16 @@ public class Main extends Application {
         postRef = emp.fbRef().child("ingresos");
         newPostRef = postRef.push(); newPostRef.setValue(i1);
         
+        
+        
         // Para verificar escrituras válidas (Leíbles por código)
-        postRef = emp.fbRef().child("ingresos");
+        postRef = emp.fbRef().child("sucursales");
         postRef.addChildEventListener(new ChildEventListener() {
             // Retrieve new posts as they are added to the database
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
                   System.out.println(snapshot);
-                  Ingreso post = snapshot.getValue(Ingreso.class);
+                  Sucursal post = snapshot.getValue(Sucursal.class);
                   System.out.println("Mensaje:" + post.toString());
             }
             @Override

@@ -25,12 +25,12 @@ public class Ingreso {
     { return this.fecha; }
     
     /**
-     * Retorna nombre-capacidad-tipo (Sin tipo si es normal)
+     * Retorna "fecha->valor" del ingreso
      * @return String
      */
     @Override
     public String toString() {
         String s = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(this.fecha);
-        return s +":"+ this.valor;
+        return s +" ->"+ this.valor;
     }
 }
