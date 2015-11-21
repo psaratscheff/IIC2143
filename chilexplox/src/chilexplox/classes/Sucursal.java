@@ -71,14 +71,14 @@ public class Sucursal {
     {
         for (Encomienda e: encomiendasAlmacenadas)
         {
-            if (e.getId() == id)
+            if (e.getId().equals(id))
             {
                 return e;
             }
         }
         for (Encomienda e: encomiendasRecibidas)
         {
-            if (e.getId() == id)
+            if (e.getId().equals(id))
             {
                 return e;
             }

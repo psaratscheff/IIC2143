@@ -48,9 +48,6 @@ public class Main extends Application {
         Sucursal s3 = new Sucursal("Santiago",150);
         Sucursal s4 = new Sucursal("Arica",250);
         
-        /* Para que existe esa lista?!
-        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"1",s,s,"Normal")); 
-        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"2",s,s,"Normal"));*/ 
         
         Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s1.getDireccion());
         emp.AddEmpleado(e);
@@ -61,10 +58,10 @@ public class Main extends Application {
         Boss b= new Boss("Berni","Ljubetic","3","3");
         emp.getjefes().add(b);
         
-        Encomienda enc1 = new Encomienda("Normal","Urgente",1,s1.getDireccion(),s2.getDireccion(),"Normal");
-        Encomienda enc2 = new Encomienda("Normal","Urgente",1,s1.getDireccion(),s2.getDireccion(),"Normal");
-        s1.getEncomiendasAlmacenadas().add(enc1);
-        s1.getEncomiendasAlmacenadas().add(enc2);
+        Encomienda enc1 = new Encomienda("Normal","Urgente",1,s2.getDireccion(),s3.getDireccion(),"Normal");
+        Encomienda enc2 = new Encomienda("Normal","Urgente",1,s2.getDireccion(),s4.getDireccion(),"Normal");
+        s2.getEncomiendasAlmacenadas().add(enc1);
+        s2.getEncomiendasAlmacenadas().add(enc2);
         
         Pedido p1 = new Pedido(null);
         p1.getEncomiendas().add(enc1);
@@ -74,17 +71,13 @@ public class Main extends Application {
         Camion c2 = new Camion("CharlieII", 20, true,"Normal");
         Camion c3 = new Camion("Arnold", 5, true,"Refrigerado");
         Camion c4 = new Camion("Aleph", 5, true,"Radioactivo");
-        /*emp.getcamiones().add(c1);
-        emp.getcamiones().add(c2);
-        emp.getcamiones().add(c3);
-        emp.getcamiones().add(c4);*/
-        s1.getCamionesEstacionados().add(c1);
-        s1.getCamionesEstacionados().add(c2);
-        s1.getCamionesEstacionados().add(c3);
-        s1.getCamionesEstacionados().add(c4);
+        s2.getCamionesEstacionados().add(c1);
+        s2.getCamionesEstacionados().add(c2);
+        s2.getCamionesEstacionados().add(c3);
+        s2.getCamionesEstacionados().add(c4);
         
         Mensaje m1 = new Mensaje("AAAAAA", true);
-        s1.getMensajesRecibidos().add(m1);
+        s2.getMensajesRecibidos().add(m1);
         
         // Cargar información a la base de datos
         Firebase postRef;
@@ -129,9 +122,9 @@ public class Main extends Application {
             // Retrieve new posts as they are added to the database
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
-                  System.out.println(snapshot);
+                  //System.out.println(snapshot);
                   Empleado post = snapshot.getValue(Empleado.class);
-                  System.out.println("Mensaje:" + post.toString());
+                  //System.out.println("Mensaje:" + post.toString());
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}

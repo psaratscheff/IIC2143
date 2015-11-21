@@ -133,6 +133,29 @@ public class FXMLSucursalController implements Initializable {
     }
     
     // Métodos privados para cargar información
+    // ---------Sucursales: -------------
+    private void AddSucursal(final Sucursal s)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ChoiceBoxSucursales.getItems().add(s);
+                ChoiceBoxDestinoCamiones.getItems().add(s);
+                emp.getsucursales().add(s);
+            }
+        });
+    }
+    private void RemoveSucursal(final Sucursal s)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ChoiceBoxSucursales.getItems().remove(s);
+                ChoiceBoxDestinoCamiones.getItems().remove(s);
+                emp.getsucursales().remove(s);
+            }
+        });
+    }
     private void LoadSucursales()
     {
         Firebase sucursalesRef = emp.fbRef().child("sucursales");
@@ -140,35 +163,26 @@ public class FXMLSucursalController implements Initializable {
             // Retrieve new posts as they are added to the database
             @Override
             public void onChildAdded(DataSnapshot ds, String previousChildKey) {
-                Sucursal post = ds.getValue(Sucursal.class);
+                Sucursal s = ds.getValue(Sucursal.class);
                 //System.out.println("Sucursal:" + post.toString());
-
-                ChoiceBoxSucursales.getItems().add(post);
-                ChoiceBoxDestinoCamiones.getItems().add(post);
-                emp.getsucursales().add(post);
+                AddSucursal(s);
+                System.out.println("Sucursal Agregada:" + s.toString());
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String string) {
+                Sucursal s = ds.getValue(Sucursal.class);
                 // Elimino la versión antigua
-                Sucursal old = emp.getSucursalConDireccion(string);
-                ChoiceBoxSucursales.getItems().remove(old);
-                ChoiceBoxDestinoCamiones.getItems().remove(old);
-                emp.getsucursales().remove(old);
+                emp.getsucursales().remove(s);
                 // Agrego la versión nueva
-                Sucursal post = ds.getValue(Sucursal.class);
-
-                ChoiceBoxSucursales.getItems().add(post);
-                ChoiceBoxDestinoCamiones.getItems().add(post);
-                emp.getsucursales().add(post);
+                emp.getsucursales().add(s);
+                //System.out.println("Sucursal changed: "+s+ " camiones-> "+s.getCamionesEstacionados()+ " encomiendas-> "+s.getEncomiendasAlmacenadas());
+                System.out.println("Sucursal Modificada:" + s.toString());
             }
             @Override
             public void onChildRemoved(DataSnapshot ds) {
-                Sucursal post = ds.getValue(Sucursal.class);
-                System.out.println("Sucursal REMOVIDA:" + post.toString());
-
-                ChoiceBoxSucursales.getItems().remove(post);
-                ChoiceBoxDestinoCamiones.getItems().remove(post);
-                emp.getsucursales().remove(post);
+                Sucursal s = ds.getValue(Sucursal.class);
+                System.out.println("Sucursal REMOVIDA:" + s.toString());
+                RemoveSucursal(s);
             }
             @Override
             public void onChildMoved(DataSnapshot ds, String string) {
@@ -180,38 +194,76 @@ public class FXMLSucursalController implements Initializable {
             }
         });/**/
     }
+    // ---------Camiones: -------------
+    private void AddCamion(final Camion c)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ChoiceBoxCamiones.getItems().add(c);
+            }
+        });
+    }
+    private void RemoveCamion(final Camion c)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Camion temp = null;
+                for(Camion c2: ChoiceBoxCamiones.getItems())
+                {
+                    if (c2.getNombre().equals(c.getNombre()))
+                    {
+                        temp=c2;
+                    }
+                }
+                ChoiceBoxCamiones.getItems().remove(temp);
+                System.out.println(ChoiceBoxCamiones.getItems());
+                
+                temp = null;
+                for(Camion c2: emp.getsucursalactual().getCamionesEstacionados())
+                {
+                    if (c2.getNombre().equals(c.getNombre()))
+                    {
+                        temp=c2;
+                    }
+                }
+                emp.getsucursalactual().getCamionesEstacionados().remove(temp);
+                System.out.println(emp.getsucursalactual().getCamionesEstacionados());
+            }
+        });
+    }
     private void LoadCamiones()
     {
-        Firebase camionesRef = emp.fbRef().child("camiones");
+        espacioCamion = -1;
+        ChoiceBoxCamiones.getItems().clear();
+        
+        Firebase camionesRef = emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("camionesEstacionados");
         camionesRef.addChildEventListener(new ChildEventListener() {
             // Retrieve new posts as they are added to the database
             @Override
             public void onChildAdded(DataSnapshot ds, String previousChildKey) {
-                Camion post = ds.getValue(Camion.class);
+                Camion c = ds.getValue(Camion.class);
                 //System.out.println("Camión:" + post.toString());
-
-                ChoiceBoxCamiones.getItems().add(post);
-                emp.getCamiones().add(post);
+                AddCamion(c);
+                System.out.println("Camión Agregado:" + c.toString());
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String string) {
                 // Elimino la versión antigua
                 Camion old = emp.getCamionConNombre(string);
-                ChoiceBoxCamiones.getItems().remove(old);
-                emp.getCamiones().remove(old);
+                RemoveCamion(old);
                 // Agrego la versión nueva
-                Camion post = ds.getValue(Camion.class);
-                
-                ChoiceBoxCamiones.getItems().add(post);
-                emp.getCamiones().add(post);
+                Camion c = ds.getValue(Camion.class);
+                AddCamion(c);
+                System.out.println("Camión Modificado:" + c.toString());
             }
             @Override
             public void onChildRemoved(DataSnapshot ds) {
-                Camion post = ds.getValue(Camion.class);
-                System.out.println("Camión REMOVIDO:" + post.toString());
+                Camion c = ds.getValue(Camion.class);
+                System.out.println("Camión REMOVIDO:" + c.toString());
                   
-                ChoiceBoxCamiones.getItems().remove(post);
-                emp.getCamiones().remove(post);
+                RemoveCamion(c);
             }
             @Override
             public void onChildMoved(DataSnapshot ds, String string) {
@@ -223,6 +275,7 @@ public class FXMLSucursalController implements Initializable {
             }
         });/**/
     }
+    // ---------Encomiendas almacenadas: -------------
     private void SetUrgentText()
     {
         Platform.runLater(new Runnable() {
@@ -232,12 +285,32 @@ public class FXMLSucursalController implements Initializable {
             }
         });
     }
-    private void AddEncomiendaToSucursal(final String s)
+    private void AddEncomiendaToSucursal(final Encomienda en)
     {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+                String s = "["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo();
                 EncomiendasEnSucursal.getItems().add(s);
+            }
+        });
+    }
+    private void RemoveEncomiendaToSucursal(final Encomienda en)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                String s = "["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo();
+                EncomiendasEnSucursal.getItems().remove(s);
+                Encomienda temp = null;
+                for(Encomienda en2: emp.getsucursalactual().getEncomiendasAlmacenadas())
+                {
+                    if (en2.getId().equals(en.getId()))
+                    {
+                        temp=en2;
+                    }
+                }
+                emp.getsucursalactual().getEncomiendasAlmacenadas().remove(temp);
             }
         });
     }
@@ -254,19 +327,22 @@ public class FXMLSucursalController implements Initializable {
                 {
                     SetUrgentText();
                 }
-                AddEncomiendaToSucursal("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
+                AddEncomiendaToSucursal(en);
+                System.out.println("Encomienda Agregada:" + en.toString());
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String string) {
-                // Elimino la versión antigua
-                EncomiendasEnSucursal.getItems().remove(Integer.parseInt(string));
-                // Agrego la versión nueva
                 Encomienda en = ds.getValue(Encomienda.class);
+                /* NADA
+                // Elimino la versión antigua
+                RemoveEncomiendaToSucursal(string);
+                // Agrego la versión nueva
                 if (en.getPrioridad().equals("Urgente")) 
                 {
-                    Urgencia.setText("Hay una encomienda urgente!"); //Falta deshabilitar esto...
+                    SetUrgentText();
                 }
-                EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
+                AddEncomiendaToSucursal(en);*/
+                System.out.println("Encomienda Modificada:" + en.toString());
             }
             @Override
             public void onChildRemoved(DataSnapshot ds) {
@@ -274,7 +350,7 @@ public class FXMLSucursalController implements Initializable {
                 System.out.println("Encomienda REMOVIDA:" + en.toString());
                 
                 // Elimino la versión antigua
-                EncomiendasEnSucursal.getItems().remove("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
+                RemoveEncomiendaToSucursal(en);
             }
             @Override
             public void onChildMoved(DataSnapshot ds, String string) {
@@ -282,9 +358,180 @@ public class FXMLSucursalController implements Initializable {
             }
             @Override
             public void onCancelled(FirebaseError fe) {
-                System.out.println("ERROR FB-101:" + fe.getMessage());
+                System.out.println("ERROR FB-107:" + fe.getMessage());
             }
         });/**/
+    }
+    // ---------Encomiendas recibidas: -------------
+   private void AddEncomiendaToRecibidos(final Encomienda en)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                String s = "["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo();
+                EncomiendasRecibidas.getItems().add(s);
+                emp.getsucursalactual().getEncomiendasAlmacenadas().add(en);
+            }
+        });
+    }
+    private void RemoveEncomiendaToRecibidos(final Encomienda en)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                String s = "["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo();
+                EncomiendasRecibidas.getItems().remove(s);
+                Encomienda temp = null;
+                for(Encomienda en2: emp.getsucursalactual().getEncomiendasRecibidas())
+                {
+                    if (en2.getId().equals(en.getId()))
+                    {
+                        temp=en2;
+                    }
+                }
+                emp.getsucursalactual().getEncomiendasRecibidas().remove(en);
+            }
+        });
+    }
+    private void LoadEncomiendasRecibidas()
+    {
+        EncomiendasRecibidas.getItems().clear();
+        
+        Firebase encomiendasRef = emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("encomiendasRecibidas");
+        encomiendasRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
+                Encomienda en = ds.getValue(Encomienda.class);
+                if (en.getPrioridad().equals("Urgente")) 
+                {
+                    SetUrgentText();
+                }
+                AddEncomiendaToRecibidos(en);
+                System.out.println("EncomiendaR Agregada:" + en.toString());
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {
+                Encomienda en = ds.getValue(Encomienda.class);
+                /* NADA
+                // Elimino la versión antigua
+                RemoveEncomiendaToRecibidos(string);
+                // Agrego la versión nueva
+                if (en.getPrioridad().equals("Urgente")) 
+                {
+                    SetUrgentText();
+                }
+                AddEncomiendaToRecibidos(en);*/
+                System.out.println("EncomiendaR Modificada:" + en.toString());
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {
+                Encomienda en = ds.getValue(Encomienda.class);
+                System.out.println("EncomiendaR REMOVIDA:" + en.toString());
+                
+                // Elimino la versión antigua
+                RemoveEncomiendaToRecibidos(en);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {
+                // Who cares... (No se requiere hacer nada)
+            }
+            @Override
+            public void onCancelled(FirebaseError fe) {
+                System.out.println("ERROR FB-109:" + fe.getMessage());
+            }
+        });/**/
+    }
+    
+    // ---------Mensajes: -------------
+    private void AddMensaje(final Mensaje m)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (m.getUrgente() == true) 
+                {
+                    String mensajePreview ="URGENTE " + m.getContenido();
+                    String[] mpArray = mensajePreview.split("\\r?\\n");
+                    if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                    ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
+                }
+                else
+                {
+                    String mensajePreview = m.getContenido();
+                    String[] mpArray = mensajePreview.split("\\r?\\n");
+                    if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                    ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
+                }
+            }
+        });
+    }
+    private void RemoveMensaje(final Mensaje m)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                if (m.getUrgente() == true) 
+                {
+                    String mensajePreview ="URGENTE " + m.getContenido();
+                    String[] mpArray = mensajePreview.split("\\r?\\n");
+                    if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                    ListMessagesPreview.getItems().remove(mensajePreview);
+                }
+                else
+                {
+                    String mensajePreview = m.getContenido();
+                    String[] mpArray = mensajePreview.split("\\r?\\n");
+                    if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                    ListMessagesPreview.getItems().remove(mensajePreview);
+                }
+            }
+        });
+    }
+    private void LoadMensajes()
+    {
+        ListMessagesPreview.getItems().clear();
+        
+        Firebase mensajesRef = emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("mensajesRecibidos");
+        mensajesRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
+                Mensaje m = ds.getValue(Mensaje.class);
+                AddMensaje(m);
+                System.out.println("Mensaje Agregado:" + m.toString());
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {
+                // Elimino la versión antigua
+                ListMessagesPreview.getItems().remove(Integer.parseInt(string));
+                emp.getsucursalactual().getMensajesRecibidos().remove(Integer.parseInt(string));
+                // Agrego la versión nueva
+                Mensaje m = ds.getValue(Mensaje.class);
+                AddMensaje(m);
+                System.out.println("Mensaje Modificado:" + m.toString());
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {
+                Mensaje m = ds.getValue(Mensaje.class);
+                RemoveMensaje(m);
+                System.out.println("Mensaje REMOVIDO:" + m.toString());
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {
+                // Who cares... (No se requiere hacer nada)
+            }
+            @Override
+            public void onCancelled(FirebaseError fe) {
+                System.out.println("ERROR FB-104:" + fe.getMessage());
+            }
+        });/**/
+        
+        ListMessagesPreview.setCellFactory(new Callback<ListView<String>, EllipsisListCell>() {
+            @Override
+            public EllipsisListCell call(ListView<String> p) {
+                EllipsisListCell cell = new EllipsisListCell();
+                return cell;
+            }
+        });
     }
     
     
@@ -293,40 +540,12 @@ public class FXMLSucursalController implements Initializable {
         LoadEncomiendasAlmacenadas();
         
         // CARGAR ENCOMIENDAS RECIBIDAS
-        EncomiendasRecibidas.getItems().clear();
-        for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
-        {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
-        }
-        // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
-        ListMessagesPreview.getItems().clear();
-        for(Mensaje m: emp.getsucursalactual().getMensajesRecibidos())
-        {
-            if (m.getUrgente() == true) 
-            {
-                String mensajePreview ="URGENTE " + m.getContenido();
-                String[] mpArray = mensajePreview.split("\\r?\\n");
-                if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
-                ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
-            }
-            else
-            {
-                String mensajePreview = m.getContenido();
-                String[] mpArray = mensajePreview.split("\\r?\\n");
-                if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
-                ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
-            }
-        }
-        ListMessagesPreview.setCellFactory(new Callback<ListView<String>, EllipsisListCell>() {
-            @Override
-            public EllipsisListCell call(ListView<String> p) {
-                EllipsisListCell cell = new EllipsisListCell();
-                return cell;
-            }
-        });
+        LoadEncomiendasRecibidas();
+        
+        // CARGAR PREVIEW MENSAJES!!
+        LoadMensajes();
+        
         // CARGAR CAMIONES DISPONIBLES
-        espacioCamion = -1;
-        ChoiceBoxCamiones.getItems().clear();
         LoadCamiones();
     }
     
@@ -350,7 +569,14 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private void EntregarEncomiendaAction(){
         String enco = EncomiendasRecibidas.getSelectionModel().getSelectedItem();
-        String encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
+        String encomiendaID;
+        try{
+            encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
+        }catch(Exception e){
+            System.out.println("Debes seleccionar un pedido a entregar");
+            return; // FIN
+        }
+        System.out.println("AAAA: " + encomiendaID);
         Encomienda encomienda = null;
         try
         {
@@ -419,66 +645,49 @@ public class FXMLSucursalController implements Initializable {
             //OJO con la importancia de que el id sea un numero valido
             // Obtener Camion a Enviar
             Camion camion = ChoiceBoxCamiones.getValue();
-            System.out.println(camion + "--AAAAAAAAAAAAAAAAAAA--"+encomiendaID);
             if (camion != null && encomienda != null)// aca
             {
-                if(camion.getTipo()==encomienda.getTipo())
+                if(camion.getTipo().equals(encomienda.getTipo()))
                 {
-                espacioCamion = camion.PorcentajeDisponible();
-                if (espacioCamion>=1.0){ return; }
+                    espacioCamion = camion.PorcentajeDisponible();
+                    if (espacioCamion>=1.0){ return; }
 
-                //CARGAR CAMION!!
+                    //CARGAR CAMION!!
+                    Integer index = emp.getsucursalactual().getEncomiendasAlmacenadas().indexOf(encomienda);
+                    emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("encomiendasAlmacenadas").child(index.toString()).removeValue();
+                    
+                    encomienda.setestado("En Camión");
+                    camion.addencomienda(encomienda);
+                    emp.fbRef().child("camiones").child(camion.getNombre()).setValue(camion);
 
-                encomienda.setestado("En Camión") ;
-                camion.addencomienda(encomienda);
-                emp.getsucursalactual().getEncomiendasAlmacenadas().remove(encomienda);
+                    //Recargar Encomiendas
+                    // Firebase lo hace automágicamente :)
 
-                //Recargar Encomiendas
-                EncomiendasEnSucursal.getItems().clear();
-                Boolean boolurgencia = false;
-
-                for(Encomienda en: emp.getsucursalactual().getEncomiendasAlmacenadas())
-                {
-                    if (en.getPrioridad() == "Urgente") 
+                    //Actualizar capacidad
+                    espacioCamion = camion.PorcentajeDisponible();
+                    // RECICLAR ESTE CODIGO DESPUES!!! ¡¡¡¡DRY!!!!
+                    ProgressBarCapacity.setProgress(espacioCamion);
+                    if (espacioCamion<0.7)
                     {
-                        boolurgencia = true;
+                         ProgressBarCapacity.setStyle("-fx-accent: green;");
                     }
-                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion()+" Tipo: "+en.getTipo());
-                }
-                if (boolurgencia == false) 
-                {
-                    Urgencia.setText(null);
-                }
-                if (boolurgencia) 
-                {
-                    Urgencia.setText("Hay una encomienda urgente!");
-                    boolurgencia = false;
-                }
-
-                //Actualizar capacidad
-                espacioCamion = camion.PorcentajeDisponible();
-                // RECICLAR ESTE CODIGO DESPUES!!! ¡¡¡¡DRY!!!!
-                ProgressBarCapacity.setProgress(espacioCamion);
-                if (espacioCamion<0.7)
-                {
-                     ProgressBarCapacity.setStyle("-fx-accent: green;");
-                }
-                else if (espacioCamion<0.85)
-                {
-                     ProgressBarCapacity.setStyle("-fx-accent: yellow;");
+                    else if (espacioCamion<0.85)
+                    {
+                         ProgressBarCapacity.setStyle("-fx-accent: yellow;");
+                    }
+                    else
+                    {
+                         ProgressBarCapacity.setStyle("-fx-accent: red;");
+                    }
                 }
                 else
                 {
-                     ProgressBarCapacity.setStyle("-fx-accent: red;");
-                }
-            }
-            else
-            {
-                MessageBox mb = new MessageBox("Solo se puede cargar una encomienda \n tipo "+ encomienda.getTipo()+
-                        " en un camion "+encomienda.getTipo()+"!", MessageBoxType.OK_ONLY);
-                mb.showAndWait();
-                
-                return;}//podria hacer un messagebox que no coincide tipo
+                    MessageBox mb = new MessageBox("Solo se puede cargar una encomienda \n tipo "+ encomienda.getTipo()+
+                            " en un camion "+encomienda.getTipo()+"!", MessageBoxType.OK_ONLY);
+                    mb.showAndWait();
+
+                    return;
+                }//podria hacer un messagebox que no coincide tipo
             }
         }
         catch (Exception e)
@@ -491,31 +700,41 @@ public class FXMLSucursalController implements Initializable {
     private void EnviarCamionAction() throws IOException{
         // Obtener Camion a Enviar
         Camion camion = ChoiceBoxCamiones.getValue();
-        if (camion != null)
+        // Obtener Sucursal destino
+        Sucursal destinoSucursal = ChoiceBoxDestinoCamiones.getValue();
+        if (camion != null && destinoSucursal != null)
         {
-            // Obtener Sucursal destino
-            Sucursal destinoSucursal = ChoiceBoxDestinoCamiones.getValue();
             // Enviar Camion
-            destinoSucursal.getCamionesEstacionados().add(camion);
-            emp.getsucursalactual().getCamionesEstacionados().remove(camion);
+            Camion temp = null;
+            for(Camion c2: emp.getsucursalactual().getCamionesEstacionados())
+            {
+                if (c2.getNombre().equals(camion.getNombre()))
+                {
+                    temp=c2;
+                }
+            }
+            Integer index = emp.getsucursalactual().getCamionesEstacionados().indexOf(temp);
+            emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("camionesEstacionados").child(index.toString()).removeValue();
+            
             // Descargar encomiendas en destino (Inmediato por ahora)
+            destinoSucursal.getCamionesEstacionados().add(camion);
             for (Encomienda e: camion.getEncomiendas())
             {
                 e.setestado("En Destino");
                 destinoSucursal.getEncomiendasRecibidas().add(e);
-            }
-            camion.borrarencomiendas();/**/
-            }
+            }camion.borrarencomiendas();/**/
+            emp.fbRef().child("sucursales").child(destinoSucursal.getDireccion()).setValue(destinoSucursal);
         
-        ChoiceBoxDestinoCamiones.getSelectionModel().clearSelection();
-        // CARGAR CAMIONES DISPONIBLES
-        ChoiceBoxCamiones.getItems().clear();
-        for (Camion c: emp.getsucursalactual().getCamionesEstacionados()) 
-        {
-            ChoiceBoxCamiones.getItems().add(c);
-        }/**/
-        espacioCamion = -1;
-        ProgressBarCapacity.setProgress(-1); // -1 para indeterminado
+            ChoiceBoxDestinoCamiones.getSelectionModel().clearSelection();
+            // CARGAR CAMIONES DISPONIBLES
+            /*ChoiceBoxCamiones.getItems().clear();
+            for (Camion c: emp.getsucursalactual().getCamionesEstacionados()) 
+            {
+                ChoiceBoxCamiones.getItems().add(c);
+            }/**/
+            espacioCamion = -1;
+            ProgressBarCapacity.setProgress(-1); // -1 para indeterminado
+        }
     }
     
     
