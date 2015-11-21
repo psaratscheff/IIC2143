@@ -49,17 +49,17 @@ public class FXMLMensajesRecibidosController implements Initializable {
         emp = Empresa.getInstance();
         for(Sucursal s: emp.getsucursales())
         {
-            EnviarDestino.getItems().add(s.getdireccion());
+            EnviarDestino.getItems().add(s.getDireccion());
         }
-        for(Mensaje m: emp.getsucursalactual().getmensajesrecibidos())
+        for(Mensaje m: emp.getsucursalactual().getMensajesRecibidos())
         {
-            if (m.geturgencia() == true) 
+            if (m.getUrgente() == true) 
             {
-                Recibidos.getItems().add(0, "URGENTE " + m.getcontenido()); // Invierto el orden, se agregan al principio
+                Recibidos.getItems().add(0, "URGENTE " + m.getContenido()); // Invierto el orden, se agregan al principio
             }
             else
             {
-                Recibidos.getItems().add(0, m.getcontenido()); // Invierto el orden, se agregan al principio
+                Recibidos.getItems().add(0, m.getContenido()); // Invierto el orden, se agregan al principio
             }
             
         }
@@ -69,13 +69,13 @@ public class FXMLMensajesRecibidosController implements Initializable {
     private void btnEnviarMensaje(MouseEvent event) throws IOException
     {
         Boolean urgencia = EnviarUrgente.isSelected();
-        String contenido = "[" + emp.getsucursalactual().getdireccion() + "] --- " + EnviarContenido.getText();
+        String contenido = "[" + emp.getsucursalactual().getDireccion() + "] --- " + EnviarContenido.getText();
         String direccionDestino = EnviarDestino.getValue();
         if (direccionDestino != null & EnviarContenido.getText() != "") 
         {
             for(Sucursal s: emp.getsucursales())
             {
-                if (s.getdireccion() == direccionDestino) 
+                if (s.getDireccion() == direccionDestino) 
                 {
                     emp.getempleadoactual().EnviarMensaje(s, contenido, urgencia);
                     EnviarContenido.setText("");

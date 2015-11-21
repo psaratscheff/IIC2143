@@ -37,7 +37,7 @@ public Sucursal getsucursaldondetrabaja()
   public void EnviarMensaje(Sucursal sucursal, String mensaje, boolean urgente)
   {
       Mensaje mensaje1 = new Mensaje(mensaje, urgente);
-      sucursal.getmensajesrecibidos().add(mensaje1);
+      sucursal.getMensajesRecibidos().add(mensaje1);
       
   }
   

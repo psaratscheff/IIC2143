@@ -15,6 +15,8 @@ public class Sucursal {
     //Faltantes en el UML
     private List<Encomienda> encomiendasAlmacenadas;
     private List<Encomienda> encomiendasRecibidas;
+    
+    public Sucursal() {} // Constructor vacío para FireBase
 
     public Sucursal(String direccion, int capacidad)
     {
@@ -28,19 +30,23 @@ public class Sucursal {
       this.clientesRegistrados = new ArrayList();
       this.encomiendasRecibidas = new ArrayList();
     }
-
-    public List<Camion> getcamionesestacionados()
-    {return camionesEstacionados;}
-
-    public List<Encomienda> getencomiendasrecibidas()
-    {return encomiendasRecibidas;}
-    public List<Encomienda> getencomiendasalmacenadas()
-    {return encomiendasAlmacenadas;}
-    public String getdireccion()
-    {return direccion;}
-
-    public List<Mensaje> getmensajesrecibidos()
-    {return mensajesRecibidos;}
+    
+    public String getDireccion()
+    { return this.direccion; }
+    public long getCapacidad()
+    { return this.capacidad; }
+    public List<Mensaje> getMensajesRecibidos()
+    { return this.mensajesRecibidos; }
+    public List<Empleado> getTrabajadores()
+    { return this.trabajadores; }
+    public List<Camion> getCamionesEstacionados()
+    { return this.camionesEstacionados; }
+    public List<Cliente> getClientesRegistrados()
+    { return this.clientesRegistrados; }
+    public List<Encomienda> getEncomiendasAlmacenadas()
+    { return this.encomiendasAlmacenadas; }
+    public List<Encomienda> getEncomiendasRecibidas()
+    { return this.encomiendasRecibidas; }
 
     public int EspacioDisponible()
     {
@@ -70,7 +76,7 @@ public class Sucursal {
     public List<Encomienda> RecibirCamion(Camion camion)
     {
         // Falta validar espacio disponible
-        List<Encomienda> temporal = camion.getlistencomiendas();
+        List<Encomienda> temporal = camion.getEncomiendas();
         camion.borrarencomiendas(); //Vacío el camión
         camion.setdisponibilidad(true);  //vuelve a estar disponible el camion
         for(Encomienda e : temporal) // cambia estado de la encomienda

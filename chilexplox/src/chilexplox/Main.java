@@ -19,6 +19,10 @@ import chilexplox.classes.Camion;
 import com.firebase.client.Firebase;
 import com.firebase.client.ValueEventListener;
 import chilexplox.classes.Encomienda;
+import chilexplox.classes.Mensaje;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,15 +39,18 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         //Creacion de empresa inicial
         List<Integer> h = new ArrayList(); h.add(8); h.add(13); h.add(14); h.add(17);
-        Sucursal s = new Sucursal("Valdivia", 1000);
-        emp.getsucursales().add(s);
-        emp.getsucursales().add(new Sucursal("La Serena",50));
-        emp.getsucursales().add(new Sucursal("Santiago",150));
-        emp.getsucursales().add(new Sucursal("Arica",250));
-        Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s);
+        Sucursal s1 = new Sucursal("Valdivia", 1000);
+        Sucursal s2 = new Sucursal("La Serena",50);
+        Sucursal s3 = new Sucursal("Santiago",150);
+        Sucursal s4 = new Sucursal("Arica",250);
+        emp.getsucursales().add(s1);
+        emp.getsucursales().add(s2);
+        emp.getsucursales().add(s3);
+        emp.getsucursales().add(s4);
+        Empleado e = new Empleado("Thomas", "Pryce Jones", "1", "1", h, s1);
         Cliente c = new Cliente("Pedro","S","Lejos","2","2");
-        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"1",s,s,"Normal"));
-        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"2",s,s,"Normal"));
+        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"1",s1,s2,"Normal"));
+        emp.getencomiendas().add(new Encomienda("Normal","Urgente",1,"2",s1,s2,"Normal"));
         emp.AddEmpleado(e);
         emp.AddCliente(c);
         Camion c1 = new Camion("Charlie", 10, true,"Normal");
@@ -54,29 +61,46 @@ public class Main extends Application {
         emp.getcamiones().add(c2);
         emp.getcamiones().add(c3);
         emp.getcamiones().add(c4);
-        s.getcamionesestacionados().add(c1);
-        s.getcamionesestacionados().add(c2);
-        s.getcamionesestacionados().add(c3);
-        s.getcamionesestacionados().add(c4);
+        s1.getCamionesEstacionados().add(c1);
+        s1.getCamionesEstacionados().add(c2);
+        s1.getCamionesEstacionados().add(c3);
+        s1.getCamionesEstacionados().add(c4);
         
-        //Cargar data a FireBase
-        /*Firebase sucursalesRef = emp.fbRef().child("sucursales");
-        Firebase sPushRef = sucursalesRef.push();
-        Map<String, String> post1 = new HashMap<String, String>();
-        post1.put("name", "Arica");
-        post1.put("direccion", "direccion ariqueña");
-        post1.put("capacidad", "250");
-        sPushRef.setValue(post1);/**/
-        /*String postId = sPushRef.getKey();
-        Firebase camionesRef = emp.fbRef().child("camiones");
-        Firebase pushRef= camionesRef.push();
-        Map<String, String> post2 = new HashMap<String, String>();
-        post2.put("name", "Aleph");
-        post2.put("tipo", "Radioactivo");
-        post2.put("capacidad", "5");
-        post2.put("disponible", "true");
-        post2.put("poscicion", postId);
-        pushRef.setValue(post2);/**/
+        // Cargar información a la base de datos
+        Firebase postRef;
+        Firebase newPostRef;
+        
+        postRef = emp.fbRef().child("camiones");
+        newPostRef = postRef.child(c1.getNombre()); newPostRef.setValue(c1);
+        newPostRef = postRef.child(c2.getNombre()); newPostRef.setValue(c2);
+        newPostRef = postRef.child(c3.getNombre()); newPostRef.setValue(c3);
+        newPostRef = postRef.child(c4.getNombre()); newPostRef.setValue(c4);
+        
+        postRef = emp.fbRef().child("sucursales");
+        newPostRef = postRef.child(s1.getDireccion()); newPostRef.setValue(s1);
+        newPostRef = postRef.child(s2.getDireccion()); newPostRef.setValue(s2);
+        newPostRef = postRef.child(s3.getDireccion()); newPostRef.setValue(s3);
+        newPostRef = postRef.child(s4.getDireccion()); newPostRef.setValue(s4);
+        
+        // Para verificar escrituras válidas (Leíbles por código)
+        postRef = emp.fbRef().child("camiones");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+                  System.out.println(snapshot);
+                  Camion post = snapshot.getValue(Camion.class);
+                  System.out.println("Mensaje:" + post.toString());
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
+        });
         
         //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));

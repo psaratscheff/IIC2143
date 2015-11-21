@@ -113,7 +113,7 @@ public class Empresa {
     {
         for (Sucursal s: sucursales) 
         {
-            if(s.getdireccion()==direccion)
+            if(s.getDireccion()==direccion)
             {return s;}
         }
         return sucursales.get(0);
@@ -124,7 +124,7 @@ public class Empresa {
         List<String> array = new ArrayList();
         for (Sucursal s: sucursales) 
         {
-            array.add(s.getdireccion());
+            array.add(s.getDireccion());
         }
         return array;
     }
@@ -144,7 +144,7 @@ public class Empresa {
     {
         for(Camion c: camiones)
         {
-            if (c.getdisponibilidad()==true)
+            if (c.getDisponibilidad()==true)
             {return c;}
         }
         return null;

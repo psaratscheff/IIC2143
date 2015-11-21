@@ -6,14 +6,16 @@ public class Mensaje {
   private boolean urgente;
   //Relacionados
   
-
+  public Mensaje() {} // Constructor vacío para Firebase
+  
   public Mensaje(String contenido, boolean urgente)
   {
     this.contenido = contenido;
     this.urgente = urgente;
   }
-  public boolean geturgencia()
-  {return urgente;}
-  public String getcontenido()
-  {return contenido;}
+    
+    public Boolean getUrgente()
+    {return urgente;}
+    public String getContenido()
+    {return contenido;}
 }

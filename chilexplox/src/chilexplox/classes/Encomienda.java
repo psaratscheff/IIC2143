@@ -26,7 +26,7 @@ public class Encomienda {
     this.tipo=tipo;
   }
   public String getdirorigen()
-  {return origen.getdireccion();}
+  {return origen.getDireccion();}
     public String gettipo()
     {return tipo;}
     public String getid()

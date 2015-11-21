@@ -7,40 +7,41 @@ import java.util.List;
 
 public class Camion {
     private int capacidad;
-    private String name;
+    private String nombre;
     private String tipo;
     private List<Encomienda> encomiendas;
     private boolean disponibilidad;
-    
+
+    public Camion() {} // Constructor vacío para Firebase
+
     public Camion(String n, int cap, boolean disp,String tip)
-            {
-               capacidad = cap;
-               disponibilidad = disp;
-               name = n;
-               tipo=tip;
-               //Inicializo los arrays para poder agregar valores
-               this.encomiendas = new ArrayList();
-            }
+    {
+        capacidad = cap;
+        disponibilidad = disp;
+        nombre = n;
+        tipo=tip;
+        //Inicializo los arrays para poder agregar valores
+        this.encomiendas = new ArrayList();
+    }
+    
+    public long getCapacidad()
+    {return this.capacidad;}
+    public String getNombre()
+    {return this.nombre;}
+    public String getTipo()
+    {return this.tipo;}
+    public List<Encomienda> getEncomiendas()
+    {return this.encomiendas;}
+    public Boolean getDisponibilidad()
+    {return this.disponibilidad;}
     
     
     /**
-     * claramente retorna la disponibilidad del camion(si esta ocupado o no)
-     * @return 
-     */
-    public boolean getdisponibilidad()
-    {return disponibilidad;}
-    /**
-     * cambia el estado de disponibilidad del camion al booleano "disp"
+     * cambia el estado de getDisponibilidad del camion al booleano "disp"
      * @param disp 
      */
     public void setdisponibilidad(boolean disp)
     {disponibilidad=disp;}
-    /**
-     * retorna el nombre del camion
-     * @return 
-     */
-    public String Nombre()
-    {return name;}
     /**
      * borra una encomienda "encomienda" de la lista de encomiendas del camion
      * @param encomienda 
@@ -62,33 +63,11 @@ public class Camion {
      * @param encomiendas 
      */
     public void CargarCamion( List<Encomienda> encomiendas)
-  {
-    // Falta validar espacio disponible
-      encomiendas.addAll(encomiendas); //Agrega todas las encomiendas de la lista
-      disponibilidad=false;  // deja de estar disponible el camion
-  }
-    /**
-     * retorna nombre-capacidad-tipo del camion en un solo string
-     * @return 
-     */
-    public String getNombre()
     {
-        return name + '-' + capacidad;
+      // Falta validar espacio disponible
+        encomiendas.addAll(encomiendas); //Agrega todas las encomiendas de la lista
+        disponibilidad=false;  // deja de estar disponible el camion
     }
-    /**
-     * retorna la lista de encomiendas dentro del camion
-     * @return 
-     */
-    public List<Encomienda> getlistencomiendas()
-    {
-        return encomiendas;
-    }
-    /**
-     * retorna el tipo del camion(normal,radioactivo,refrigerado)
-     * @return 
-     */
-    public String gettipo()
-    {return tipo;}
     
     public int EspacioDisponible()
     {
@@ -109,18 +88,16 @@ public class Camion {
     }
     
     /**
-     * Retornar nombre del camion con su tamaño
+     * Retorna nombre-capacidad-tipo (Sin tipo si es normal)
      * @return String
      */
     @Override
     public String toString() {
-        if(this.tipo=="Normal")
+        String t = "";
+        if (this.tipo != "Normal")
         {
-        return this.name+"-"+this.capacidad;
+            t="-"+this.tipo;
         }
-        else
-        {
-        return this.name+"-"+this.capacidad+"-"+this.tipo ;
-        }
+        return this.nombre+"-"+this.capacidad+t;
     }
 }
