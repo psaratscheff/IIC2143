@@ -42,6 +42,9 @@ public class Camion {
     
     // Otro métodos en adelante:
     
+    public String NombreCompleto()
+    { return this.toString(); }
+    
     /**
      * cambia el estado de getDisponibilidad del camion al booleano "disp"
      * @param disp 
@@ -99,10 +102,10 @@ public class Camion {
      */
     @Override
     public String toString() {
-        String t = "";
-        if (this.tipo != "Normal")
+        String t = "-"+this.tipo;;
+        if (this.tipo.equals("Normal"))
         {
-            t="-"+this.tipo;
+            t="";
         }
         return this.nombre+"-"+this.capacidad+t;
     }

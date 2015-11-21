@@ -27,7 +27,8 @@ public class Empresa {
      * Retorna la única instancia (singleton) de Empresa
      * @return
      */
-    public static Empresa getInstance() {
+    public static Empresa getInstance()
+    {
         return instance;
     }
     private DateFormat dateFormat;
@@ -77,9 +78,15 @@ public class Empresa {
     public List<Boss> getjefes()
     {return jefes;}
     public Sucursal getsucursalactual()
-    {return sucursalActual;}
+    {
+        //System.out.println("Sucursal actual: "+sucursalActual +"->"+ sucursalActual.getEncomiendasAlmacenadas());
+        return sucursalActual;
+    }
     public void setsucursalactual(Sucursal sucursal)
-    {sucursalActual=sucursal;}
+    {
+        sucursalActual=sucursal;
+        //System.out.println("Seteada Sucursal actual: "+sucursal +"->"+ sucursal.getEncomiendasAlmacenadas());
+    }
     public Pedido getpedidotemp()
     {return pedidotemp;}
     public void setpedidotemp(Pedido pedido)
@@ -134,7 +141,7 @@ public class Empresa {
     {
         for (Camion c: camiones) 
         {
-            if(c.getNombre().equals(nombre))
+            if(c.NombreCompleto().equals(nombre))
             {return c;}
         }
         System.out.println("El camión con nombre "+nombre+" no fue encontrado!");
