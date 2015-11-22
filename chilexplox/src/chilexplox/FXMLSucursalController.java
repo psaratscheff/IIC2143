@@ -175,10 +175,11 @@ public class FXMLSucursalController implements Initializable {
             @Override
             public void onChildChanged(DataSnapshot ds, String string) {
                 emp = Empresa.getInstance();
+                System.out.println(ds.getValue());
                 Sucursal s = ds.getValue(Sucursal.class);
-                s.getEncomiendasAlmacenadas().removeAll(Collections.singleton(null));
+                /*s.getEncomiendasAlmacenadas().removeAll(Collections.singleton(null));
                 s.getEncomiendasRecibidas().removeAll(Collections.singleton(null));
-                s.getCamionesEstacionados().removeAll(Collections.singleton(null));
+                s.getCamionesEstacionados().removeAll(Collections.singleton(null));*/
                 System.out.println("Sucursal Modificada:" + s.toString());
                 // Elimino la versión antigua
                 Sucursal temp = null;
@@ -199,7 +200,7 @@ public class FXMLSucursalController implements Initializable {
                 }
                 //System.out.println("Nueva: " + s + " - " + s.getEncomiendasAlmacenadas() + " - " + s.getEncomiendasRecibidas() + " - " + s.getCamionesEstacionados());
                 //System.out.println("Sucursal changed: "+s+ " camiones-> "+s.getCamionesEstacionados()+ " encomiendas-> "+s.getEncomiendasAlmacenadas());
-                UpdateConSucursal(); // Actualizar data
+                RefreshConSucursal(); // Actualizar data
             }
             @Override
             public void onChildRemoved(DataSnapshot ds) {
@@ -284,6 +285,112 @@ public class FXMLSucursalController implements Initializable {
                 {
                     ChoiceBoxCamiones.getItems().add(c.NombreCompleto());
                 }/**/
+                //Stufffff to do
+                ProgressBarCapacity.setProgress(espacioCamion);
+                 if (espacioCamion<0.7)
+                 {
+                      ProgressBarCapacity.setStyle("-fx-accent: green;");
+                 }
+                 else if (espacioCamion<0.85)
+                 {
+                      ProgressBarCapacity.setStyle("-fx-accent: yellow;");
+                 }
+                 else
+                 {
+                      ProgressBarCapacity.setStyle("-fx-accent: red;");
+                 }
+            }
+        });
+    }
+    
+    public void RefreshConSucursal()
+    {
+        Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
+            @Override
+            public void run() {
+                Sucursal s = emp.getsucursalactual();
+                System.out.println("Refrescando..." + s + " - " + s.getEncomiendasAlmacenadas() + " - " + s.getEncomiendasRecibidas() + " - " + s.getCamionesEstacionados());
+                // CARGAR ENCOMIENDAS
+                String seleccionado = EncomiendasEnSucursal.getSelectionModel().getSelectedItem();
+                EncomiendasEnSucursal.getItems().clear();
+                Boolean boolurgencia = false;
+                for(Encomienda en: emp.getsucursalactual().getEncomiendasAlmacenadas())
+                {
+                    if (en.getPrioridad()== "Urgente") 
+                    {
+                        boolurgencia = true;
+                    }
+                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + en.getDireccionDestino()+" Tipo: "+en.getTipo());
+                }
+                if (boolurgencia == false)
+                {
+                    Urgencia.setText(null);
+                }
+                if (boolurgencia) 
+                {
+                    Urgencia.setText("Hay una encomienda urgente!");
+                    boolurgencia = false;
+                }
+                // Dejo seleccionado el que estaba seleccionado antes de refrescar la ventana
+                try{
+                    EncomiendasEnSucursal.getSelectionModel().select(seleccionado);
+                }catch(Exception e){
+                    System.out.println("Ya no está disponible la encomienda: "+e.getMessage());
+                }
+
+                // CARGAR ENCOMIENDAS RECIBIDAS
+                String seleccionadoR = EncomiendasRecibidas.getSelectionModel().getSelectedItem();
+                EncomiendasRecibidas.getItems().clear();
+                for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
+                {
+                    EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado()+")" + "// " + "ID: #" + en.getId() + "# Destino: " + en.getDireccionDestino());
+                }
+                // Dejo seleccionado el que estaba seleccionado antes de refrescar la ventana
+                try{
+                    EncomiendasRecibidas.getSelectionModel().select(seleccionadoR);
+                }catch(Exception e){
+                    System.out.println("Ya no está disponible la encomiendaR: "+e.getMessage());
+                }
+                // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
+                ListMessagesPreview.getItems().clear();
+                for(Mensaje m: emp.getsucursalactual().getMensajesRecibidos())
+                {
+                    if (m.getUrgente()== true) 
+                    {
+                        String mensajePreview ="URGENTE " + m.getContenido();
+                        String[] mpArray = mensajePreview.split("\\r?\\n");
+                        if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                        ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
+                    }
+                    else
+                    {
+                        String mensajePreview = m.getContenido();
+                        String[] mpArray = mensajePreview.split("\\r?\\n");
+                        if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                        ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
+                    }
+                }
+                ListMessagesPreview.setCellFactory(new Callback<ListView<String>, EllipsisListCell>() {
+                    @Override
+                    public EllipsisListCell call(ListView<String> p) {
+                        EllipsisListCell cell = new EllipsisListCell();
+                        return cell;
+                    }
+                });
+                // CARGAR CAMIONES DISPONIBLES
+                String selectedCamion = ChoiceBoxCamiones.getSelectionModel().getSelectedItem();
+                espacioCamion = -1;
+                ChoiceBoxCamiones.getItems().clear();
+                for (Camion c: emp.getsucursalactual().getCamionesEstacionados()) 
+                {
+                    ChoiceBoxCamiones.getItems().add(c.NombreCompleto());
+                }/**/
+                // Dejo seleccionado el que estaba seleccionado antes de refrescar la ventana
+                try{
+                    ChoiceBoxCamiones.getSelectionModel().select(selectedCamion);
+                }catch(Exception e){
+                    System.out.println("Ya no está disponible el camion: "+e.getMessage());
+                }
             }
         });
     }
@@ -424,27 +531,28 @@ public class FXMLSucursalController implements Initializable {
                     emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("encomiendasAlmacenadas").child(index.toString()).removeValue();
                     
                     encomienda.setestado("En Camión");
+                    Integer c_index = emp.getsucursalactual().getCamionesEstacionados().indexOf(camion);
                     camion.addencomienda(encomienda);
-                    emp.fbRef().child("camiones").child(camion.NombreCompleto()).setValue(camion);
+                    emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("camionesEstacionados").child(c_index.toString()).setValue(camion);
 
-                    //Recargar Encomiendas
+                    //RECARGAR ENCOMIENDAS
                     // Firebase lo hace automágicamente :)
 
-                    //Actualizar capacidad
+                    //ACTUALIZAR CAPACIDAD
                     espacioCamion = camion.PorcentajeDisponible();
-                    // RECICLAR ESTE CODIGO DESPUES!!! ¡¡¡¡DRY!!!!
+                    // Reciclar este código después!!! ¡¡¡¡DRY!!!!
                     ProgressBarCapacity.setProgress(espacioCamion);
                     if (espacioCamion<0.7)
                     {
-                         ProgressBarCapacity.setStyle("-fx-accent: green;");
+                        ProgressBarCapacity.setStyle("-fx-accent: green;");
                     }
                     else if (espacioCamion<0.85)
                     {
-                         ProgressBarCapacity.setStyle("-fx-accent: yellow;");
+                        ProgressBarCapacity.setStyle("-fx-accent: yellow;");
                     }
                     else
                     {
-                         ProgressBarCapacity.setStyle("-fx-accent: red;");
+                        ProgressBarCapacity.setStyle("-fx-accent: red;");
                     }
                 }
                 else
