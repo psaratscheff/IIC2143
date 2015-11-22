@@ -84,6 +84,5 @@
       <Label fx:id="Urgencia" layoutX="394.0" layoutY="245.0" textFill="RED" />
       <Button fx:id="VerInforme" layoutX="807.0" layoutY="554.0" mnemonicParsing="false" onAction="#CargarVentanaInformes" text="Ver Informe" />
       <Button fx:id="Salir" layoutX="34.0" layoutY="52.0" mnemonicParsing="false" onAction="#SalirAction" text="Salir" />
-      <Button fx:id="VerEncomienda" layoutX="673.0" layoutY="386.0" mnemonicParsing="false" onAction="#VerEncomiendaAction" text="Ver datos encomienda" />
    </children>
 </AnchorPane>

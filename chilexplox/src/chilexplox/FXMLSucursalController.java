@@ -282,18 +282,18 @@ public class FXMLSucursalController implements Initializable {
                 }/**/
                 //Stufffff to do
                 ProgressBarCapacity.setProgress(espacioCamion);
-                 if (espacioCamion<0.7)
-                 {
-                      ProgressBarCapacity.setStyle("-fx-accent: green;");
-                 }
-                 else if (espacioCamion<0.85)
-                 {
-                      ProgressBarCapacity.setStyle("-fx-accent: yellow;");
-                 }
-                 else
-                 {
-                      ProgressBarCapacity.setStyle("-fx-accent: red;");
-                 }
+                if (espacioCamion<0.7)
+                {
+                    ProgressBarCapacity.setStyle("-fx-accent: green;");
+                }
+                else if (espacioCamion<0.85)
+                {
+                    ProgressBarCapacity.setStyle("-fx-accent: yellow;");
+                }
+                else
+                {
+                    ProgressBarCapacity.setStyle("-fx-accent: red;");
+                }
                 Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
                     @Override
                     public void run() {
@@ -903,31 +903,6 @@ public class FXMLSucursalController implements Initializable {
         catch (Exception e)
         {
             //Nada
-        }
-    }
-    
-    @FXML
-    private void VerEncomiendaAction() throws IOException{
-        try
-        {
-            String encomiendaID = EncomiendasEnSucursal.getSelectionModel().getSelectedItem().split("#")[1]; 
-            if (encomiendaID == null) {
-                encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1];
-            } //Asumo que si estoy en una de las dos listas
-            
-            Encomienda encomienda = null;
-            encomienda = emp.getencomiendabyid(encomiendaID);
-            System.out.print(encomienda.getId());
-            MessageBox mb = new MessageBox("Origen: "+encomienda.getSucursalOrigen()
-                    + "//Destino: "+encomienda.getSucursalDestino()
-                    + "//Direccion: " + encomienda.getDireccionDestino(), MessageBoxType.OK_ONLY);
-            mb.showAndWait();
-                
-            
-        } 
-        catch (Exception e)
-        {
-            
         }
     }
 }
