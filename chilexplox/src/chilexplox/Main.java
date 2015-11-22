@@ -91,12 +91,6 @@ public class Main extends Application {
         newPostRef = postRef.push(); String id1 = newPostRef.getKey(); enc1.setId(id1); newPostRef.setValue(enc1);
         newPostRef = postRef.push(); String id2 = newPostRef.getKey(); enc2.setId(id2); newPostRef.setValue(enc2);
         
-        /*postRef = emp.fbRef().child("camiones");
-        newPostRef = postRef.child(c1.NombreCompleto()); newPostRef.setValue(c1);
-        newPostRef = postRef.child(c2.NombreCompleto()); newPostRef.setValue(c2);
-        newPostRef = postRef.child(c3.NombreCompleto()); newPostRef.setValue(c3);
-        newPostRef = postRef.child(c4.NombreCompleto()); newPostRef.setValue(c4);*/
-        
         postRef = emp.fbRef().child("sucursales");
         newPostRef = postRef.child(s1.getDireccion()); newPostRef.setValue(s1);
         newPostRef = postRef.child(s2.getDireccion()); newPostRef.setValue(s2);
@@ -138,7 +132,7 @@ public class Main extends Application {
             @Override
             public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
         });
-        */
+        /**/
         //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         Scene scene = new Scene(root);

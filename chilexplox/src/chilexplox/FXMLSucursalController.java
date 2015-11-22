@@ -441,6 +441,7 @@ public class FXMLSucursalController implements Initializable {
     {
         Camion camionSeleccionado = null;
         String cs = ChoiceBoxCamiones.getValue();
+        System.out.println(emp.getsucursalactual().getCamionesEstacionados());
         for (Camion c: emp.getsucursalactual().getCamionesEstacionados())
         {
             System.out.println(c.NombreCompleto()+" != "+cs);
@@ -527,13 +528,10 @@ public class FXMLSucursalController implements Initializable {
                     if (espacioCamion>=1.0){ return; }
 
                     //CARGAR CAMION!!
-                    Integer index = emp.getsucursalactual().getEncomiendasAlmacenadas().indexOf(encomienda);
-                    emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("encomiendasAlmacenadas").child(index.toString()).removeValue();
-                    
+                    emp.getsucursalactual().getEncomiendasAlmacenadas().remove(encomienda);
                     encomienda.setestado("En Camión");
-                    Integer c_index = emp.getsucursalactual().getCamionesEstacionados().indexOf(camion);
-                    camion.addencomienda(encomienda);
-                    emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("camionesEstacionados").child(c_index.toString()).setValue(camion);
+                    camion.addencomienda(encomienda); // Camion obtenido de los estacionados en sucursal actual!
+                    emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
 
                     //RECARGAR ENCOMIENDAS
                     // Firebase lo hace automágicamente :)
