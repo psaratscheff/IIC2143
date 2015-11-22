@@ -74,6 +74,7 @@ public class FXMLVentanaPagoController implements Initializable {
             public void run(){
                 for(Encomienda en: pedido.getEncomiendas())
                 {
+                    en.setEmpleado(emp.getempleadoactual().getUsername());
                     //----Agrego encomiendas en empresa---
                     postRef = emp.fbRef().child("encomiendas");
                     newPostRef = postRef.push(); String id1 = newPostRef.getKey(); en.setId(id1); newPostRef.setValue(en);

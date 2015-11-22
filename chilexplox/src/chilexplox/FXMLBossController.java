@@ -35,6 +35,10 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import ciruman.EllipsisListCell;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import java.util.Iterator;
 import java.util.List;
 import javafx.util.Callback;
@@ -185,18 +189,18 @@ public class FXMLBossController implements Initializable {
     private void VerErroresAction() throws IOException{
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLLogin.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLErrores.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();
-            Stage cerrar = (Stage)Salir.getScene().getWindow();
-            cerrar.close();
         } 
         catch (Exception e)
         {
             //Nada
         }
     }
+    
+    
     
 }

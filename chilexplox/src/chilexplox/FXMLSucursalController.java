@@ -502,6 +502,7 @@ public class FXMLSucursalController implements Initializable {
         try
         {
             encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
+            encomienda.setEmpleado(emp.getempleadoactual().getUsername());
         } 
         catch (Exception e)
         {
@@ -728,6 +729,10 @@ public class FXMLSucursalController implements Initializable {
         s.getMensajesRecibidos().add(mnsj);
         postRef = emp.fbRef().child("sucursales");
         newPostRef = postRef.child(encomienda.getSucursalOrigen()); newPostRef.setValue(s);
+        String error = "Se ha detectado error en la encomienda ID #"+encomienda.getId()+"#" + "por parte del funcionario: " + encomienda.getEmpleado();
+        Mensaje mnsjerror = new Mensaje(error, false);
+        postRef = emp.fbRef().child("errores");
+        newPostRef = postRef.push(); newPostRef.setValue(mnsjerror);
         
     }
     
