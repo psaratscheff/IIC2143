@@ -25,7 +25,6 @@
       <Button fx:id="BotonVerEstadoEncomienda" layoutX="320.0" layoutY="203.0" onAction="#EventoVerEstadoEncomienda" prefHeight="31.0" prefWidth="189.0" text="Ver estado encomienda" />
       <TextField fx:id="TextFieldNrEncomienda" layoutX="305.0" layoutY="159.0" prefHeight="31.0" prefWidth="218.0" promptText="Numero encomienda" />
       <Button fx:id="BottonAgregarEncomienda" layoutX="65.0" layoutY="136.0" mnemonicParsing="false" onAction="#EventoAgregarEncomiendaCliente" prefHeight="31.0" prefWidth="180.0" text="Agregar encomienda" />
-      <ListView fx:id="ListViewEncomiendasCliente" layoutX="320.0" layoutY="100.0" prefHeight="30.0" prefWidth="239.0" visible="false" />
       <Button fx:id="Salir" layoutX="512.0" layoutY="18.0" mnemonicParsing="false" onAction="#SalirAction" text="Salir" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#186509" height="135.0" layoutX="280.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" width="3.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#186509" height="3.0" layoutX="54.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" width="501.0" />

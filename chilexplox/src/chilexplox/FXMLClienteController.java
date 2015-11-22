@@ -68,8 +68,6 @@ public class FXMLClienteController implements Initializable {
     private TextField TextFieldNrEncomienda;
     @FXML
     private Label LabelNombreTrabajador;
-    @FXML
-    private ListView<String> ListViewEncomiendasCliente;
     Empresa emp;
     
     @Override
@@ -79,47 +77,31 @@ public class FXMLClienteController implements Initializable {
         String bienvenida = "Hola, " + emp.getclienteactual().getNombre();
         LabelNombreTrabajador.setText(bienvenida);
     }
-    
-   /* @FXML
-    private void EventoAgregarEncomiendaCliente(javafx.event.ActionEvent event) {
-        try {
-          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedidoCliente.fxml"));
-          
-        } catch (Exception e){
-            System.out.println("ERROR 102: " + e.toString());
-        }
-    }*/
     @FXML
     private void EventoVerEstadoEncomienda(javafx.event.ActionEvent event)
     {
-       String nrencomienda= TextFieldNrEncomienda.getText();
-       boolean existe= false;
-       ListViewEncomiendasCliente.getItems().clear();
-       for(Encomienda en: emp.getencomiendas())
-       {   
-           if(nrencomienda.equals(en.getId()))
-           {
-               ListViewEncomiendasCliente.visibleProperty().setValue(true);
-               existe=true;
-               ListViewEncomiendasCliente.getItems().add("ID: "+"#"+en.getId()+"#"+" Destino: "+emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
-               ListViewEncomiendasCliente.getItems().add("Hola");
-               
-           }
-       }
-       if(existe==false)
-       {//mensaje de que no existe
-         MessageBox mb = new MessageBox("No existe una encomienda con ese numero. \n Verifique su informacion.\n \n", MessageBoxType.OK_ONLY);
-        mb.showAndWait(); 
-        if(mb.getMessageBoxResult() == MessageBoxResult.OK)
-        {
-        System.out.println("OK");
+        String nrencomienda= TextFieldNrEncomienda.getText();
+        boolean existe= false;
+        for(Encomienda en: emp.getencomiendas())
+        {   
+            if(nrencomienda.equals(en.getId()))
+            {
+                MessageBox mb = new MessageBox("Encomienda encontrada, aquí se lanza la nueva ventana...", MessageBoxType.OK_ONLY);
+                mb.showAndWait();
+            }
         }
-       }
-    
+        if(existe==false)
+        {//mensaje de que no existe
+            MessageBox mb = new MessageBox("No existe una encomienda con ese numero.", MessageBoxType.OK_ONLY);
+            mb.showAndWait(); 
+            if(mb.getMessageBoxResult() == MessageBoxResult.OK)
+            {
+                System.out.println("OK");
+            }
+        }
     }
     @FXML
     private void EventoAgregarEncomiendaCliente(javafx.event.ActionEvent event) {
-        ListViewEncomiendasCliente.visibleProperty().setValue(false);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedidoCliente.fxml"));
             Parent root = (Parent) fxmlLoader.load();
@@ -132,7 +114,6 @@ public class FXMLClienteController implements Initializable {
             System.out.println("ERROR 102: " + e.toString());
         }
     }
-    
     @FXML
     private void SalirAction() throws IOException{
         try
