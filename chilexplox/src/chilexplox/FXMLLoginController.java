@@ -49,10 +49,6 @@ public class FXMLLoginController implements Initializable {
     private TextField username;
     @FXML
     private Label ErrorLabel;
-
-    List<Empleado> empleados= new ArrayList();
-    List<Cliente> clientes= new ArrayList();
-    List<Boss> jefes= new ArrayList();
     /**
      * Initializes the controller class.
      */
@@ -70,17 +66,40 @@ public class FXMLLoginController implements Initializable {
                   //System.out.println(snapshot);
                   Empleado post = snapshot.getValue(Empleado.class);
                   System.out.println("Mensaje:" + post.toString());
-                  empleados.add(post);
                   emp.AddEmpleado(post);
             }
             @Override
-            public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildChanged(DataSnapshot ds, String previousChildKey)
+            {
+                Empleado new_usr = ds.getValue(Empleado.class);
+                Empleado old_usr = null;
+                for (Empleado usr: emp.getempleados())
+                {
+                    if (usr.getUsername().equals(new_usr.getUsername()))
+                    {
+                        old_usr = usr;
+                    }
+                }
+                if (old_usr == null) { throw new UnsupportedOperationException("¡¡Empleado modificado no existe!!"); }
+                emp.getempleados().remove(old_usr);
+                emp.getempleados().add(new_usr);
+            }
             @Override
-            public void onChildRemoved(DataSnapshot ds) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildRemoved(DataSnapshot ds)
+            {
+                Empleado old_usr = ds.getValue(Empleado.class);
+                emp.getjefes().remove(old_usr);
+            }
             @Override
-            public void onChildMoved(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildMoved(DataSnapshot ds, String string)
+            {
+                // No importa, no se hace nada
+            }
             @Override
-            public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
+            public void onCancelled(FirebaseError fe)
+            {
+                System.out.println("ERROR FB-102:" + fe.getMessage());
+            }
         });
         postRef = emp.fbRef().child("jefes");
         postRef.addChildEventListener(new ChildEventListener() {
@@ -90,17 +109,40 @@ public class FXMLLoginController implements Initializable {
                   //System.out.println(snapshot);
                   Boss post = snapshot.getValue(Boss.class);
                   //System.out.println("Mensaje:" + post.toString());
-                  jefes.add(post);
                   emp.AddJefe(post);
             }
             @Override
-            public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildChanged(DataSnapshot ds, String previousChildKey)
+            {
+                Boss new_usr = ds.getValue(Boss.class);
+                Boss old_usr = null;
+                for (Boss usr: emp.getjefes())
+                {
+                    if (usr.getUsername().equals(new_usr.getUsername()))
+                    {
+                        old_usr = usr;
+                    }
+                }
+                if (old_usr == null) { throw new UnsupportedOperationException("¡¡Jefe modificado no existe!!"); }
+                emp.getjefes().remove(old_usr);
+                emp.getjefes().add(new_usr);
+            }
             @Override
-            public void onChildRemoved(DataSnapshot ds) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildRemoved(DataSnapshot ds)
+            {
+                Boss old_usr = ds.getValue(Boss.class);
+                emp.getjefes().remove(old_usr);
+            }
             @Override
-            public void onChildMoved(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildMoved(DataSnapshot ds, String string)
+            {
+                // No importa, no se hace nada
+            }
             @Override
-            public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
+            public void onCancelled(FirebaseError fe)
+            {
+                System.out.println("ERROR FB-102:" + fe.getMessage());
+            }
         });
         
         postRef = emp.fbRef().child("clientes");
@@ -108,20 +150,41 @@ public class FXMLLoginController implements Initializable {
             // Retrieve new posts as they are added to the database
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
-                  //System.out.println(snapshot);
                   Cliente post = snapshot.getValue(Cliente.class);
-                  //System.out.println("Mensaje:" + post.toString());
-                  clientes.add(post);
                   emp.AddCliente(post);
             }
             @Override
-            public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildChanged(DataSnapshot ds, String previousChildKey)
+            {
+                Cliente new_usr = ds.getValue(Cliente.class);
+                Cliente old_usr = null;
+                for (Cliente usr: emp.getclientes())
+                {
+                    if (usr.getUsuario().equals(new_usr.getUsuario()))
+                    {
+                        old_usr = usr;
+                    }
+                }
+                if (old_usr == null) { throw new UnsupportedOperationException("¡¡Cliente modificado no existe!!"); }
+                emp.getclientes().remove(old_usr);
+                emp.getclientes().add(new_usr);
+            }
             @Override
-            public void onChildRemoved(DataSnapshot ds) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildRemoved(DataSnapshot ds)
+            {
+                Cliente old_usr = ds.getValue(Cliente.class);
+                emp.getclientes().remove(old_usr);
+            }
             @Override
-            public void onChildMoved(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildMoved(DataSnapshot ds, String string)
+            {
+                // No importa, no se hace nada
+            }
             @Override
-            public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
+            public void onCancelled(FirebaseError fe)
+            {
+                System.out.println("ERROR FB-102:" + fe.getMessage());
+            }
         });
     }    
 //tengo que hacer array de usuario en el initialice desde sucursla controler 
@@ -130,7 +193,7 @@ public class FXMLLoginController implements Initializable {
     {
         String pass = password.getText();
         String user = username.getText();
-        for (Empleado e: empleados) 
+        for (Empleado e: emp.getempleados()) 
         {
             if (pass.equals(e.getPassword()) & user.equals(e.getUsername())) 
             {
@@ -145,7 +208,7 @@ public class FXMLLoginController implements Initializable {
             } 
             
         }
-        for (Cliente c: clientes)
+        for (Cliente c: emp.getclientes())
         {
          if (pass.equals(c.getPassword()) & user.equals(c.getUsuario())) 
             {
@@ -160,7 +223,7 @@ public class FXMLLoginController implements Initializable {
             } 
         }
         
-        for (Boss b: jefes)
+        for (Boss b: emp.getjefes())
         {
             
          if (pass.equals(b.getPassword()) & user.equals(b.getUsername())) 
