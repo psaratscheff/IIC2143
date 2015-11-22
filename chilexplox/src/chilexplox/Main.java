@@ -177,6 +177,133 @@ public class Main extends Application {
                 System.out.println("ERROR FB-102:" + fe.getMessage());
             }
         });
+        
+        //Mantener los usuarios sincronizados
+        postRef = emp.fbRef().child("empleados");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+                  //System.out.println(snapshot);
+                  Empleado post = snapshot.getValue(Empleado.class);
+                  emp.AddEmpleado(post);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String previousChildKey)
+            {
+                Empleado new_usr = ds.getValue(Empleado.class);
+                Empleado old_usr = null;
+                for (Empleado usr: emp.getempleados())
+                {
+                    if (usr.getUsername().equals(new_usr.getUsername()))
+                    {
+                        old_usr = usr;
+                    }
+                }
+                if (old_usr == null) { throw new UnsupportedOperationException("¡¡Empleado modificado no existe!!"); }
+                emp.getempleados().remove(old_usr);
+                emp.getempleados().add(new_usr);
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds)
+            {
+                Empleado old_usr = ds.getValue(Empleado.class);
+                emp.getjefes().remove(old_usr);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string)
+            {
+                // No importa, no se hace nada
+            }
+            @Override
+            public void onCancelled(FirebaseError fe)
+            {
+                System.out.println("ERROR FB-102:" + fe.getMessage());
+            }
+        });
+        postRef = emp.fbRef().child("jefes");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+                  Boss post = snapshot.getValue(Boss.class);
+                  emp.AddJefe(post);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String previousChildKey)
+            {
+                Boss new_usr = ds.getValue(Boss.class);
+                Boss old_usr = null;
+                for (Boss usr: emp.getjefes())
+                {
+                    if (usr.getUsername().equals(new_usr.getUsername()))
+                    {
+                        old_usr = usr;
+                    }
+                }
+                if (old_usr == null) { throw new UnsupportedOperationException("¡¡Jefe modificado no existe!!"); }
+                emp.getjefes().remove(old_usr);
+                emp.getjefes().add(new_usr);
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds)
+            {
+                Boss old_usr = ds.getValue(Boss.class);
+                emp.getjefes().remove(old_usr);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string)
+            {
+                // No importa, no se hace nada
+            }
+            @Override
+            public void onCancelled(FirebaseError fe)
+            {
+                System.out.println("ERROR FB-102:" + fe.getMessage());
+            }
+        });
+        
+        postRef = emp.fbRef().child("clientes");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+                  Cliente post = snapshot.getValue(Cliente.class);
+                  emp.AddCliente(post);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String previousChildKey)
+            {
+                Cliente new_usr = ds.getValue(Cliente.class);
+                Cliente old_usr = null;
+                for (Cliente usr: emp.getclientes())
+                {
+                    if (usr.getUsuario().equals(new_usr.getUsuario()))
+                    {
+                        old_usr = usr;
+                    }
+                }
+                if (old_usr == null) { throw new UnsupportedOperationException("¡¡Cliente modificado no existe!!"); }
+                emp.getclientes().remove(old_usr);
+                emp.getclientes().add(new_usr);
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds)
+            {
+                Cliente old_usr = ds.getValue(Cliente.class);
+                emp.getclientes().remove(old_usr);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string)
+            {
+                // No importa, no se hace nada
+            }
+            @Override
+            public void onCancelled(FirebaseError fe)
+            {
+                System.out.println("ERROR FB-102:" + fe.getMessage());
+            }
+        });
         //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         Scene scene = new Scene(root);
