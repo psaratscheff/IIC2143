@@ -8,18 +8,18 @@ public class Empleado {
     private String apellido;
     private String username;
     private String password;
-    private List<Integer> horario;
+    //private List<Integer> horario;
     private String sucursalDondeTrabaja;
     
     public Empleado() {} // Constructor vacío para Firebase
 
-    public Empleado(String nombre, String apellido, String username, String password, List<Integer> horario, String sucursal)
+    public Empleado(String nombre, String apellido, String username, String password,  String sucursal)
     {
         this.nombre = nombre;
         this.apellido = apellido;
         this.username = username;
         this.password = password;
-        this.horario = horario;
+        //this.horario = horario;
         this.sucursalDondeTrabaja = sucursal;
     }
 
@@ -31,8 +31,8 @@ public class Empleado {
     {return username;}
     public String getPassword()
     {return password;}
-    public List<Integer> getHorario()
-    {return horario;}
+   // public List<Integer> getHorario()
+   // {return horario;}
     public String getSucursalDondeTrabaja()
     {return sucursalDondeTrabaja;}
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLAgregarEmpleadoController">
+   <children>
+       <TextField fx:id="CNombre" layoutX="179.0" layoutY="70.0" prefHeight="25.0" prefWidth="192.0" />
+         
+         <TextField fx:id="CApellido" layoutX="179.0" layoutY="110.0" prefHeight="25.0" prefWidth="192.0" />
+         <TextField fx:id="CSucursal" layoutX="179.0" layoutY="155.0" prefHeight="25.0" prefWidth="192.0" />
+          <TextField fx:id="CUsername" layoutX="179.0" layoutY="200.0" prefHeight="25.0" prefWidth="192.0" />
+         <Label layoutX="59.0" layoutY="205.0" text="Username:" />
+         <Label layoutX="55.0" layoutY="160.0" text="Sucursal:" />
+         <Label layoutX="58.0" layoutY="115.0" text="Apellido:" />
+         <Label layoutX="58.0" layoutY="75.0" text="Nombre:" />
+         <Label layoutX="130.0" layoutY="16.0" text="Ingrese los datos">
+            <font>
+               <Font name="System Bold" size="20.0" />
+            </font>
+         </Label>
+      <Label layoutX="55.0" layoutY="262.0" text="Clave:" />
+      <PasswordField fx:id="CClave" layoutX="180.0" layoutY="257.0" prefHeight="31.0" prefWidth="192.0" />
+      <PasswordField fx:id="CClave2" layoutX="180.0" layoutY="298.0" prefHeight="31.0" prefWidth="192.0" />
+      <Label layoutX="56.0" layoutY="303.0" text="Repita su clave:" />
+      <Button fx:id="ButtonRegistrar" layoutX="161.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#btnRegistrarAction" text="Registrar" />
+   </children>
+</AnchorPane>

@@ -170,7 +170,20 @@ public class FXMLBossController implements Initializable {
             }
         });/**/
     }
-    
+    @FXML
+    private void agregarEmpleadoAction() throws IOException
+    {
+    try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLAgregarEmpleado.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+        } 
+    catch (Exception e){
+            
+        }
+    }
     @FXML
     private void btnCargarSucursal() throws IOException{
         Sucursal s = ChoiceBoxSucursales.getValue();

@@ -37,7 +37,7 @@
        <Label fx:id="ErrorLabelSucursal" layoutX="400.0" layoutY="100.0" textFill="RED" />
       
       
-      <Button fx:id="ButtonAgregarEmpleado" layoutX="406.0" layoutY="190.0" mnemonicParsing="false" text="Agregar empleado" />
+      <Button fx:id="ButtonAgregarEmpleado" layoutX="406.0" layoutY="190.0" mnemonicParsing="false" text="Agregar empleado" onAction="#agregarEmpleadoAction"  />
       <Button fx:id="ButtonEliminarEmpleado" layoutX="406.0" layoutY="243.0" mnemonicParsing="false" text="Eliminar Empleado" />
       
       <Button fx:id="VerInforme" layoutX="424.0" layoutY="290.0" mnemonicParsing="false" onAction="#CargarVentanaInformes" text="Ver Informe" />
