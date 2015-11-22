@@ -703,6 +703,8 @@ public class FXMLSucursalController implements Initializable {
     
     @FXML
     private void NotificarErrorAction() throws IOException{
+        Firebase postRef;
+        Firebase newPostRef;
         String encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
         Encomienda encomienda = null;
         try
@@ -713,8 +715,13 @@ public class FXMLSucursalController implements Initializable {
         {
             return; //Nada
         }
-        String mensaje = "Se ha detectado error en la encomienda ID #"+encomienda.getId()+"#";
-        emp.getempleadoactual().EnviarMensaje(emp.getSucursalConDireccion(encomienda.getSucursalOrigen()), mensaje, true);
+        String contenido = "Se ha detectado error en la encomienda ID #"+encomienda.getId()+"#";
+        Mensaje mnsj = new Mensaje(contenido,true);
+        Sucursal s = emp.getSucursalConDireccion(encomienda.getSucursalOrigen());
+        s.getMensajesRecibidos().add(mnsj);
+        postRef = emp.fbRef().child("sucursales");
+        newPostRef = postRef.child(encomienda.getSucursalOrigen()); newPostRef.setValue(s);
+        
     }
     
     @FXML
