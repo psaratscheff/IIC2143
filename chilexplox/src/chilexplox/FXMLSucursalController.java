@@ -729,7 +729,7 @@ public class FXMLSucursalController implements Initializable {
         s.getMensajesRecibidos().add(mnsj);
         postRef = emp.fbRef().child("sucursales");
         newPostRef = postRef.child(encomienda.getSucursalOrigen()); newPostRef.setValue(s);
-        String error = "Se ha detectado error en la encomienda ID #"+encomienda.getId()+"#" + "por parte del funcionario: " + encomienda.getEmpleado();
+        String error = "Error en la encomienda ID #"+encomienda.getId()+"#" + "/n por parte del funcionario: " + encomienda.getEmpleado();
         Mensaje mnsjerror = new Mensaje(error, false);
         postRef = emp.fbRef().child("errores");
         newPostRef = postRef.push(); newPostRef.setValue(mnsjerror);

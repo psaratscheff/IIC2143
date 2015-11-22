@@ -14,6 +14,7 @@ import com.firebase.client.FirebaseError;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -46,7 +47,7 @@ public class FXMLErroresController implements Initializable {
             @Override
             public void onChildAdded(DataSnapshot ds, String previousChildKey) {
                 Mensaje error = ds.getValue(Mensaje.class);
-                ListaErrores.getItems().add(error.getContenido());
+                AddError(error);
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String previousChildKey) {
@@ -65,5 +66,15 @@ public class FXMLErroresController implements Initializable {
                 System.out.println("ERROR FB-101:" + fe.getMessage());
             }
         });/**/
+    }
+    
+    private void AddError(final Mensaje m)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ListaErrores.getItems().add(m.getContenido());
+            }
+        });
     }
 }
