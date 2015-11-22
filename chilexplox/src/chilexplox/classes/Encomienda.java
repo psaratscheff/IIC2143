@@ -51,10 +51,7 @@ public class Encomienda {
     {return id;}
     public void setId(String sId)
     {
-        if (this.id == null)
-        {
-            this.id = sId;
-        }
+        this.id = sId;
     }
     public int getLargo()
     {return largo;}

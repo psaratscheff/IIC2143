@@ -9,11 +9,13 @@ import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Ingreso;
 import chilexplox.classes.Pedido;
+import com.firebase.client.Firebase;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,7 +54,8 @@ public class FXMLVentanaPagoController implements Initializable {
     private int valor;
     private FXMLSucursalController sucursalController;
     private FXMLClienteController clienteController;
-
+    Firebase postRef;
+    Firebase newPostRef;
 
     /**
      * Initializes the controller class.
@@ -60,19 +63,37 @@ public class FXMLVentanaPagoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Nada :)
+        
     }    
     
     @FXML
     private void btnPagar(MouseEvent event) throws IOException 
     {
-        for(Encomienda en: pedido.getEncomiendas())
-        {
-            emp.getSucursalConDireccion(en.getSucursalOrigen()).getEncomiendasAlmacenadas().add(en);
-            emp.getencomiendas().add(en);
-        }
-        
-        Calendar cal = Calendar.getInstance();
-        emp.addIngreso(new Ingreso(this.valor, cal.getTime()));
+        Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
+            @Override
+            public void run(){
+                for(Encomienda en: pedido.getEncomiendas())
+                {
+                    //----Agrego encomiendas en empresa---
+                    postRef = emp.fbRef().child("encomiendas");
+                    newPostRef = postRef.push(); String id1 = newPostRef.getKey(); en.setId(id1); newPostRef.setValue(en);
+                    emp.getsucursalactual().getEncomiendasAlmacenadas().add(en);
+                    
+                }
+                //----Agrego el ingreso a la empresa---
+                Calendar cal = Calendar.getInstance();
+                Ingreso i = new Ingreso(valor, cal.getTime());
+                emp.addIngreso(i);
+                postRef = emp.fbRef().child("ingresos");
+                newPostRef = postRef.push(); newPostRef.setValue(i);
+                //----Actualizo la sucursal con las nuevas encomiendas---
+                postRef = emp.fbRef().child("sucursales");
+                newPostRef = postRef.child(emp.getsucursalactual().getDireccion()); newPostRef.setValue(emp.getsucursalactual());
+                //----Agrego el pedido a la empresa---
+                postRef = emp.fbRef().child("pedidos");
+                newPostRef = postRef.push(); pedido.setId(newPostRef.getKey()); newPostRef.setValue(pedido);
+            }
+        });
         
         Stage stage = (Stage) okButton.getScene().getWindow();
         this.sucursalController.UpdateConSucursal();

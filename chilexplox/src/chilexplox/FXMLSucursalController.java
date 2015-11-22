@@ -496,7 +496,7 @@ public class FXMLSucursalController implements Initializable {
         } 
         catch (Exception e)
         {
-            System.out.println("1No hay encomienda seleccionada");
+            System.out.println("No hay encomienda seleccionada");
             return; //Nada
         }
         

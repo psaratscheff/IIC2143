@@ -9,6 +9,10 @@ import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Pedido;
 import chilexplox.classes.Sucursal;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import java.awt.Desktop.Action;
 import java.io.IOException;
 import java.net.URL;
@@ -89,10 +93,9 @@ public class FXMLIngresoPedidoController implements Initializable {
         ETipo.getItems().add("Normal");
         ETipo.getItems().add("Refrigerado");
         ETipo.getItems().add("Radioactivo");
-        for (Sucursal s: emp.getsucursales()) 
-        {
-            EDestino.getItems().add(s.getDireccion());
-        }
+        
+        LoadSucursales();
+        
         EOrigen.setText(emp.getsucursalactual().getDireccion());
         editando=false;
     }
@@ -128,7 +131,7 @@ public class FXMLIngresoPedidoController implements Initializable {
                 String tipo= ETipo.getValue();
                 for(Sucursal s: emp.getsucursales())
                     {
-                        if (s.getDireccion() == destino) 
+                        if (s.getDireccion().equals(destino)) 
                         {
                             Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo);
                             en.setancho(Integer.parseInt(EAncho.getText()));
@@ -225,4 +228,34 @@ public class FXMLIngresoPedidoController implements Initializable {
         this.sucursalController = aThis;
     }
     
+    private void LoadSucursales()
+    {
+        Firebase sucursalesRef = emp.fbRef().child("sucursales");
+        sucursalesRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
+                Sucursal s = ds.getValue(Sucursal.class);
+                EDestino.getItems().add(s.getDireccion());
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {
+                //Hay que hacer algo por si cambia nombre?
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {
+                Sucursal s = ds.getValue(Sucursal.class);
+                System.out.println("Sucursal REMOVIDA:" + s.toString());
+                EDestino.getItems().remove(s.getDireccion());
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {
+                // Who cares... (No se requiere hacer nada)
+            }
+            @Override
+            public void onCancelled(FirebaseError fe) {
+                System.out.println("ERROR FB-101:" + fe.getMessage());
+            }
+        });/**/
+    }
 }
