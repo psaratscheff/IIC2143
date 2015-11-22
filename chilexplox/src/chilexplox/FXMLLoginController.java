@@ -69,8 +69,9 @@ public class FXMLLoginController implements Initializable {
             public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
                   //System.out.println(snapshot);
                   Empleado post = snapshot.getValue(Empleado.class);
-                  //System.out.println("Mensaje:" + post.toString());
+                  System.out.println("Mensaje:" + post.toString());
                   empleados.add(post);
+                  emp.AddEmpleado(post);
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
@@ -90,6 +91,7 @@ public class FXMLLoginController implements Initializable {
                   Boss post = snapshot.getValue(Boss.class);
                   //System.out.println("Mensaje:" + post.toString());
                   jefes.add(post);
+                  emp.AddJefe(post);
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
@@ -110,6 +112,7 @@ public class FXMLLoginController implements Initializable {
                   Cliente post = snapshot.getValue(Cliente.class);
                   //System.out.println("Mensaje:" + post.toString());
                   clientes.add(post);
+                  emp.AddCliente(post);
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
@@ -178,10 +181,10 @@ public class FXMLLoginController implements Initializable {
     private void btnRegistrarseAction(MouseEvent event) throws IOException 
     {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLRegistraseCliente.fxml"));
-                Parent root = (Parent) fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));  
-                stage.show();
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));  
+        stage.show();
        
     }
     

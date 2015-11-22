@@ -165,9 +165,17 @@ public class Empresa {
     {
         this.clientes.add(c);
     }
+      public void AddJefe(Boss b)
+    {
+        this.jefes.add(b);
+    }
     public void addIngreso(Ingreso i)
     {
         this.ingresos.add(i);
+    }
+    public void addSucursal(Sucursal s)
+    {
+        this.sucursales.add(s);
     }
     public Camion EntregarCamion()
     {
@@ -236,6 +244,8 @@ public class Empresa {
         Firebase myFirebaseRef = new Firebase("https://chilexplox.firebaseio.com/");
         return myFirebaseRef;
     }
+    
+    
    /* public int buscarmenoridencomienda()
     {
         int largo=encomiendas.size();

@@ -61,6 +61,7 @@ import se.mbaeumer.fxmessagebox.MessageBoxType;
  * @author Thomas Pryce Jones
  */
 public class FXMLSucursalController implements Initializable {
+    
     @FXML
     private Label LabelNombreTrabajador;
     @FXML
@@ -216,7 +217,6 @@ public class FXMLSucursalController implements Initializable {
             }
         });/**/
     }
-    
     public void UpdateConSucursal()
     {
         Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"

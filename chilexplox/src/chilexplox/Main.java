@@ -41,6 +41,7 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        /*
         //Creacion de empresa inicial
         List<Integer> h = new ArrayList(); h.add(8); h.add(13); h.add(14); h.add(17);
         Sucursal s1 = new Sucursal("Valdivia", 1000);
@@ -78,7 +79,9 @@ public class Main extends Application {
         
         Mensaje m1 = new Mensaje("AAAAAA", true);
         s2.getMensajesRecibidos().add(m1);
-        
+        s1.getMensajesRecibidos().add(m1);
+        s4.getMensajesRecibidos().add(m1);
+        s3.getMensajesRecibidos().add(m1);
         // Cargar información a la base de datos
         Firebase postRef;
         Firebase newPostRef;
@@ -135,7 +138,7 @@ public class Main extends Application {
             @Override
             public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
         });
-        
+        */
         //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         Scene scene = new Scene(root);
