@@ -278,7 +278,7 @@ public class Main extends Application {
                 Cliente old_usr = null;
                 for (Cliente usr: emp.getclientes())
                 {
-                    if (usr.getUsuario().equals(new_usr.getUsuario()))
+                    if (usr.getRut().equals(new_usr.getRut()))
                     {
                         old_usr = usr;
                     }
