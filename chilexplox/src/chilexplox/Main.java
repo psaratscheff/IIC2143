@@ -42,6 +42,12 @@ public class Main extends Application {
     Firebase newPostRef;
     @Override
     public void start(Stage stage) throws Exception {
+        /*Sucursal s1 = new Sucursal("Valdivia", 1000);
+        Empleado e;
+        e = new Empleado("Thomas", "Pryce Jones", "1", "1", s1.getDireccion());
+        
+        postRef = emp.fbRef().child("empleados");
+        newPostRef = postRef.child(e.getUsername()); newPostRef.setValue(e);*/
         /*
         //Creacion de empresa inicial
         List<Integer> h = new ArrayList(); h.add(8); h.add(13); h.add(14); h.add(17);
