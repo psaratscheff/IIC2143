@@ -126,6 +126,10 @@ public class FXMLSucursalController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // Limpiar campos de muestra
+        LabelSucursal.setText("");
+        ErrorLabelSucursal.setText("");
+        Urgencia.setText("");
         // Get singleton empresa
         emp = Empresa.getInstance();
         // Set welcome message
@@ -237,7 +241,7 @@ public class FXMLSucursalController implements Initializable {
                 }
                 if (boolurgencia) 
                 {
-                    Urgencia.setText("Hay una encomienda urgente!");
+                    Urgencia.setText("¡Hay una encomienda urgente!");
                     boolurgencia = false;
                 }
 
