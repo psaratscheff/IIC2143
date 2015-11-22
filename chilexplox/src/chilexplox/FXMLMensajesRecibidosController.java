@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -63,28 +64,32 @@ public class FXMLMensajesRecibidosController implements Initializable {
     @FXML
     private void btnEnviarMensaje(MouseEvent event) throws IOException
     {
-        Boolean urgencia = EnviarUrgente.isSelected();
-        String contenido = "[" + emp.getsucursalactual().getDireccion() + "] --- " + EnviarContenido.getText();
-        String direccionDestino = EnviarDestino.getValue();
-        if (direccionDestino != null & EnviarContenido.getText() != "") 
-        {
-            for(Sucursal s: emp.getsucursales())
-            {
-                if (s.getDireccion().equals(direccionDestino)) 
+        Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
+            @Override
+            public void run() {
+                Boolean urgencia = EnviarUrgente.isSelected();
+                String contenido = "[" + emp.getsucursalactual().getDireccion() + "] --- " + EnviarContenido.getText();
+                String direccionDestino = EnviarDestino.getValue();
+                if (direccionDestino != null & EnviarContenido.getText() != "") 
                 {
-                    try{
-                        postRef = emp.fbRef().child("sucursales").child(direccionDestino).child("mensajesRecibidos");
-                        Mensaje mnsj = new Mensaje(contenido,urgencia);
-                        newPostRef = postRef.push(); newPostRef.setValue(mnsj);
-                        EnviarContenido.setText("");
+                    for(Sucursal s: emp.getsucursales())
+                    {
+                        if (s.getDireccion().equals(direccionDestino)) 
+                        {
+                            try{
+                                Mensaje mnsj = new Mensaje(contenido,urgencia);
+                                s.getMensajesRecibidos().add(mnsj);
+                                postRef = emp.fbRef().child("sucursales");
+                                newPostRef = postRef.child(direccionDestino); newPostRef.setValue(s);
+                                EnviarContenido.setText("");
+                            }
+                            catch(Exception e){}
+
+                        }
                     }
-                    catch(Exception e){}
-                    
                 }
             }
-        }
-        
-        
+        });
     }
     
     private void LoadSucursales()
@@ -153,4 +158,6 @@ public class FXMLMensajesRecibidosController implements Initializable {
             }
         });/**/
     }
+    
+    
 }
