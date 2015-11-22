@@ -37,8 +37,13 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import ciruman.EllipsisListCell;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import java.util.Iterator;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.util.Callback;
 
 //Listener
@@ -100,6 +105,12 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
+        Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
+            @Override
+            public void run() {
+                LoadSucursales();
+            }
+        });
         emp = Empresa.getInstance();
         pedido = new Pedido(emp.AsignarIDPedido());
         EPrioridad.getItems().add("Urgente");
@@ -108,11 +119,8 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
         ETipo.getItems().add("Normal");
         ETipo.getItems().add("Refrigerado");
         ETipo.getItems().add("Radioactivo");
-        for (Sucursal s: emp.getsucursales()) 
-        {
-            EDestino.getItems().add(s.getDireccion());
-            EOrigen.getItems().add(s.getDireccion());
-        }
+        
+        
        
         editando=false;
     } 
@@ -130,6 +138,8 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
         stage.setScene(new Scene(root));  
         stage.show();
         
+        emp.setsucursalactual(emp.getSucursalConDireccion(EOrigen.getValue()));
+        
     }
      @FXML
     private void btnAgregarEncomienda(MouseEvent event) 
@@ -146,7 +156,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                 Sucursal sucursalorigen= emp.getSucursalConDireccion(origen);
                 for(Sucursal s: emp.getsucursales())
                     {
-                        if (s.getDireccion()== destino) 
+                        if (s.getDireccion().equals(destino)) 
                         {
                             Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), sucursalorigen.getDireccion(), s.getDireccion(), tipo);
                             en.setancho(Integer.parseInt(EAncho.getText()));
@@ -167,7 +177,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                 String id = EditarID.getText().split("#")[1];
                 for (Encomienda en: pedido.getEncomiendas()) 
                 {
-                    if (en.getId() == id) 
+                    if (en.getId().equals(id)) 
                     {
                         pedido.removeencomienda(en);
                         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
@@ -176,7 +186,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                         String tipo= ETipo.getValue();
                         for(Sucursal s: emp.getsucursales())
                         {
-                            if (s.getDireccion() == destino) 
+                            if (s.getDireccion().equals(destino)) 
                             {
                                 Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo);
                                 wn.setancho(Integer.parseInt(EAncho.getText()));
@@ -241,6 +251,57 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
 
     void setClienteController(FXMLClienteController aThis) {
         this.clienteController = aThis;
+    }
+    
+    private void LoadSucursales()
+    {
+        Firebase sucursalesRef = emp.fbRef().child("sucursales");
+        sucursalesRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
+                Sucursal s = ds.getValue(Sucursal.class);
+                AddSucursal(s);
+                emp.getsucursales().add(s);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {
+                
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {
+                Sucursal s = ds.getValue(Sucursal.class);
+                RemoveSucursal(s);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {
+                // Who cares... (No se requiere hacer nada)
+            }
+            @Override
+            public void onCancelled(FirebaseError fe) {
+                System.out.println("ERROR FB-101:" + fe.getMessage());
+            }
+        });/**/
+    }
+    private void AddSucursal(final Sucursal s)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                EDestino.getItems().add(s.getDireccion());
+                EOrigen.getItems().add(s.getDireccion());
+            }
+        });
+    }
+    private void RemoveSucursal(final Sucursal s)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                EDestino.getItems().remove(s.getDireccion());
+                EOrigen.getItems().remove(s.getDireccion());
+            }
+        });
     }
     
 }

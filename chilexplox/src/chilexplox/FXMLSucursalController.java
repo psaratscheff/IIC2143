@@ -626,8 +626,6 @@ public class FXMLSucursalController implements Initializable {
             ProgressBarCapacity.setProgress(-1); // -1 para indeterminado
         }
     }
-    
-    
     @FXML
     private void IngresarPedidoAction() throws IOException{
         if (ChoiceBoxSucursales.getValue() == null)

@@ -96,7 +96,7 @@ public class FXMLVentanaPagoController implements Initializable {
         });
         
         Stage stage = (Stage) okButton.getScene().getWindow();
-        this.sucursalController.UpdateConSucursal();
+        try{this.sucursalController.UpdateConSucursal();}catch(Exception e){}
         this.parentStage.close();
         stage.close();
     }

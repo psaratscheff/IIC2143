@@ -97,9 +97,6 @@ public class FXMLClienteController implements Initializable {
        ListViewEncomiendasCliente.getItems().clear();
        for(Encomienda en: emp.getencomiendas())
        {   
-           
-           
-           
            if(nrencomienda.equals(en.getId()))
            {
                ListViewEncomiendasCliente.visibleProperty().setValue(true);

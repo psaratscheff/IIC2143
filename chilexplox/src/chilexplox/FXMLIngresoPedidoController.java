@@ -152,7 +152,7 @@ public class FXMLIngresoPedidoController implements Initializable {
                 String id = EditarID.getText().split("#")[1];
                 for (Encomienda en: pedido.getEncomiendas()) 
                 {
-                    if (en.getId() == id) 
+                    if (en.getId().equals(id)) 
                     {
                         pedido.removeencomienda(en);
                         int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
@@ -161,7 +161,7 @@ public class FXMLIngresoPedidoController implements Initializable {
                         String tipo= ETipo.getValue();
                         for(Sucursal s: emp.getsucursales())
                         {
-                            if (s.getDireccion() == destino) 
+                            if (s.getDireccion().equals(destino)) 
                             {
                                 Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo);
                                 wn.setancho(Integer.parseInt(EAncho.getText()));
