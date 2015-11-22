@@ -197,7 +197,7 @@ public class FXMLSucursalController implements Initializable {
                 }
                 //System.out.println("Nueva: " + s + " - " + s.getEncomiendasAlmacenadas() + " - " + s.getEncomiendasRecibidas() + " - " + s.getCamionesEstacionados());
                 //System.out.println("Sucursal changed: "+s+ " camiones-> "+s.getCamionesEstacionados()+ " encomiendas-> "+s.getEncomiendasAlmacenadas());
-                UpdateConSucursal(); // Actualizar data
+                RefreshConSucursal(); // Actualizar data
             }
             @Override
             public void onChildRemoved(DataSnapshot ds) {
@@ -283,6 +283,20 @@ public class FXMLSucursalController implements Initializable {
                 {
                     ChoiceBoxCamiones.getItems().add(c.NombreCompleto());
                 }/**/
+                //Stufffff to do
+                ProgressBarCapacity.setProgress(espacioCamion);
+                 if (espacioCamion<0.7)
+                 {
+                      ProgressBarCapacity.setStyle("-fx-accent: green;");
+                 }
+                 else if (espacioCamion<0.85)
+                 {
+                      ProgressBarCapacity.setStyle("-fx-accent: yellow;");
+                 }
+                 else
+                 {
+                      ProgressBarCapacity.setStyle("-fx-accent: red;");
+                 }
             }
         });
     }
@@ -362,12 +376,19 @@ public class FXMLSucursalController implements Initializable {
                     }
                 });
                 // CARGAR CAMIONES DISPONIBLES
+                String selectedCamion = ChoiceBoxCamiones.getSelectionModel().getSelectedItem();
                 espacioCamion = -1;
                 ChoiceBoxCamiones.getItems().clear();
                 for (Camion c: emp.getsucursalactual().getCamionesEstacionados()) 
                 {
                     ChoiceBoxCamiones.getItems().add(c.NombreCompleto());
                 }/**/
+                // Dejo seleccionado el que estaba seleccionado antes de refrescar la ventana
+                try{
+                    ChoiceBoxCamiones.getSelectionModel().select(selectedCamion);
+                }catch(Exception e){
+                    System.out.println("Ya no está disponible el camion: "+e.getMessage());
+                }
             }
         });
     }
