@@ -606,9 +606,9 @@ public class FXMLSucursalController implements Initializable {
                     temp=c2;
                 }
             }
-            Integer index = emp.getsucursalactual().getCamionesEstacionados().indexOf(temp);
-            emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).child("camionesEstacionados").child(index.toString()).removeValue();
-            
+            // Remove camion de sucursal
+            emp.getsucursalactual().getCamionesEstacionados().remove(temp);
+            emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
             // Descargar encomiendas en destino (Inmediato por ahora)
             destinoSucursal.getCamionesEstacionados().add(camion);
             for (Encomienda e: camion.getEncomiendas())
