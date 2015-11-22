@@ -68,6 +68,7 @@ public class Encomienda {
     public String getTipo()
     {return tipo;}
     
+    
     public void setdestino(String sucursal)
     {sucursalDestino=sucursal;}
     public void settamaño(Integer tam)

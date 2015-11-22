@@ -120,7 +120,7 @@ public class Empresa {
         Encomienda temp = null;
         for(Encomienda en: encomiendas)
         {
-            if (en.getId() == id) 
+            if (en.getId().equals(id)) 
             {
                 temp =en;
             }

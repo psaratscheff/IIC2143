@@ -38,7 +38,8 @@ import java.util.Map;
  */
 public class Main extends Application {
     Empresa emp = Empresa.getInstance();
-    
+    Firebase postRef;
+    Firebase newPostRef;
     @Override
     public void start(Stage stage) throws Exception {
         /*
@@ -133,6 +134,25 @@ public class Main extends Application {
             public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
         });
         /**/
+        
+        postRef = emp.fbRef().child("encomiendas");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+                  //System.out.println(snapshot);
+                  Encomienda post = snapshot.getValue(Encomienda.class);
+                  emp.getencomiendas().add(post);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            @Override
+            public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
+        });
         //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         Scene scene = new Scene(root);
