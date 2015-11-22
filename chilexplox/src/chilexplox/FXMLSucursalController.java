@@ -194,8 +194,8 @@ public class FXMLSucursalController implements Initializable {
                 if (emp.getsucursalactual().getDireccion().equals(s.getDireccion()))
                 {
                     emp.setsucursalactual(s);
+                    RefreshConSucursal(); // Actualizar data mostrada (Visual)
                 }
-                RefreshConSucursal(); // Actualizar data mostrada (Visual)
             }
             @Override
             public void onChildRemoved(DataSnapshot ds) {
@@ -294,7 +294,7 @@ public class FXMLSucursalController implements Initializable {
                 {
                     ProgressBarCapacity.setStyle("-fx-accent: red;");
                 }
-                Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
+                Platform.runLater(new Runnable() { // Asegurarme que se limpie la selección corriendolo poco después de cargar la lista
                     @Override
                     public void run() {
                         ChoiceBoxCamiones.getSelectionModel().clearSelection();
