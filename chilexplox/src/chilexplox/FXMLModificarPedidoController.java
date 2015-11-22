@@ -93,37 +93,45 @@ public class FXMLModificarPedidoController implements Initializable {
         Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
             @Override
             public void run(){
-                System.out.print(emp.getencomiendatemporal().getId());
+                
+                Encomienda enco = emp.getencomiendabyid(emp.getencomiendatemporal().getId());
+                
                 int tamaño = Integer.parseInt(EPeso.getText())*Integer.parseInt(ELargo.getText())*Integer.parseInt(EAncho.getText());
                 String prioridad = EPrioridad.getValue();
                 String destino = EDestino.getValue();
-                for(Sucursal s: emp.getsucursales())
+                enco.setdestino(destino);
+                enco.setprioridad(prioridad);
+                enco.settamaño(tamaño);
+                enco.setancho(Integer.parseInt(EAncho.getText()));
+                enco.setlargo(Integer.parseInt(ELargo.getText()));
+                enco.setpeso(Integer.parseInt(EPeso.getText()));
+                enco.setdirecciondestino(EDireccion.getText());
+                enco.setEmpleado(emp.getempleadoactual().getUsername());
+                
+                Encomienda temp = null;
+                for(Encomienda e: emp.getsucursalactual().getEncomiendasAlmacenadas())
+                {
+                    if (e.getId().equals(enco.getId()))
                     {
-                        if (s.getDireccion() == destino) 
-                        {
-                            emp.getencomiendatemporal().setdestino(s.getDireccion());
-                            emp.getencomiendatemporal().setprioridad(prioridad);
-                            emp.getencomiendatemporal().settamaño(tamaño);
-                            emp.getencomiendatemporal().setancho(Integer.parseInt(EAncho.getText()));
-                            emp.getencomiendatemporal().setlargo(Integer.parseInt(ELargo.getText()));
-                            emp.getencomiendatemporal().setpeso(Integer.parseInt(EPeso.getText()));
-                            emp.getencomiendatemporal().setdirecciondestino(EDireccion.getText());
-                            emp.getencomiendatemporal().setEmpleado(emp.getempleadoactual().getUsername());
-                        }
+                        temp = e;
+                        e = enco;
                     }
-                Encomienda temp = emp.getencomiendabyid(emp.getencomiendatemporal().getId());
-                emp.getencomiendas().remove(temp);
-                emp.getencomiendas().add(emp.getencomiendatemporal());
-                //----Actualizo la encomienda---
-                postRef = emp.fbRef().child("encomiendas");
-                newPostRef = postRef.child(emp.getencomiendatemporal().getId()); newPostRef.setValue(emp.getencomiendatemporal());
+                }
+                emp.getsucursalactual().getEncomiendasAlmacenadas().remove(temp);
+                emp.getsucursalactual().getEncomiendasAlmacenadas().add(enco);
+                
+                
                 //----Actualizo la sucursal---
                 postRef = emp.fbRef().child("sucursales");
                 newPostRef = postRef.child(emp.getsucursalactual().getDireccion()); newPostRef.setValue(emp.getsucursalactual());
+                
+                //----Actualizo la encomienda---
+                postRef = emp.fbRef().child("encomiendas");
+                newPostRef = postRef.child(enco.getId()); newPostRef.setValue(enco);
+                
             }
         });
         
-        this.sucursalController.UpdateConSucursal();
         Stage stage = (Stage) Editar.getScene().getWindow();
         stage.close();
     }
