@@ -58,7 +58,7 @@ public class FXMLAgregarEmpleadoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //TODO
     } 
-    public void btnRegistrarmeAction(MouseEvent event) throws IOException 
+    public void btnRegistrarAction(MouseEvent event) throws IOException 
     {
         String nombre= CNombre.getText();
         String apellido= CApellido.getText();
