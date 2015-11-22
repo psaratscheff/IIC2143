@@ -66,7 +66,8 @@ public class FXMLBossController implements Initializable {
     private Button Mensajes;
     @FXML
     private Button CargarSucursal;
-    
+    @FXML
+    private Button VerErrores;
     @FXML
     private ListView ListMessagesPreview; //TIENE CELL-FACTORY!! No convertir a ListView<String>!!
     
@@ -164,6 +165,24 @@ public class FXMLBossController implements Initializable {
     
     @FXML
     private void SalirAction() throws IOException{
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLLogin.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+            Stage cerrar = (Stage)Salir.getScene().getWindow();
+            cerrar.close();
+        } 
+        catch (Exception e)
+        {
+            //Nada
+        }
+    }
+    
+    @FXML
+    private void VerErroresAction() throws IOException{
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLLogin.fxml"));
