@@ -78,7 +78,7 @@ public class FXMLVentanaPagoController implements Initializable {
                     postRef = emp.fbRef().child("encomiendas");
                     newPostRef = postRef.push(); String id1 = newPostRef.getKey(); en.setId(id1); newPostRef.setValue(en);
                     emp.getsucursalactual().getEncomiendasAlmacenadas().add(en);
-                    
+                    // Sincronización de sucursal con firebase más adelante                    
                 }
                 //----Agrego el ingreso a la empresa---
                 Calendar cal = Calendar.getInstance();
@@ -86,7 +86,7 @@ public class FXMLVentanaPagoController implements Initializable {
                 emp.addIngreso(i);
                 postRef = emp.fbRef().child("ingresos");
                 newPostRef = postRef.push(); newPostRef.setValue(i);
-                //----Actualizo la sucursal con las nuevas encomiendas---
+                //----Actualizo la sucursal con las nuevas encomiendas e ingreso---
                 postRef = emp.fbRef().child("sucursales");
                 newPostRef = postRef.child(emp.getsucursalactual().getDireccion()); newPostRef.setValue(emp.getsucursalactual());
                 //----Agrego el pedido a la empresa---

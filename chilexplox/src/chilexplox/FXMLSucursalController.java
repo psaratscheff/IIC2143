@@ -188,16 +188,14 @@ public class FXMLSucursalController implements Initializable {
                     }
                 }
                 emp.getsucursales().remove(temp);
-                //System.out.println("temp: "+ temp + " - " + temp.getEncomiendasAlmacenadas() + " - " + temp.getEncomiendasRecibidas() + " - " + temp.getCamionesEstacionados());
                 // Agrego la versión nueva
                 emp.getsucursales().add(s);
+                // La dejo seleccionada si estaba ya seleccionada y fue modificada:
                 if (emp.getsucursalactual().getDireccion().equals(s.getDireccion()))
                 {
                     emp.setsucursalactual(s);
                 }
-                //System.out.println("Nueva: " + s + " - " + s.getEncomiendasAlmacenadas() + " - " + s.getEncomiendasRecibidas() + " - " + s.getCamionesEstacionados());
-                //System.out.println("Sucursal changed: "+s+ " camiones-> "+s.getCamionesEstacionados()+ " encomiendas-> "+s.getEncomiendasAlmacenadas());
-                RefreshConSucursal(); // Actualizar data
+                RefreshConSucursal(); // Actualizar data mostrada (Visual)
             }
             @Override
             public void onChildRemoved(DataSnapshot ds) {
@@ -296,6 +294,12 @@ public class FXMLSucursalController implements Initializable {
                  {
                       ProgressBarCapacity.setStyle("-fx-accent: red;");
                  }
+                Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
+                    @Override
+                    public void run() {
+                        ChoiceBoxCamiones.getSelectionModel().clearSelection();
+                    }
+                });
             }
         });
     }
@@ -333,7 +337,7 @@ public class FXMLSucursalController implements Initializable {
                     EncomiendasEnSucursal.getSelectionModel().select(seleccionado);
                 }catch(Exception e){
                     System.out.println("Ya no está disponible la encomienda: "+e.getMessage());
-                }
+                }/**/
 
                 // CARGAR ENCOMIENDAS RECIBIDAS
                 String seleccionadoR = EncomiendasRecibidas.getSelectionModel().getSelectedItem();
@@ -347,7 +351,7 @@ public class FXMLSucursalController implements Initializable {
                     EncomiendasRecibidas.getSelectionModel().select(seleccionadoR);
                 }catch(Exception e){
                     System.out.println("Ya no está disponible la encomiendaR: "+e.getMessage());
-                }
+                }/**/
                 // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
                 ListMessagesPreview.getItems().clear();
                 for(Mensaje m: emp.getsucursalactual().getMensajesRecibidos())
@@ -387,7 +391,7 @@ public class FXMLSucursalController implements Initializable {
                     ChoiceBoxCamiones.getSelectionModel().select(selectedCamion);
                 }catch(Exception e){
                     System.out.println("Ya no está disponible el camion: "+e.getMessage());
-                }
+                }/**/
             }
         });
     }
