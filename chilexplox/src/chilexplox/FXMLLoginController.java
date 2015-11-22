@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Empleado;
 import chilexplox.classes.Sucursal;
@@ -27,6 +26,7 @@ import com.firebase.client.FirebaseError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -55,18 +55,19 @@ public class FXMLLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ErrorLabel.setText("");
     }    
-//tengo que hacer array de usuario en el initialice desde sucursla controler 
+    
     @FXML
-    private void btnLoginAction(MouseEvent event) throws IOException 
+    private void btnLoginAction(ActionEvent event) throws IOException 
     {
+        ErrorLabel.setText("");
         String pass = password.getText();
         String user = username.getText();
         for (Empleado e: emp.getempleados()) 
         {
             if (pass.equals(e.getPassword()) & user.equals(e.getUsername())) 
             {
-                
                 emp.setempleadoactual(e) ; //Seteo el usuario que se logró loguear
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLSucursal.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
@@ -74,8 +75,12 @@ public class FXMLLoginController implements Initializable {
                 stage.setScene(new Scene(root));  
                 stage.show();
                 ((Node)(event.getSource())).getScene().getWindow().hide(); // hide es IDENTICO a close()
-            } 
-            
+            }
+            else if (user.equals(e.getUsername()))
+            {
+                ErrorLabel.setText("La contraseña ingresada es incorrecta.");
+                return;
+            }
         }
         for (Cliente c: emp.getclientes())
         {
@@ -89,8 +94,12 @@ public class FXMLLoginController implements Initializable {
                 stage.show();
                 ((Node)(event.getSource())).getScene().getWindow().hide(); // hide es IDENTICO a close()
             } 
+            else if (user.equals(c.getRut()))
+            {
+                ErrorLabel.setText("La contraseña ingresada es incorrecta.");
+                return;
+            }
         }
-        
         for (Boss b: emp.getjefes())
         {
             if (pass.equals(b.getPassword()) & user.equals(b.getUsername())) 
@@ -102,12 +111,20 @@ public class FXMLLoginController implements Initializable {
                 stage.setScene(new Scene(root));  
                 stage.show();
                 ((Node)(event.getSource())).getScene().getWindow().hide(); // hide es IDENTICO a close()
-            } 
+            }
+            else if (user.equals(b.getUsername()))
+            {
+                ErrorLabel.setText("La contraseña ingresada es incorrecta.");
+                return;
+            }
         }
-        ErrorLabel.setText("Usuario o contraseña incorrectos");
+        if (ErrorLabel.getText().equals(""))
+        {
+            ErrorLabel.setText("El Usuario/Rut ingresado no existe");
+        }
     }
     @FXML
-    private void btnRegistrarseAction(MouseEvent event) throws IOException 
+    private void btnRegistrarseAction(ActionEvent event) throws IOException 
     {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLRegistraseCliente.fxml"));
         Parent root = (Parent) fxmlLoader.load();

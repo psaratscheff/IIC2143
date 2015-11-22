@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -7,22 +8,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="310.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLClienteController">
+<AnchorPane id="AnchorPane" prefHeight="249.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLClienteController">
     
    <children>
-       <Label fx:id="LabelNombreTrabajador" layoutX="165.0" layoutY="65.0" prefHeight="35.0" prefWidth="195.0" text="aögoqawedadsfasfasfasf" />
-      <Label layoutX="205.0" layoutY="30.0" text="ChilExplox ">
+       <Label fx:id="LabelNombreTrabajador" layoutX="57.0" layoutY="76.0" prefHeight="35.0" prefWidth="195.0" text="Bienvenida">
          <font>
-            <Font size="24.0" />
+            <Font size="17.0" />
+         </font></Label>
+      <Label layoutX="201.0" layoutY="18.0" text="ChilExplox ">
+         <font>
+            <Font size="34.0" />
          </font>
       </Label>
-      <Label id="label1" layoutX="324.0" layoutY="140.0" prefHeight="21.0" prefWidth="227.0" text="Numero de encomienda a revisar" />
+      <Label id="label1" layoutX="305.0" layoutY="130.0" prefHeight="21.0" prefWidth="227.0" text="Numero de encomienda a revisar" />
       <Label fx:id="ErrorLabel" layoutX="262.0" layoutY="278.0" textFill="RED" />
-      <Button fx:id="BotonVerEstadoEncomienda" layoutX="328.0" layoutY="231.0" onAction="#EventoVerEstadoEncomienda" prefHeight="31.0" prefWidth="189.0" text="Ver estado encomienda" />
-      <TextField fx:id="TextFieldNrEncomienda" layoutX="328.0" layoutY="183.0" prefHeight="31.0" prefWidth="218.0" promptText="Numero encomienda" />
-      <Button fx:id="BottonAgregarEncomienda" layoutX="57.0" layoutY="140.0" mnemonicParsing="false" onAction="#EventoAgregarEncomiendaCliente" prefHeight="31.0" prefWidth="180.0" text="Agregar encomienda" />
+      <Button fx:id="BotonVerEstadoEncomienda" layoutX="320.0" layoutY="203.0" onAction="#EventoVerEstadoEncomienda" prefHeight="31.0" prefWidth="189.0" text="Ver estado encomienda" />
+      <TextField fx:id="TextFieldNrEncomienda" layoutX="305.0" layoutY="159.0" prefHeight="31.0" prefWidth="218.0" promptText="Numero encomienda" />
+      <Button fx:id="BottonAgregarEncomienda" layoutX="65.0" layoutY="136.0" mnemonicParsing="false" onAction="#EventoAgregarEncomiendaCliente" prefHeight="31.0" prefWidth="180.0" text="Agregar encomienda" />
       <ListView fx:id="ListViewEncomiendasCliente" layoutX="320.0" layoutY="100.0" prefHeight="30.0" prefWidth="239.0" visible="false" />
-      <Button fx:id="Salir" layoutX="38.0" layoutY="53.0" mnemonicParsing="false" onAction="#SalirAction" text="Salir" />
+      <Button fx:id="Salir" layoutX="512.0" layoutY="18.0" mnemonicParsing="false" onAction="#SalirAction" text="Salir" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#186509" height="135.0" layoutX="280.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" width="3.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#186509" height="3.0" layoutX="54.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" width="501.0" />
    </children>
 
 </AnchorPane>

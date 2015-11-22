@@ -7,21 +7,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="443.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLLoginController">
+<AnchorPane id="AnchorPane" prefHeight="343.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLLoginController">
    <children>
-      <TextField id="textField1" fx:id="username" layoutX="93.0" layoutY="127.0" prefWidth="415.0" promptText="Username" />
-      <Label layoutX="175.0" layoutY="28.0" text="Welcome to ChilExplox ">
+      <TextField id="textField1" fx:id="username" layoutX="93.0" layoutY="127.0" prefWidth="415.0" promptText="Usuario/Rut" />
+      <Label layoutX="175.0" layoutY="28.0" text="Bienvenido a ChilExplox ">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <PasswordField id="passwordField1" fx:id="password" layoutX="93.0" layoutY="218.0" prefWidth="415.0" promptText="Password" />
-      <Label id="label1" layoutX="100.0" layoutY="200.0" text="Password" />
+      <PasswordField id="passwordField1" fx:id="password" layoutX="93.0" layoutY="159.0" prefWidth="415.0" promptText="Contraseña" />
       
-      <Label id="label1" layoutX="98.0" layoutY="110.0" text="Username" />
-      <Label fx:id="ErrorLabel" layoutX="262.0" layoutY="278.0" textFill="RED" />
-      <Button id="button1" fx:id="login" defaultButton="true" layoutX="101.0" layoutY="289.0" onMouseClicked="#btnLoginAction" prefHeight="70.0" prefWidth="400.0" text="Login" />
-      <Button fx:id="Bottonregistrarse" layoutX="262.0" layoutY="378.0" mnemonicParsing="false" text="aqui!" onMouseClicked="#btnRegistrarseAction" />
-      <Label layoutX="187.0" layoutY="383.0" prefHeight="21.0" prefWidth="102.0" text="Registrarse" />
+      <Label id="label1" layoutX="93.0" layoutY="102.0" text="Ingresa tus datos:" />
+      <Label fx:id="ErrorLabel" layoutX="263.0" layoutY="102.0" text="Datos Incorrectos, por favor prueba de nuevo." textFill="RED" />
+      <Button id="button1" fx:id="login" defaultButton="true" layoutX="101.0" layoutY="203.0" onAction="#btnLoginAction" prefHeight="70.0" prefWidth="400.0" text="Iniciar Sesión" />
+      <Button id="button1" fx:id="Bottonregistrarse" defaultButton="true" layoutX="101.0" layoutY="280.0" onAction="#btnRegistrarseAction" prefHeight="35.0" prefWidth="400.0" text="Regístrate" />
    </children>
 </AnchorPane>
