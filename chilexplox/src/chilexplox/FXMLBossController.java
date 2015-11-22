@@ -297,7 +297,7 @@ public class FXMLBossController implements Initializable {
     }
     @FXML
     private void CargarVentanaInformes()
-    {/*
+    {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLVerInforme.fxml"));
             Parent root = (Parent) fxmlLoader.load();
@@ -309,7 +309,7 @@ public class FXMLBossController implements Initializable {
         }
         catch (Exception e){
             System.out.println("ERROR 101: " + e.toString());
-        }*/
+        }
     }
     
     @FXML

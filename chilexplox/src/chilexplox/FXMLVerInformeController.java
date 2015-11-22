@@ -27,7 +27,11 @@ import javafx.scene.control.TextField;
 public class FXMLVerInformeController implements Initializable {
     
     @FXML
-    private ComboBox<Integer> ComboBoxPeriodos;
+    private ComboBox<Integer> CBPeriodos;
+    @FXML
+    private ComboBox<String> CBOrdenarPor;
+    @FXML
+    private ComboBox<String> CBMostrar;
     @FXML
     private TextField NetValue;
 
@@ -48,18 +52,19 @@ public class FXMLVerInformeController implements Initializable {
     
     void fillComboBox()
     {
-        // OPTIMIZAR
-        //Cambiar por metodo con mes y año!!
-        ComboBoxPeriodos.getItems().add(10); //Añado Noviembre
-        ComboBoxPeriodos.getItems().add(11); //Añado Diciembre
+        for(int i=1;i<13;i++){
+        CBPeriodos.getItems().add(i); //aniado los emses del anio
+    }
+       
+       
     }
     
     @FXML
     void CargarPeriodo()
     {
-        if (ComboBoxPeriodos.getValue() != null)
+        if (CBPeriodos.getValue() != null)
         {
-            int m = ComboBoxPeriodos.getValue();
+            int m = CBPeriodos.getValue();
             int neto = 0;
             Calendar cal = Calendar.getInstance();
             for (Ingreso i: emp.ingresos())
@@ -74,4 +79,12 @@ public class FXMLVerInformeController implements Initializable {
             NetValue.setText("$"+neto);
         }
     }
+    @FXML
+    void Mostrar()
+    {
+    
+    }
+    @FXML
+    void OrdenarPor()
+    {}
 }
