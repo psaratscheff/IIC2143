@@ -79,9 +79,8 @@ public class FXMLLoginController implements Initializable {
         }
         for (Cliente c: emp.getclientes())
         {
-         if (pass.equals(c.getPassword()) & user.equals(c.getUsuario())) 
+            if (pass.equals(c.getPassword()) & user.equals(c.getRut())) 
             {
-                
                 emp.setclienteactual(c) ; //Seteo el usuario que se logró loguear
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLCliente.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
@@ -94,10 +93,8 @@ public class FXMLLoginController implements Initializable {
         
         for (Boss b: emp.getjefes())
         {
-            
-         if (pass.equals(b.getPassword()) & user.equals(b.getUsername())) 
+            if (pass.equals(b.getPassword()) & user.equals(b.getUsername())) 
             {
-                
                 emp.setjefeactual(b) ; //Seteo el usuario que se logró loguear
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLBoss.fxml"));
                 Parent root = (Parent) fxmlLoader.load();

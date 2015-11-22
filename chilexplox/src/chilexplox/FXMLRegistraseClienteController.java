@@ -88,7 +88,7 @@ public class FXMLRegistraseClienteController implements Initializable {
         }
         for(Cliente c:clientes)
         {
-            if(c.getUsuario().equals(CUsername.getText()))
+            if(c.getRut().equals(CUsername.getText()))
             {
                 MessageBox mb = new MessageBox("El nombre de usuario ya esta ocupado.", MessageBoxType.OK_ONLY);
                 mb.showAndWait();
@@ -102,9 +102,9 @@ public class FXMLRegistraseClienteController implements Initializable {
         if(CClave.getText().equals(CClave2.getText()))
         {
             Firebase postRef;
-            Cliente c1 = new Cliente(nombre,apellido,direccion,username,clave);
+            Cliente c1 = new Cliente(nombre, apellido, direccion, rut, clave);
             postRef = emp.fbRef().child("clientes");
-            postRef.child(c1.getUsuario()).setValue(c1);
+            postRef.child(c1.getRut()).setValue(c1);
             ((Node)(event.getSource())).getScene().getWindow().hide();
         }
         else
