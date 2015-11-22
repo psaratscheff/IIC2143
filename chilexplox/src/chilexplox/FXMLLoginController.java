@@ -26,12 +26,15 @@ import com.firebase.client.FirebaseError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import se.mbaeumer.fxmessagebox.MessageBox;
+import se.mbaeumer.fxmessagebox.MessageBoxType;
 
 /**
  * FXML Controller class
@@ -56,11 +59,24 @@ public class FXMLLoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ErrorLabel.setText("");
-    }    
+    }
     
     @FXML
-    private void btnLoginAction(ActionEvent event) throws IOException 
+    private void btnLoginAction(ActionEvent event) throws IOException, InterruptedException 
     {
+        int counter = 0;
+        while (emp.getempleados().isEmpty() && emp.getclientes().isEmpty() && emp.getjefes().isEmpty())
+        {
+            if (counter >= 10)
+            {
+                MessageBox mb = new MessageBox("Error al conectar con el servidor.\n Por favor verifique su conexión a internet\n y que hayan usuarios registrados.", MessageBoxType.OK_ONLY);
+                mb.showAndWait();
+                ErrorLabel.setText("Error al conectar con el servidor, pruebe nuevamente.");
+                return;
+            }
+            Thread.sleep(1500); // Esperamos a que cargue la información
+            counter++;
+        }
         ErrorLabel.setText("");
         String pass = password.getText();
         String user = username.getText();
