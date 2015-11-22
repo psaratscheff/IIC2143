@@ -50,9 +50,6 @@ public class FXMLRegistraseClienteController implements Initializable {
     private TextField CRut;
    
     @FXML
-    private TextField CUsername;
-   
-    @FXML
     private PasswordField CClave;
     
     @FXML
@@ -73,10 +70,9 @@ public class FXMLRegistraseClienteController implements Initializable {
         String apellido= CApellido.getText();
         String direccion= CDireccion.getText();
         String rut= CRut.getText();
-        String username= CUsername.getText();
         String clave= CClave.getText();
         String clave2= CClave2.getText();
-        if (nombre.equals("") || apellido.equals("") || direccion.equals("") || rut.equals("") || username.equals("") || clave.equals("") || clave2.equals("") )
+        if (nombre.equals("") || apellido.equals("") || direccion.equals("") || rut.equals("") || clave.equals("") || clave2.equals("") )
         {
                 MessageBox mb = new MessageBox("Por favor ingrese todos los campos", MessageBoxType.OK_ONLY);
                 mb.showAndWait();
@@ -88,7 +84,7 @@ public class FXMLRegistraseClienteController implements Initializable {
         }
         for(Cliente c:clientes)
         {
-            if(c.getRut().equals(CUsername.getText()))
+            if(c.getRut().equals(CRut.getText()))
             {
                 MessageBox mb = new MessageBox("El nombre de usuario ya esta ocupado.", MessageBoxType.OK_ONLY);
                 mb.showAndWait();
