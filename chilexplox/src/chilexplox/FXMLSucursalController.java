@@ -169,17 +169,12 @@ public class FXMLSucursalController implements Initializable {
             public void onChildAdded(DataSnapshot ds, String previousChildKey) {
                 Sucursal s = ds.getValue(Sucursal.class);
                 System.out.println("Sucursal Agregada:" + s.toString());
-                //System.out.println("Sucursal:" + post.toString());
                 AddSucursal(s);
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String string) {
                 emp = Empresa.getInstance();
-                System.out.println(ds.getValue());
                 Sucursal s = ds.getValue(Sucursal.class);
-                /*s.getEncomiendasAlmacenadas().removeAll(Collections.singleton(null));
-                s.getEncomiendasRecibidas().removeAll(Collections.singleton(null));
-                s.getCamionesEstacionados().removeAll(Collections.singleton(null));*/
                 System.out.println("Sucursal Modificada:" + s.toString());
                 // Elimino la versión antigua
                 Sucursal temp = null;
@@ -422,7 +417,6 @@ public class FXMLSucursalController implements Initializable {
             System.out.println("Debes seleccionar un pedido a entregar");
             return; // FIN
         }
-        System.out.println("AAAA: " + encomiendaID);
         Encomienda encomienda = null;
         try
         {
@@ -441,18 +435,18 @@ public class FXMLSucursalController implements Initializable {
     {
         Camion camionSeleccionado = null;
         String cs = ChoiceBoxCamiones.getValue();
-        System.out.println(emp.getsucursalactual().getCamionesEstacionados());
         for (Camion c: emp.getsucursalactual().getCamionesEstacionados())
         {
-            System.out.println(c.NombreCompleto()+" != "+cs);
             if (c.NombreCompleto().equals(cs))
             {
-            System.out.println(c.NombreCompleto()+" == "+cs);
                 camionSeleccionado = c;
             }
         }
         // Reviso que haya seleccion al momento de llamar al metodo
-        if (camionSeleccionado == null) { System.out.println("5No hay camion seleccionado"); return; }
+        if (camionSeleccionado == null) { 
+            if (espacioCamion!=-1){ System.out.println("5No hay camion seleccionado"); } 
+            return; 
+        }
         
         camionActual = camionSeleccionado;
         espacioCamion = camionSeleccionado.PorcentajeDisponible();
@@ -493,6 +487,7 @@ public class FXMLSucursalController implements Initializable {
     
     @FXML
     private void CargarCamionAction() throws IOException{
+        if (EncomiendasEnSucursal.getSelectionModel().getSelectedItem() == null) { return; }
         String encomiendaID = EncomiendasEnSucursal.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
         Encomienda encomienda = null;
         try
