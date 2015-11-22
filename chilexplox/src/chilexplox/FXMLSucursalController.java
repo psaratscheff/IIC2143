@@ -174,7 +174,7 @@ public class FXMLSucursalController implements Initializable {
                 AddSucursal(s);
             }
             @Override
-            public void onChildChanged(DataSnapshot ds, String string) {
+            public void onChildChanged(DataSnapshot ds, String previousChildKey) {
                 emp = Empresa.getInstance();
                 Sucursal s = ds.getValue(Sucursal.class);
                 System.out.println("Sucursal Modificada:" + s.toString());

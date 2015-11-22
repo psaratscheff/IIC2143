@@ -134,24 +134,48 @@ public class Main extends Application {
             public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
         });
         /**/
-        
+        // Mantener la lista de encomiendas actualizadas
         postRef = emp.fbRef().child("encomiendas");
         postRef.addChildEventListener(new ChildEventListener() {
             // Retrieve new posts as they are added to the database
             @Override
-            public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
                   //System.out.println(snapshot);
-                  Encomienda post = snapshot.getValue(Encomienda.class);
-                  emp.getencomiendas().add(post);
+                  Encomienda enc = ds.getValue(Encomienda.class);
+                  emp.getencomiendas().add(enc);
             }
             @Override
-            public void onChildChanged(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildChanged(DataSnapshot ds, String previousChildKey)
+            {
+                Encomienda new_enc = ds.getValue(Encomienda.class);
+                Encomienda old_enc = null;
+                for (Encomienda e: emp.getencomiendas())
+                {
+                    if (e.getId().equals(new_enc.getId()))
+                    {
+                        old_enc = e;
+                    }
+                }
+                if (old_enc == null) { throw new UnsupportedOperationException("¡¡Encomienda modificada no existe!!"); }
+                emp.getencomiendas().remove(old_enc);
+                emp.getencomiendas().add(new_enc);
+            }
             @Override
-            public void onChildRemoved(DataSnapshot ds) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildRemoved(DataSnapshot ds)
+            {
+                Encomienda old_enc = ds.getValue(Encomienda.class);
+                emp.getencomiendas().remove(old_enc);
+            }
             @Override
-            public void onChildMoved(DataSnapshot ds, String string) {throw new UnsupportedOperationException("Not supported yet.");}
+            public void onChildMoved(DataSnapshot ds, String string)
+            {
+                // No importa, no se hace nada
+            }
             @Override
-            public void onCancelled(FirebaseError fe) {throw new UnsupportedOperationException("Not supported yet."); }
+            public void onCancelled(FirebaseError fe)
+            {
+                System.out.println("ERROR FB-102:" + fe.getMessage());
+            }
         });
         //Creacion grafica del login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
