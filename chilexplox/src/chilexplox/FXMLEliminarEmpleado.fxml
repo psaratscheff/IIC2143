@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="186.0" prefWidth="540.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="chilexplox.FXMLEliminarEmpleadoController">
+   <children>
+      <Label fx:id="LabelAdvertencia" layoutX="7.0" layoutY="14.0" text="¡Advertencia! Los empleados eliminados no pueden ser recuperados." textFill="RED">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="LabelEmpleado" layoutX="181.0" layoutY="49.0" text="¿Que empleado desea eliminar?" />
+      <ChoiceBox fx:id="ChoiceBoxEmpleado" layoutX="168.0" layoutY="76.0" prefHeight="25.0" prefWidth="195.0" />
+      <Button id="btnDelete" fx:id="btnDelete" defaultButton="true" layoutX="146.0" layoutY="125.0" onAction="#btnEliminarEmpleadoAction" prefHeight="44.0" prefWidth="239.0" text="ELIMINAR EMPLEADO" textFill="RED" />
+   </children>
+</AnchorPane>

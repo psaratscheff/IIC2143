@@ -147,10 +147,9 @@ public class FXMLBossController implements Initializable {
                 // Agrego la versión nueva
                 emp.getsucursales().add(s);
                 // La dejo seleccionada si estaba ya seleccionada y fue modificada:
-                if (emp.getsucursalactual().getDireccion().equals(s.getDireccion()))
+                if (emp.getsucursalactual() != null && emp.getsucursalactual().getDireccion().equals(s.getDireccion()))
                 {
                     emp.setsucursalactual(s);
-                    
                 }
             }
             
@@ -173,15 +172,33 @@ public class FXMLBossController implements Initializable {
     @FXML
     private void agregarEmpleadoAction() throws IOException
     {
-    try {
+        try 
+        {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLAgregarEmpleado.fxml"));
             Parent root = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();
         } 
-    catch (Exception e){
-            
+        catch (Exception e)
+        {
+            System.out.println("ERROR AL CARGAR LA VENTANA AGREGAR_EMPLEADO");
+        }
+    }
+    @FXML
+    private void eliminarEmpleadoAction() throws IOException
+    {
+        try 
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLEliminarEmpleado.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+        } 
+        catch (Exception e)
+        {
+            System.out.println("ERROR AL CARGAR LA VENTANA ELIMINAR_EMPLEADO");
         }
     }
     @FXML
