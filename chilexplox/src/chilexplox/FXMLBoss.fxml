@@ -28,6 +28,11 @@
             <Font size="16.0" />
          </font>
       </Label>
+       <Label fx:id="LabelSucursal" layoutX="253.0" layoutY="20.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
 
        <Label fx:id="ErrorLabelSucursal" layoutX="400.0" layoutY="100.0" textFill="RED" />
       

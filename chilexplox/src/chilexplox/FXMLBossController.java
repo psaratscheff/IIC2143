@@ -41,6 +41,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import java.util.Iterator;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.util.Callback;
 
 //Listener
@@ -89,13 +90,87 @@ public class FXMLBossController implements Initializable {
         emp = Empresa.getInstance();
         String bienvenida = "Hola, estimad@  " + emp.getjefeactual().getNombre();
         LabelNombreJefe.setText(bienvenida);
-        for (Sucursal s: emp.getsucursales()) 
-        {
-            ChoiceBoxSucursales.getItems().add(s);
-            
-        }
+        LoadSucursales();
+        
         
     }
+    
+    
+    private void AddSucursal(final Sucursal s)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                
+                ChoiceBoxSucursales.getItems().add(s);
+                
+                emp.getsucursales().add(s);
+            }
+        });
+    }
+    private void RemoveSucursal(final Sucursal s)
+    {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                ChoiceBoxSucursales.getItems().remove(s.getDireccion());
+                emp.getsucursales().remove(s);
+            }
+        });
+    }
+    private void LoadSucursales()
+    {
+        Firebase sucursalesRef = emp.fbRef().child("sucursales");
+        sucursalesRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
+                Sucursal s = ds.getValue(Sucursal.class);
+                System.out.println("Sucursal Agregada:" + s.toString());
+                AddSucursal(s);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String previousChildKey) {
+                emp = Empresa.getInstance();
+                Sucursal s = ds.getValue(Sucursal.class);
+                System.out.println("Sucursal Modificada:" + s.toString());
+                // Elimino la versión antigua
+                Sucursal temp = null;
+                for(Sucursal s2: emp.getsucursales())
+                {
+                    if (s2.getDireccion().equals(s.getDireccion()))
+                    {
+                        temp=s2;
+                    }
+                }
+                emp.getsucursales().remove(temp);
+                // Agrego la versión nueva
+                emp.getsucursales().add(s);
+                // La dejo seleccionada si estaba ya seleccionada y fue modificada:
+                if (emp.getsucursalactual().getDireccion().equals(s.getDireccion()))
+                {
+                    emp.setsucursalactual(s);
+                    
+                }
+            }
+            
+            @Override
+            public void onChildRemoved(DataSnapshot ds) {
+                Sucursal s = ds.getValue(Sucursal.class);
+                System.out.println("Sucursal REMOVIDA:" + s.toString());
+                RemoveSucursal(s);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string) {
+                // Who cares... (No se requiere hacer nada)
+            }
+            @Override
+            public void onCancelled(FirebaseError fe) {
+                System.out.println("ERROR FB-101:" + fe.getMessage());
+            }
+        });/**/
+    }
+    
     @FXML
     private void btnCargarSucursal() throws IOException{
         Sucursal s = ChoiceBoxSucursales.getValue();
@@ -138,6 +213,46 @@ public class FXMLBossController implements Initializable {
         // CARGAR CAMIONES DISPONIBLES
         
     }
+    public void RefreshConSucursal()
+    {
+        Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
+            @Override
+            public void run() {
+                Sucursal s = emp.getsucursalactual();
+                System.out.println("Refrescando..." + s + " - " + s.getEncomiendasAlmacenadas() + " - " + s.getEncomiendasRecibidas() + " - " + s.getCamionesEstacionados());
+                // CARGAR ENCOMIENDAS
+                
+                // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
+                ListMessagesPreview.getItems().clear();
+                for(Mensaje m: emp.getsucursalactual().getMensajesRecibidos())
+                {
+                    if (m.getUrgente()== true)
+                    {
+                        String mensajePreview ="URGENTE " + m.getContenido();
+                        String[] mpArray = mensajePreview.split("\\r?\\n");
+                        if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                        ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
+                    }
+                    else
+                    {
+                        String mensajePreview = m.getContenido();
+                        String[] mpArray = mensajePreview.split("\\r?\\n");
+                        if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
+                        ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
+                    }
+                }
+                ListMessagesPreview.setCellFactory(new Callback<ListView<String>, EllipsisListCell>() {
+                    @Override
+                    public EllipsisListCell call(ListView<String> p) {
+                        EllipsisListCell cell = new EllipsisListCell();
+                        return cell;
+                    }
+                });
+               
+            }
+        });
+    }
+    
     @FXML
     private void MensajesAction() throws IOException{
         try {
