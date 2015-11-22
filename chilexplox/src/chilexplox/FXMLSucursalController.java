@@ -195,7 +195,7 @@ public class FXMLSucursalController implements Initializable {
                 // Agrego la versión nueva
                 emp.getsucursales().add(s);
                 // La dejo seleccionada si estaba ya seleccionada y fue modificada:
-                if (emp.getsucursalactual().getDireccion().equals(s.getDireccion()))
+                if (emp.getsucursalactual() != null && emp.getsucursalactual().getDireccion().equals(s.getDireccion()))
                 {
                     emp.setsucursalactual(s);
                     RefreshConSucursal(); // Actualizar data mostrada (Visual)

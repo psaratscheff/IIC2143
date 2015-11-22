@@ -5,18 +5,21 @@
  */
 package chilexplox;
 
+import chilexplox.classes.Sucursal;
 import com.firebase.client.Firebase;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import se.mbaeumer.fxmessagebox.MessageBox;
 import se.mbaeumer.fxmessagebox.MessageBoxResult;
 import se.mbaeumer.fxmessagebox.MessageBoxType;
@@ -38,7 +41,7 @@ public class FXMLAgregarEmpleadoController implements Initializable {
     private TextField CApellido;
    
     @FXML
-    private TextField CSucursal;
+    private ChoiceBox<Sucursal> CSucursal;
    
     @FXML
     private TextField CUsername;
@@ -57,16 +60,19 @@ public class FXMLAgregarEmpleadoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //TODO
-    } 
-    public void btnRegistrarAction(MouseEvent event) throws IOException 
+        CSucursal.getItems().clear(); // Innecesario, pero... porsiaca
+        CSucursal.getItems().addAll(emp.getsucursales());
+    }
+    @FXML
+    private void btnRegistrarAction()
     {
         String nombre= CNombre.getText();
         String apellido= CApellido.getText();
-        String sucursal= CSucursal.getText();
+        Sucursal sucursal = CSucursal.getSelectionModel().getSelectedItem();
         String username= CUsername.getText();
         String clave= CClave.getText();
         String clave2= CClave2.getText();
-        if (nombre.equals("") || apellido.equals("") || sucursal.equals("") || username.equals("") || clave.equals("") || clave2.equals("") )
+        if (nombre.equals("") || apellido.equals("") || sucursal == null || username.equals("") || clave.equals("") || clave2.equals("") )
         {
                 MessageBox mb = new MessageBox("Por favor ingrese todos los campos", MessageBoxType.OK_ONLY);
                 mb.showAndWait();
@@ -92,10 +98,11 @@ public class FXMLAgregarEmpleadoController implements Initializable {
         if(CClave.getText().equals(CClave2.getText()))
         {
             Firebase postRef;
-            chilexplox.classes.Empleado c1 = new chilexplox.classes.Empleado(nombre, apellido,username,clave,sucursal);
+            chilexplox.classes.Empleado c1 = new chilexplox.classes.Empleado(nombre, apellido,username,clave,sucursal.toString());
             postRef = emp.fbRef().child("empleados");
             postRef.child(c1.getUsername()).setValue(c1);
-            ((Node)(event.getSource())).getScene().getWindow().hide();
+            Stage stage = (Stage) CNombre.getScene().getWindow();
+            stage.close();
         }
         else
         {

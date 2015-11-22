@@ -169,7 +169,16 @@ public class Main extends Application {
             @Override
             public void onChildRemoved(DataSnapshot ds)
             {
-                Encomienda old_enc = ds.getValue(Encomienda.class);
+                Encomienda new_enc = ds.getValue(Encomienda.class);
+                Encomienda old_enc = null;
+                for (Encomienda usr: emp.getencomiendas())
+                {
+                    if (usr.getId().equals(new_enc.getId()))
+                    {
+                        old_enc = usr;
+                    }
+                }
+                if (old_enc == null) { throw new UnsupportedOperationException("¡¡Encomienda eliminada no existe!!"); }
                 emp.getencomiendas().remove(old_enc);
             }
             @Override
@@ -213,8 +222,17 @@ public class Main extends Application {
             @Override
             public void onChildRemoved(DataSnapshot ds)
             {
-                Empleado old_usr = ds.getValue(Empleado.class);
-                emp.getjefes().remove(old_usr);
+                Empleado new_usr = ds.getValue(Empleado.class);
+                Empleado old_usr = null;
+                for (Empleado usr: emp.getempleados())
+                {
+                    if (usr.getUsername().equals(new_usr.getUsername()))
+                    {
+                        old_usr = usr;
+                    }
+                }
+                if (old_usr == null) { throw new UnsupportedOperationException("¡¡Empleado eliminado no existe!!"); }
+                emp.getempleados().remove(old_usr);
             }
             @Override
             public void onChildMoved(DataSnapshot ds, String string)
@@ -254,7 +272,16 @@ public class Main extends Application {
             @Override
             public void onChildRemoved(DataSnapshot ds)
             {
-                Boss old_usr = ds.getValue(Boss.class);
+                Boss new_usr = ds.getValue(Boss.class);
+                Boss old_usr = null;
+                for (Boss usr: emp.getjefes())
+                {
+                    if (usr.getUsername().equals(new_usr.getUsername()))
+                    {
+                        old_usr = usr;
+                    }
+                }
+                if (old_usr == null) { throw new UnsupportedOperationException("¡¡Jefe eliminado no existe!!"); }
                 emp.getjefes().remove(old_usr);
             }
             @Override
