@@ -356,7 +356,7 @@ public class FXMLSucursalController implements Initializable {
                 ListMessagesPreview.getItems().clear();
                 for(Mensaje m: emp.getsucursalactual().getMensajesRecibidos())
                 {
-                    if (m.getUrgente()== true) 
+                    if (m.getUrgente()== true)
                     {
                         String mensajePreview ="URGENTE " + m.getContenido();
                         String[] mpArray = mensajePreview.split("\\r?\\n");
@@ -433,7 +433,10 @@ public class FXMLSucursalController implements Initializable {
             return; //Nada
         }
         emp.getsucursalactual().getEncomiendasRecibidas().remove(encomienda);
+        emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
         EncomiendasRecibidas.getItems().remove(enco);
+        encomienda.setestado("Entrega satisfactoria");
+        emp.fbRef().child("encomiendas").child(encomienda.getId()).setValue(encomienda);
     }
     
     @FXML
