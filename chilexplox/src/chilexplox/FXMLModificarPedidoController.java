@@ -87,8 +87,7 @@ public class FXMLModificarPedidoController implements Initializable {
             EDestino.getItems().add(s.getDireccion());
         }
         EDestino.getSelectionModel().select(emp.getencomiendatemporal().getSucursalDestino());
-        
-        EOrigen.setText(emp.getsucursalactual().getDireccion());
+        EOrigen.setText(emp.getencomiendatemporal().getSucursalOrigen());
         EAncho.setText(Integer.toString(emp.getencomiendatemporal().getAncho()));
         ELargo.setText(Integer.toString(emp.getencomiendatemporal().getLargo()));
         EPeso.setText(Integer.toString(emp.getencomiendatemporal().getPeso()));
@@ -108,7 +107,23 @@ public class FXMLModificarPedidoController implements Initializable {
         CDireccion.setText(cliente.getDireccion());
         CRut.setText(cRut);
     } 
-    
+    public void disableModificar()
+    {
+        Editar.disableProperty().set(true);
+        EDestino.getItems().add(emp.getencomiendatemporal().getSucursalDestino());
+        EDestino.getSelectionModel().select(emp.getencomiendatemporal().getSucursalDestino());
+        CNombre.disableProperty().set(true);
+        CApellido.disableProperty().set(true);
+        CDireccion.disableProperty().set(true);
+        CRut.disableProperty().set(true);
+        EDestino.disableProperty().set(true);
+        EOrigen.disableProperty().set(true);
+        EAncho.disableProperty().set(true);
+        ELargo.disableProperty().set(true);
+        EPeso.disableProperty().set(true);
+        EDireccion.disableProperty().set(true);
+        EPrioridad.disableProperty().set(true);
+    }
     @FXML
     private void EditarAction() throws IOException
     {
