@@ -91,8 +91,6 @@ public class FXMLBossController implements Initializable {
         String bienvenida = "Hola, estimad@  " + emp.getjefeactual().getNombre();
         LabelNombreJefe.setText(bienvenida);
         LoadSucursales();
-        
-        
     }
     
     
@@ -100,10 +98,9 @@ public class FXMLBossController implements Initializable {
     {
         Platform.runLater(new Runnable() {
             @Override
-            public void run() {
-                
+            public void run()
+            {
                 ChoiceBoxSucursales.getItems().add(s);
-                
                 emp.getsucursales().add(s);
             }
         });
@@ -211,10 +208,7 @@ public class FXMLBossController implements Initializable {
     }
     
     public void UpdateConSucursal(){
-        // CARGAR ENCOMIENDAS
-        
-       
-        
+        // CARGAR MENSAJES
         ListMessagesPreview.getItems().clear();
         for(Mensaje m: emp.getsucursalactual().getMensajesRecibidos())
         {
@@ -238,47 +232,6 @@ public class FXMLBossController implements Initializable {
             public EllipsisListCell call(ListView<String> p) {
                 EllipsisListCell cell = new EllipsisListCell();
                 return cell;
-            }
-        });
-        // CARGAR CAMIONES DISPONIBLES
-        
-    }
-    public void RefreshConSucursal()
-    {
-        Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
-            @Override
-            public void run() {
-                Sucursal s = emp.getsucursalactual();
-                System.out.println("Refrescando..." + s + " - " + s.getEncomiendasAlmacenadas() + " - " + s.getEncomiendasRecibidas() + " - " + s.getCamionesEstacionados());
-                // CARGAR ENCOMIENDAS
-                
-                // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
-                ListMessagesPreview.getItems().clear();
-                for(Mensaje m: emp.getsucursalactual().getMensajesRecibidos())
-                {
-                    if (m.getUrgente()== true)
-                    {
-                        String mensajePreview ="URGENTE " + m.getContenido();
-                        String[] mpArray = mensajePreview.split("\\r?\\n");
-                        if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
-                        ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
-                    }
-                    else
-                    {
-                        String mensajePreview = m.getContenido();
-                        String[] mpArray = mensajePreview.split("\\r?\\n");
-                        if (mpArray.length > 1) { mensajePreview = mpArray[0]+"...";} // Solo la primera linea
-                        ListMessagesPreview.getItems().add(0, mensajePreview); // Añado al principio
-                    }
-                }
-                ListMessagesPreview.setCellFactory(new Callback<ListView<String>, EllipsisListCell>() {
-                    @Override
-                    public EllipsisListCell call(ListView<String> p) {
-                        EllipsisListCell cell = new EllipsisListCell();
-                        return cell;
-                    }
-                });
-               
             }
         });
     }
@@ -345,7 +298,4 @@ public class FXMLBossController implements Initializable {
             //Nada
         }
     }
-    
-    
-    
 }

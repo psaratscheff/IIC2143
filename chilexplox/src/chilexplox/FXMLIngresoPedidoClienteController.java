@@ -65,7 +65,6 @@ import se.mbaeumer.fxmessagebox.MessageBoxType;
  */
 public class FXMLIngresoPedidoClienteController implements Initializable {
 
-   
     @FXML
     private Button Pagar;
     @FXML
@@ -84,7 +83,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
     private TextField ELargo;
     @FXML
     private ChoiceBox<String> EDestino;
-     @FXML
+    @FXML
     private ChoiceBox<String> EOrigen;
     @FXML
     private TextField EDireccion;
@@ -119,9 +118,6 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
         ETipo.getItems().add("Normal");
         ETipo.getItems().add("Refrigerado");
         ETipo.getItems().add("Radioactivo");
-        
-        
-       
         editando=false;
     } 
      public void btnPagar(MouseEvent event) throws IOException 
@@ -158,7 +154,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                     {
                         if (s.getDireccion().equals(destino)) 
                         {
-                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), sucursalorigen.getDireccion(), s.getDireccion(), tipo);
+                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), sucursalorigen.getDireccion(), s.getDireccion(), tipo, "SIN CLIENTE");
                             en.setancho(Integer.parseInt(EAncho.getText()));
                             en.setlargo(Integer.parseInt(ELargo.getText()));
                             en.setpeso(Integer.parseInt(EPeso.getText()));
@@ -188,7 +184,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                         {
                             if (s.getDireccion().equals(destino)) 
                             {
-                                Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo);
+                                Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo, "SIN CLIENTE");
                                 wn.setancho(Integer.parseInt(EAncho.getText()));
                                 wn.setlargo(Integer.parseInt(ELargo.getText()));
                                 wn.setpeso(Integer.parseInt(EPeso.getText()));
@@ -248,10 +244,6 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                 System.out.println("Cancel");
         }
     }
-
-    void setClienteController(FXMLClienteController aThis) {
-        this.clienteController = aThis;
-    }
     
     private void LoadSucursales()
     {
@@ -302,6 +294,10 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
                 EOrigen.getItems().remove(s.getDireccion());
             }
         });
+    }
+
+    void setClienteController(FXMLClienteController aThis) {
+        this.clienteController = aThis;
     }
     
 }

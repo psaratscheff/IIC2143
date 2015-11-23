@@ -56,6 +56,8 @@ public class Cliente {
     {sucursalRegistrada=sucursal;}
     public void setPedidosRealizados(List<Pedido> pedidos)
     {pedidosRealizados=pedidos;}
+    public void setPassword(String pass)
+    {this.password = pass;}
     
     /**
      * Retorna el nombre completo del cliente

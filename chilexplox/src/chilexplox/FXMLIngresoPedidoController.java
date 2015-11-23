@@ -5,6 +5,7 @@
  */
 package chilexplox;
 
+import chilexplox.classes.Cliente;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Pedido;
@@ -103,12 +104,31 @@ public class FXMLIngresoPedidoController implements Initializable {
     @FXML
     private void btnPagar(MouseEvent event) throws IOException 
     {
-        if (CNombre.getText() != null & CApellido.getText() != null & CDireccion.getText()!= null) 
+        String nombre = CNombre.getText();
+        String apellido = CApellido.getText();
+        String direccion = CDireccion.getText();
+        String rut = CRut.getText();
+        
+        if ( nombre.equals("") || apellido.equals("") || direccion.equals("") || rut.equals("") )
         {
+            MessageBox mb = new MessageBox("Debe ingresar la información del cliente", MessageBoxType.OK_ONLY);
+            mb.showAndWait();
+        }
+        else if (ListEncomiendas.getItems().isEmpty())
+        {
+            MessageBox mb = new MessageBox("Debe ingresar al menos una encomienda", MessageBoxType.OK_ONLY);
+            mb.showAndWait();
+        }
+        else
+        {
+            //Crear cliente para entregar a próxima ventana (De no pagar no se sincroniza con FireBase) LA CONTRASEÑA ES SU NOMBRE! La puede cambiar después
+            Cliente cliente = new Cliente(nombre, apellido, direccion, rut, nombre);
+            // Cargar Ventana Pagar
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLVentanaPago.fxml"));
             Parent root = (Parent) fxmlLoader.load();        
             FXMLVentanaPagoController controller = fxmlLoader.<FXMLVentanaPagoController>getController();
             controller.setPedido(pedido);
+            controller.setCliente(cliente);
             controller.setEmpresa(emp);
             controller.setParentWindow((Stage)Pagar.getScene().getWindow());
             controller.setSucursalController(this.sucursalController);
@@ -133,8 +153,8 @@ public class FXMLIngresoPedidoController implements Initializable {
                     {
                         if (s.getDireccion().equals(destino)) 
                         {
-                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo);
-                            en.setancho(Integer.parseInt(EAncho.getText()));
+                            Encomienda en = new Encomienda("Ingresado", prioridad, tamaño, emp.AsignarIDEnco(), emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo, "SIN CLIENTE");
+                            en.setancho(Integer.parseInt(EAncho.getText())); // Todo esto debería estar en el constructor...
                             en.setlargo(Integer.parseInt(ELargo.getText()));
                             en.setpeso(Integer.parseInt(EPeso.getText()));
                             en.setdirecciondestino(EDireccion.getText());
@@ -163,7 +183,7 @@ public class FXMLIngresoPedidoController implements Initializable {
                         {
                             if (s.getDireccion().equals(destino)) 
                             {
-                                Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo);
+                                Encomienda wn = new Encomienda("Ingresado", prioridad, tamaño, id, emp.getsucursalactual().getDireccion(), s.getDireccion(), tipo, "SIN CLIENTE");
                                 wn.setancho(Integer.parseInt(EAncho.getText()));
                                 wn.setlargo(Integer.parseInt(ELargo.getText()));
                                 wn.setpeso(Integer.parseInt(EPeso.getText()));
