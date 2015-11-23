@@ -233,7 +233,7 @@ public class FXMLSucursalController implements Initializable {
                     {
                         boolurgencia = true;
                     }
-                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + en.getDireccionDestino()+" Tipo: "+en.getTipo());
+                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + " -- " + "ID: #" + en.getId() + "# -- Destino: " + en.getSucursalDestino()+" Tipo: "+en.getTipo());
                 }
                 if (boolurgencia == false)
                 {
@@ -249,7 +249,7 @@ public class FXMLSucursalController implements Initializable {
                 EncomiendasRecibidas.getItems().clear();
                 for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
                 {
-                    EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado()+")" + "// " + "ID: #" + en.getId() + "# Destino: " + en.getDireccionDestino());
+                    EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + " -- " + "ID: #" + en.getId() + "# -- Origen: " + en.getSucursalOrigen()+" -- Tipo: "+en.getTipo());
                 }
                 // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
                 ListMessagesPreview.getItems().clear();
@@ -325,7 +325,7 @@ public class FXMLSucursalController implements Initializable {
                     {
                         boolurgencia = true;
                     }
-                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + en.getDireccionDestino()+" Tipo: "+en.getTipo());
+                    EncomiendasEnSucursal.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + " -- " + "ID: #" + en.getId() + "# -- Destino: " + en.getSucursalDestino()+" Tipo: "+en.getTipo());
                 }
                 if (boolurgencia == false)
                 {
@@ -348,7 +348,7 @@ public class FXMLSucursalController implements Initializable {
                 EncomiendasRecibidas.getItems().clear();
                 for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
                 {
-                    EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado()+")" + "// " + "ID: #" + en.getId() + "# Destino: " + en.getDireccionDestino());
+                    EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + " -- " + "ID: #" + en.getId() + "# -- Origen: " + en.getSucursalOrigen()+" -- Tipo: "+en.getTipo());
                 }
                 // Dejo seleccionado el que estaba seleccionado antes de refrescar la ventana
                 try{
