@@ -103,7 +103,7 @@ public class FXMLClienteController implements Initializable {
     {
         String nrencomienda= TextFieldNrEncomienda.getText();
         boolean existe= false;
-        for(Encomienda en: emp.getencomiendas())
+        for(Encomienda en: emp.getEncomiendas())
         {   
             if(nrencomienda.equals(en.getId()))
             {

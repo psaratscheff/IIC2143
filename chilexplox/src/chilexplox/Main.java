@@ -42,7 +42,111 @@ public class Main extends Application {
     Firebase newPostRef;
     @Override
     public void start(Stage stage) throws Exception {
-        // Mantener la lista de encomiendas actualizadas
+        // Mantener la lista de ingresos actualizada
+        postRef = emp.fbRef().child("ingresos");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
+                  //System.out.println(snapshot);
+                  Ingreso ing = ds.getValue(Ingreso.class);
+                  emp.getIngresos().add(ing);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String previousChildKey)
+            {
+                Ingreso new_ing = ds.getValue(Ingreso.class);
+                Ingreso old_ing = null;
+                for (Ingreso i: emp.getIngresos())
+                {
+                    if (i.getId().equals(new_ing.getId()))
+                    {
+                        old_ing = i;
+                    }
+                }
+                if (old_ing == null) { throw new UnsupportedOperationException("¡¡Ingreso modificado no existe!!"); }
+                emp.getIngresos().remove(old_ing);
+                emp.getIngresos().add(new_ing);
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds)
+            {
+                Ingreso new_ing = ds.getValue(Ingreso.class);
+                Ingreso old_ing = null;
+                for (Ingreso i: emp.getIngresos())
+                {
+                    if (i.getId().equals(new_ing.getId()))
+                    {
+                        old_ing = i;
+                    }
+                }
+                if (old_ing == null) { throw new UnsupportedOperationException("¡¡Ingreso eliminada no existe!!"); }
+                emp.getEncomiendas().remove(old_ing);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string)
+            {
+                // No importa, no se hace nada
+            }
+            @Override
+            public void onCancelled(FirebaseError fe)
+            {
+                System.out.println("ERROR FB-102:" + fe.getMessage());
+            }
+        });
+        // Mantener la lista de pedidos actualizada
+        postRef = emp.fbRef().child("pedidos");
+        postRef.addChildEventListener(new ChildEventListener() {
+            // Retrieve new posts as they are added to the database
+            @Override
+            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
+                  //System.out.println(snapshot);
+                  Pedido ped = ds.getValue(Pedido.class);
+                  emp.getPedidos().add(ped);
+            }
+            @Override
+            public void onChildChanged(DataSnapshot ds, String previousChildKey)
+            {
+                Pedido new_ped = ds.getValue(Pedido.class);
+                Pedido old_ped = null;
+                for (Pedido p: emp.getPedidos())
+                {
+                    if (p.getId().equals(new_ped.getId()))
+                    {
+                        old_ped = p;
+                    }
+                }
+                if (old_ped == null) { throw new UnsupportedOperationException("¡¡Pedido modificado no existe!!"); }
+                emp.getPedidos().remove(old_ped);
+                emp.getPedidos().add(new_ped);
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot ds)
+            {
+                Pedido new_ped = ds.getValue(Pedido.class);
+                Pedido old_ped = null;
+                for (Pedido p: emp.getPedidos())
+                {
+                    if (p.getId().equals(new_ped.getId()))
+                    {
+                        old_ped = p;
+                    }
+                }
+                if (old_ped == null) { throw new UnsupportedOperationException("¡¡Pedido eliminada no existe!!"); }
+                emp.getPedidos().remove(old_ped);
+            }
+            @Override
+            public void onChildMoved(DataSnapshot ds, String string)
+            {
+                // No importa, no se hace nada
+            }
+            @Override
+            public void onCancelled(FirebaseError fe)
+            {
+                System.out.println("ERROR FB-102:" + fe.getMessage());
+            }
+        });
+        // Mantener la lista de encomiendas actualizada
         postRef = emp.fbRef().child("encomiendas");
         postRef.addChildEventListener(new ChildEventListener() {
             // Retrieve new posts as they are added to the database
@@ -50,14 +154,14 @@ public class Main extends Application {
             public void onChildAdded(DataSnapshot ds, String previousChildKey) {
                   //System.out.println(snapshot);
                   Encomienda enc = ds.getValue(Encomienda.class);
-                  emp.getencomiendas().add(enc);
+                  emp.getEncomiendas().add(enc);
             }
             @Override
             public void onChildChanged(DataSnapshot ds, String previousChildKey)
             {
                 Encomienda new_enc = ds.getValue(Encomienda.class);
                 Encomienda old_enc = null;
-                for (Encomienda e: emp.getencomiendas())
+                for (Encomienda e: emp.getEncomiendas())
                 {
                     if (e.getId().equals(new_enc.getId()))
                     {
@@ -65,15 +169,15 @@ public class Main extends Application {
                     }
                 }
                 if (old_enc == null) { throw new UnsupportedOperationException("¡¡Encomienda modificada no existe!!"); }
-                emp.getencomiendas().remove(old_enc);
-                emp.getencomiendas().add(new_enc);
+                emp.getEncomiendas().remove(old_enc);
+                emp.getEncomiendas().add(new_enc);
             }
             @Override
             public void onChildRemoved(DataSnapshot ds)
             {
                 Encomienda new_enc = ds.getValue(Encomienda.class);
                 Encomienda old_enc = null;
-                for (Encomienda usr: emp.getencomiendas())
+                for (Encomienda usr: emp.getEncomiendas())
                 {
                     if (usr.getId().equals(new_enc.getId()))
                     {
@@ -81,7 +185,7 @@ public class Main extends Application {
                     }
                 }
                 if (old_enc == null) { throw new UnsupportedOperationException("¡¡Encomienda eliminada no existe!!"); }
-                emp.getencomiendas().remove(old_enc);
+                emp.getEncomiendas().remove(old_enc);
             }
             @Override
             public void onChildMoved(DataSnapshot ds, String string)

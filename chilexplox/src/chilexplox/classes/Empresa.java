@@ -47,6 +47,7 @@ public class Empresa {
     private int IDPedido = 0;
     private Pedido pedidotemp;
     private List<Ingreso> ingresos;
+    private List<Pedido> pedidos;
     
     public Empresa()
     {
@@ -58,6 +59,7 @@ public class Empresa {
         this.jefes = new ArrayList();
         this.encomiendas = new ArrayList();
         this.ingresos = new ArrayList();
+        this.pedidos = new ArrayList();
     }
     
     /**
@@ -107,8 +109,12 @@ public class Empresa {
     {jefeActual=jefe;}
     public void setclienteactual(Cliente cliente)
     {clienteActual=cliente;}
-    public List<Encomienda> getencomiendas()
+    public List<Encomienda> getEncomiendas()
     {return encomiendas;}
+    public List<Pedido> getPedidos()
+    {return pedidos;}
+    public List<Ingreso> getIngresos()
+    {return ingresos;}
     public List<Camion> getCamiones()
     {return camiones;}
     public Encomienda getencomiendatemporal()

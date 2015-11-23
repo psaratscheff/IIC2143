@@ -10,6 +10,7 @@ import java.util.Date;
 public class Ingreso {
     private int valor;
     private Date fecha;
+    private String id;
     
     public Ingreso() {} // Constructor vacío para Firebase
     
@@ -20,9 +21,13 @@ public class Ingreso {
     }
     public int getValor()
     { return this.valor; }
-    
     public Date getFecha()
     { return this.fecha; }
+    public String getId()
+    {return this.id;}
+    
+    public void setId(String id)
+    {this.id = id;}
     
     /**
      * Retorna "fecha->valor" del ingreso

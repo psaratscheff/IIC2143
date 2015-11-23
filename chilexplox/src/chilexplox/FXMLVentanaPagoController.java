@@ -102,7 +102,7 @@ public class FXMLVentanaPagoController implements Initializable {
                 Ingreso i = new Ingreso(valor, cal.getTime());
                 emp.addIngreso(i);
                 postRef = emp.fbRef().child("ingresos");
-                newPostRef = postRef.push(); newPostRef.setValue(i);
+                newPostRef = postRef.push(); i.setId(newPostRef.getKey()); newPostRef.setValue(i);
                 //----Actualizo la sucursal con las nuevas encomiendas e ingreso---
                 postRef = emp.fbRef().child("sucursales");
                 newPostRef = postRef.child(emp.getsucursalactual().getDireccion()); newPostRef.setValue(emp.getsucursalactual());
