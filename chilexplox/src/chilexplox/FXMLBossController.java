@@ -100,7 +100,16 @@ public class FXMLBossController implements Initializable {
             @Override
             public void run()
             {
-                ChoiceBoxSucursales.getItems().add(s);
+                if (ChoiceBoxSucursales.getItems().isEmpty())
+                {
+                    ChoiceBoxSucursales.getItems().add(s);
+                    ChoiceBoxSucursales.getSelectionModel().select(s);
+                    UpdateConSucursal();
+                }
+                else
+                {
+                    ChoiceBoxSucursales.getItems().add(s);
+                }
                 emp.getsucursales().add(s);
             }
         });

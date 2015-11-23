@@ -7,23 +7,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="583.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLBossController">
+<AnchorPane id="AnchorPane" prefHeight="362.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chilexplox.FXMLBossController">
     <children>
-       <ComboBox fx:id="ChoiceBoxSucursales" layoutX="406.0" layoutY="53.0" onAction="#btnCargarSucursal" prefWidth="150.0" />
+       <ComboBox fx:id="ChoiceBoxSucursales" layoutX="271.0" layoutY="62.0" onAction="#btnCargarSucursal" prefWidth="150.0" />
        
-      <Button fx:id="Mensajes" layoutX="64.0" layoutY="93.0" mnemonicParsing="false" onAction="#MensajesAction" text="Mensajes">
+      <Button fx:id="Mensajes" layoutX="22.0" layoutY="253.0" mnemonicParsing="false" onAction="#MensajesAction" text="Mensajes">
          <font>
             <Font size="26.0" />
          </font>
       </Button>
       
-      <ListView id="ListMessagesPreview" fx:id="ListMessagesPreview" layoutX="25.0" layoutY="172.0" prefHeight="203.0" prefWidth="220.0" />
+      <ListView id="ListMessagesPreview" fx:id="ListMessagesPreview" layoutX="236.0" layoutY="122.0" prefHeight="203.0" prefWidth="220.0" />
       <Label fx:id="LabelNombreJefe" layoutX="25.0" layoutY="20.0" text="Hola, #NombreJefe">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="456.0" layoutY="20.0" text="Sucursal">
          <font>
             <Font size="16.0" />
          </font>
@@ -37,12 +32,11 @@
        <Label fx:id="ErrorLabelSucursal" layoutX="400.0" layoutY="100.0" textFill="RED" />
       
       
-      <Button fx:id="ButtonAgregarEmpleado" layoutX="406.0" layoutY="190.0" mnemonicParsing="false" text="Agregar empleado" onAction="#agregarEmpleadoAction" />
-      <Button fx:id="ButtonEliminarEmpleado" layoutX="406.0" layoutY="243.0" mnemonicParsing="false" text="Eliminar Empleado" onAction="#eliminarEmpleadoAction" />
+      <Button fx:id="ButtonAgregarEmpleado" layoutX="36.0" layoutY="109.0" mnemonicParsing="false" onAction="#agregarEmpleadoAction" text="Agregar empleado" />
+      <Button fx:id="ButtonEliminarEmpleado" layoutX="36.0" layoutY="162.0" mnemonicParsing="false" onAction="#eliminarEmpleadoAction" text="Eliminar Empleado" />
       
-      <Button fx:id="VerInforme" layoutX="424.0" layoutY="290.0" mnemonicParsing="false" onAction="#CargarVentanaInformes" text="Ver Informe" />
+      <Button fx:id="VerInforme" layoutX="54.0" layoutY="209.0" mnemonicParsing="false" onAction="#CargarVentanaInformes" text="Ver Informe" />
       <Button fx:id="Salir" layoutX="25.0" layoutY="45.0" mnemonicParsing="false" onAction="#SalirAction" text="Salir" />
-      <Button fx:id="VerErrores" layoutX="395.0" layoutY="337.0" mnemonicParsing="false" onAction="#VerErroresAction" text="Ver Registro de Errores" />
       
       
    </children>
