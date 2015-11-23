@@ -16,6 +16,7 @@
         <ChoiceBox fx:id="EPrioridad" layoutX="112.0" layoutY="249.0" prefHeight="25.0" prefWidth="192.0" />
         <ChoiceBox fx:id="EDestino" layoutX="112.0" layoutY="285.0" prefHeight="25.0" prefWidth="192.0" />
         <ChoiceBox fx:id="ETipo" layoutX="112.0" layoutY="320.0" prefHeight="25.0" prefWidth="192.0" />
+      <TextField fx:id="EDireccion" layoutX="112.0" layoutY="354.0" prefHeight="25.0" prefWidth="192.0" />
          
     
       <Label layoutX="45.0" layoutY="324.0" text="Tipo:" />
@@ -82,7 +83,6 @@
          </font>
       </Button>
       <Label layoutX="45.0" layoutY="358.0" text="Dirección:" />
-      <TextField fx:id="EDireccion" layoutX="112.0" layoutY="354.0" prefHeight="25.0" prefWidth="192.0" />
       
       
    </children>
