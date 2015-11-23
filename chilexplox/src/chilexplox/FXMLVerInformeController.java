@@ -8,6 +8,8 @@ package chilexplox;
 import chilexplox.classes.Camion;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Ingreso;
+import chilexplox.classes.Sucursal;
+import chilexplox.classes.Empleado;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 /**
@@ -37,6 +40,8 @@ public class FXMLVerInformeController implements Initializable {
     private TextField NetValue;
      @FXML
     private Label labeltextfield;
+      @FXML
+    private ListView mostrador;
 
     private Empresa emp;
     
@@ -171,7 +176,51 @@ public class FXMLVerInformeController implements Initializable {
     @FXML
     void OrdenarPor()
     {
-    
+        List valoresxsuc=new ArrayList();
+    for(Sucursal s:emp.getsucursales())
+    {
+        int valor=0;
+        int contador=0;
+        int valortot=0;
+        List aux=new ArrayList();
+        aux.add(s.getDireccion());
+        valoresxsuc.add(s.getDireccion());
+        for(Ingreso i:emp.ingresos())
+        {
+        if(s.getDireccion().equals(i.getSucursal()))
+        {
+            valortot+=i.getValor();
+        }
+        }
+        if(CBMostrar.getValue().equals("Promedio"))
+                    {
+                        if(contador!=0)
+                            
+                        {
+                       valor = valortot/contador;
+                        }
+                    }
+            else if(CBMostrar.getValue().equals("Total"))
+                   {
+                        valor= valortot;
+                   }
+        valoresxsuc.add(Integer.toString(valortot));
+       mostrador.getItems().clear();
        
+    }
+    int cont=1;
+    String meter="";
+    for(Object s: valoresxsuc)
+       {
+           if(cont%2==1)
+           {
+               meter= s+" :";
+           }
+           else if(cont%2==0)
+           {
+               meter+=s;
+               mostrador.getItems().add(meter);
+           }
+       }
     }
 }
