@@ -48,6 +48,8 @@ public class Empresa {
     private Pedido pedidotemp;
     private List<Ingreso> ingresos;
     private List<Pedido> pedidos;
+    private String empleadostring;
+    private String sucursalstring;
     
     public Empresa()
     {
@@ -69,6 +71,23 @@ public class Empresa {
      * Entrega un string con la fecha en formato "yyyy/MM/dd HH:mm:ss"
      * @return DateFormat
      */
+    
+    public String getEmpleadoString()
+    {
+    return this.empleadostring;
+    }
+     public String getSucursalString()
+    {
+    return this.sucursalstring;
+    }
+     public void setSucursalString(String suc)
+     {
+     sucursalstring=suc;
+     }
+     public void setEmpleadoString(String emp)
+     {
+     empleadostring=emp;
+     }
     public List<Ingreso> ingresos()
     {
         return this.ingresos;

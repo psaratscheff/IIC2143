@@ -8,6 +8,8 @@ package chilexplox;
 import chilexplox.classes.Camion;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Ingreso;
+import chilexplox.classes.Sucursal;
+import chilexplox.classes.Empleado;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,6 +19,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 /**
@@ -27,13 +31,17 @@ import javafx.scene.control.TextField;
 public class FXMLVerInformeController implements Initializable {
     
     @FXML
-    private ComboBox<Integer> CBPeriodos;
+    private ComboBox<String> CBPeriodos;
     @FXML
     private ComboBox<String> CBOrdenarPor;
     @FXML
     private ComboBox<String> CBMostrar;
     @FXML
     private TextField NetValue;
+     @FXML
+    private Label labeltextfield;
+      @FXML
+    private ListView mostrador;
 
     private Empresa emp;
     
@@ -52,8 +60,25 @@ public class FXMLVerInformeController implements Initializable {
     
     void fillComboBox()
     {
-        for(int i=1;i<13;i++){
-        CBPeriodos.getItems().add(i); //aniado los emses del anio
+        {
+        CBPeriodos.getItems().add("00");
+        CBPeriodos.getItems().add("01");
+        CBPeriodos.getItems().add("02");
+        CBPeriodos.getItems().add("03");
+        CBPeriodos.getItems().add("04");
+        CBPeriodos.getItems().add("05");
+        CBPeriodos.getItems().add("06");
+        CBPeriodos.getItems().add("07");
+        CBPeriodos.getItems().add("08");
+        CBPeriodos.getItems().add("09");
+        CBPeriodos.getItems().add("10");
+        CBPeriodos.getItems().add("11");
+        
+        
+       
+
+
+//aniado los emses del anio
     }
        
        
@@ -64,27 +89,138 @@ public class FXMLVerInformeController implements Initializable {
     {
         if (CBPeriodos.getValue() != null)
         {
-            int m = CBPeriodos.getValue();
+            int valor=0;
+            int contador=0;
+            String m = CBPeriodos.getValue();
             int neto = 0;
+            
             Calendar cal = Calendar.getInstance();
+            
             for (Ingreso i: emp.ingresos())
             {
                 cal.setTime(i.getFecha());
-                int month = cal.get(Calendar.MONTH);
-                if (month == m)
+                String month = Integer.toString(cal.get(Calendar.MONTH));
+                
+                if (m.equals(month))
                 {
-                    neto += i.getValor();
+                    
+                        contador+=1;
+                        neto += i.getValor();
+                    //System.out.print("llegue dentro del if");
                 }
             }
-            NetValue.setText("$"+neto);
+             if(CBMostrar.getValue().equals("Promedio"))
+                    {
+                        if(contador!=0)
+                            
+                        {
+                       valor = neto/contador;
+                        }
+                    }
+            else if(CBMostrar.getValue().equals("Total"))
+                   {
+                        valor= neto;
+                   }
+            NetValue.setText("$"+valor);
         }
     }
     @FXML
     void Mostrar()
     {
-    
+     if(CBMostrar.getValue().equals("Promedio"))
+                    {
+                       labeltextfield.setText("Ingreso promedio periodo:");
+                    }
+            else if(CBMostrar.getValue().equals("Ingreso neto periodo:"))
+                   {
+                        
+                   }
+     
+     if (CBPeriodos.getValue() != null)
+        {
+            int valor=0;
+            int contador=0;
+            String m = CBPeriodos.getValue();
+            int neto = 0;
+            
+            Calendar cal = Calendar.getInstance();
+            
+            for (Ingreso i: emp.ingresos())
+            {
+                cal.setTime(i.getFecha());
+                String month = Integer.toString(cal.get(Calendar.MONTH));
+                
+                if (m.equals(month))
+                {
+                    
+                        contador+=1;
+                        neto += i.getValor();
+                    //System.out.print("llegue dentro del if");
+                }
+            }
+             if(CBMostrar.getValue().equals("Promedio"))
+                    {
+                        if(contador!=0)
+                            
+                        {
+                       valor = neto/contador;
+                        }
+                    }
+            else if(CBMostrar.getValue().equals("Total"))
+                   {
+                        valor= neto;
+                   }
+            NetValue.setText("$"+valor);
+        }
     }
     @FXML
     void OrdenarPor()
-    {}
+    {
+        List valoresxsuc=new ArrayList();
+    for(Sucursal s:emp.getsucursales())
+    {
+        int valor=0;
+        int contador=0;
+        int valortot=0;
+        List aux=new ArrayList();
+        aux.add(s.getDireccion());
+        valoresxsuc.add(s.getDireccion());
+        for(Ingreso i:emp.ingresos())
+        {
+        if(s.getDireccion().equals(i.getSucursal()))
+        {
+            valortot+=i.getValor();
+        }
+        }
+        if(CBMostrar.getValue().equals("Promedio"))
+                    {
+                        if(contador!=0)
+                            
+                        {
+                       valor = valortot/contador;
+                        }
+                    }
+            else if(CBMostrar.getValue().equals("Total"))
+                   {
+                        valor= valortot;
+                   }
+        valoresxsuc.add(Integer.toString(valortot));
+       mostrador.getItems().clear();
+       
+    }
+    int cont=1;
+    String meter="";
+    for(Object s: valoresxsuc)
+       {
+           if(cont%2==1)
+           {
+               meter= s+" :";
+           }
+           else if(cont%2==0)
+           {
+               meter+=s;
+               mostrador.getItems().add(meter);
+           }
+       }
+    }
 }

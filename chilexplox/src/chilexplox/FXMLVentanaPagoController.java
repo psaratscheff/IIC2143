@@ -101,7 +101,7 @@ public class FXMLVentanaPagoController implements Initializable {
                 }
                 //----Agrego el ingreso a la empresa---
                 Calendar cal = Calendar.getInstance();
-                Ingreso i = new Ingreso(valor, cal.getTime());
+                Ingreso i = new Ingreso(valor, cal.getTime(),emp.getSucursalString(),emp.getEmpleadoString());
                 emp.addIngreso(i);
                 postRef = emp.fbRef().child("ingresos");
                 newPostRef = postRef.push(); i.setId(newPostRef.getKey()); newPostRef.setValue(i);

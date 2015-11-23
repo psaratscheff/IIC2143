@@ -122,6 +122,7 @@ public class FXMLSucursalController implements Initializable {
     Empresa emp;
     Camion camionActual;
     double espacioCamion = -1;
+    Camion camion = null;
     
     /**
      * Initializes the controller class.
@@ -352,18 +353,35 @@ public class FXMLSucursalController implements Initializable {
                 }/**/
 
                 // CARGAR ENCOMIENDAS RECIBIDAS
-                String seleccionadoR = EncomiendasRecibidas.getSelectionModel().getSelectedItem();
                 EncomiendasRecibidas.getItems().clear();
-                for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
+                if (VerPedidosRecibidos.visibleProperty().getValue())
                 {
-                    EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + " -- " + "ID: #" + en.getId() + "# -- Origen: " + en.getSucursalOrigen()+" -- Tipo: "+en.getTipo());
+                    String seleccionadoR = EncomiendasRecibidas.getSelectionModel().getSelectedItem();
+                    for(Encomienda en: camion.getEncomiendas())
+                    {
+                        EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + " -- " + "ID: #" + en.getId() + "# -- Origen: " + en.getSucursalOrigen()+" -- Tipo: "+en.getTipo());
+                    }
+                    // Dejo seleccionado el que estaba seleccionado antes de refrescar la ventana
+                    try{
+                        EncomiendasRecibidas.getSelectionModel().select(seleccionadoR);
+                    }catch(Exception e){
+                        System.out.println("Ya no está disponible la encomiendaR: "+e.getMessage());
+                    }/**/
                 }
-                // Dejo seleccionado el que estaba seleccionado antes de refrescar la ventana
-                try{
-                    EncomiendasRecibidas.getSelectionModel().select(seleccionadoR);
-                }catch(Exception e){
-                    System.out.println("Ya no está disponible la encomiendaR: "+e.getMessage());
-                }/**/
+                else
+                {
+                    String seleccionadoR = EncomiendasRecibidas.getSelectionModel().getSelectedItem();
+                    for(Encomienda en: emp.getsucursalactual().getEncomiendasRecibidas())
+                    {
+                        EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + " -- " + "ID: #" + en.getId() + "# -- Origen: " + en.getSucursalOrigen()+" -- Tipo: "+en.getTipo());
+                    }
+                    // Dejo seleccionado el que estaba seleccionado antes de refrescar la ventana
+                    try{
+                        EncomiendasRecibidas.getSelectionModel().select(seleccionadoR);
+                    }catch(Exception e){
+                        System.out.println("Ya no está disponible la encomiendaR: "+e.getMessage());
+                    }/**/
+                }
                 // CARGAR PREVIEW MENSAJES!! (Agregar un timer de sincronización?)
                 ListMessagesPreview.getItems().clear();
                 for(Mensaje m: emp.getsucursalactual().getMensajesRecibidos())
@@ -681,28 +699,29 @@ public class FXMLSucursalController implements Initializable {
     @FXML
     private void VerCamionAction() throws IOException{
         // Obtener Camion a Revisar
-        Camion camion = null;
+        Camion camionS = null;
         String cs = ChoiceBoxCamiones.getValue();
         for (Camion c: emp.getsucursalactual().getCamionesEstacionados())
         {
             if (c.NombreCompleto().equals(cs))
             {
-                camion = c;
+                camionS = c;
             }
         }
         // Reviso que haya seleccion al momento de llamar al metodo
-        if (camion == null) { System.out.println("3No hay camion seleccionado"); return; }
-        LabelRecibidosCamiones.setText("Camion: "+camion.NombreCompleto());
+        if (camionS == null) { System.out.println("3No hay camion seleccionado"); return; }
+        LabelRecibidosCamiones.setText("Camion: "+camionS.NombreCompleto());
         NotificarErrorPedido.setVisible(false);
         EntregarEncomienda.setVisible(false);
         PasarACola.setVisible(false);
         QuitarEncomiendaCamion.setVisible(true);
         VerPedidosRecibidos.setVisible(true);
         EncomiendasRecibidas.getItems().clear();
-        for(Encomienda en: camion.getEncomiendas())
+        for(Encomienda en: camionS.getEncomiendas())
         {
             EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
         }
+        this.camion = camionS;
     }
     
     @FXML
@@ -814,12 +833,9 @@ public class FXMLSucursalController implements Initializable {
             Urgencia.setText("Hay una encomienda urgente!");
             boolurgencia = false;
         }
-
         EncomiendasRecibidas.getItems().clear();
-        for(Encomienda en: camion.getEncomiendas())
-        {
-            EncomiendasRecibidas.getItems().add("["+en.getPrioridad()+"]" + "(" + en.getEstado() +")" + "// " + "ID: #" + en.getId() + "# Destino: " + emp.getSucursalConDireccion(en.getSucursalDestino()).getDireccion());
-        }
+        RefreshConSucursal();
+        
         //Actualizar capacidad
         espacioCamion = camion.PorcentajeDisponible();
         // RECICLAR ESTE CODIGO DESPUES!!! ¡¡¡¡DRY!!!!
@@ -836,6 +852,17 @@ public class FXMLSucursalController implements Initializable {
         {
              ProgressBarCapacity.setStyle("-fx-accent: red;");
         }
+        
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    VerCamionAction();
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLSucursalController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
     
     @FXML
