@@ -175,7 +175,12 @@ public class FXMLVerInformeController implements Initializable {
     }
     @FXML
     void OrdenarPor()
-    {
+    {String m = CBPeriodos.getValue();
+            int neto = 0;
+            
+            Calendar cal = Calendar.getInstance();
+        if(CBOrdenarPor.getValue().equals("Sucursal"))
+        {
         List valoresxsuc=new ArrayList();
     for(Sucursal s:emp.getsucursales())
     {
@@ -186,14 +191,22 @@ public class FXMLVerInformeController implements Initializable {
         aux.add(s.getDireccion());
         valoresxsuc.add(s.getDireccion());
         for(Ingreso i:emp.ingresos())
-        {
+        { 
+            cal.setTime(i.getFecha());
+                String month = Integer.toString(cal.get(Calendar.MONTH));
+                
+                if (m.equals(month))
+               {
         if(s.getDireccion().equals(i.getSucursal()))
         {
+            contador+=1;
+            System.out.print("puedo comparar sucursales \n");
             valortot+=i.getValor();
-        }
+        }}
         }
         if(CBMostrar.getValue().equals("Promedio"))
                     {
+                         System.out.print("comparopromedio \n");
                         if(contador!=0)
                             
                         {
@@ -202,6 +215,7 @@ public class FXMLVerInformeController implements Initializable {
                     }
             else if(CBMostrar.getValue().equals("Total"))
                    {
+                       System.out.print("comparototal \n");
                         valor= valortot;
                    }
         valoresxsuc.add(Integer.toString(valortot));
@@ -212,8 +226,11 @@ public class FXMLVerInformeController implements Initializable {
     String meter="";
     for(Object s: valoresxsuc)
        {
+           
+                         System.out.print(s +" \n");
            if(cont%2==1)
            {
+                
                meter= s+" :";
            }
            else if(cont%2==0)
@@ -221,6 +238,99 @@ public class FXMLVerInformeController implements Initializable {
                meter+=s;
                mostrador.getItems().add(meter);
            }
+           cont+=1;
        }
+        }
+        else if(CBOrdenarPor.getValue().equals("Empleado"))
+        {
+        List valoresxsuc=new ArrayList();
+    for(Empleado e:emp.getempleados())
+    {
+        int valor=0;
+        int contador=0;
+        int valortot=0;
+        List aux=new ArrayList();
+        aux.add(e.getUsername());
+        valoresxsuc.add(e.getUsername());
+        for(Ingreso i:emp.ingresos())
+        {
+            
+        if(e.getUsername().equals(i.getEmpleado()))
+        {
+            System.out.print("puedo comparar sucursales \n");
+            valortot+=i.getValor();
+            contador+=1;
+        }
+        }
+        if(CBMostrar.getValue().equals("Promedio"))
+                    {
+                         System.out.print("comparopromedio \n");
+                        if(contador!=0)
+                            
+                        {
+                       valor = valortot/contador;
+                        }
+                    }
+            else if(CBMostrar.getValue().equals("Total"))
+                   {
+                       System.out.print("comparototal \n");
+                        valor= valortot;
+                   }
+        valoresxsuc.add(Integer.toString(valortot));
+       mostrador.getItems().clear();
+       
+    }
+    int cont=1;
+    String meter="";
+    for(Object s: valoresxsuc)
+       {
+           
+                         System.out.print(s +" \n");
+           if(cont%2==1)
+           {
+                
+               meter= s+" :";
+           }
+           else if(cont%2==0)
+           {
+               meter+=s;
+               mostrador.getItems().add(meter);
+           }
+           cont+=1;
+       }
+    }
+    if (CBPeriodos.getValue() != null)
+        {
+            int valor=0;
+            int contador=0;
+           
+            
+            for (Ingreso i: emp.ingresos())
+            {
+                cal.setTime(i.getFecha());
+                String month = Integer.toString(cal.get(Calendar.MONTH));
+                
+                if (m.equals(month))
+                {
+                    
+                        contador+=1;
+                        neto += i.getValor();
+                    //System.out.print("llegue dentro del if");
+                }
+            }
+             if(CBMostrar.getValue().equals("Promedio"))
+                    {
+                        if(contador!=0)
+                            
+                        {
+                       valor = neto/contador;
+                        }
+                    }
+            else if(CBMostrar.getValue().equals("Total"))
+                   {
+                        valor= neto;
+                   }
+            NetValue.setText("$"+valor);
+        }
     }
 }
