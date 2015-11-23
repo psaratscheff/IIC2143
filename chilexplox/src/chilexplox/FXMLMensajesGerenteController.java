@@ -80,7 +80,7 @@ Empresa emp;
                 emp.getempleadoactual().EnviarMensaje(s, contenido, urgencia);
                     EnviarContenido.setText("");
                 }
-                if (s.getDireccion() == direccionDestino) 
+                if (s.getDireccion().equals(direccionDestino)) 
                 {
                     emp.getempleadoactual().EnviarMensaje(s, contenido, urgencia);
                     EnviarContenido.setText("");

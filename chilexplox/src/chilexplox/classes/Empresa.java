@@ -198,7 +198,7 @@ public class Empresa {
     {
         for(Cliente c: clientes)
         {
-            if (c.getRut()==rut)
+            if (c.getRut().equals(rut))
             {
                 return c;
             }
