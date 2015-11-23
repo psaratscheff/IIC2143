@@ -74,6 +74,7 @@ public class FXMLVentanaPagoController implements Initializable {
         Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
             @Override
             public void run(){
+                // Agrego/Actualizo información cliente
                 Cliente c = null;
                 for (Cliente c2: emp.getclientes())
                 {
@@ -83,7 +84,8 @@ public class FXMLVentanaPagoController implements Initializable {
                         cliente.setPassword(password); // Mantener la contraseña original, sino queda con el nombre como contraseña
                     }
                 }
-                emp.fbRef().child("clientes").child(cliente.getRut()).setValue(cliente); // Actualizar información del cliente
+                emp.fbRef().child("clientes").child(cliente.getRut()).setValue(cliente);
+                // Agrego encomiendas
                 for(Encomienda en: pedido.getEncomiendas())
                 {
                     en.setEmpleado(emp.getempleadoactual().getUsername());
