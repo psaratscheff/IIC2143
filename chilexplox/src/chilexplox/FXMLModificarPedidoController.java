@@ -5,6 +5,7 @@
  */
 package chilexplox;
 
+import chilexplox.classes.Cliente;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Ingreso;
@@ -30,6 +31,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import se.mbaeumer.fxmessagebox.MessageBox;
+import se.mbaeumer.fxmessagebox.MessageBoxType;
 
 /**
  * FXML Controller class
@@ -68,6 +71,7 @@ public class FXMLModificarPedidoController implements Initializable {
     Empresa emp;
     Firebase postRef;
     Firebase newPostRef;
+    Cliente cliente;
     /**
      * Initializes the controller class.
      */
@@ -78,18 +82,42 @@ public class FXMLModificarPedidoController implements Initializable {
         EPrioridad.getItems().add("Normal");
         EPrioridad.getItems().add("Express");
         
-        LoadSucursales();
+        for (Sucursal s: emp.getsucursales())
+        {
+            EDestino.getItems().add(s.getDireccion());
+        }
+        EDestino.getSelectionModel().select(emp.getencomiendatemporal().getSucursalDestino());
         
         EOrigen.setText(emp.getsucursalactual().getDireccion());
         EAncho.setText(Integer.toString(emp.getencomiendatemporal().getAncho()));
         ELargo.setText(Integer.toString(emp.getencomiendatemporal().getLargo()));
         EPeso.setText(Integer.toString(emp.getencomiendatemporal().getPeso()));
         EDireccion.setText(emp.getencomiendatemporal().getDireccionDestino());
+        EPrioridad.getSelectionModel().select(emp.getencomiendatemporal().getPrioridad());
+        
+        String cRut = emp.getencomiendatemporal().getClienteRut();
+        for (Cliente c: emp.getclientes())
+        {
+            if (c.getRut().equals(cRut))
+            {
+                cliente = c;
+            }
+        }
+        CNombre.setText(cliente.getNombre());
+        CApellido.setText(cliente.getApellido());
+        CDireccion.setText(cliente.getDireccion());
+        CRut.setText(cRut);
     } 
     
     @FXML
-    private void EditarAction() throws IOException{
-        
+    private void EditarAction() throws IOException
+    {
+        if (EAncho.getText().equals("") || ELargo.getText().equals("") || EPeso.getText().equals("") || EPrioridad.getValue().equals("") || EDestino.getValue().equals("") || EDireccion.getText().equals("") || CNombre.getText().equals("") || CApellido.getText().equals("") || CDireccion.getText().equals("") || CRut.getText().equals("") )
+        {
+            MessageBox mb = new MessageBox("No se pueden dejar campos en blanco", MessageBoxType.OK_ONLY);
+            mb.showAndWait();
+            return;
+        }
         Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
             @Override
             public void run(){
@@ -129,6 +157,21 @@ public class FXMLModificarPedidoController implements Initializable {
                 postRef = emp.fbRef().child("encomiendas");
                 newPostRef = postRef.child(enco.getId()); newPostRef.setValue(enco);
                 
+                // Agrego/Actualizo información cliente
+                cliente.setnNombre(CNombre.getText());
+                cliente.setApellido(CApellido.getText());
+                cliente.setDireccion(CDireccion.getText());
+                cliente.setRut(CRut.getText());
+                Cliente c = null;
+                for (Cliente c2: emp.getclientes())
+                {
+                    if (c2.getRut().equals(cliente.getRut()))
+                    {
+                        String password = c2.getPassword();
+                        cliente.setPassword(password); // Mantener la contraseña original, sino queda con el nombre como contraseña
+                    }
+                }
+                emp.fbRef().child("clientes").child(cliente.getRut()).setValue(cliente);
             }
         });
         
@@ -138,36 +181,5 @@ public class FXMLModificarPedidoController implements Initializable {
     
     void setSucursalController(FXMLSucursalController aThis) {
         this.sucursalController = aThis;
-    }
-    
-    private void LoadSucursales()
-    {
-        Firebase sucursalesRef = emp.fbRef().child("sucursales");
-        sucursalesRef.addChildEventListener(new ChildEventListener() {
-            // Retrieve new posts as they are added to the database
-            @Override
-            public void onChildAdded(DataSnapshot ds, String previousChildKey) {
-                Sucursal s = ds.getValue(Sucursal.class);
-                EDestino.getItems().add(s.getDireccion());
-            }
-            @Override
-            public void onChildChanged(DataSnapshot ds, String string) {
-                //Hay que hacer algo por si cambia nombre?
-            }
-            @Override
-            public void onChildRemoved(DataSnapshot ds) {
-                Sucursal s = ds.getValue(Sucursal.class);
-                System.out.println("Sucursal REMOVIDA:" + s.toString());
-                EDestino.getItems().remove(s.getDireccion());
-            }
-            @Override
-            public void onChildMoved(DataSnapshot ds, String string) {
-                // Who cares... (No se requiere hacer nada)
-            }
-            @Override
-            public void onCancelled(FirebaseError fe) {
-                System.out.println("ERROR FB-101:" + fe.getMessage());
-            }
-        });/**/
     }
 }
