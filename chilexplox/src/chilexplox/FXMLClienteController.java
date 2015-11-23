@@ -99,7 +99,7 @@ public class FXMLClienteController implements Initializable {
         }
     }
     @FXML
-    private void EventoVerEstadoEncomienda(javafx.event.ActionEvent event)
+    private void EventoVerEstadoEncomienda(javafx.event.ActionEvent event) throws IOException
     {
         String nrencomienda= TextFieldNrEncomienda.getText();
         boolean existe= false;
@@ -107,8 +107,17 @@ public class FXMLClienteController implements Initializable {
         {   
             if(nrencomienda.equals(en.getId()))
             {
-                MessageBox mb = new MessageBox("Encomienda encontrada, aquí se lanza la nueva ventana...", MessageBoxType.OK_ONLY);
-                mb.showAndWait();
+                emp.setencomiendatemporal(en);
+                
+                existe = true;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLModificarPedido.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                FXMLModificarPedidoController controller = fxmlLoader.<FXMLModificarPedidoController>getController();
+                controller.disableModificar();
+                controller.setSucursalController(new FXMLSucursalController());
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));  
+                stage.show();
             }
         }
         if(existe==false)
