@@ -5,6 +5,7 @@
  */
 package chilexplox;
 
+import chilexplox.classes.Cliente;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Ingreso;
@@ -56,6 +57,7 @@ public class FXMLVentanaPagoController implements Initializable {
     private FXMLClienteController clienteController;
     Firebase postRef;
     Firebase newPostRef;
+    private Cliente cliente;
 
     /**
      * Initializes the controller class.
@@ -72,12 +74,26 @@ public class FXMLVentanaPagoController implements Initializable {
         Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
             @Override
             public void run(){
+                Cliente c = null;
+                for (Cliente c2: emp.getclientes())
+                {
+                    if (c2.getRut().equals(cliente.getRut()))
+                    {
+                        String password = c2.getPassword();
+                        cliente.setPassword(password); // Mantener la contraseña original, sino queda con el nombre como contraseña
+                    }
+                }
+                emp.fbRef().child("clientes").child(cliente.getRut()).setValue(cliente); // Actualizar información del cliente
                 for(Encomienda en: pedido.getEncomiendas())
                 {
                     en.setEmpleado(emp.getempleadoactual().getUsername());
+                    System.out.println("cliente.getRut(): "+cliente.getRut());
+                    en.setClienteRut(cliente.getRut());
+                    System.out.println("en.getClienteRut(): "+en.getClienteRut());
                     //----Agrego encomiendas en empresa---
                     postRef = emp.fbRef().child("encomiendas");
                     newPostRef = postRef.push(); String id1 = newPostRef.getKey(); en.setId(id1); newPostRef.setValue(en);
+                    System.out.println("Rut cliente encomienda: "+en.getClienteRut());
                     emp.getsucursalactual().getEncomiendasAlmacenadas().add(en);
                     // Sincronización de sucursal con firebase más adelante                    
                 }
@@ -108,7 +124,11 @@ public class FXMLVentanaPagoController implements Initializable {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
-
+    
+    void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     void setPedido(Pedido pedido) {
         this.pedido = pedido;
         valor = pedido.CalcularValor();

@@ -15,10 +15,11 @@ public class Encomienda {
     private String destinatario; //id - firebase
     private String tipo;
     private String empleado;
+    private String clienteRut;
 
     public Encomienda() {} // Constructor vacío para Firebase
     
-    public Encomienda(String estado, String prioridad, int tamaño, String sucursalOrigen, String sucursalDestino, String tipo)
+    public Encomienda(String estado, String prioridad, int tamaño, String sucursalOrigen, String sucursalDestino, String tipo, String ClienteRut)
     {
         this.estado = estado;
         this.prioridad = prioridad;
@@ -28,8 +29,9 @@ public class Encomienda {
         this.sucursalOrigen = sucursalOrigen;
         this.tipo=tipo;
         this.empleado = null;
+        this.clienteRut = ClienteRut;
     }
-    public Encomienda(String estado, String prioridad, int tamaño, String id, String sucursalOrigen, String sucursalDestino, String tipo)
+    public Encomienda(String estado, String prioridad, int tamaño, String id, String sucursalOrigen, String sucursalDestino, String tipo, String ClienteRut)
     {
         this.estado = estado;
         this.prioridad = prioridad;
@@ -39,6 +41,7 @@ public class Encomienda {
         this.sucursalOrigen = sucursalOrigen;
         this.tipo=tipo;
         this.empleado = null;
+        this.clienteRut = ClienteRut;
     }
     
     // No modificar nombres, necesarios para FireBase!!!
@@ -52,6 +55,8 @@ public class Encomienda {
     {return tamaño;}
     public String getId()
     {return id;}
+    public String getClienteRut()
+    {return clienteRut;}
     public void setId(String sId)
     {
         this.id = sId;
@@ -91,4 +96,6 @@ public class Encomienda {
     {return peso = pes;}
     public String setEmpleado(String em)
     {return empleado = em;}
+    public void setClienteRut(String ClienteRut) 
+    {this.clienteRut = ClienteRut;}
 }
