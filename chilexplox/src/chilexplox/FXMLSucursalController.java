@@ -432,7 +432,7 @@ public class FXMLSucursalController implements Initializable {
         try{
             encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
         }catch(Exception e){
-            System.out.println("Debes seleccionar un pedido a entregar");
+            System.out.println("1Debes seleccionar un pedido a entregar");
             return; // FIN
         }
         Encomienda encomienda = null;
@@ -510,9 +510,9 @@ public class FXMLSucursalController implements Initializable {
         if (EncomiendasEnSucursal.getSelectionModel().getSelectedItem() == null) { return; }
         String encomiendaID;
         try{
-            encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
+            encomiendaID = EncomiendasEnSucursal.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
         }catch(Exception e){
-            System.out.println("Debes seleccionar un pedido a entregar");
+            System.out.println("2Debes seleccionar un pedido a entregar");
             return; // FIN
         }
         Encomienda encomienda = null;
@@ -542,48 +542,44 @@ public class FXMLSucursalController implements Initializable {
             }
             // Reviso que haya seleccion al momento de llamar al metodo
             if (camion == null) { System.out.println("1No hay camion seleccionado"); return; }
-            if (camion != null && encomienda != null)// aca
+
+            if(camion.getTipo().equals(encomienda.getTipo()))
             {
-                if(camion.getTipo().equals(encomienda.getTipo()))
+                espacioCamion = camion.PorcentajeDisponible();
+                if (espacioCamion>=1.0){ return; }
+
+                //CARGAR CAMION!!
+                emp.getsucursalactual().getEncomiendasAlmacenadas().remove(encomienda);
+                encomienda.setestado("En Camión");
+                camion.addencomienda(encomienda); // Camion obtenido de los estacionados en sucursal actual!
+                emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
+
+                //RECARGAR ENCOMIENDAS
+                // Firebase lo hace automágicamente :)
+
+                //ACTUALIZAR CAPACIDAD
+                espacioCamion = camion.PorcentajeDisponible();
+                // Reciclar este código después!!! ¡¡¡¡DRY!!!!
+                ProgressBarCapacity.setProgress(espacioCamion);
+                if (espacioCamion<0.7)
                 {
-                    espacioCamion = camion.PorcentajeDisponible();
-                    if (espacioCamion>=1.0){ return; }
-
-                    //CARGAR CAMION!!
-                    emp.getsucursalactual().getEncomiendasAlmacenadas().remove(encomienda);
-                    encomienda.setestado("En Camión");
-                    camion.addencomienda(encomienda); // Camion obtenido de los estacionados en sucursal actual!
-                    emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
-
-                    //RECARGAR ENCOMIENDAS
-                    // Firebase lo hace automágicamente :)
-
-                    //ACTUALIZAR CAPACIDAD
-                    espacioCamion = camion.PorcentajeDisponible();
-                    // Reciclar este código después!!! ¡¡¡¡DRY!!!!
-                    ProgressBarCapacity.setProgress(espacioCamion);
-                    if (espacioCamion<0.7)
-                    {
-                        ProgressBarCapacity.setStyle("-fx-accent: green;");
-                    }
-                    else if (espacioCamion<0.85)
-                    {
-                        ProgressBarCapacity.setStyle("-fx-accent: yellow;");
-                    }
-                    else
-                    {
-                        ProgressBarCapacity.setStyle("-fx-accent: red;");
-                    }
+                    ProgressBarCapacity.setStyle("-fx-accent: green;");
+                }
+                else if (espacioCamion<0.85)
+                {
+                    ProgressBarCapacity.setStyle("-fx-accent: yellow;");
                 }
                 else
                 {
-                    MessageBox mb = new MessageBox("Solo se puede cargar una encomienda \n tipo "+ encomienda.getTipo()+
-                            " en un camion "+encomienda.getTipo()+"!", MessageBoxType.OK_ONLY);
-                    mb.showAndWait();
-
-                    return;
-                }//podria hacer un messagebox que no coincide tipo
+                    ProgressBarCapacity.setStyle("-fx-accent: red;");
+                }
             }
+            else
+            {
+                MessageBox mb = new MessageBox("Solo se puede cargar una encomienda \n tipo "+ encomienda.getTipo()+
+                        " en un camion "+encomienda.getTipo()+"!", MessageBoxType.OK_ONLY);
+                mb.showAndWait();
+            }//podria hacer un messagebox que no coincide tipo
         }
         catch (Exception e)
         {
@@ -617,39 +613,36 @@ public class FXMLSucursalController implements Initializable {
         }
         // Reviso que haya seleccion al momento de llamar al metodo
         if (destinoSucursal == null) { System.out.println("1No hay destino seleccionado"); return; }
-        if (camion != null && destinoSucursal != null)
+        // Enviar Camion
+        Camion temp = null;
+        for(Camion c2: emp.getsucursalactual().getCamionesEstacionados())
         {
-            // Enviar Camion
-            Camion temp = null;
-            for(Camion c2: emp.getsucursalactual().getCamionesEstacionados())
+            if (c2.NombreCompleto().equals(camion.NombreCompleto()))
             {
-                if (c2.NombreCompleto().equals(camion.NombreCompleto()))
-                {
-                    temp=c2;
-                }
+                temp=c2;
             }
-            // Remove camion de sucursal
-            emp.getsucursalactual().getCamionesEstacionados().remove(temp);
-            emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
-            // Descargar encomiendas en destino (Inmediato por ahora)
-            destinoSucursal.getCamionesEstacionados().add(camion);
-            for (Encomienda e: camion.getEncomiendas())
-            {
-                e.setestado("En Destino");
-                destinoSucursal.getEncomiendasRecibidas().add(e);
-            }camion.borrarencomiendas();/**/
-            emp.fbRef().child("sucursales").child(destinoSucursal.getDireccion()).setValue(destinoSucursal);
-        
-            ChoiceBoxDestinoCamiones.getSelectionModel().clearSelection();
-            // CARGAR CAMIONES DISPONIBLES
-            /*ChoiceBoxCamiones.getItems().clear();
-            for (Camion c: emp.getsucursalactual().getCamionesEstacionados()) 
-            {
-                ChoiceBoxCamiones.getItems().add(c);
-            }/**/
-            espacioCamion = -1;
-            ProgressBarCapacity.setProgress(-1); // -1 para indeterminado
         }
+        // Remove camion de sucursal
+        emp.getsucursalactual().getCamionesEstacionados().remove(temp);
+        emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
+        // Descargar encomiendas en destino (Inmediato por ahora)
+        destinoSucursal.getCamionesEstacionados().add(camion);
+        for (Encomienda e: camion.getEncomiendas())
+        {
+            e.setestado("En Destino");
+            destinoSucursal.getEncomiendasRecibidas().add(e);
+        }camion.borrarencomiendas();/**/
+        emp.fbRef().child("sucursales").child(destinoSucursal.getDireccion()).setValue(destinoSucursal);
+
+        ChoiceBoxDestinoCamiones.getSelectionModel().clearSelection();
+        // CARGAR CAMIONES DISPONIBLES
+        /*ChoiceBoxCamiones.getItems().clear();
+        for (Camion c: emp.getsucursalactual().getCamionesEstacionados()) 
+        {
+            ChoiceBoxCamiones.getItems().add(c);
+        }/**/
+        espacioCamion = -1;
+        ProgressBarCapacity.setProgress(-1); // -1 para indeterminado
     }
     @FXML
     private void IngresarPedidoAction() throws IOException{
@@ -734,7 +727,7 @@ public class FXMLSucursalController implements Initializable {
         try{
             encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
         }catch(Exception e){
-            System.out.println("Debes seleccionar un pedido a entregar");
+            System.out.println("3Debes seleccionar un pedido a entregar");
             return; // FIN
         }
         Encomienda encomienda = null;
@@ -765,7 +758,7 @@ public class FXMLSucursalController implements Initializable {
         try{
             encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
         }catch(Exception e){
-            System.out.println("Debes seleccionar un pedido a entregar");
+            System.out.println("4Debes seleccionar un pedido a entregar");
             return; // FIN
         }
         Encomienda encomienda = null;
@@ -850,7 +843,7 @@ public class FXMLSucursalController implements Initializable {
         try{
             encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
         }catch(Exception e){
-            System.out.println("Debes seleccionar un pedido a entregar");
+            System.out.println("5Debes seleccionar un pedido a entregar");
             return; // FIN
         }
         Encomienda encomienda = null;
@@ -900,9 +893,9 @@ public class FXMLSucursalController implements Initializable {
         {
             String encomiendaID;
             try{
-                encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
+                encomiendaID = EncomiendasEnSucursal.getSelectionModel().getSelectedItem().split("#")[1]; // Obtengo el id
             }catch(Exception e){
-                System.out.println("Debes seleccionar un pedido a entregar");
+                System.out.println("6Debes seleccionar un pedido a entregar");
                 return; // FIN
             }
             Encomienda encomienda = null;
