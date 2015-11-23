@@ -20,9 +20,9 @@ public class Ingreso {
         this.fecha = fecha;
     }
     public int getValor()
-    { return this.valor; }
+    {return this.valor;}
     public Date getFecha()
-    { return this.fecha; }
+    {return this.fecha;}
     public String getId()
     {return this.id;}
     
