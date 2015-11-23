@@ -214,7 +214,7 @@ public class FXMLIngresoPedidoController implements Initializable {
     @FXML
     private void btnEditar(MouseEvent event) 
     {
-        MessageBox mb = new MessageBox("OK or cancel?", MessageBoxType.OK_CANCEL);
+        MessageBox mb = new MessageBox("¿Seguro que desea editar la encomienda?", MessageBoxType.OK_CANCEL);
         mb.showAndWait();
         if (mb.getMessageBoxResult() == MessageBoxResult.OK)
         {
