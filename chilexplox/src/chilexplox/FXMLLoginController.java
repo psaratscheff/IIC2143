@@ -105,6 +105,8 @@ public class FXMLLoginController implements Initializable {
                 emp.setclienteactual(c) ; //Seteo el usuario que se logró loguear
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLCliente.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
+                FXMLClienteController controller = fxmlLoader.<FXMLClienteController>getController();
+                controller.setCliente(c);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));  
                 stage.show();

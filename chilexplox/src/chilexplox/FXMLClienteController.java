@@ -6,6 +6,7 @@
 package chilexplox;
 
 import chilexplox.classes.Camion;
+import chilexplox.classes.Cliente;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Mensaje;
@@ -69,6 +70,7 @@ public class FXMLClienteController implements Initializable {
     @FXML
     private Label LabelNombreTrabajador;
     Empresa emp;
+    Cliente cliente;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,6 +78,25 @@ public class FXMLClienteController implements Initializable {
         emp = Empresa.getInstance();
         String bienvenida = "Hola, " + emp.getclienteactual().getNombre();
         LabelNombreTrabajador.setText(bienvenida);
+    }
+    public void setCliente(Cliente cliente)
+    {
+        this.cliente = cliente;
+    }
+    @FXML
+    private void CambiarContraseñaAction()
+    {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLCambiarContraseña.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            FXMLCambiarContraseñaController controller = fxmlLoader.<FXMLCambiarContraseñaController>getController();
+            controller.setCliente(cliente);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+        } catch (Exception e){
+            System.out.println("ERROR 102: " + e.toString());
+        }
     }
     @FXML
     private void EventoVerEstadoEncomienda(javafx.event.ActionEvent event)
@@ -101,7 +122,8 @@ public class FXMLClienteController implements Initializable {
         }
     }
     @FXML
-    private void EventoAgregarEncomiendaCliente(javafx.event.ActionEvent event) {
+    private void EventoAgregarEncomiendaCliente(javafx.event.ActionEvent event)
+    {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLIngresoPedidoCliente.fxml"));
             Parent root = (Parent) fxmlLoader.load();

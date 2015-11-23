@@ -28,6 +28,7 @@
       <Button fx:id="Salir" layoutX="512.0" layoutY="18.0" mnemonicParsing="false" onAction="#SalirAction" text="Salir" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#186509" height="135.0" layoutX="280.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" width="3.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#186509" height="3.0" layoutX="54.0" layoutY="109.0" stroke="BLACK" strokeType="INSIDE" width="501.0" />
+      <Button fx:id="BottonCambiarContraseña" layoutX="65.0" layoutY="188.0" mnemonicParsing="false" onAction="#CambiarContraseñaAction" prefHeight="31.0" prefWidth="180.0" text="Cambiar Contraseña" />
    </children>
 
 </AnchorPane>
