@@ -460,7 +460,6 @@ public class FXMLSucursalController implements Initializable {
             if (espacioCamion!=-1){ System.out.println("5No hay camion seleccionado"); } 
             return; 
         }
-        
         camionActual = camionSeleccionado;
         espacioCamion = camionSeleccionado.PorcentajeDisponible();
 
@@ -651,10 +650,10 @@ public class FXMLSucursalController implements Initializable {
             FXMLIngresoPedidoController controller = fxmlLoader.<FXMLIngresoPedidoController>getController();
             controller.setSucursalController(this);
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));  
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e){
-            System.out.println("ERROR 102: " + e.toString());
+            System.out.println("ERROR 304: " + e.toString());
         }
     }
     
@@ -771,6 +770,7 @@ public class FXMLSucursalController implements Initializable {
             encomienda.setestado("En cola");
             camion.borrarencomienda(encomienda);
             emp.getsucursalactual().getEncomiendasAlmacenadas().add(encomienda);
+            emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
             //Recargar Encomiendas
             EncomiendasEnSucursal.getItems().clear();
             Boolean boolurgencia = false;
@@ -823,7 +823,6 @@ public class FXMLSucursalController implements Initializable {
         try
         {
             encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
-            
         } 
         catch (Exception e)
         {
@@ -832,6 +831,7 @@ public class FXMLSucursalController implements Initializable {
         EncomiendasEnSucursal.getItems().add("["+encomienda.getPrioridad()+"]" + "(" + encomienda.getEstado() +")" + "// " + "ID: #" + encomienda.getId() + "# Destino: " + emp.getSucursalConDireccion(encomienda.getSucursalDestino()).getDireccion()+" Tipo: "+encomienda.getTipo());
         emp.getsucursalactual().getEncomiendasAlmacenadas().add(encomienda);
         emp.getsucursalactual().getEncomiendasRecibidas().remove(encomienda);
+        emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
         //Recargar Encomiendas
         EncomiendasEnSucursal.getItems().clear();
         Boolean boolurgencia = false;
