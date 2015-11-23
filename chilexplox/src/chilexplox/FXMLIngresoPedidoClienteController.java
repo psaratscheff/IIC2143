@@ -119,6 +119,8 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
         ETipo.getItems().add("Refrigerado");
         ETipo.getItems().add("Radioactivo");
         editando=false;
+        emp.setEmpleadoString("Internet");
+        emp.setSucursalString("Internet");
     } 
      public void btnPagar(MouseEvent event) throws IOException 
     {

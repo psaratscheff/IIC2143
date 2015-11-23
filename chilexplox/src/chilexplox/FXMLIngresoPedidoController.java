@@ -99,6 +99,8 @@ public class FXMLIngresoPedidoController implements Initializable {
         
         EOrigen.setText(emp.getsucursalactual().getDireccion());
         editando=false;
+         emp.setSucursalString(emp.getsucursalactual().getDireccion());
+        emp.setEmpleadoString(emp.getempleadoactual().getUsername());
     }
 
     @FXML
