@@ -384,7 +384,6 @@ public class FXMLSucursalController implements Initializable {
                 });
                 // CARGAR CAMIONES DISPONIBLES
                 String selectedCamion = ChoiceBoxCamiones.getSelectionModel().getSelectedItem();
-                espacioCamion = -1;
                 ChoiceBoxCamiones.getItems().clear();
                 for (Camion c: emp.getsucursalactual().getCamionesEstacionados()) 
                 {
@@ -393,6 +392,7 @@ public class FXMLSucursalController implements Initializable {
                 // Dejo seleccionado el que estaba seleccionado antes de refrescar la ventana
                 try{
                     ChoiceBoxCamiones.getSelectionModel().select(selectedCamion);
+                    RefreshProgressBarAction();
                 }catch(Exception e){
                     System.out.println("Ya no está disponible el camion: "+e.getMessage());
                 }/**/
@@ -540,7 +540,7 @@ public class FXMLSucursalController implements Initializable {
                     emp.getsucursalactual().getEncomiendasAlmacenadas().remove(encomienda);
                     encomienda.setestado("En Camión");
                     camion.addencomienda(encomienda); // Camion obtenido de los estacionados en sucursal actual!
-                    emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
+                    
 
                     //RECARGAR ENCOMIENDAS
                     // Firebase lo hace automágicamente :)
@@ -561,6 +561,8 @@ public class FXMLSucursalController implements Initializable {
                     {
                         ProgressBarCapacity.setStyle("-fx-accent: red;");
                     }
+                    //Actualizo servidor
+                    emp.fbRef().child("sucursales").child(emp.getsucursalactual().getDireccion()).setValue(emp.getsucursalactual());
                 }
                 else
                 {
