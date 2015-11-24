@@ -42,6 +42,33 @@ public class Main extends Application {
     Firebase newPostRef;
     @Override
     public void start(Stage stage) throws Exception {
+        /*
+        Sucursal s1 = new Sucursal("Valdivia", 1000);
+        Sucursal s2 = new Sucursal("La Serena",50);
+        Sucursal s3 = new Sucursal("Santiago",150);
+        
+        Camion c1 = new Camion("Queen's Gambit", 40, true, "Normal");
+        Camion c2 = new Camion("La Odisea", 20, true,"Normal");
+        Camion c3 = new Camion("Schwarzeneger", 5, true,"Refrigerado");
+        Camion c4 = new Camion("Petunia", 5, true,"Normal");
+        Camion c5 = new Camion("El Secreto", 5, true,"Radioactivo");
+        Camion c6 = new Camion("Aleman", 15, true,"Refrigerado");
+        
+        s1.getCamionesEstacionados().add(c1);
+        s1.getCamionesEstacionados().add(c2);
+        s2.getCamionesEstacionados().add(c3);
+        s2.getCamionesEstacionados().add(c4);
+        s3.getCamionesEstacionados().add(c5);
+        s3.getCamionesEstacionados().add(c6);
+        
+        Firebase postRef;
+        Firebase newPostRef;
+        
+        postRef = emp.fbRef().child("sucursales");
+        newPostRef = postRef.child(s1.getDireccion()); newPostRef.setValue(s1);
+        newPostRef = postRef.child(s2.getDireccion()); newPostRef.setValue(s2);
+        newPostRef = postRef.child(s3.getDireccion()); newPostRef.setValue(s3);*/
+        
         // Mantener la lista de ingresos actualizada
         postRef = emp.fbRef().child("ingresos");
         postRef.addChildEventListener(new ChildEventListener() {
