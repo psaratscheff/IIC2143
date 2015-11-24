@@ -52,5 +52,7 @@
       </Label>
       <Label layoutX="47.0" layoutY="312.0" text="Dirección:" />
       <TextField fx:id="EDireccion" layoutX="113.0" layoutY="308.0" />
+      <TextField fx:id="EEstado" layoutX="372.0" layoutY="106.0" />
+      <Label layoutX="306.0" layoutY="110.0" text="Estado:" />
    </children>
 </AnchorPane>

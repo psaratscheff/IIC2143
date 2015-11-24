@@ -89,10 +89,13 @@ public class FXMLVentanaPagoController implements Initializable {
                 for(Encomienda en: pedido.getEncomiendas())
                 {
                     en.setEmpleado(emp.getempleadoactual().getUsername());
+                    System.out.println("cliente.getRut(): "+cliente.getRut());
                     en.setClienteRut(cliente.getRut());
+                    System.out.println("en.getClienteRut(): "+en.getClienteRut());
                     //----Agrego encomiendas en empresa---
                     postRef = emp.fbRef().child("encomiendas");
                     newPostRef = postRef.push(); String id1 = newPostRef.getKey(); en.setId(id1); newPostRef.setValue(en);
+                    System.out.println("Rut cliente encomienda: "+en.getClienteRut());
                     emp.getsucursalactual().getEncomiendasAlmacenadas().add(en);
                     // Sincronización de sucursal con firebase más adelante                    
                 }

@@ -65,6 +65,8 @@ public class FXMLModificarPedidoController implements Initializable {
     private ChoiceBox<String> EDestino;
     @FXML
     private Label EOrigen;
+    @FXML
+    private TextField EEstado;
     
     private FXMLSucursalController sucursalController;
 
@@ -93,6 +95,7 @@ public class FXMLModificarPedidoController implements Initializable {
         EPeso.setText(Integer.toString(emp.getencomiendatemporal().getPeso()));
         EDireccion.setText(emp.getencomiendatemporal().getDireccionDestino());
         EPrioridad.getSelectionModel().select(emp.getencomiendatemporal().getPrioridad());
+        EEstado.setText(emp.getencomiendatemporal().getEstado());
         
         String cRut = emp.getencomiendatemporal().getClienteRut();
         for (Cliente c: emp.getclientes())
@@ -110,6 +113,7 @@ public class FXMLModificarPedidoController implements Initializable {
     public void disableModificar()
     {
         Editar.disableProperty().set(true);
+        Editar.visibleProperty().set(false);
         EDestino.getItems().add(emp.getencomiendatemporal().getSucursalDestino());
         EDestino.getSelectionModel().select(emp.getencomiendatemporal().getSucursalDestino());
         CNombre.disableProperty().set(true);
@@ -123,6 +127,7 @@ public class FXMLModificarPedidoController implements Initializable {
         EPeso.disableProperty().set(true);
         EDireccion.disableProperty().set(true);
         EPrioridad.disableProperty().set(true);
+        EEstado.disableProperty().set(true);
     }
     @FXML
     private void EditarAction() throws IOException

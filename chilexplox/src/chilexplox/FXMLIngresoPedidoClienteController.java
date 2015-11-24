@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import chilexplox.classes.Camion;
+import chilexplox.classes.Cliente;
 import chilexplox.classes.Empresa;
 import chilexplox.classes.Encomienda;
 import chilexplox.classes.Mensaje;
@@ -98,6 +99,7 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
     private Pedido pedido;
     private Boolean editando;
     private FXMLClienteController clienteController;
+    private Cliente cliente;
     /**
      * Initializes the controller class.
      */
@@ -122,9 +124,29 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
         emp.setEmpleadoString("Internet");
         emp.setSucursalString("Internet");
     } 
-     public void btnPagar(MouseEvent event) throws IOException 
+    public void btnPagar(MouseEvent event) throws IOException 
     {
+        if (ListEncomiendas.getItems().isEmpty())
+        {
+            MessageBox mb = new MessageBox("Debe ingresar al menos una encomienda", MessageBoxType.OK_ONLY);
+            mb.showAndWait();
+        }
+        else
+        {
+            // Cargar Ventana Pagar
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLVentanaPagoCliente.fxml"));
+            Parent root = (Parent) fxmlLoader.load();        
+            FXMLVentanaPagoClienteController controller = fxmlLoader.<FXMLVentanaPagoClienteController>getController();
+            controller.setPedido(pedido);
+            controller.setCliente(cliente);
+            controller.setEmpresa(emp);
+            controller.setParentWindow((Stage)Pagar.getScene().getWindow());
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));  
+            stage.show();
+        }
         
+        /*
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLVentanaPago.fxml"));
         Parent root = (Parent) fxmlLoader.load();        
         FXMLVentanaPagoController controller = fxmlLoader.<FXMLVentanaPagoController>getController();
@@ -136,12 +158,24 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
         stage.setScene(new Scene(root));  
         stage.show();
         
-        emp.setsucursalactual(emp.getSucursalConDireccion(EOrigen.getValue()));
-        
+        emp.setsucursalactual(emp.getSucursalConDireccion(EOrigen.getValue()));*/
+    }
+    public void setCliente(Cliente c)
+    {
+        cliente = c;
     }
      @FXML
     private void btnAgregarEncomienda(MouseEvent event) 
     {
+        if (EAncho.getText().equals("") || EPrioridad.getSelectionModel().getSelectedItem() == null
+                || ETipo.getSelectionModel().getSelectedItem() == null || EPeso.getText().equals("")
+                || ELargo.getText().equals("") || EDestino.getSelectionModel().getSelectedItem() == null
+                || EOrigen.getSelectionModel().getSelectedItem() == null || EDireccion.getText().equals("") )
+        {
+            MessageBox mb = new MessageBox("Debe llenar todos los campos", MessageBoxType.OK_ONLY);
+            mb.showAndWait();
+            return;
+        }
         try
         {
             if(editando == false)

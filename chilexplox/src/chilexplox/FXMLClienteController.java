@@ -138,6 +138,7 @@ public class FXMLClienteController implements Initializable {
             Parent root = (Parent) fxmlLoader.load();
             FXMLIngresoPedidoClienteController controller = fxmlLoader.<FXMLIngresoPedidoClienteController>getController();
             controller.setClienteController(this);
+            controller.setCliente(cliente);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));  
             stage.show();
