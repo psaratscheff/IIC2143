@@ -100,18 +100,27 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
     private Boolean editando;
     private FXMLClienteController clienteController;
     private Cliente cliente;
+    static private Boolean loaded_sucursales = false;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-        Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
-            @Override
-            public void run() {
-                LoadSucursales();
-            }
-        });
+        if (!loaded_sucursales)
+        {
+            loaded_sucursales = true;
+            Platform.runLater(new Runnable() { // Evitar problemas con el "Not on FX Thread"
+                @Override
+                public void run() {
+                    LoadSucursales();
+                }
+            });
+        }
+        else
+        {
+            emp=Empresa.getInstance();
+            RefreshSucursales();
+        }
         emp = Empresa.getInstance();
         pedido = new Pedido(emp.AsignarIDPedido());
         EPrioridad.getItems().add("Urgente");
@@ -334,6 +343,14 @@ public class FXMLIngresoPedidoClienteController implements Initializable {
 
     void setClienteController(FXMLClienteController aThis) {
         this.clienteController = aThis;
+    }
+
+    private void RefreshSucursales()
+    {
+        for (Sucursal s: emp.getsucursales())
+        {
+            AddSucursal(s);
+        }
     }
     
 }
