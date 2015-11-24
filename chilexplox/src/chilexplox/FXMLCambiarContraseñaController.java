@@ -45,21 +45,15 @@ public class FXMLCambiarContraseñaController implements Initializable {
         System.out.println("ASDJ HASDLhIKFBDF");
         if (pass1.getText().equals(pass2.getText()))
         {
-            for (Cliente c: emp.getclientes())
-            {
-                if (c.getRut().equals(c.getRut()))
-                {
-                    c.setPassword(pass1.getText());
-                    // Actualizar cliente
-                    emp.fbRef().child("clientes").child(c.getRut()).setValue(c);
-                    // Confirmar cambio de clave
-                    MessageBox mb = new MessageBox("Contraseña modificada exitosamente", MessageBoxType.OK_ONLY);
-                    mb.showAndWait();
-                    //Cerrar ventana
-                    Stage stage = (Stage) pass1.getScene().getWindow();
-                    stage.close();
-                }
-            }
+            cliente.setPassword(pass1.getText());
+            // Actualizar cliente
+            emp.fbRef().child("clientes").child(cliente.getRut()).setValue(cliente);
+            // Confirmar cambio de clave
+            MessageBox mb = new MessageBox("Contraseña modificada exitosamente", MessageBoxType.OK_ONLY);
+            mb.showAndWait();
+            //Cerrar ventana
+            Stage stage = (Stage) pass1.getScene().getWindow();
+            stage.close();
         }
         else
         {

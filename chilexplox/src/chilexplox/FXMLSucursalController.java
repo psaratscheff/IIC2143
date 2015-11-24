@@ -736,6 +736,12 @@ public class FXMLSucursalController implements Initializable {
         }/**/
         espacioCamion = -1;
         ProgressBarCapacity.setProgress(-1); // -1 para indeterminado
+        // Volver a ver recibidos si se estaba viendo un camion
+        try {
+            VerPedidosRecibidosAction();
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLSucursalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     @FXML
     private void IngresarPedidoAction() throws IOException{
