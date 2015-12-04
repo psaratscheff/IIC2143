@@ -109,6 +109,10 @@ public class FXMLModificarPedidoController implements Initializable {
         CApellido.setText(cliente.getApellido());
         CDireccion.setText(cliente.getDireccion());
         CRut.setText(cRut);
+        
+        if (emp.getedittemp() == false) {
+            disableModificar();
+        }
     } 
     public void disableModificar()
     {

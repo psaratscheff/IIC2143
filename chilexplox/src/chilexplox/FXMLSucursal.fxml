@@ -40,15 +40,15 @@
        <Button fx:id="VerCamion" layoutX="117.0" layoutY="587.0" mnemonicParsing="false" onAction="#VerCamionAction" text="Ver camión" />
        
        
-       <ListView fx:id="EncomiendasEnSucursal" layoutX="327.0" layoutY="339.0" prefHeight="132.0" prefWidth="408.0" />
+       <ListView fx:id="EncomiendasEnSucursal" layoutX="259.0" layoutY="339.0" prefHeight="132.0" prefWidth="476.0" />
        
-      <Label layoutX="326.0" layoutY="317.0" text="Pedidos en cola" />
-      <Label fx:id="LabelRecibidosCamiones" layoutX="326.0" layoutY="490.0" text="Pedidos recibidos" />
+      <Label layoutX="259.0" layoutY="319.0" text="Pedidos en cola" />
+      <Label fx:id="LabelRecibidosCamiones" layoutX="259.0" layoutY="492.0" text="Pedidos recibidos" />
       <Button fx:id="ModificarPedido" layoutX="750.0" layoutY="349.0" mnemonicParsing="false" onAction="#ModificarPedidoAction" text="Modificar pedido" />
        <Button fx:id="CargarCamion" layoutX="750.0" layoutY="389.0" mnemonicParsing="false" onAction="#CargarCamionAction" text="Cargar a camión" />
        
        
-       <ListView fx:id="EncomiendasRecibidas" layoutX="327.0" layoutY="519.0" prefHeight="132.0" prefWidth="408.0" />
+       <ListView fx:id="EncomiendasRecibidas" layoutX="259.0" layoutY="519.0" prefHeight="132.0" prefWidth="476.0" />
        
       <Button fx:id="NotificarErrorPedido" layoutX="750.0" layoutY="521.0" mnemonicParsing="false" onAction="#NotificarErrorAction" text="Notificar error" />
       <Button fx:id="EntregarEncomienda" layoutX="750.0" layoutY="560.0" mnemonicParsing="false" onAction="#EntregarEncomiendaAction" text="Entregar Pedido" />
@@ -81,8 +81,9 @@
       
       
       
-      <Label fx:id="Urgencia" layoutX="471.0" layoutY="317.0" text="¡Hay una encomienda urgente!" textFill="RED" />
-      <Button fx:id="VerInforme" layoutX="926.0" layoutY="514.0" mnemonicParsing="false" onAction="#CargarVentanaInformes" text="Ver Informe (Ya no es necesario para el empleado o si?)" />
+      <Label fx:id="Urgencia" layoutX="404.0" layoutY="319.0" text="¡Hay una encomienda urgente!" textFill="RED" />
+      <Button fx:id="VerInforme" layoutX="926.0" layoutY="466.0" mnemonicParsing="false" onAction="#CargarVentanaInformes" text="Ver Informe (Ya no es necesario para el empleado o si?)" />
       <Button fx:id="Salir" layoutX="785.0" layoutY="14.0" mnemonicParsing="false" onAction="#SalirAction" prefHeight="40.0" prefWidth="94.0" text="Salir" />
+      <Button fx:id="VerEncomienda" layoutX="750.0" layoutY="459.0" mnemonicParsing="false" onAction="#VerInfoEncomiendaAction" text="Ver Encomienda" />
    </children>
 </AnchorPane>

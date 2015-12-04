@@ -1012,6 +1012,7 @@ public class FXMLSucursalController implements Initializable {
             encomienda = emp.getsucursalactual().getEncomienda(encomiendaID);
             if (emp.getsucursalactual() == emp.getSucursalConDireccion(encomienda.getSucursalOrigen())) 
             {
+                emp.setedittemp(Boolean.TRUE);
                 emp.setencomiendatemporal(encomienda);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLModificarPedido.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
@@ -1058,6 +1059,42 @@ public class FXMLSucursalController implements Initializable {
         catch (Exception e)
         {
             //Nada
+        }
+    }
+    
+    @FXML
+    private void VerInfoEncomiendaAction() throws IOException{
+        try
+        {
+            Boolean enSucursal = EncomiendasEnSucursal.getSelectionModel().isEmpty();
+            Boolean enRecibidos = EncomiendasRecibidas.getSelectionModel().isEmpty();
+            String encomiendaID = null;
+            if (!enSucursal && enRecibidos) {
+                encomiendaID = EncomiendasEnSucursal.getSelectionModel().getSelectedItem().split("#")[1]; 
+            }
+            
+            if (!enRecibidos && enSucursal) {
+                encomiendaID = EncomiendasRecibidas.getSelectionModel().getSelectedItem().split("#")[1]; 
+            }
+            
+            emp.setedittemp(false);
+            Encomienda encomienda = null;
+            encomienda = emp.getencomiendabyid(encomiendaID);
+            emp.setencomiendatemporal(encomienda);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXMLModificarPedido.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                FXMLModificarPedidoController controller = fxmlLoader.<FXMLModificarPedidoController>getController();
+                controller.setSucursalController(this);
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));  
+                stage.show();
+            
+                
+            
+        } 
+        catch (Exception e)
+        {
+            System.out.printf("hubo error");
         }
     }
 }

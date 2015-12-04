@@ -50,6 +50,7 @@ public class Empresa {
     private List<Pedido> pedidos;
     private String empleadostring;
     private String sucursalstring;
+    private Boolean edittemp;
     
     public Empresa()
     {
@@ -108,6 +109,10 @@ public class Empresa {
         sucursalActual=sucursal;
         //System.out.println("Seteada Sucursal actual: "+sucursal +"->"+ sucursal.getEncomiendasAlmacenadas());
     }
+    public Boolean getedittemp()
+    {return edittemp;}
+    public void setedittemp(Boolean asd)
+    {edittemp = asd;}
     public Pedido getpedidotemp()
     {return pedidotemp;}
     public void setpedidotemp(Pedido pedido)
