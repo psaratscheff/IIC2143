@@ -37,6 +37,7 @@
       
       <Button fx:id="VerInforme" layoutX="54.0" layoutY="209.0" mnemonicParsing="false" onAction="#CargarVentanaInformes" text="Ver Informe" />
       <Button fx:id="Salir" layoutX="25.0" layoutY="45.0" mnemonicParsing="false" onAction="#SalirAction" text="Salir" />
+      <Button fx:id="VerErrores" layoutX="64.0" layoutY="313.0" mnemonicParsing="false" onAction="#VerErroresAction" text="Ver Errores" />
       
       
    </children>
