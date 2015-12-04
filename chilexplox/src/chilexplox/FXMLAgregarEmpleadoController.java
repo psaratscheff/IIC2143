@@ -61,7 +61,16 @@ public class FXMLAgregarEmpleadoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //TODO
         CSucursal.getItems().clear(); // Innecesario, pero... porsiaca
-        CSucursal.getItems().addAll(emp.getsucursales());
+        int a = 0;
+        for(Sucursal s: emp.getsucursales())
+                {
+                     CSucursal.getItems().add(s);
+                     a +=1;
+                     if (a == 4) {
+                        break;
+                    }
+                }
+        
     }
     @FXML
     private void btnRegistrarAction()
